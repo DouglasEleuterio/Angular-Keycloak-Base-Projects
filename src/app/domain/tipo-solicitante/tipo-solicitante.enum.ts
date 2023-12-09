@@ -1,0 +1,10 @@
+export enum TipoSolicitanteEnum {
+  COLABORADOR = 'COLABORADOR',
+  COLABORADOR_LABEL = 'Colaborador',
+  COLABORADOR_EVENTUAL = 'COLABORADOR_EVENTUAL',
+  COLABORADOR_EVENTUAL_LABEL = 'Colaborador Eventual',
+  MAGISTRADO = 'MAGISTRADO',
+  MAGISTRADO_LABEL = 'Magistrado',
+  SERVIDOR = 'SERVIDOR',
+  SERVIDOR_LABEL = 'Servidor'
+}

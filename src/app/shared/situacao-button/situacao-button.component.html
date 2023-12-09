@@ -1,0 +1,8 @@
+<div class="situacao-button">
+  <p-inputSwitch
+    pTooltip="{{(ativo ? 'titles.inativar' :  'titles.ativar') | appTranslate: 'shared'}}"
+    tooltipPosition="top"
+    [(ngModel)]="inputValue"
+    (click)="updateStatus()"
+  ></p-inputSwitch>
+</div>

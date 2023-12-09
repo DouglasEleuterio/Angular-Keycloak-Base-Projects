@@ -1,0 +1,14 @@
+<div class="p-fluid formgrid grid" [formGroup]="formGroup">
+  <app-field class="field col-12 md:col-8" [noValidation]="true" page="tipo_localidade">
+    <input appFieldRef pInputText type="text" formControlName="descricao" maxlength="100" />
+  </app-field>
+
+  <app-field class="field col-12 md:col-4" [noValidation]="true" page="tipo_localidade">
+    <p-dropdown
+      appFieldRef
+      [options]="optSituacao"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="situacao"
+    ></p-dropdown>
+  </app-field>
+</div>

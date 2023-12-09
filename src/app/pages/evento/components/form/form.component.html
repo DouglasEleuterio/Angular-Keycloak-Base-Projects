@@ -1,0 +1,96 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'evento'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-6 md:col-6" [submitted]="submitted" page="evento">
+            <input appFieldRef pInputText type="text" formControlName="nomeEvento" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-6 md:col-6" [submitted]="submitted" page="evento">
+            <p-dropdown
+              appFieldRef
+              dataKey="id"
+              optionLabel="descricao"
+              [options]="listTipoEvento"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="tipoEvento"
+              emptyFilterMessage="{{'no_records' | appTranslate: 'shared'}}"
+              emptyMessage="{{'no_records' | appTranslate: 'shared'}}"
+            >
+              <ng-template let-item pTemplate="selectedItem">
+                <span pTooltip="{{item.descricao}}">{{item.descricao | appEllipse: 40}}</span>
+              </ng-template>
+              <ng-template let-item pTemplate="item">
+                <span pTooltip="{{item.descricao}}">{{item.descricao | appEllipse: 40}}</span>
+              </ng-template>
+            </p-dropdown>
+          </app-field>
+
+          <app-field class="p-field col-12 md:col-12" [submitted]="submitted" page="evento">
+            <textarea appFieldRef pInputTextarea rows="2" formControlName="descricao" maxlength="500"></textarea>
+          </app-field>
+          <app-field class="p-field col-3 md:col-3" [submitted]="submitted" page="evento">
+            <p-calendar
+              appFieldRef
+              formControlName="dataInicio"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              yearRange="1990:2050"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+          <app-field class="p-field col-3 md:col-3" [submitted]="submitted" page="evento">
+            <p-calendar
+              appFieldRef
+              formControlName="dataTermino"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              yearRange="1990:2050"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+          <app-field class="p-field col-3 md:col-3" [submitted]="submitted" page="evento">
+            <input appFieldRef pInputText type="text" formControlName="numeroDocumento" maxlength="25" />
+          </app-field>
+          <app-field class="p-field col-3 md:col-3" [submitted]="submitted" page="evento">
+            <input appFieldRef pInputText type="text" formControlName="numeroProcesso" maxlength="25" />
+          </app-field>
+          <app-field class="p-field col-6 md:col-6" [submitted]="submitted" page="evento">
+            <input appFieldRef pInputText type="text" formControlName="organizadora" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-6 md:col-6" [submitted]="submitted" page="evento">
+            <p-dropdown
+              appFieldRef
+              [options]="unidadeList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="unidade"
+            ></p-dropdown>
+          </app-field>
+          <app-field class="p-field col-12 md:col-12" [submitted]="submitted" page="evento">
+            <textarea appFieldRef pInputTextarea rows="2" formControlName="condicoes" maxlength="500"></textarea>
+          </app-field>
+          <div class="p-field col-12 md:col-12">
+            <p-checkbox
+              [binary]="true"
+              formControlName="permiteDiasManutencao"
+              label="{{'field.permite_dias_manutencao' | appTranslate:'evento'}}"
+            ></p-checkbox>
+          </div>
+        </div>
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

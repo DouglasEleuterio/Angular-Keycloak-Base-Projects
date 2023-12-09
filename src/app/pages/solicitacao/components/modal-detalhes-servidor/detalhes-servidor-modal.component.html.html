@@ -1,0 +1,36 @@
+<p-dialog
+  styleClass="active"
+  header="{{'title.modal_cadastro' | appTranslate:'solicitacao'}}"
+  [(visible)]="visible"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [closable]="false"
+  [modal]="true"
+>
+  <ng-template pTemplate="body">
+    <div class="p-fluid formgrid grid">
+      <div class="readonly p-field col-12 md:col-12">
+        <div *ngIf="dadosServidor.situacaoFuncional && dadosServidor.situacaoFuncional?.length > 0">
+          {{'field.situacaofuncional' | appTranslate: 'solicitacao'}}
+          <div class="label">{{dadosServidor.situacaoFuncional}}</div>
+        </div>
+        <div *ngIf="dadosServidor.funcaoComissionada && dadosServidor.funcaoComissionada?.length > 0">
+          {{'field.funcaocomissionada' | appTranslate: 'solicitacao'}}
+          <div class="label">{{dadosServidor.funcaoComissionada}}</div>
+        </div>
+        <div>
+          {{'field.cargosolicitante' | appTranslate: 'solicitacao'}}
+          <div class="label">{{dadosServidor.cargoSolicitante}}</div>
+        </div>
+        <div>
+          {{'field.unidadesolicitante' | appTranslate: 'solicitacao'}}
+          <div class="label">{{dadosServidor.unidadeSolicitante}}</div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <p-button (click)="close()" label="{{'action.close' | appTranslate:'solicitacao'}}" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

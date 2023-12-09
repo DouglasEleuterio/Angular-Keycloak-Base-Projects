@@ -1,0 +1,18 @@
+/* Add your customizations of layout here */
+.list-body {
+  margin-top: 20px;
+}
+
+.detail-body {
+  margin-top: 20px;
+}
+
+.p-panel.p-panel-toggleable .p-panel-header {
+  background: none;
+}
+
+.p-dropdown-no-crop-list {
+  white-space: normal;
+  max-width: 400px;
+  text-overflow: ellipsis;
+}

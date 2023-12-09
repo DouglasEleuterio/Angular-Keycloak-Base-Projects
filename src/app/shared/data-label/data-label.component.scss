@@ -1,0 +1,15 @@
+.data-label-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.data-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.data-value {
+  font-size: 14px;
+}

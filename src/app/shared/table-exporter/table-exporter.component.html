@@ -1,0 +1,42 @@
+<div class="table-exporter-buttons">
+  <button
+    [disabled]="empty"
+    pButton
+    pRipple
+    icon="pi pi-file"
+    class="p-button-rounded p-button-outlined"
+    (click)="export(types.CSV, false)"
+    pTooltip="{{ 'export_csv' | appTranslate: 'shared' }}"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    [disabled]="empty"
+    pButton
+    pRipple
+    icon="pi pi-file-excel"
+    class="p-button-rounded p-button-outlined p-button-success"
+    (click)="export(types.EXCEL, false)"
+    pTooltip="{{ 'export_xlsx' | appTranslate: 'shared' }}"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    [disabled]="empty"
+    pButton
+    pRipple
+    icon="pi pi-file-pdf"
+    class="p-button-rounded p-button-outlined p-button-danger"
+    (click)="export(types.PDF, false)"
+    pTooltip="{{ 'export_pdf' | appTranslate: 'shared' }}"
+    tooltipPosition="bottom"
+  ></button>
+  <button
+    [disabled]="empty"
+    pButton
+    pRipple
+    icon="pi pi-print"
+    class="p-button-rounded p-button-outlined p-button-info"
+    (click)="export(types.PDF, true)"
+    pTooltip="{{ 'export_print' | appTranslate: 'shared' }}"
+    tooltipPosition="bottom"
+  ></button>
+</div>

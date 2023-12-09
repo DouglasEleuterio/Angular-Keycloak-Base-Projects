@@ -1,0 +1,135 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'indenizacao_transporte'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-9 md:col-9" [submitted]="submitted" page="indenizacao_transporte">
+            <input appFieldRef pInputText type="text" formControlName="normativo" maxlength="64" />
+          </app-field>
+
+          <app-field class="p-field col-3 md:col-3" [submitted]="submitted" page="indenizacao_transporte">
+            <p-calendar
+              appFieldRef
+              formControlName="dataNormativo"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              yearRange="1990:2050"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+
+          <app-field class="p-field col-3 md:col-3" [submitted]="submitted" page="indenizacao_transporte">
+            <p-calendar
+              appFieldRef
+              formControlName="vigenciaInicial"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              yearRange="1990:2050"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+
+          <app-field class="p-field col-3 md:col-3" [submitted]="submitted" page="indenizacao_transporte">
+            <p-calendar
+              appFieldRef
+              formControlName="vigenciaFinal"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              yearRange="1990:2050"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+
+          <app-field class="p-field col-12 md:col-12" [submitted]="submitted" page="indenizacao_transporte">
+            <div [class.form-error]="submitted && !isValidPolitica" style="margin-top: 10px; padding: 0 !important">
+              <div
+                *ngFor="let politicaIndenizacao of listarPoliticaIndenizacaoCombustivel"
+                class="p-fluid grid field-checkbox col-12"
+                style="padding: 0.5rem !important"
+              >
+                <div class="p-fluid formgrid grid col-12">
+                  <p-radioButton
+                    [inputId]="politicaIndenizacao.value"
+                    [value]="politicaIndenizacao.value"
+                    formControlName="politicaValorTransporte"
+                    (onClick)="changeValuePolitica()"
+                  >
+                  </p-radioButton>
+                  <label [for]="politicaIndenizacao.value" class="ml-2">{{ politicaIndenizacao.label }}</label>
+                </div>
+
+                <div
+                  *ngIf="validarPoliticaIndenizacao(politicaIndenizacao) && isShowTipoCombustivel"
+                  class="p-fluid formgrid grid col-12"
+                  style="padding: 1rem !important"
+                >
+                  <app-field class="field col-3" [submitted]="submitted" page="indenizacao_transporte">
+                    <p-dropdown
+                      appFieldRef
+                      [options]="listarTipoCombustiveis"
+                      placeholder="{{'select' | appTranslate:'shared'}}"
+                      formControlName="combustivelPadrao"
+                    ></p-dropdown>
+                  </app-field>
+                </div>
+
+                <div
+                  *ngIf="validarPoliticaIndenizacao(politicaIndenizacao) && isShowTipoCombustivel"
+                  class="p-fluid formgrid grid col-12"
+                  style="padding: 1rem !important"
+                >
+                  <app-field class="field col-3" [submitted]="submitted" page="indenizacao_transporte">
+                    <p-inputNumber
+                      appFieldRef
+                      formControlName="consumoPadrao"
+                      inputId="minmaxfraction"
+                      mode="decimal"
+                      locale="pt-BR"
+                      max="999.9"
+                      min="1.0"
+                      [minFractionDigits]="1"
+                      [maxFractionDigits]="1"
+                      suffix=" km/l"
+                    />
+                  </app-field>
+                </div>
+              </div>
+            </div>
+          </app-field>
+
+          <app-field class="p-field col-3 md:col-3" *ngIf="isShowConsumoPadrao" [submitted]="submitted" page="indenizacao_transporte">
+            <p-inputNumber
+              appFieldRef
+              formControlName="consumoPadrao"
+              inputId="minmaxfraction"
+              mode="decimal"
+              locale="pt-BR"
+              maxlength="9"
+              max="999.9"
+              min="1.0"
+              [minFractionDigits]="1"
+              [maxFractionDigits]="1"
+              suffix=" km/l"
+            />
+          </app-field>
+        </div>
+
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

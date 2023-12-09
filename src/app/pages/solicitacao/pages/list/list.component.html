@@ -1,0 +1,144 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'solicitacao'}}</h5>
+        <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'solicitacao'}}"></button>
+      </div>
+
+      <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
+        <app-solicitacao-filters appFilterRef></app-solicitacao-filters>
+      </app-filter>
+
+      <!-- TODO, daniel - atualizar export com outros TO-DO's -->
+      <div class="p-mr-2 p-mb-2">
+        <app-table-exporter
+          [empty]="tableData === null || tableData.length === 0"
+          [title]="'title.exporter' | appTranslate: 'solicitacao'"
+          filename="solicitacao_exportacao"
+          [filter]="pagination.filter"
+          [sort]="pagination.sort"
+          [service]="service"
+          [configuration]="exporterConfig"
+        ></app-table-exporter>
+      </div>
+
+      <div>
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="id">
+                {{'field.numero' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="id"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="solicitante">
+                {{'field.solicitante' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="solicitante"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="dataCriacao">
+                {{'field.dataCriacao' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="dataCriacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="eventos">
+                {{'field.eventos' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="eventos"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1">
+                {{'field.trechoDataInicio' | appTranslate:'solicitacao'}}
+                <p-sortIcon></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1">
+                {{'field.trechoDataFim' | appTranslate:'solicitacao'}}
+                <p-sortIcon></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1">
+                {{'field.processo' | appTranslate:'solicitacao'}}
+                <p-sortIcon></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="situacaoSolicitacao.situacaoSolicitacaoFase.descricao">
+                {{'field.FaseSituacao' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="situacaoSolicitacao.situacaoSolicitacaoFase.descricao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.numero' | appTranslate:'solicitacao'}}</span>
+                <span> {{entity?.id}}/{{entity?.dataCriacao | date:'yyyy'}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.solicitante' | appTranslate:'solicitacao'}}</span>
+                <span> {{entity?.solicitante?.nome}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.dataCriacao' | appTranslate:'solicitacao'}}</span>
+                <span> {{entity?.dataCriacao | date:'dd/MM/yyyy'}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.eventos' | appTranslate:'solicitacao'}}</span>
+                <div *ngFor="let evento of entity.eventos">
+                  <span>{{evento?.nomeEvento}}</span>
+                </div>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.trechoDataInicio' | appTranslate:'solicitacao'}}</span>
+                <span *ngIf="entity?.trechoViagem"> {{entity?.trechoViagem[0]?.dataPartida | date:'dd/MM/yyyy'}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.trechoDataFim' | appTranslate:'solicitacao'}} </span>
+                <span *ngIf="entity?.trechoViagem">
+                  {{entity?.trechoViagem[entity?.trechoViagem?.length -1]?.dataPartida | date:'dd/MM/yyyy'}}
+                </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.processo' | appTranslate:'solicitacao'}}</span>
+                <div *ngFor="let evento of entity.eventos">
+                  <span>{{evento?.numeroProcesso}}</span>
+                </div>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.situacaoSolicitacao' | appTranslate:'solicitacao'}}</span>
+                <span>
+                  {{entity?.situacaoSolicitacao?.situacaoSolicitacaoFase?.chave | situacaoSolicitacaoFase}} /
+                  {{entity?.situacaoSolicitacao?.chave | situacaoSolicitacao}}
+                </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-buttons-table-solicitacao
+                  [entityId]="entity.id"
+                  [showEdit]="showEdit(entity?.situacaoSolicitacao?.chave)"
+                  [showDel]="showDel(entity?.situacaoSolicitacao?.chave)"
+                  (onRemove)="remove($event)"
+                  (onHistoric)="historic(entity.id)"
+                ></app-buttons-table-solicitacao>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

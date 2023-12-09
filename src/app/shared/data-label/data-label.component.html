@@ -1,0 +1,5 @@
+<div class="data-label-container">
+  <span class="data-title">{{title}}</span>
+  <span *ngIf="value" class="data-value">{{value | emptyDataPipe: true}}</span>
+  <span *ngIf="htmlValue" class="data-value" [innerHTML]="htmlValue"></span>
+</div>

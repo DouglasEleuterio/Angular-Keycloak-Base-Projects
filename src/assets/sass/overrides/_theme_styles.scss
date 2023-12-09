@@ -1,0 +1,125 @@
+/* Add your customizations of theme here */
+
+p-autocomplete.ng-dirty.ng-invalid.ng-submitted > .p-autocomplete > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-autocomplete.ng-pristine.ng-invalid.ng-submitted > .p-autocomplete > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-calendar.ng-dirty.ng-invalid.ng-submitted > .p-calendar > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-calendar.ng-pristine.ng-invalid.ng-submitted > .p-calendar > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-cascadeselect.ng-dirty.ng-invalid.ng-submitted > .p-cascadeselect {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-cascadeselect.ng-pristine.ng-invalid.ng-submitted > .p-cascadeselect {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-checkbox.ng-dirty.ng-invalid.ng-submitted > .p-checkbox > .p-checkbox-box {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-checkbox.ng-pristine.ng-invalid.ng-submitted > .p-checkbox > .p-checkbox-box {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-chips.ng-dirty.ng-invalid.ng-submitted > .p-chips > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-chips.ng-pristine.ng-invalid.ng-submitted > .p-chips > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-dropdown.ng-dirty.ng-invalid > .p-dropdown {
+  border: $inputBorder !important;
+}
+
+p-dropdown.ng-dirty.ng-invalid.ng-submitted > .p-dropdown {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-dropdown.ng-pristine.ng-invalid.ng-submitted > .p-dropdown {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-inputmask.ng-dirty.ng-invalid.ng-submitted > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-inputnumber.ng-dirty.ng-invalid.ng-submitted > .p-inputnumber > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-inputmask.ng-pristine.ng-invalid.ng-submitted > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-inputnumber.ng-pristine.ng-invalid.ng-submitted > .p-inputnumber > .p-inputtext {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-inputswitch.ng-dirty.ng-invalid.ng-submitted > .p-inputswitch {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-inputswitch.ng-pristine.ng-invalid.ng-submitted > .p-inputswitch {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+.p-inputtext.ng-dirty.ng-invalid.ng-submitted {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+.p-inputtext.ng-pristine.ng-invalid.ng-submitted {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-listbox.ng-dirty.ng-invalid.ng-submitted > .p-listbox {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-listbox.ng-pristine.ng-invalid.ng-submitted > .p-listbox {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-multiselect.ng-dirty.ng-invalid.ng-submitted > .p-multiselect {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-multiselect.ng-pristine.ng-invalid.ng-submitted > .p-multiselect {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-radiobutton.ng-dirty.ng-invalid.ng-submitted > .p-radiobutton > .p-radiobutton-box {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-radiobutton.ng-pristine.ng-invalid.ng-submitted > .p-radiobutton > .p-radiobutton-box {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-selectbutton.ng-dirty.ng-invalid.ng-submitted > .p-selectbutton > .p-button {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-selectbutton.ng-pristine.ng-invalid.ng-submitted > .p-selectbutton > .p-button {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-togglebutton.ng-dirty.ng-invalid.ng-submitted > .p-togglebutton.p-button {
+  border-color: $fieldErrorValidationColor !important;
+}
+
+p-togglebutton.ng-pristine.ng-invalid.ng-submitted > .p-togglebutton.p-button {
+  border-color: $fieldErrorValidationColor !important;
+}

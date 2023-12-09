@@ -1,0 +1,11 @@
+<div class="layout-breadcrumb-container">
+  <div class="layout-breadcrumb-left-items">
+    <a href="#" class="menu-button" (click)="appMain.onMenuButtonClick($event)" *ngIf="appMain.isStatic() && !appMain.isMobile()">
+      <i class="pi pi-bars"></i>
+    </a>
+  </div>
+  <div class="layout-breadcrumb-right-items">
+    <a tabindex="0" class="search-icon" (click)="appMain.searchActive = true; appMain.searchClick = true;"> </a>
+    <div class="search-wrapper" [ngClass]="{'active-search-wrapper': appMain.searchActive}"></div>
+  </div>
+</div>

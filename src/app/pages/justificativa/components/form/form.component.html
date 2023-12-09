@@ -1,0 +1,35 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'justificativa'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-12 md:col-12" [submitted]="submitted" page="justificativa">
+            <input appFieldRef pInputText type="text" formControlName="descricao" maxlength="100" />
+          </app-field>
+        </div>
+
+        <div class="p-field col-12 md:col-12" style="margin-top: 10px; padding: 0 !important">
+          <div>{{ 'title.checkbox_utilizacao' | appTranslate:'justificativa'}}</div>
+          <div class="flex gap-3" page="justificativa">
+            <p-checkbox [binary]="true" formControlName="autorizacao" label="Autorização"></p-checkbox>
+            <p-checkbox [binary]="true" formControlName="calculo" label="Cálculo"></p-checkbox>
+            <p-checkbox [binary]="true" formControlName="pagamento" label="Pagamento"></p-checkbox>
+            <p-checkbox [binary]="true" formControlName="prestacaoConta" label="Prestação de Contas"></p-checkbox>
+          </div>
+          <div class="color-error" *ngIf="submitted && !isValidUtilizacao">
+            {{ 'validation.utilizacao.required' | appTranslate:'justificativa'}}
+          </div>
+        </div>
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

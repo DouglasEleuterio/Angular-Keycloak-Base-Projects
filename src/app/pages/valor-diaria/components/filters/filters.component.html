@@ -1,0 +1,25 @@
+<div class="p-fluid formgrid grid" [formGroup]="formGroup">
+  <app-field class="field col-6 md:col-6" [noValidation]="true" page="valor_diaria">
+    <input appFieldRef pInputText type="text" formControlName="normativo" maxlength="100" />
+  </app-field>
+
+  <app-field class="field col-4 md:col-4" [noValidation]="true" page="valor_diaria" multiple>
+    <p-multiSelect
+      appFieldRef
+      [options]="listTipoLocalidade"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="tipoLocalidade"
+      [panelStyle]="{'width':'100%'}"
+      optionLabel="descricao"
+    ></p-multiSelect>
+  </app-field>
+
+  <app-field class="field col-2 md:col-2" [noValidation]="true" page="valor_diaria">
+    <p-dropdown
+      appFieldRef
+      [options]="optSituacao"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="situacao"
+    ></p-dropdown>
+  </app-field>
+</div>

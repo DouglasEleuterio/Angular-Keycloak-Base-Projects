@@ -1,0 +1,139 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'preco_combustivel'}}</h5>
+        <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'preco_combustivel'}}"></button>
+      </div>
+      <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
+        <app-preco-combustivel-filters appFilterRef></app-preco-combustivel-filters>
+      </app-filter>
+      <div class="p-mr-2 p-mb-2">
+        <app-table-exporter
+          [empty]="tableData === null || tableData.length === 0"
+          [title]="'title.exporter' | appTranslate: 'preco_combustivel'"
+          filename="preco_combustivel_exportacao"
+          [filter]="pagination.filter"
+          [sort]="pagination.sort"
+          [service]="service"
+          [configuration]="exporterConfig"
+        ></app-table-exporter>
+      </div>
+
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="id">
+                {{'field.id' | appTranslate:'preco_combustivel'}}
+                <p-sortIcon field="id"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="precoGasolina">
+                {{'field.precoGasolina' | appTranslate:'preco_combustivel'}}
+                <p-sortIcon field="precoGasolina"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="precoEtanol">
+                {{'field.precoEtanol' | appTranslate:'preco_combustivel'}}
+                <p-sortIcon field="precoEtanol"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="precoDiesel">
+                {{'field.precoDiesel' | appTranslate:'preco_combustivel'}}
+                <p-sortIcon field="precoDiesel"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="precoGNV">
+                {{'field.precoGNV' | appTranslate:'preco_combustivel'}}
+                <p-sortIcon field="precoGNV"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="normativo">
+                {{'field.normativo' | appTranslate:'preco_combustivel'}}
+                <p-sortIcon field="normativo"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="situacao">
+                {{'field.situacao' | appTranslate:'preco_combustivel'}}
+                <p-sortIcon field="situacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="dataCriacao">
+                {{'field.dataCriacao' | appTranslate:'preco_combustivel'}}
+                <p-sortIcon field="dataCriacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.codigo' | appTranslate:'preco_combustivel'}}</span>
+                <span> {{entity.id}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.precoGasolina' | appTranslate:'preco_combustivel'}}</span>
+                <span> {{entity.precoGasolina | thousandFormat}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.precoEtanol' | appTranslate:'preco_combustivel'}}</span>
+                <span> {{entity.precoEtanol | thousandFormat}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.precoDiesel' | appTranslate:'preco_combustivel'}}</span>
+                <span> {{entity.precoDiesel | thousandFormat}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.precoGNV' | appTranslate:'preco_combustivel'}}</span>
+                <span> {{entity.precoGNV | thousandFormat}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.normativo' | appTranslate:'preco_combustivel'}}</span>
+                <span> {{entity.normativo}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.situacao' | appTranslate:'preco_combustivel'}}</span>
+                <span>
+                  <div class="btn-situacao">
+                    <app-situacao-button-preco-combustivel
+                      (onUpdateStatus)="updateStatus($event, entity.situacao)"
+                      [entityId]="entity.id"
+                      [ativo]="entity.situacao"
+                    ></app-situacao-button-preco-combustivel>
+                  </div>
+                </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.dataCriacao' | appTranslate:'preco_combustivel'}}</span>
+                <span> {{entity.dataCriacao | date:'dd/MM/yyyy'}} </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons
+                  page="preco_combustivel"
+                  [entityId]="entity.id"
+                  [detailPermission]="false"
+                  (onRemove)="remove($event)"
+                ></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+<ng-container *ngIf="submitted && hasError()">
+  <span *ngFor="let error of errors" [class]="errorClass" style="display: block"> {{translateErrorByType(error)}} </span>
+</ng-container>

@@ -1,0 +1,321 @@
+<div [formGroup]="formGroup">
+  <div class="p-fluid formgrid grid">
+    <h5 class="subtitle col-12 md:col-12">{{ 'title.evento' | appTranslate:'solicitacao'}}</h5>
+  </div>
+
+  <div *ngIf="!isDetail" class="p-fluid formgrid grid">
+    <div class="field col-3 md:col-3">
+      <div class="label">
+        <label> {{ 'field.eventos' | appTranslate : 'solicitacao' }} * </label>
+      </div>
+      <p-dropdown
+        [styleClass]="submitted && !this.formGroup.controls.eventos?.valid ? 'border-red-500' : ''"
+        #dropdownEventos
+        (onChange)="onChangeEvento($event?.value?.id)"
+        [options]="listEventosDropDown"
+        placeholder="{{'select' | appTranslate:'shared'}}"
+        emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+        optionLabel="nomeEvento"
+        dataKey="id"
+      ></p-dropdown>
+      <app-field-validator
+        [control]="this.formGroup.controls.eventos"
+        [submitted]="submitted"
+        field="eventos"
+        page="solicitacao"
+      ></app-field-validator>
+    </div>
+
+    <div class="readonly p-field col-2 md:col-2">
+      <div class="label">
+        <label> {{ 'field.evento_periodo_evento' | appTranslate : 'solicitacao' }} </label>
+      </div>
+      <div class="periodo-evento">
+        <input #eventoDataInicio readonly pInputText type="text" />
+        <div class="periodo-evento-separador">a</div>
+        <input #eventoDataTermino readonly pInputText type="text" />
+      </div>
+    </div>
+
+    <div class="readonly p-field col-3 md:col-3">
+      <div class="label">
+        <label> {{ 'field.evento_numero_documento' | appTranslate : 'solicitacao' }} </label>
+      </div>
+      <input #eventoNumeroDocumento readonly pInputText type="text" />
+    </div>
+
+    <div class="readonly p-field col-4 md:col-4">
+      <div class="label">
+        <label> {{ 'field.evento_numero_processo' | appTranslate : 'solicitacao' }} </label>
+      </div>
+      <input #eventoNumeroProcesso readonly pInputText type="text" />
+    </div>
+
+    <div *ngIf="showDescricaoEvento" class="readonly p-field col-12 md:col-12">
+      <div class="label">
+        <label> {{ 'field.evento_descricao' | appTranslate : 'solicitacao' }} </label>
+      </div>
+      <textarea #eventoDescricao readonly pInputTextarea rows="1" [autoResize]="true"></textarea>
+    </div>
+
+    <div *ngIf="showCondicaoEvento" class="readonly p-field col-12 md:col-12">
+      <div class="label">
+        <label> {{ 'field.evento_condicao' | appTranslate : 'solicitacao' }} </label>
+      </div>
+      <textarea #eventoCondicao readonly pInputTextarea rows="1" [autoResize]="true"></textarea>
+    </div>
+
+    <div class="btn-add-evento col-12 md:col-12">
+      <p-button
+        [disabled]="!enableBtnAddEvento"
+        pRipple
+        type="button"
+        (click)="addEvento(dropdownEventos)"
+        label="{{'action.add_evento' | appTranslate:'solicitacao'}}"
+      ></p-button>
+    </div>
+  </div>
+
+  <div class="p-fluid formgrid grid">
+    <div class="col-12 md:col-12">
+      <p-table [value]="listEventosTable">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>{{ 'field.eventos' | appTranslate: 'solicitacao' }}</th>
+            <th>{{ 'field.evento_periodo_evento' | appTranslate: 'solicitacao' }}</th>
+            <th>{{ 'field.evento_numero_documento' | appTranslate: 'solicitacao' }}</th>
+            <th>{{ 'field.evento_numero_processo' | appTranslate: 'solicitacao' }}</th>
+            <th class="bnt-center">{{'actions' | appTranslate:'shared'}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-evento>
+          <tr>
+            <td>{{ evento.nomeEvento }}</td>
+            <td>{{ evento.dataInicio | date:'dd/MM/yyyy' }} - {{ evento.dataTermino | date:'dd/MM/yyyy' }}</td>
+            <td>{{ evento.numeroDocumento }}</td>
+            <td>{{ evento.numeroProcesso }}</td>
+            <td>
+              <div *ngIf="isDeletableEvento(evento.id)" class="bnt-center">
+                <button
+                  *ngIf="!isDetail"
+                  pButton
+                  type="button"
+                  pTooltip="{{'action.del_evento' | appTranslate: 'solicitacao'}}"
+                  tooltipPosition="top"
+                  class="p-button-danger p-button-text"
+                  icon="pi pi-trash"
+                  (click)="removeEvento(evento)"
+                ></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td style="text-align: center" colspan="99">{{'no_add' | appTranslate:'shared'}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <h5 class="subtitle col-12 md:col-12">{{ 'title.grupo_trabalho' | appTranslate:'solicitacao'}}</h5>
+
+    <app-field class="field col-4 md:col-4" [submitted]="submitted" page="solicitacao">
+      <i
+        class="icon-help pi pi-info-circle"
+        pTooltip="{{'message.participaGrupoTrabalho' | appTranslate:'solicitacao'}}"
+        tooltipPosition="top"
+        fitContent="true"
+      ></i>
+      <p-dropdown
+        (onChange)="formConfig.changeParticipaGrupoTrabalho()"
+        appFieldRef
+        [options]="simNaoOptions"
+        placeholder="{{'select' | appTranslate:'shared'}}"
+        emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+        formControlName="participaGrupoTrabalho"
+      ></p-dropdown>
+    </app-field>
+
+    <app-field
+      *ngIf="this.formGroup.controls.participaGrupoTrabalho?.value"
+      class="field col-4 md:col-4"
+      [submitted]="submitted"
+      page="solicitacao"
+    >
+      <p-dropdown
+        appFieldRef
+        [options]="maiorCargoFuncaoList"
+        placeholder="{{'select' | appTranslate:'shared'}}"
+        emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+        formControlName="maiorCargoFuncaoGrupo"
+      ></p-dropdown>
+    </app-field>
+
+    <app-field
+      *ngIf="this.formGroup.controls.participaGrupoTrabalho?.value"
+      class="field col-4 md:col-4"
+      [submitted]="submitted"
+      page="solicitacao"
+    >
+      <input appFieldRef pInputText type="text" formControlName="normativoGrupoTrabalho" maxlength="64" />
+    </app-field>
+
+    <h5 class="subtitle col-12 md:col-12">{{ 'title.assessoramento' | appTranslate:'solicitacao'}}</h5>
+
+    <app-field class="field col-4 md:col-4" [submitted]="submitted" page="solicitacao">
+      <i
+        class="icon-help pi pi-info-circle"
+        pTooltip="{{'message.assessoraMembroTribunal' | appTranslate:'solicitacao'}}"
+        tooltipPosition="top"
+        fitContent="true"
+      ></i>
+      <p-dropdown
+        appFieldRef
+        [options]="simNaoOptions"
+        placeholder="{{'select' | appTranslate:'shared'}}"
+        emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+        formControlName="assessoraMembroTribunal"
+      ></p-dropdown>
+    </app-field>
+
+    <h5 *ngIf="!this.formGroup.controls.solicitacaoComplementacao?.value" class="subtitle col-12 md:col-12">
+      {{ 'title.justificativa' | appTranslate:'solicitacao'}}
+    </h5>
+
+    <app-field
+      *ngIf="!this.formGroup.controls.solicitacaoComplementacao?.value"
+      class="col-12 md:col-12"
+      [submitted]="submitted"
+      page="solicitacao"
+    >
+      <textarea
+        appFieldRef
+        pInputTextarea
+        rows="1"
+        [autoResize]="true"
+        formControlName="justificativaSolicitacao"
+        maxlength="2000"
+      ></textarea>
+    </app-field>
+
+    <h5 class="subtitle col-12 md:col-12">{{ 'title.trecho' | appTranslate:'solicitacao'}}</h5>
+
+    <div *ngIf="!isDetail">
+      <button
+        class="btn-trecho"
+        pRipple
+        pButton
+        type="button"
+        label="{{'action.incluir_trecho' | appTranslate:'solicitacao'}}"
+        routerLink="trecho-viagem/new"
+      ></button>
+    </div>
+
+    <div class="col-12 md:col-12">
+      <p-table [value]="listTrechoViagemTable">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>{{ 'field.trecho.nome' | appTranslate: 'solicitacao' }}</th>
+            <th>{{ 'field.trecho.data_partida' | appTranslate: 'solicitacao' }}</th>
+            <th>{{ 'field.trecho.meio_transporte' | appTranslate: 'solicitacao' }}</th>
+            <th>{{ 'field.trecho.utilizaTransporteOficial' | appTranslate: 'solicitacao' }}</th>
+            <th>{{ 'field.trecho.infos_complementares' | appTranslate: 'solicitacao' }}</th>
+            <th class="bnt-center">{{'actions' | appTranslate:'shared'}}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-trecho>
+          <tr>
+            <td>{{ trecho?.origemCidade?.descricaoLocalidade }} | {{ trecho?.destinoCidade?.descricaoLocalidade }}</td>
+            <td>{{ trecho?.dataPartida | date:'dd/MM/yyyy' }}</td>
+            <td>{{ trecho?.meioTransporte | meioTransportePipe }}</td>
+            <td>{{ trecho?.utilizaTransporteOficial | simNaoPipe }}</td>
+            <td>{{infosComplementaresTrecho(trecho?.sugestaoHorarioPartidaInicial, trecho?.sugestaoHorarioPartidaFinal)}}</td>
+            <td>
+              <div class="bnt-center">
+                <button
+                  *ngIf="trecho.posicaoTrecho &lt; trechoPosicaoFinal && !trecho.trechoSolicitacaoOriginal && !isDetail"
+                  pButton
+                  type="button"
+                  pTooltip="{{'action.trecho_move_down' | appTranslate: 'solicitacao'}}"
+                  tooltipPosition="top"
+                  class="p-button-text"
+                  icon="pi pi-arrow-circle-down"
+                  (click)="trocarPosicao(false, trecho.id)"
+                ></button>
+                <button
+                  *ngIf="trecho.posicaoTrecho &gt; trechoPosicaoInicial && !trecho.trechoSolicitacaoOriginal && !isDetail"
+                  pButton
+                  type="button"
+                  pTooltip="{{'action.trecho_move_up' | appTranslate: 'solicitacao'}}"
+                  tooltipPosition="top"
+                  class="p-button-text"
+                  icon="pi pi-arrow-circle-up"
+                  (click)="trocarPosicao(true, trecho.id)"
+                ></button>
+                <button
+                  *ngIf="!isDetail"
+                  pButton
+                  type="button"
+                  pTooltip="{{'action.trecho_edit' | appTranslate: 'solicitacao'}}"
+                  tooltipPosition="top"
+                  class="p-button-text"
+                  icon="pi pi-pencil"
+                  routerLink="trecho-viagem/edit/{{trecho.id}}"
+                ></button>
+                <button
+                  *ngIf="!trecho.trechoSolicitacaoOriginal && !isDetail"
+                  pButton
+                  type="button"
+                  pTooltip="{{'action.trecho_del' | appTranslate: 'solicitacao'}}"
+                  tooltipPosition="top"
+                  class="p-button-danger p-button-text"
+                  icon="pi pi-trash"
+                  (click)="removeTrecho(trecho.id)"
+                ></button>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td style="text-align: center" colspan="99">{{'no_add' | appTranslate:'shared'}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <h5 class="subtitle col-12 md:col-12">{{ 'title.pernoite' | appTranslate:'solicitacao'}}</h5>
+
+    <div class="readonly p-field col-12 md:col-12">
+      <div class="pernoite">
+        <label> {{getLabelPerNoite}} </label>
+      </div>
+    </div>
+
+    <h5 class="subtitle col-12 md:col-12">{{ 'title.bagagem' | appTranslate:'solicitacao'}}</h5>
+
+    <div class="readonly p-field col-12 md:col-12">
+      <div class="label">
+        <label> {{ 'field.despachar_bagagem' | appTranslate : 'solicitacao' }} </label>
+      </div>
+      <div class="bagagem">
+        <label> {{getLabelBagagem}} </label>
+      </div>
+    </div>
+
+    <!--  justificativa-bagagem -->
+    <!-- <div class="label">
+        <label> {{ 'field.justificativa_bagagem' | appTranslate : 'solicitacao' }} * </label>
+      </div> -->
+    <app-field
+      style="margin-top: 20px"
+      *ngIf="isJustificativaBagagem"
+      class="field col-12 md:col-12"
+      [submitted]="submitted"
+      page="solicitacao"
+    >
+      <textarea appFieldRef pInputTextarea rows="1" [autoResize]="true" formControlName="bagagem" maxlength="2000"></textarea>
+    </app-field>
+  </div>
+</div>

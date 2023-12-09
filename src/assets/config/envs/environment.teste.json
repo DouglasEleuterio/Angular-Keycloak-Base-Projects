@@ -1,0 +1,20 @@
+{
+  "baseUrl": "https://api.diarias-teste.tre-mt.fabricacrp.com.br",
+  "authLoginUrl": "https://api.diarias-teste.tre-mt.fabricacrp.com.br/auth/token",
+  "authLogoutUrl": "https://api.diarias-teste.tre-mt.fabricacrp.com.br/auth/logout",
+  "authCodeUrl": "https://keycloak-teste.fabricacrp.com.br/auth/realms/TRE-MT/protocol/openid-connect/auth",
+  "authClientId": "diarias",
+  "authCallbackUrl": "https://diarias-teste.tre-mt.fabricacrp.com.br/oauth/authorize/callback",
+  "authNonce": false,
+  "authChallenge": false,
+  "authScope": "profile offline_access",
+  "authAuthorizationResponseType": "code",
+  "authAuthorizationSecretKey": false,
+  "authParamsType": "query",
+  "authBasicAuthorization": false,
+  "authSendClientIdClientSecret": false,
+  "validationJsonMode": false,
+  "disableRefresh": false,
+  "defaultPaginationSize": 10,
+  "defaultPaginationSizeOptions": [10, 20, 50]
+}

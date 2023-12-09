@@ -1,0 +1,23 @@
+.card {
+  margin: 0;
+}
+
+.btn-pesquisa {
+  gap: 10px; 
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn-pesquisa button {
+  height: min-content;
+  width: min-content;
+}
+
+.actions {
+  text-align: center !important;
+}

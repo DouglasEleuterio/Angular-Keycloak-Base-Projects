@@ -1,0 +1,14 @@
+<div class="p-fluid formgrid grid" [formGroup]="formGroup">
+  <app-field class="field col-8 md:col-8" [noValidation]="true" page="preco_combustivel">
+    <input appFieldRef pInputText type="text" formControlName="normativo" maxlength="64" />
+  </app-field>
+
+  <app-field class="field col-4 md:col-4" [noValidation]="true" page="preco_combustivel">
+    <p-dropdown
+      appFieldRef
+      [options]="optSituacao"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="situacao"
+    ></p-dropdown>
+  </app-field>
+</div>

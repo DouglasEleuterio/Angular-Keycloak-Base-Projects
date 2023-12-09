@@ -1,0 +1,131 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.historic' | appTranslate:'solicitacao'}}</h5>
+      </div>
+      <div>
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="id">
+                {{'field.historico.responsavel_mudanca' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="id"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="situacaoSolicitacaoAnterior.chave">
+                {{'field.historico.situacao_anterior' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="situacaoSolicitacaoAnterior.chave"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="situacaoSolicitacaoNova.chave">
+                {{'field.historico.situacao_nova' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="situacaoSolicitacaoNova.chave"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="dataSituacaoSolicitacao">
+                {{'field.historico.dataSituacaoSolicitacao' | appTranslate:'solicitacao'}}
+                <p-sortIcon field="dataSituacaoSolicitacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1">
+                <div class="flex-center buttons-modal">{{'field.historico.justificativa' | appTranslate:'solicitacao'}}</div>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.historico.responsavel_mudanca' | appTranslate:'solicitacao'}}</span>
+                <span> {{entity.idResponsavelMudanca}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.historico.situacao_anterior' | appTranslate:'solicitacao'}}</span>
+                <span>
+                  {{entity?.situacaoSolicitacaoAnterior?.situacaoSolicitacaoFase?.chave | situacaoSolicitacaoFase}}
+                  {{entity?.situacaoSolicitacaoAnterior ? '/' : null}} {{entity?.situacaoSolicitacaoAnterior?.chave | situacaoSolicitacao}}
+                </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.historico.situacao_nova' | appTranslate:'solicitacao'}}</span>
+                <span>
+                  {{entity?.situacaoSolicitacaoNova?.situacaoSolicitacaoFase?.chave | situacaoSolicitacaoFase}}
+                  {{entity?.situacaoSolicitacaoNova ? '/' : null}} {{entity?.situacaoSolicitacaoNova?.chave | situacaoSolicitacao}}
+                </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.historico.dataSituacaoSolicitacao' | appTranslate:'solicitacao'}}</span>
+                <span> {{entity.dataSituacaoSolicitacao | date:'dd/MM/yyyy HH:mm:ss'}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.historico.justificativa' | appTranslate:'solicitacao'}}</span>
+                <div class="flex-center buttons-modal">
+                  <button
+                    pButton
+                    type="button"
+                    pTooltip="{{'action.detail' | appTranslate: 'solicitacao'}}"
+                    tooltipPosition="top"
+                    class="p-button-primary p-button-text"
+                    icon="pi pi-eye"
+                    (click)="showDialog(entity.justificativa?.descricao)"
+                  ></button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-dialog
+          header="{{'field.historico.justificativa' | appTranslate:'solicitacao'}}"
+          [(visible)]="visibleModal"
+          [modal]="true"
+          [style]="{ width: '50vw' }"
+          [draggable]="false"
+          [resizable]="false"
+          [closeOnEscape]="false"
+          [closable]="false"
+        >
+          <ng-template pTemplate="body">
+            <p class="m-0">{{contentModal}}</p>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <div class="flex-center buttons-close-modal">
+              <button
+                class="p-button-outlined"
+                type="button"
+                pButton
+                pRipple
+                (click)="visibleModal = false"
+                label="{{'action.close' | appTranslate:'solicitacao'}}"
+              ></button>
+            </div>
+          </ng-template>
+        </p-dialog>
+      </div>
+      <div class="flex-center buttons-close">
+        <button
+          class="p-button-outlined"
+          type="button"
+          pButton
+          pRipple
+          (click)="cancel()"
+          label="{{'action.cancel' | appTranslate:'solicitacao'}}"
+        ></button>
+      </div>
+    </div>
+  </div>
+</div>

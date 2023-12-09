@@ -1,0 +1,55 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'contato'}}</h5>
+      </div>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="contato">
+            <input appFieldRef pInputText type="text" formControlName="nome" maxlength="100" />
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="contato">
+            <p-inputMask mask="(99) 99999-9999" formControlName="telefone"></p-inputMask>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="contato">
+            <input appFieldRef pInputText type="text" formControlName="email" maxlength="50" />
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="contato">
+            <p-dropdown
+              appFieldRef
+              [options]="ufList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="uf"
+              (onChange)="onUfChange()"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="contato">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="Sem resultados correspondentes à busca"
+              [options]="localidadeList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="cidade"
+              optionLabel="descricaoLocalidade"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="contato">
+            <input appFieldRef pInputText type="text" formControlName="cargo" maxlength="100" />
+          </app-field>
+        </div>
+
+        <div class="form-buttons">
+          <button class="form-buttons" pButton pRipple type="submit" label="{{'add' | appTranslate:'shared'}}"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

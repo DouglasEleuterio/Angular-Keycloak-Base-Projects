@@ -1,0 +1,140 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'distancia-localidade'}}</h5>
+        <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'distancia-localidade'}}"></button>
+      </div>
+      <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
+        <app-distancia-localidade-filters appFilterRef></app-distancia-localidade-filters>
+      </app-filter>
+
+      <div class="p-mr-2 p-mb-2">
+        <app-table-exporter
+          [empty]="tableData === null || tableData.length === 0"
+          [title]="'title.exporter' | appTranslate: 'distancia-localidade'"
+          filename="distancia-localidade_exportacao"
+          [filter]="pagination.filter"
+          [sort]="pagination.sort"
+          [service]="service"
+          [configuration]="exporterConfig"
+        ></app-table-exporter>
+      </div>
+
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="id">
+                {{'field.id' | appTranslate:'distancia-localidade'}}
+                <p-sortIcon field="id"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="ufOrigem">
+                {{'field.ufOrigem' | appTranslate:'distancia-localidade'}}
+                <p-sortIcon field="ufOrigem"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="localidadeOrigem">
+                {{'field.localidadeOrigem' | appTranslate:'distancia-localidade'}}
+                <p-sortIcon field="localidadeOrigem"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="ufDestino">
+                {{'field.ufDestino' | appTranslate:'distancia-localidade'}}
+                <p-sortIcon field="ufDestino"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="localidadeDestino">
+                {{'field.localidadeDestino' | appTranslate:'distancia-localidade'}}
+                <p-sortIcon field="localidadeDestino"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="distancia">
+                {{'field.distancia' | appTranslate:'distancia-localidade'}}
+                <p-sortIcon field="distancia"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="situacao">
+                {{'field.situacao' | appTranslate:'distancia-localidade'}}
+                <p-sortIcon field="situacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="dataCriacao">
+                {{'field.dataCriacao' | appTranslate:'distancia-localidade'}}
+                <p-sortIcon field="dataCriacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.id' | appTranslate:'distancia-localidade'}}</span>
+                <span pTooltip="{{entity.id}}"> {{entity.id}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.ufOrigem' | appTranslate:'distancia-localidade'}}</span>
+                <span pTooltip="{{entity.ufOrigem}}"> {{entity.ufOrigem}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.localidadeOrigem' | appTranslate:'distancia-localidade'}}</span>
+                <span pTooltip="{{entity.localidadeOrigem}}"> {{entity.localidadeOrigem.descricaoLocalidade}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.ufDestino' | appTranslate:'distancia-localidade'}}</span>
+                <span pTooltip="{{entity.ufDestino}}"> {{entity.ufDestino}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.localidadeDestino' | appTranslate:'distancia-localidade'}}</span>
+                <span pTooltip="{{entity.localidadeDestino}}"> {{entity.localidadeDestino.descricaoLocalidade}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.distancia' | appTranslate:'distancia-localidade'}}</span>
+                <span pTooltip="{{entity.distancia}}"> {{entity.distancia}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.situacao' | appTranslate:'distancia-localidade'}}</span>
+                <span>
+                  <div class="btn-situacao">
+                    <app-situacao-button
+                      (onUpdateStatus)="updateStatus($event, entity.situacao)"
+                      [entityId]="entity.id"
+                      [ativo]="entity.situacao"
+                    ></app-situacao-button>
+                  </div>
+                </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.dataCriacao' | appTranslate:'distancia-localidade'}}</span>
+                <span> {{entity.dataCriacao | date:'dd/MM/yyyy'}} </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons
+                  page="distancia-localidade"
+                  [detailPermission]="false"
+                  [entityId]="entity.id"
+                  (onRemove)="remove($event)"
+                ></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

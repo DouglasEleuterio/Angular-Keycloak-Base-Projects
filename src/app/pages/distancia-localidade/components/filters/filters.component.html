@@ -1,0 +1,45 @@
+<div class="p-fluid formgrid grid" [formGroup]="formGroup">
+  <app-field class="p-field col-4 md:col-4" [noValidation]="true" page="distancia-localidade">
+    <p-dropdown
+      appFieldRef
+      [options]="ufList"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="ufOrigem"
+      (onChange)="onUfChange()"
+    ></p-dropdown>
+  </app-field>
+
+  <app-field class="p-field col-4 md:col-4" [noValidation]="true" page="distancia-localidade">
+    <p-dropdown
+      appFieldRef
+      [filter]="true"
+      emptyFilterMessage="Sem resultados correspondentes à busca"
+      [options]="localidadeList"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="localidadeOrigem"
+      optionLabel="descricaoLocalidade"
+    ></p-dropdown>
+  </app-field>
+
+  <app-field class="p-field col-4 md:col-4" [noValidation]="true" page="distancia-localidade">
+    <p-dropdown
+      appFieldRef
+      [options]="ufList"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="ufDestino"
+      (onChange)="onUfDestinoChange()"
+    ></p-dropdown>
+  </app-field>
+
+  <app-field class="p-field col-4 md:col-4" [noValidation]="true" page="distancia-localidade">
+    <p-dropdown
+      appFieldRef
+      [filter]="true"
+      emptyFilterMessage="Sem resultados correspondentes à busca"
+      [options]="localidadeDestinoList"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="localidadeDestino"
+      optionLabel="descricaoLocalidade"
+    ></p-dropdown>
+  </app-field>
+</div>

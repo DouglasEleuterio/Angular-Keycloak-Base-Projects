@@ -1,0 +1,54 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+pool: 'Docker'
+
+variables:
+  Major: 1
+  Minor: 0
+  Patch: $[counter(variables['Minor'], 0)]
+  Repository: 'tremt.diarias.front'
+  ArtifactName: 'TRE-MT.Diarias.Front'
+
+name: $(Major).$(Minor).$(Patch)
+
+steps:
+  - task: Docker@2
+    displayName: 'DockerRegistry - Build'
+    inputs:
+      containerRegistry: 'CRP - DockerRegistry'
+      repository: '$(Repository)'
+      command: 'build'
+      Dockerfile: '**/Dockerfile'
+      tags: '$(Major).$(Minor).$(Patch)'
+      arguments: '--build-arg VERSION=$(Major).$(Minor).$(Patch)'
+
+  - task: Docker@2
+    displayName: 'DockerRegistry - Login'
+    inputs:
+      containerRegistry: 'CRP - DockerRegistry'
+      command: 'login'
+
+  - task: Docker@2
+    displayName: 'DockerRegistry - Push'
+    inputs:
+      containerRegistry: 'CRP - DockerRegistry'
+      repository: '$(Repository)'
+      command: 'push'
+      tags: '$(Major).$(Minor).$(Patch)'
+
+  - task: CopyFiles@2
+    displayName: 'Copiando docker-compose e configurações de ambiente'
+    inputs:
+      sourceFolder: '$(Build.SourcesDirectory)'
+      contents: |
+        src/assets/config/**
+      targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Gerando artefato de publicação'
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: '$(ArtifactName)'

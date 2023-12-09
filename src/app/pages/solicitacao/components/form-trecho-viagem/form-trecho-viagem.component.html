@@ -1,0 +1,306 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.trecho_viagem' | appTranslate:'solicitacao'}}</h5>
+      </div>
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <div class="p-field col-12 md:col-12">
+            <div class="apenas-um-destino" *ngIf="isNew">
+              <div class="label">
+                <label> {{ 'field.apenas_um_destino' | appTranslate : 'solicitacao' }} * </label>
+              </div>
+              <div class="container-radio">
+                <div *ngFor="let simNao of simNaoOptions" class="field-checkbox">
+                  <p-radioButton
+                    [inputId]="simNao.value"
+                    [value]="simNao.value"
+                    (onClick)="onChangeApenasUmTrecho($event.value)"
+                    formControlName="apenasUmDestino"
+                  ></p-radioButton>
+                  <label class="label-radio" [for]="simNao.value">{{ simNao.label }}</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div #ida class="p-field col-6 md:col-6" formGroupName="trechoIda">
+            <div #origem class="flex gap-3 mt-10">
+              <div #origemUF class="w-20">
+                <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                  <p-dropdown
+                    (onChange)="onChangeUFOrigem($event.value)"
+                    appFieldRef
+                    [options]="listUFs"
+                    placeholder="{{'select' | appTranslate:'shared'}}"
+                    emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                    formControlName="origemUF"
+                  ></p-dropdown>
+                </app-field>
+              </div>
+              <div #origemCidade class="w-80">
+                <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                  <p-dropdown
+                    (onChange)="onChangeCidadeOrigem($event.value)"
+                    appFieldRef
+                    [options]="listCidadesOrigem"
+                    placeholder="{{'select' | appTranslate:'shared'}}"
+                    emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                    formControlName="origemCidade"
+                    optionLabel="descricaoLocalidade"
+                    dataKey="id"
+                  ></p-dropdown>
+                </app-field>
+              </div>
+            </div>
+            <div #localDificilAcessoOrigem class="flex mt-10">
+              <div class="w-100" *ngIf="listLocaisDificilAcessoOrigem.length > 0">
+                <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                  <p-dropdown
+                    (onChange)="onChangeLocaisDificilAcessoOrigem($event.value)"
+                    appFieldRef
+                    [options]="listLocaisDificilAcessoOrigem"
+                    placeholder="{{'select' | appTranslate:'shared'}}"
+                    emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                    formControlName="localDificilAcessoOrigem"
+                    optionLabel="nome"
+                    dataKey="id"
+                  ></p-dropdown>
+                </app-field>
+              </div>
+            </div>
+
+            <div *ngIf="form.apenasUmDestino?.value" class="flex mt-10">
+              <h5>{{ 'title.trecho_ida' | appTranslate:'solicitacao'}}</h5>
+            </div>
+
+            <div #dataPartida class="flex mt-10">
+              <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                <p-calendar
+                  appFieldRef
+                  formControlName="dataPartida"
+                  dateFormat="dd/mm/yy"
+                  monthNavigator="true"
+                  yearNavigator="true"
+                  yearRange="1990:2050"
+                  showIcon="true"
+                  appDateMask
+                ></p-calendar>
+              </app-field>
+            </div>
+            <div #meioTransporteIda class="flex mt-10">
+              <div class="w-50">
+                <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                  <p-dropdown
+                    (onChange)="onChangeMeioTransporte($event.value, true)"
+                    appFieldRef
+                    [options]="meioTransporteOptions"
+                    placeholder="{{'select' | appTranslate:'shared'}}"
+                    emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                    formControlName="meioTransporte"
+                  ></p-dropdown>
+                </app-field>
+              </div>
+            </div>
+            <div #sugestaoHorarioPartida *ngIf="isMeioTransporteAereoOuRodoviarioIda">
+              <div class="flex gap-3 mt-10">
+                <div class="w-100">{{ 'field.sugestao_horario_partida' | appTranslate: 'solicitacao.trechoida' }}</div>
+              </div>
+              <div class="flex gap-3">
+                <div class="w-20">
+                  <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                    <p-inputMask appFieldRef mask="99:99" formControlName="sugestaoHorarioPartidaInicial" placeholder="HH:MM"></p-inputMask>
+                  </app-field>
+                </div>
+                <div class="w-20">
+                  <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                    <p-inputMask appFieldRef mask="99:99" formControlName="sugestaoHorarioPartidaFinal" placeholder="HH:MM"></p-inputMask>
+                  </app-field>
+                </div>
+              </div>
+            </div>
+            <div #utilizaTransporteOficial *ngIf="isMeioTransporteAereoIda">
+              <div class="flex mt-10">
+                <div class="w-100">
+                  <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                    <p-dropdown
+                      [options]="simNaoOptions"
+                      placeholder="{{'select' | appTranslate:'shared'}}"
+                      emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                      formControlName="utilizaTransporteOficial"
+                    ></p-dropdown>
+                  </app-field>
+                </div>
+              </div>
+              <div class="flex">
+                <div class="w-100 color-subtitle">
+                  {{'message.desembarque_transporte' | appTranslate:'solicitacao'}} [{{ destinoDesembarque }}]
+                </div>
+              </div>
+            </div>
+            <div #utilizaDespachoBagagem *ngIf="isMeioTransporteAereoIda" class="flex mt-10">
+              <div class="w-100">
+                <app-field [submitted]="submitted" page="solicitacao.trechoIda">
+                  <p-dropdown
+                    appFieldRef
+                    [options]="simNaoOptions"
+                    placeholder="{{'select' | appTranslate:'shared'}}"
+                    emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                    formControlName="utilizaDespachoBagagem"
+                  ></p-dropdown>
+                </app-field>
+              </div>
+            </div>
+          </div>
+
+          <div #volta class="p-field col-6 md:col-6">
+            <div>
+              <div #destino class="flex gap-3 mt-10">
+                <div #destinoUF class="w-20">
+                  <app-field [submitted]="submitted" page="solicitacao">
+                    <p-dropdown
+                      (onChange)="onChangeUFDestino($event.value)"
+                      appFieldRef
+                      [options]="listUFs"
+                      placeholder="{{'select' | appTranslate:'shared'}}"
+                      emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                      formControlName="destinoUF"
+                    ></p-dropdown>
+                  </app-field>
+                </div>
+                <div #destinoCidade class="w-80">
+                  <app-field [submitted]="submitted" page="solicitacao">
+                    <p-dropdown
+                      (onChange)="onChangeCidadeDestino($event.value)"
+                      appFieldRef
+                      [options]="listCidadesDestino"
+                      placeholder="{{'select' | appTranslate:'shared'}}"
+                      emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                      formControlName="destinoCidade"
+                      optionLabel="descricaoLocalidade"
+                      dataKey="id"
+                    ></p-dropdown>
+                  </app-field>
+                </div>
+              </div>
+              <div #locaisDificilAcessoDestino class="flex mt-10">
+                <div class="w-100" *ngIf="listLocaisDificilAcessoDestino.length > 0">
+                  <app-field [submitted]="submitted" page="solicitacao">
+                    <p-dropdown
+                      (onChange)="onChangeLocaisDificilAcessoDestino($event.value)"
+                      appFieldRef
+                      [options]="listLocaisDificilAcessoDestino"
+                      placeholder="{{'select' | appTranslate:'shared'}}"
+                      emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                      formControlName="localDificilAcessoDestino"
+                      optionLabel="nome"
+                      dataKey="id"
+                    ></p-dropdown>
+                  </app-field>
+                </div>
+              </div>
+            </div>
+
+            <div #voltaUmtrecho *ngIf="form.apenasUmDestino?.value" class="trecho-volta" formGroupName="trechoVolta">
+              <div class="flex mt-10">
+                <h5>{{ 'title.trecho_volta' | appTranslate:'solicitacao'}}</h5>
+              </div>
+              <div #dataVolta class="flex mt-10">
+                <app-field [submitted]="submitted" page="solicitacao.trechoVolta">
+                  <p-calendar
+                    appFieldRef
+                    formControlName="dataPartida"
+                    dateFormat="dd/mm/yy"
+                    monthNavigator="true"
+                    yearNavigator="true"
+                    yearRange="1990:2050"
+                    showIcon="true"
+                    appDateMask
+                  ></p-calendar>
+                </app-field>
+              </div>
+              <div #meioTransporteVolta class="flex mt-10">
+                <div class="w-50">
+                  <app-field [submitted]="submitted" page="solicitacao.trechoVolta">
+                    <p-dropdown
+                      (onChange)="onChangeMeioTransporte($event.value, false)"
+                      appFieldRef
+                      [options]="meioTransporteOptions"
+                      placeholder="{{'select' | appTranslate:'shared'}}"
+                      emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                      formControlName="meioTransporte"
+                    ></p-dropdown>
+                  </app-field>
+                </div>
+              </div>
+              <div #sugestaoHorarioVolta *ngIf="isMeioTransporteAereoOuRodoviarioVolta">
+                <div class="flex gap-3 mt-10">
+                  <div class="w-100">{{ 'field.sugestao_horario_partida' | appTranslate: 'solicitacao.trechovolta' }}</div>
+                </div>
+                <div class="flex gap-3">
+                  <div class="w-20">
+                    <app-field [submitted]="submitted" page="solicitacao.trechoVolta">
+                      <p-inputMask
+                        appFieldRef
+                        mask="99:99"
+                        formControlName="sugestaoHorarioPartidaInicial"
+                        placeholder="HH:MM"
+                      ></p-inputMask>
+                    </app-field>
+                  </div>
+                  <div class="w-20">
+                    <app-field [submitted]="submitted" page="solicitacao.trechoVolta">
+                      <p-inputMask appFieldRef mask="99:99" formControlName="sugestaoHorarioPartidaFinal" placeholder="HH:MM"></p-inputMask>
+                    </app-field>
+                  </div>
+                </div>
+              </div>
+              <div #utilizaTransporteOficialVolta *ngIf="isMeioTransporteAereoVolta">
+                <div class="flex mt-10">
+                  <div class="w-100">
+                    <app-field [submitted]="submitted" page="solicitacao.trechoVolta">
+                      <p-dropdown
+                        [options]="simNaoOptions"
+                        placeholder="{{'select' | appTranslate:'shared'}}"
+                        emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                        formControlName="utilizaTransporteOficial"
+                      ></p-dropdown>
+                    </app-field>
+                  </div>
+                </div>
+                <div class="flex">
+                  <div class="w-100 color-subtitle">{{'message.desembarque_transporte_volta' | appTranslate:'solicitacao'}}</div>
+                </div>
+              </div>
+              <div #utilizaDespachoBagagemVolta *ngIf="isMeioTransporteAereoVolta" class="flex mt-10">
+                <div class="w-100">
+                  <app-field [submitted]="submitted" page="solicitacao.trechoVolta">
+                    <p-dropdown
+                      appFieldRef
+                      [options]="simNaoOptions"
+                      placeholder="{{'select' | appTranslate:'shared'}}"
+                      emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                      formControlName="utilizaDespachoBagagem"
+                    ></p-dropdown>
+                  </app-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="buttons-form">
+          <button
+            class="p-button-outlined"
+            pButton
+            pRipple
+            type="button"
+            (click)="cancel()"
+            label="{{'action.cancel' | appTranslate:'solicitacao'}}"
+          ></button>
+          <button pButton pRipple type="button" label="{{'action.confirm' | appTranslate:'solicitacao'}}" (click)="submit()"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

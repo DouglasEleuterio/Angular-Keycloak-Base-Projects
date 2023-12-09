@@ -1,0 +1,12 @@
+singleQuote: true
+printWidth: 140
+trailingComma: none
+arrowParens: avoid
+endOfLine: auto
+overrides:
+  - files: '*.component.html'
+    options:
+      parser: angular
+  - files: '*.html'
+    options:
+      parser: html

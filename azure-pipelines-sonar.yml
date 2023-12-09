@@ -1,0 +1,26 @@
+# Maven
+# Build your Java project and run tests with Apache Maven.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+pool:
+  name: Docker
+
+name: Sonar
+
+variables:
+  Major: 0
+  Minor: 0
+  Patch: $[counter(variables['Minor'], 0)]
+  Tag: 'tremt.diarias.sonar-front'
+
+steps:
+  - task: CmdLine@2
+    displayName: 'Executando Scanner'
+    inputs:
+      script: 'sudo docker build -f Sonar.Dockerfile -t $(Tag):$(Major).$(Minor).$(Patch) .'
+
+  - task: CmdLine@2
+    displayName: 'Limpando Scanner'
+    inputs:
+      script: 'sudo docker rmi $(Tag):$(Major).$(Minor).$(Patch)'

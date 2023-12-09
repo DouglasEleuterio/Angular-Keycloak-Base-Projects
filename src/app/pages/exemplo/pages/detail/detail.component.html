@@ -1,0 +1,18 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.detail' | appTranslate:'exemplo'}}</h5>
+      </div>
+      <div class="detail-body grid">
+        <div class="col-3">
+          <app-data-label title="{{'field.nome' | appTranslate:'exemplo'}}" [value]="entity?.nome"></app-data-label>
+        </div>
+        <div class="col-3">
+          <app-data-label title="{{'field.descricao' | appTranslate:'exemplo'}}" [value]="entity?.descricao"></app-data-label>
+        </div>
+      </div>
+      <app-form-buttons [isDetail]="true" (onCancel)="cancel()"></app-form-buttons>
+    </div>
+  </div>
+</div>

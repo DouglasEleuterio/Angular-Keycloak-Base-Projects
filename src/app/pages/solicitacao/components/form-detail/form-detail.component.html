@@ -1,0 +1,29 @@
+<div class="grid header">
+  <div class="column">
+    <div>
+      <label> {{ 'field.detail.numero'| appTranslate:'solicitacao'}} </label>
+    </div>
+    <div>
+      <label>{{ solicitacao?.id }}/{{ solicitacao?.dataCriacao | date: 'yyyy' }}</label>
+    </div>
+  </div>
+  <div class="column">
+    <div>
+      <label> {{ 'field.detail.situacao'| appTranslate:'solicitacao'}} </label>
+    </div>
+    <div>
+      <label> {{ solicitacao?.situacaoSolicitacao?.chave | situacaoSolicitacao }} </label>
+    </div>
+  </div>
+  <div class="column">
+    <div>
+      <label> {{ 'field.detail.data'| appTranslate:'solicitacao'}} </label>
+    </div>
+    <div>
+      <label> {{ solicitacao?.dataCriacao | date: 'dd/MM/yyyy' }} </label>
+    </div>
+  </div>
+</div>
+<div class="steps">
+  <p-steps [model]="situacoes" [activeIndex]="activeIndex"> </p-steps>
+</div>

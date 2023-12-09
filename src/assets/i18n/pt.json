@@ -1,0 +1,1358 @@
+{
+  "APPLICATION": {
+    "NAME": "Diárias",
+    "ORGANIZATION": "TRE - MT",
+    "VERSION": "Versão: {{version}}"
+  },
+  "SHARED": {
+    "LABEL": {
+      "ACTIONS": "Ações",
+      "LOGOUT": "Ao sair o usuário será deslogado de TODOS os sistemas que utilizam o SSO para login. Deseja sair?"
+    },
+    "EXPORT_CSV": "Exportar para CSV",
+    "EXPORT_XLSX": "Exportar para XLSX",
+    "EXPORT_PDF": "Exportar para PDF",
+    "EXPORT_PRINT": "Imprimir",
+    "LISTING": "Listagem",
+    "FILTER": "Filtro",
+    "SEARCH_FILTERS": "Filtros de pesquisa",
+    "SEARCH": "Pesquisar",
+    "CLEAR": "Limpar",
+    "ACTIONS": "Ações",
+    "VIEW_ACTION": "Visualizar",
+    "EDIT_ACTION": "Editar",
+    "DELETE_ACTION": "Excluir",
+    "REMOVE_ACTION": "Remover",
+    "NO_RECORDS": "Nenhum registro encontrado.",
+    "NO_ADD": "Nenhum registro adicionado.",
+    "LOADING": "Carregando informações...",
+    "ADD": "Adicionar",
+    "EDIT": "Alterar",
+    "DETAIL": "Detalhe",
+    "SELECT": "Selecione",
+    "WRITE": "Digite",
+    "SAVE": "Salvar",
+    "CONFIRM": "Sim",
+    "INCLUIR": "Incluir Autorizado",
+    "BACK": "Voltar",
+    "MODIFY": "Confirmar",
+    "NOT": "Não",
+    "YES": "Sim",
+    "SEND": "Enviar",
+    "CANCEL": "Não",
+    "NAME_MAX_LENGTH": "O campo nome deve ter entre 1 e 100 caracteres.",
+    "EMAIL_MAX_LENGTH": "O campo e-mail deve ter entre 1 e 100 caracteres.",
+    "TEXT_DELETE": "Tem certeza que deseja excluir esse item?",
+    "TEXT_SUCESS_UPDATE": "Registro alterado com sucesso!",
+    "TEXT_SUCESS_DELETE": "Registro excluído com sucesso",
+    "SELECT_ALL": "Todos",
+    "SELECT_FILE": "Selecionar arquivo",
+    "DOWNLOAD_FILE": "Download do arquivo",
+    "SETTINGS": "Configuração",
+    "LOCALE_CALENDAR": "pt",
+    "GO_BACK_TO_HOME": "Voltar",
+    "GO_BACK_TO_INITIAL_PAGE": "Voltar para a página inicial",
+    "REQUIRED_FIELD": "Os campos com * são obrigatórios",
+    "NEW_FOLDER": "Nova pasta",
+    "NEW_DOCUMENT": "Novo documento",
+    "NEW_LOT_DOCUMENTS": "Novo lote de documentos",
+    "PROPERTY": "Propriedades",
+    "WELCOME": "Bem-Vindo(a)",
+    "TITLES": {
+      "VALIDATION": "Validação",
+      "ERROR": "Atenção",
+      "INFO": "Detalhes",
+      "RESULT": "Resultado",
+      "SUCCESS": "Sucesso",
+      "DELETE": "Excluir",
+      "CONFIRM": "Confirmar",
+      "ATIVAR": "Ativar",
+      "INATIVAR": "Inativar"
+    },
+    "MSG": {
+      "DELETE": "Tem certeza que deseja excluir o registro?",
+      "DELETE_SUCCESSFUL": "Registro excluído com sucesso",
+      "SAVE_SUCCESSFUL": "Registro adicionado com sucesso!",
+      "UPDATE_SUCCESSFUL": "Registro alterado com sucesso!",
+      "INVALID_FORM": "Por favor, realize a revisão do formulário!",
+      "ACTIVATE": "Tem certeza que deseja prosseguir com a ativação desse registro?",
+      "DISABLE": "Tem certeza que deseja prosseguir com a inativação desse registro?",
+      "NOT_DEFINED": "Valor não definido"
+    },
+    "ERROR": {
+      "404": "A requisição com o servidor retornou o status 404. Neste caso o servidor pode estar desligado ou não foi possível acessar a internet.",
+      "500": "O servidor se deparou com um erro ao processar a requisição. Este erro não foi mapeado então é preciso entrar em contato com o administrador do sistema."
+    }
+  },
+  "LOGIN": {
+    "TITLE": {
+      "PAGE": "Login",
+      "LOGOUT": "Sair"
+    },
+    "LABEL": {
+      "TITLE": "Login",
+      "DESCRIPTION": "O acesso ao sistema é realizado através SSO do TRE-MT. Para acessar o sistema, clique no botão acima, que você será redirecionado para tela de login.",
+      "FORGOT_PASSWORD": "Esqueceu sua senha?",
+      "LOGOUT": "Ao sair o usuário será deslogado de TODOS os sistemas que utilizam o SSO para login. Deseja sair?",
+      "ENTRAR": "Entrar",
+      "TITLE_VALIDACAO_AUTENTICACAO": "Ocorreu um erro ao realizar a autenticação!",
+      "VOLTAR_TELA_LOGIN": "Voltar para a tela de login"
+    },
+    "FIELD": {
+      "USERNAME": "Usuário",
+      "PASSWORD": "Senha"
+    },
+    "PLACEHOLDER": {
+      "USERNAME": "Informe seu usuário",
+      "PASSWORD": "Informe sua senha"
+    },
+    "ACTION": {
+      "SIGN": "Entrar",
+      "LOGOUT": "Sair"
+    },
+    "ERROR": {
+      "USERNAME": {
+        "REQUIRED": "O campo usuário é obrigatório"
+      },
+      "EMAIL": {
+        "REQUIRED": "O campo e-mail é obrigatório.",
+        "EMAIL": "O campo e-mail deve ser um e-mail válido.",
+        "MAXLENGTH": "O campo e-mail deve ter no máximo {{requiredLength}} caracteres."
+      },
+      "PASSWORD": {
+        "REQUIRED": "O campo senha é obrigatório",
+        "MINLENGTH": "A Senha deve ter no mínimo {{requiredLength}} caracteres."
+      },
+      "CONFIRMPASSWORD": {
+        "REQUIRED": "O campo confirmação de senha é obrigatório",
+        "MINLENGTH": "A Senha deve ter no mínimo {{requiredLength}} caracteres.",
+        "MUSTMATCH": "A Confirmação da senha deve ser igual a Senha."
+      }
+    },
+    "MSG": {
+      "ACTIVE_ACCOUNT": "Antes do seu primeiro acesso, vamos criar sua nova senha",
+      "NEW_TOKEN": "Um novo token de ativação foi reenviado para o seu e-mail.",
+      "GENERATE_NEW_TOKEN": "Clique aqui para reenviar um novo token de ativação",
+      "TOKEN_EXPIRED": "O token de ativação expirou!",
+      "ACCOUNT_ACTIVED": "Sua conta já se encontra ativada.",
+      "AGUARDANDO_VALIDACAO": "Aguarde um momento enquanto validamos seu acesso de autenticação. Isso pode levar alguns segundos.",
+      "AGRADECIMENTO": "Obrigado por sua paciência!"
+    }
+  },
+  "EXEMPLO": {
+    "TITLE": {
+      "PAGE": "Exemplo",
+      "NEW_PAGE": "Adicionar Exemplo",
+      "EDIT_PAGE": "Alterar Exemplo",
+      "DETAIL": "Detalhamento do Exemplo"
+    },
+    "FILTER": {
+      "GLOBAL": "Placeholder para pesquisa global"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Exemplo adicionado com sucesso.",
+      "UPDATED": "Exemplo alterado com sucesso.",
+      "NOT_FOUND": "Exemplo não foi encontrado.",
+      "DELETE": "Você tem certeza que deseja excluir o exemplo?",
+      "DELETED_SUCCESS": "Exemplo excluído com sucesso!",
+      "ACTIVED": "Exemplo foi ativado com sucesso!",
+      "INACTIVED": "Exemplo foi inativado com sucesso!"
+    },
+    "FIELD": {
+      "NOME": "Nome",
+      "DESCRICAO": "Descrição",
+      "SITUACAO": "Situação",
+      "DATACRIACAO": "Data de Cadastro",
+      "DATAATUALIZACAO": "Data de Atualização"
+    },
+    "ACTION": {
+      "ADD": "Adicionar",
+      "EDIT": "Alterar",
+      "DEL": "Excluir",
+      "DETAIL": "Detalhar"
+    },
+    "VALIDATION": {
+      "NOME": {
+        "REQUIRED": "O campo nome é obrigatório.",
+        "MAXLENGTH": "O campo nome deve ter no máximo {{requiredLength}} caracteres."
+      },
+      "DESCRICAO": {
+        "MAXLENGTH": "O campo descrição deve ter no máximo {{requiredLength}} caracteres."
+      }
+    }
+  },
+  "AUXILIO_ALIMENTACAO": {
+    "TITLE": {
+      "PAGE": "Gestão de Auxílio Alimentação",
+      "NEW_PAGE": "Cadastro de Auxílio Alimentação",
+      "EDIT_PAGE": "Alteração de Auxílio Alimentação",
+      "EXPORTER": "Auxílio Alimentação"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "UF": "UF",
+      "ORGAO": "Órgão Externo",
+      "DIAS": "Dias de Recebimento de Auxilio Alimentação",
+      "SITUACAO": "Ativo",
+      "DATACRIACAO": "Data de Cadastro"
+    },
+    "ACTION": {
+      "ADD": "Adicionar",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Auxílio Alimentação adicionado com sucesso.",
+      "UPDATED": "Auxílio Alimentação alterado com sucesso.",
+      "NOT_FOUND": "Auxílio Alimentação não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Auxílio Alimentação excluído com sucesso!",
+      "ACTIVED": "Auxílio Alimentação foi ativado com sucesso!",
+      "INACTIVED": "Auxílio Alimentação foi inativado com sucesso!"
+    },
+    "VALIDATION": {
+      "DIAS": {
+        "REQUIRED": "O campo Dias de Recebimento de Auxilio Alimentação é obrigatório.",
+        "MAX": "O campo Dias de Recebimento de Auxilio Alimentação deve ser no máximo 99."
+      },
+      "ORGAO": {
+        "REQUIRED": "O campo Órgão Externo é obrigatório."
+      }
+    }
+  },
+  "TIPO_LOCALIDADE": {
+    "TITLE": {
+      "PAGE": "Gestão de Tipo de Localidade",
+      "NEW_PAGE": "Cadastro de Tipo de Localidade",
+      "EDIT_PAGE": "Alteração de Tipo de Localidade",
+      "EXPORTER": "Tipo de Localidade"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "DESCRICAO": "Descrição",
+      "SITUACAO": "Ativo",
+      "DATACRIACAO": "Data de Cadastro"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Tipo de Localidade",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Tipo de Localidade adicionado com sucesso.",
+      "UPDATED": "Tipo de Localidade alterado com sucesso.",
+      "NOT_FOUND": "Tipo de Localidade não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Tipo de Localidade excluído com sucesso!",
+      "ACTIVED": "Tipo de Localidade foi ativado com sucesso!",
+      "INACTIVED": "Tipo de Localidade foi inativado com sucesso!"
+    },
+    "VALIDATION": {
+      "DESCRICAO": {
+        "REQUIRED": "O campo Descrição é obrigatório."
+      }
+    }
+  },
+  "JUSTIFICATIVA": {
+    "TITLE": {
+      "PAGE": "Gestão de Justificativas",
+      "NEW_PAGE": "Cadastro de Justificativa",
+      "EDIT_PAGE": "Alteração de Justificativa",
+      "EXPORTER": "Justificativa",
+      "CHECKBOX_UTILIZACAO": "Utilização *"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "DESCRICAO": "Descrição",
+      "AUTORIZACAO": "Autorização",
+      "CALCULO": "Cálculo",
+      "PAGAMENTO": "Pagamento",
+      "PRESTACAOCONTA ": "Prestação de Contas",
+      "SITUACAO": "Ativo",
+      "DATACRIACAO": "Data de Cadastro"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Justificativa",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Justificativa adicionada com sucesso.",
+      "UPDATED": "Justificativa atualizada com sucesso.",
+      "NOT_FOUND": "Justificativa não foi encontrada.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Justificativa excluída com sucesso!",
+      "ACTIVED": "Justificativa foi ativada com sucesso!",
+      "INACTIVED": "Justificativa foi inativada com sucesso!"
+    },
+    "VALIDATION": {
+      "DESCRICAO": {
+        "REQUIRED": "O campo Descrição é obrigatório."
+      },
+      "UTILIZACAO": {
+        "REQUIRED": "O campo Utilização é obrigatório."
+      }
+    }
+  },
+  "VALOR_DIARIA": {
+    "TITLE": {
+      "PAGE": "Gestão de Valor de Diária",
+      "NEW_PAGE": "Cadastro de Valor de Diária",
+      "EDIT_PAGE": "Alteração de Valor de Diária",
+      "EXPORTER": "Valor de Diária"
+    },
+    "FIELD": {
+      "VALOR": "Valor",
+      "TIPOLOCALIDADE": "Tipo de Localidade",
+      "CARGOS": "Inclui",
+      "NORMATIVO": "Normativo",
+      "DATANORMATIVO": "Data do Normativo",
+      "DATAPUBLICACAONORMATIVO": "Data da Publicação do Normativo",
+      "SITUACAO": "Ativo",
+      "CARGOS_EFETIVOS": "Inclui",
+      "CARGOS_FUNCOES": "Cargo/Função"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Valor de Diária",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Valor de Diária adicionado com sucesso.",
+      "UPDATED": "Valor de Diária alterado com sucesso.",
+      "NOT_FOUND": "Valor de Diária não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Valor de Diária excluído com sucesso!",
+      "ACTIVED": "Valor de Diária foi ativado com sucesso!",
+      "INACTIVED": "Valor de Diária foi inativado com sucesso!"
+    },
+    "VALIDATION": {
+      "VALOR": {
+        "REQUIRED": "O campo Valor é obrigatório.",
+        "MAX": "O campo Valor deve ser de no máximo R$ 100.000,00"
+      },
+      "TIPOLOCALIDADE": {
+        "REQUIRED": "O campo Tipo de Localidade é obrigatório."
+      },
+      "CARGOS": {
+        "REQUIRED": "O campo Inclui é obrigatório."
+      },
+      "NORMATIVO": {
+        "REQUIRED": "O campo Normativo é obrigatório."
+      },
+      "DATANORMATIVO": {
+        "REQUIRED": "O campo Data do Normativo é obrigatório."
+      },
+      "SITUACAO": {
+        "REQUIRED": "O campo Ativo é obrigatório."
+      },
+      "CARGOS_EFETIVOS": {
+        "REQUIRED": "O campo Inclui é obrigatório."
+      }
+    }
+  },
+  "TIPO_EVENTO": {
+    "TITLE": {
+      "PAGE": "Gestão de Tipo de Evento",
+      "NEW_PAGE": "Cadastro de Tipo de Evento",
+      "EDIT_PAGE": "Alteração de Tipo de Evento",
+      "DETAIL": "Detalhamento do Tipo de Evento",
+      "EXPORTER": "Tipo de Evento"
+    },
+    "FILTER": {
+      "GLOBAL": "Placeholder para pesquisa global"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Tipo de Evento adicionado com sucesso.",
+      "UPDATED": "Tipo de Evento alterado com sucesso.",
+      "NOT_FOUND": "Tipo de Evento não foi encontrado.",
+      "DELETE": "Você tem certeza que deseja excluir o Tipo de Evento?",
+      "DELETED_SUCCESS": "Tipo de Evento excluído com sucesso!",
+      "ACTIVED": "Tipo de Evento foi ativado com sucesso!",
+      "INACTIVED": "Tipo de Evento foi inativado com sucesso!"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "UF": "UF",
+      "ORGAO": "Órgão Externo",
+      "DIAS": "Dias de Recebimento de Auxilio Alimentação",
+      "SITUACAO": "Ativo",
+      "DESCRICAO": "Descrição",
+      "DATACRIACAO": "Data de Cadastro",
+      "DATAATUALIZACAO": "Data de Atualização"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Tipo de Evento",
+      "EDIT": "Alterar",
+      "DEL": "Excluir",
+      "DETAIL": "Detalhar"
+    },
+    "VALIDATION": {
+      "DESCRICAO": {
+        "REQUIRED": "O campo Descrição é obrigatório."
+        }
+    }
+  },
+  "CLASSIFICACAO_LOCALIDADE": {
+    "TITLE": {
+      "PAGE": "Gestão de Classificação de Localidade",
+      "NEW_PAGE": "Cadastro de Classificação de Localidade",
+      "EDIT_PAGE": "Alteração de Classificação de Localidade",
+      "EXPORTER": "Classificação de Localidade"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "UF": "UF",
+      "LOCALIDADE": "Localidade",
+      "TIPOLOCALIDADE.CODIGO":"Tipo de Localidade",
+      "TIPOLOCALIDADE":"Tipo de Localidade",
+      "SITUACAO": "Ativo",
+      "DATACRIACAO": "Data de Cadastro"
+    },
+    "ACTION": {
+      "ADD": "Adicionar",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Classificação de Localidade adicionado com sucesso.",
+      "UPDATED": "Classificação de Localidade alterado com sucesso.",
+      "NOT_FOUND": "Classificação de Localidade não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Classificação de Localidade excluída com sucesso!",
+      "ACTIVED": "Classificação de Localidade foi ativada com sucesso!",
+      "INACTIVED": "Classificação de Localidade foi inativada com sucesso!"
+    },
+    "VALIDATION": {
+      "UF": {
+        "REQUIRED": "O campo UF é obrigatório."
+      },
+      "LOCALIDADE": {
+        "REQUIRED": "O campo Localidade é obrigatório."
+      },
+      "TIPOLOCALIDADE": {
+        "REQUIRED": "O campo Tipo de Localidade é obrigatório."
+      }
+    }  
+  },
+  "CLASSIFICACAO-LOCALIDADE": {
+    "FIELD": {
+      "UF": "UF",
+      "LOCALIDADE": "Localidade",
+      "TIPOLOCALIDADE":"Tipo de Localidade"
+    },
+    "VALIDATION": {
+      "UF": {
+        "REQUIRED": "O campo UF é obrigatório."
+      },
+      "LOCALIDADE": {
+        "REQUIRED": "O campo Localidade é obrigatório"
+      },
+      "TIPOLOCALIDADE": {
+        "REQUIRED": "O campo Tipo de Localidade é obrigatório"
+      }
+    }    
+  },
+  "EVENTO": {
+    "TITLE": {
+      "PAGE": "Gestão de Evento",
+      "NEW_PAGE": "Cadastro de Evento",
+      "EDIT_PAGE": "Alteração de Evento",
+      "EXPORTER": "Evento"
+    },
+    "FIELD": {
+      "SELECIONAR": "Selecionar",
+      "NOMEEVENTO": "Evento",
+      "TIPOEVENTO": "Tipo de Evento",
+      "DESCRICAO": "Descrição",
+      "DATAINICIO": "Data de Início",
+      "DATATERMINO": "Data de Término",
+      "NUMERODOCUMENTO": "Número do Documento",
+      "NUMEROPROCESSO": "Número do Processo",
+      "ORGANIZADORA": "Organizadora",
+      "SITUACAO_CONDICAO": "Situação",
+      "SITUACAO": "Ativo",
+      "CONDICOES": "Condições",
+      "PERMITE_DIAS_MANUTENCAO": "Permite sair até 1 dia antes e retornar até 1 dia depois do evento",
+      "DATAINICIOINICIAL": "Data de Início (de)",
+      "DATAINICIOFINAL": "Data de Início (até)",
+      "DATATERMINOINICIAL": "Data de Término (de)",
+      "DATATERMINOFINAL": "Data de Término (até)",
+      "SITUACAOCONDICAO": "Situação",
+      "UNIDADE": "Unidade"
+    },
+    "VALIDATION": {
+      "NOMEEVENTO": {
+        "REQUIRED": "O campo Evento é obrigatório."
+      },
+      "TIPOEVENTO": {
+        "REQUIRED": "O campo Tipo de Evento é obrigatório."
+      },
+      "DATAINICIO": {
+        "REQUIRED": "O campo Data de Início é obrigatório."
+      },
+      "DATATERMINO": {
+        "REQUIRED": "O campo Data de Término é obrigatório."
+      },
+      "NUMERODOCUMENTO": {
+        "REQUIRED": "O campo Número do Documento é obrigatório."
+      },
+      "NUMEROPROCESSO": {
+        "REQUIRED": "O campo Número do Processo é obrigatório."
+      },
+      "UNIDADE": {
+        "REQUIRED": "O campo Unidade é obrigatório."
+      }
+    },
+    "ACTION": {
+      "ADD": "Adicionar Evento",
+      "EDIT": "Alterar",
+      "DEL": "Excluir",
+      "FINALIZAR": "Finalizar",
+      "CANCELAR": "Cancelar"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Evento adicionado com sucesso.",
+      "UPDATED": "Evento alterado com sucesso.",
+      "NOT_FOUND": "Evento não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Evento excluído com sucesso!",
+      "ACTIVED": "Evento foi ativado com sucesso!",
+      "INACTIVED": "Evento foi inativado com sucesso!",
+      "FINALIZADO": "Evento finalizado com sucesso!",
+      "CANCELADO": "Evento cancelado com sucesso!",
+      "ERROR_DATES": "A Data de Início não pode ser maior que a Data de Término.",
+      "ERROR_DATES_INICIO": "A Data de Início (de) não pode ser maior que a Data de Início (até).",
+      "ERROR_DATES_TERMINO": "A Data de Término (de) não pode ser maior que a Data de Término (até).",
+      "NO_SELECTED": "É necessário selecionar pelo menos um Evento para prosseguir."
+    }
+  },
+  "LOCAL_DIFICIL_ACESSO": {
+    "TITLE": {
+      "PAGE": "Gestão de Local de Difícil Acesso",
+      "NEW_PAGE": "Cadastro de Local de Difícil Acesso",
+      "EDIT_PAGE": "Alteração de Local de Difícil Acesso",
+      "EXPORTER": "Local de Difícil Acesso"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "NOME": "Nome",
+      "LOCALIDADE": "Localidade",
+      "DISTANCIA": "Distância da Sede (em km)",
+      "DISTANCIAF": "Distância da Sede (km)",
+      "TEMPO": "Tempo médio de viagem (em horas)",
+      "TEMPOF": "Tempo médio de viagem (horas)",
+      "CONDICOES": "Descrição das condições",
+      "CONDICOESF": "Condições de Acesso",
+      "RESOLUCAO": "Resolução que instituiu os locais de difícil acesso",
+      "SITUACAO": "Ativo"
+    },
+    "FILTERDIFF": {
+      "FIELD": {"CONDICOES": "Condições de Acesso"}
+    },
+    "ACTION": {
+      "ADD": "Adicionar Local de Difícil Acesso",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Local de Difícil Acesso adicionado com sucesso.",
+      "UPDATED": "Local de Difícil Acesso atualizado com sucesso.",
+      "NOT_FOUND": "Local de Difícil Acesso não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Local de Difícil Acesso excluído com sucesso!",
+      "ACTIVED": "Local de Difícil Acesso foi ativado com sucesso!",
+      "INACTIVED": "Local de Difícil Acesso foi inativado com sucesso!"
+    },
+    "VALIDATION": {
+      "NOME": {
+        "REQUIRED": "O campo Nome é obrigatório.",
+        "MAXLENGTH": "O campo Nome deve ser no máximo 100."
+      },
+      "DISTANCIA": {
+        "REQUIRED": "O campo Distância da Sede (em km) é obrigatório.",
+        "MAXLENGTH": "O campo Distância da Sede (em km) deve ter no máximo 4 dígitos"
+      },
+      "TEMPO": {
+        "REQUIRED": "O campo Tempo médio de viagem (em horas) é obrigatório.",
+        "MAX": "O campo Tempo médio de viagem (em horas) deve ser no máximo 1000"
+      },
+      "CONDICOES": {
+        "REQUIRED": "O campo Descrição das condições é obrigatório.",
+        "MAXLENGTH": "O campo Descrição das condições deve ter no máximo 500 caracteres."
+      },
+      "RESOLUCAO": {
+        "REQUIRED": "O campo Resolução que instituiu os locais de difícil acesso é obrigatório.",
+        "MAXLENGTH": "O campo Resolução que instituiu os locais de difícil acesso deve ter no máximo 100 caracteres."
+      },
+      "LOCALIDADE": {
+        "REQUIRED": "O campo Localidade é obrigatório."
+      }
+    }
+  },
+  "PRECO_COMBUSTIVEL": {
+    "TITLE": {
+      "PAGE": "Gestão de Preço de Combustível",
+      "NEW_PAGE": "Cadastro de Preço de Combustível",
+      "EDIT_PAGE": "Alteração de Preço de Combustível",
+      "EXPORTER": "Preço de Combustível"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "PRECOGASOLINA": "Preço Gasolina",
+      "PRECOETANOL": "Preço Etanol",
+      "PRECODIESEL": "Preço Diesel",
+      "PRECOGNV": "Preço GNV",
+      "DATANORMATIVO": "Data do Normativo",
+      "NORMATIVO": "Normativo",
+      "SITUACAO": "Ativo",
+      "DATACRIACAO": "Data de Cadastro"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Preço de Combustível",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Preço de Combustível adicionado com sucesso.",
+      "UPDATED": "Preço de Combustível atualizado com sucesso.",
+      "NOT_FOUND": "Preço de Combustível não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Preço de Combustível excluído com sucesso!",
+      "ACTIVED": "Preço de Combustível foi ativado com sucesso!",
+      "INACTIVED": "Preço de Combustível foi inativado com sucesso!",
+      "ACTIVATE_WITH_RECORD_ACTIVE": "Já existe um preço de combustível ativo, ao prosseguir com a ativação o mesmo será inativado. Tem certeza que deseja prosseguir com a ativação desde registro?"
+    },
+    "VALIDATION": {
+      "NORMATIVO": {
+        "REQUIRED": "O campo Normativo é obrigatório."
+      },
+      "PRECOGASOLINA": {
+        "REQUIRED": "O campo Preço Gasolina é obrigatório."
+      },
+      "PRECOETANOL": {
+        "REQUIRED": "O campo Preço Etanol é obrigatório."
+      },
+      "PRECODIESEL": {
+        "REQUIRED": "O campo Preço Diesel é obrigatório."
+      },
+      "PRECOGNV": {
+        "REQUIRED": "O campo Preço GNV é obrigatório."
+      },
+      "DATANORMATIVO": {
+        "REQUIRED": "O campo Data do Normativo é obrigatório."
+      }
+    }
+  },
+  "INDENIZACAO_TRANSPORTE": {
+    "TITLE": {
+      "PAGE": "Gestão de Política de Indenização de Transporte",
+      "NEW_PAGE": "Cadastro de Política de Indenização de Transporte",
+      "EDIT_PAGE": "Alteração de Política de Indenização de Transporte",
+      "EXPORTER": "Política de Indenização de Transporte"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "NORMATIVO": "Normativo",
+      "DATANORMATIVO": "Data do Normativo",
+      "VIGENCIAINICIAL": "Vigência Inicial",
+      "VIGENCIAFINAL": "Vigência Final",
+      "SITUACAO": "Ativo",
+      "DATACRIACAO": "Data de Cadastro",
+      "POLITICAVALORTRANSPORTE": "Política",
+      "COMBUSTIVELPADRAO": "Combustível Padrão",
+      "CONSUMOPADRAO": "Consumo Padrão (km/l)"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Política de Indenização de Transporte",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Política de Indenização de Transporte adicionada com sucesso.",
+      "UPDATED": "Política de Indenização de Transporte atualizada com sucesso.",
+      "NOT_FOUND": "Política de Indenização de Transporte não foi encontrada.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Política de Indenização de Transporte excluída com sucesso!",
+      "ACTIVED": "Política de Indenização de Transporte foi ativada com sucesso!",
+      "INACTIVED": "Política de Indenização de Transporte foi inativada com sucesso!",
+      "ERROR_DATES": "A Data de Vigência Inicial não pode ser maior que a Data de Vigência Final."
+    },
+    "VALIDATION": {
+      "NORMATIVO": {
+        "REQUIRED": "O campo Normativo é obrigatório."
+      },
+      "DATANORMATIVO": {
+        "REQUIRED": "O campo Data do Normativo é obrigatório."
+      },
+      "VIGENCIAINICIAL": {
+        "REQUIRED": "O campo Vigência Inicial é obrigatório."
+      },
+      "VIGENCIAFINAL": {
+        "REQUIRED": "O campo Vigência Final é obrigatório."
+      },
+      "CONSUMOPADRAO": {
+        "REQUIRED": "O campo Consumo Padrão é obrigatório."
+      },
+      "POLITICAVALORTRANSPORTE": {
+        "REQUIRED": "O campo Política é obrigatório."
+      },
+      "COMBUSTIVELPADRAO": {
+        "REQUIRED": "O campo Combustível Padrão é obrigatório."
+      }
+    }
+  },
+  "SOLICITACAO": {
+    "TITLE": {
+      "PAGE": "Gestão de Solicitações",
+      "NEW_PAGE": "Cadastro de Solicitação de Diária e Passagem",
+      "EDIT_PAGE": "Edição de Solicitação de Diária e Passagem",
+      "DETAIL_PAGE": "Visualização de Solicitações de Diária e Passagem",
+      "SOLICITANTE": "Solicitante",
+      "MODAL_CADASTRO": "Detalhes do Solicitante",
+      "CONTA_SOLICITANTE": "Conta Bancária do Solicitante",
+      "INFORMACOES_COMPLEMENTARES": "Informações Complementares",
+      "MODAL_SERVIDOR": "Pesquisar Servidor",
+      "HISTORIC": "Histórico de Solicitação",
+      "EXPORTER": "Solicitação",
+      "EVENTO": "Evento",
+      "GRUPO_TRABALHO": "Grupo de Trabalho",
+      "ASSESSORAMENTO": "Assessoramento",
+      "JUSTIFICATIVA": "Justificativa",
+      "TRECHO": "Trechos da Viagem",
+      "TRECHO_IDA": "Ida",
+      "TRECHO_VOLTA": "Volta",
+      "PERNOITE": "Pernoite",
+      "TRECHO_VIAGEM": "Trecho de viagem",
+      "BAGAGEM": "Bagagem"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Solicitação",
+      "ADD_DOCUMENT": "Selecionar Arquivo",
+      "ADD_EVENTO": "Adicionar Evento",
+      "CLOSE": "Fechar",
+      "CANCEL": "Voltar",
+      "CONFIRM": "Confirmar",
+      "SUBMIT_CREATE": "Salvar e Continuar",
+      "SUBMIT_EDIT": "Salvar",
+      "PESQUISA_SERVIDOR": "Procurar",
+      "DETALHES_SOLICITANTE": "Visualizar Detalhes do Servidor ou Magistrado",
+      "DETAIL": "Visualizar",
+      "EDIT": "Alterar",
+      "DEL": "Excluir",
+      "HISTORIC": "Histórico",
+      "AUTORIZAR": "Autorizar",
+      "ANALIZAR": "Analisar",
+      "NAO_AUTORIZAR": "Não Autorizar",
+      "DEL_EVENTO": "Excluir Evento",
+      "NAO-AUTORIZAR": "Não Autorizar",
+      "DEVOLVER": "Devolver",
+      "ANALISAR": "Analise",
+      "JUSTIFICATIVA": "Justificativa",
+      "INCLUIR_TRECHO": "Incluir Trecho",
+      "TRECHO_DEL": "Excluir Trecho",
+      "TRECHO_EDIT": "Alterar Trecho",
+      "TRECHO_MOVE_DOWN": "Mover Trecho para Baixo",
+      "TRECHO_MOVE_UP": "Mover Trecho para Cima"
+    },
+    "FIELD": {
+      "TIPO_DIARIA": "Tipo da Diária",
+      "TIPO_SOLICITACAO": "Tipo da Solicitação",
+      "SOLICITACAOORIGINAL": "Solicitação para complementar",
+      "DOCUMENTOCOMPLEMENTACAO": "Incluir Arquivo",
+      "JUSTIFICATIVACOMPLEMENTACAO": "Justificativa para complementação",
+      "TIPOSOLICITANTE": "Tipo",
+      "NOME": "Nome",
+      "DATANASCIMENTO": "Data de Nascimento",
+      "REGIMEPREVIDENCIA": "Regime de Previdência",
+      "CPF": "CPF",
+      "CARGOFUNCAO": "Cargo/Função",
+      "CLASSIFICACAOCARGOFUNCAO": "Classificação do Cargo/Função",
+      "UNIDADE": "Unidade responsável pela solicitação",
+      "MATRICULA": "Matrícula",
+      "RG": "RG",
+      "SITUACAOFUNCIONAL": "Situação Funcional",
+      "FUNCAOCOMISSIONADA": "Cargo",
+      "CARGOSOLICITANTE": "Função Comissionada",
+      "UNIDADESOLICITANTE": "Unidade",
+      "BANCO": "Banco",
+      "AGENCIA": "Agência",
+      "CONTACORRENTE": "Conta Corrente",
+      "CODIGOOPERACAO": "Código da Operação",
+      "RECEBEAUXILIOALIMENTACAO": "Recebe auxílio-alimentação?",
+      "VALORAUXILIOALIMENTACAO": "Valor do auxílio-alimentação",
+      "RECEBEAUXILIOTRANSPORTE": "Recebe auxílio-transporte?",
+      "VALORAUXILIOTRANSPORTE": "Valor do auxílio-transporte",
+      "NOMESOLICITANTE": "Solicitante",
+      "DATASOLICITACAOINICIAL": "Data da Solicitação (de)",
+      "DATASOLICITACAOFINAL": "Data da Solicitação (até)",
+      "INICIOVIAGEMINICIAL": "Inicio da Viagem (de)",
+      "INICIOVIAGEMFINAL": "Inicio da Viagem (até)",
+      "TERMINOVIAGEMINICIAL": "Término da Viagem (de)",
+      "TERMINOVIAGEMFINAL": "Término da Viagem (até)",
+      "FASESOLICITACAO": "Fase da Solicitação",
+      "SITUACAOSOLICITACAO": "Situação da Solicitação",
+      "NUMERO": "Número da Solicitação",
+      "SOLICITANTE": "Solicitante",
+      "DATACRIACAO": "Data da solicitação",
+      "EVENTOS": "Evento",
+      "TRECHODATAINICIO": "Inicio da Viagem",
+      "TRECHODATAFIM": "Término da Viagem",
+      "PROCESSO": "Processo",
+      "FASESITUACAO": "Fase/Situação",
+      "ANO": "Ano da Solicitação",
+      "EVENTOLIST": "Evento",
+      "EVENTO_PERIODO_EVENTO": "Período do Evento",
+      "EVENTO_NUMERO_DOCUMENTO": "Número do Documento",
+      "EVENTO_NUMERO_PROCESSO": "Número do Processo",
+      "EVENTO_DESCRICAO": "Descrição",
+      "EVENTO_CONDICAO": "Condições",
+      "PARTICIPAGRUPOTRABALHO": "Participará de grupo de trabalho?",
+      "MAIORCARGOFUNCAOGRUPO": "Maior cargo/função no grupo de trabalho",
+      "NORMATIVOGRUPOTRABALHO": "Normativo que define o grupo de trabalho",
+      "ASSESSORAMEMBROTRIBUNAL": "Irá assessorar membro do Tribunal?",
+      "JUSTIFICATIVASOLICITACAO": "Justificativa",
+      "PERNOITE": "Pernoite",
+      "HISTORICO": {
+        "RESPONSAVEL_MUDANCA": "Responsável pela mudança",
+        "SITUACAO_ANTERIOR": "Situação anterior",
+        "SITUACAO_NOVA": "Situação nova",
+        "DATASITUACAOSOLICITACAO": "Data",
+        "JUSTIFICATIVA": "Justificativa"
+      },
+      "DETAIL": {
+        "NUMERO": "Número",
+        "SITUACAO": "Situação da Solicitação",
+        "DATA": "Data da Solicitação"
+      },
+      "APENAS_UM_DESTINO": "Apenas um destino?",
+      "DESTINOUF": "Destino (UF)",
+      "DESTINOCIDADE": "Destino (Cidade)",
+      "LOCALDIFICILACESSODESTINO": "Local de difícil acesso (destino)",
+      "TRECHO": {
+        "NOME": "Trecho (Origem/Destino)",
+        "DATA_PARTIDA": "Data da partida",
+        "MEIO_TRANSPORTE": "Meio de transporte",
+        "UTILIZATRANSPORTEOFICIAL": "Embarque/Desembarque no destino com Veículo Oficial?",
+        "INFOS_COMPLEMENTARES": "Informação complementar"
+      },
+      "JUSTIFICATIVA_BAGAGEM": "Justificativa de Despacho de Bagagem",
+      "DESPACHAR_BAGAGEM": "Haverá necessidade de despachar bagagem?",
+      "BAGAGEM": "Justificativa de Despacho de Bagagem"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Solicitação adicionada com sucesso.",
+      "UPDATED": "Solicitação alterada com sucesso.",
+      "NOT_FOUND": "Solicitação não foi encontrada.",
+      "TRECHO_NOT_FOUND": "Trecho não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Solicitação excluída com sucesso!",
+      "DELETED_SUCCESS_TRECHO": "Trecho excluído com sucesso!",
+      "ACTIVED": "Solicitação foi ativada com sucesso!",
+      "INACTIVED": "Solicitação foi inativada com sucesso!",
+      "COLABORADOR_EVENTUAL": "Colaboradores eventuais não recebem auxílio-alimentação/transporte. Caso solicitante receba, selecione tipo Colaborador.",
+      "COLABORADOR": "Os colaboradores deverão declarar se recebem auxílio-alimentação e/ou auxílio-transporte e seus respectivos valores, para que as diárias sofram descontos correspondentes. (Art. 4º e 11º,Portaria nº 3/2013)",
+      "VALORAUXILIOALIMENTACAO": "Informe o valor do auxílio-alimentação recebido mensalmente.",
+      "VALORAUXILIOTRANSPORTE": "Informe o valor do auxílio-transporte recebido mensalmente.",
+      "ERROR_DATES": "A Data de Início não pode ser maior que a Data de Término.",
+      "ERROR_DATES_INICIO": "A Data Inicial não pode ser maior que a Data Final.",
+      "ERROR_DATES_TERMINO": "A Data Final não pode ser menor que a Data Inicial.",
+      "ERROR_DATES_IDA": "A Data da partida da Ida não pode ser maior que a Data da partida da Volta.",
+      "ERROR_DATES_VOLTA": "A Data da partida da Volta não pode ser menor que a Data da partida da Ida.",
+      "ERROR_DATES_SUGESTAO_MESMO_DIA": "A Sugestão de horário para a partida da Ida não pode anteceder a da Volta, quando a Ida e Volta ocorrem no mesmo dia.",
+      "ERROR_DATES_INVALID": "A data está no formato incorreto.",
+      "ERROR_TIMES_INVALID": "O horário está no formato incorreto.",
+      "ERROR_ADD_EVENTO": "O Evento selecionado já está adicionado a lista de Eventos.",
+      "PARTICIPAGRUPOTRABALHO": "O servidor que se deslocar em equipe de trabalho receberá diária equivalente ao maior valor pago entre os demais servidores membros da equipe.(Art. 10º, Portaria n° 3/2013)",
+      "ASSESSORAMEMBROTRIBUNAL": "Nos casos em que o servidor se afastar da respectiva jurisdição ou sede acompanhando Membro deste Tribunal, o valor da diária corresponderá a oitenta por cento da diária percebida pela autoridade acompanhada. (Art.9º, Portaria nº 3/2013)",
+      "PERNOITE_SIM": "Sim",
+      "PERNOITE_NAO": "Não. O solicitante fará jus somente à metade do valor da diária quando o afastamento não exigir pernoite.",
+      "BAGAGEM_SIM": "Haverá necessidade de despachar bagagem?: Sim.",
+      "BAGAGEM_NAO": "Haverá necessidade de despachar bagagem?: Não.",
+      "DESEMBARQUE_TRANSPORTE": "Informe se vai usar transporte oficial para desembarcar em ",
+      "DESEMBARQUE_TRANSPORTE_VOLTA": "Informe se vai usar transporte oficial para embarcar no destino",
+      "DESEMBARQUE_TRANSPORTE_SELECIONE": "Selecione um destino",
+      "DESEMBARQUE_TRANSPORTE_SELECIONE_VOLTA": "Selecione uma origem",
+      "ERROR_CIDADES": "O campo Origem (Cidade) não pode ser o mesmo de Destino (Cidade), ao menos que uma delas tenha um Local de difícil acesso.",
+      "SUCCESS_TRECHO": "Trecho da Viagem adicionado com sucesso.",
+      "ERROR_LOCAIS": "O campo Local de difícil acesso (origem) não pode ser o mesmo de Local de difícil acesso (destino).",
+      "DEVOLVIDA_ERROR": "Somente solicitações com situação analisada podem ser devolvidas.",
+      "AUTORIZAR_ERROR": "Somente solicitações com situação analisada podem ser autorizadas.",
+      "ANALISAR_ERROR": "Somente solicitações com situação em análise podem ser analisadas.",
+      "NAO_AUTORIZAR_ERROR": "Somente solicitações com situação analisada podem ser autorizadas.",
+      "ERROR_TRECHOS_COMPLEMENTAR": "O período da solicitação de complementação deverá ser maior que o da solicitação que está sendo complementada."
+    },
+    "VALIDATION": {
+      "SOLICITACAOCOMPLEMENTAR": {
+        "REQUIRED": "O campo Solicitação para complementar é obrigatório."
+      },
+      "SOLICITACAOORIGINAL": {
+        "REQUIRED": "O campo Solicitação para complementar é obrigatório."
+      },
+      "DOCUMENTOCOMPLEMENTACAO": {
+        "REQUIRED": "O campo Incluir Arquivo é obrigatório."
+      },
+      "JUSTIFICATIVACOMPLEMENTACAO": {
+        "REQUIRED": "O campo Justificativa para complementação é obrigatório."
+      },
+      "TIPOSOLICITANTE": {
+        "REQUIRED": "O campo Tipo é obrigatório."
+      },
+      "NOME": {
+        "REQUIRED": "O campo Nome é obrigatório."
+      },
+      "DATANASCIMENTO": {
+        "REQUIRED": "O campo Data de Nascimento é obrigatório.",
+        "ERROR_DATES_FUTURE": "A Data de Nascimento não pode preceder a data atual."
+      },
+      "REGIMEPREVIDENCIA": {
+        "REQUIRED": "O campo Regime de Previdência é obrigatório."
+      },
+      "CPF": {
+        "REQUIRED": "O campo CPF é obrigatório."
+      },
+      "CARGOFUNCAO": {
+        "REQUIRED": "O campo Cargo/Função é obrigatório."
+      },
+      "CLASSIFICACAOCARGOFUNCAO": {
+        "REQUIRED": "O campo Classificação do Cargo/Função é obrigatório."
+      },
+      "BANCO": {
+        "REQUIRED": "O campo Banco é obrigatório."
+      },
+      "AGENCIA": {
+        "REQUIRED": "O campo Agência é obrigatório."
+      },
+      "CONTACORRENTE": {
+        "REQUIRED": "O campo Conta Corrente é obrigatório."
+      },
+      "CODIGOOPERACAO": {
+        "REQUIRED": "O campo Código da Operação é obrigatório."
+      },
+      "RECEBEAUXILIOALIMENTACAO": {
+        "REQUIRED": "O campo Recebe auxílio-alimentação? é obrigatório."
+      },
+      "VALORAUXILIOALIMENTACAO": {
+        "REQUIRED": "O campo Valor do auxílio-alimentação é obrigatório."
+      },
+      "RECEBEAUXILIOTRANSPORTE": {
+        "REQUIRED": "O campo Recebe auxílio-transporte? é obrigatório."
+      },
+      "VALORAUXILIOTRANSPORTE": {
+        "REQUIRED": "O campo Valor do auxílio-transporte é obrigatório."
+      },
+      "EVENTOS": {
+        "REQUIRED": "O campo Evento é obrigatório."
+      },
+      "PARTICIPAGRUPOTRABALHO": {
+        "REQUIRED": "O campo Participará de grupo de trabalho? é obrigatório."
+      },
+      "MAIORCARGOFUNCAOGRUPO": {
+        "REQUIRED": "O campo Maior cargo/função no grupo de trabalho é obrigatório."
+      },
+      "NORMATIVOGRUPOTRABALHO": {
+        "REQUIRED": "O campo Normativo que define o grupo de trabalho é obrigatório."
+      },
+      "ASSESSORAMEMBROTRIBUNAL": {
+        "REQUIRED": "O campo Assessoramento é obrigatório."
+      },
+      "JUSTIFICATIVASOLICITACAO": {
+        "REQUIRED": "O campo Justificativa é obrigatório."
+      },
+      "DESTINOUF": {
+        "REQUIRED":"O campo Destino (UF) é obrigatório."
+      },
+      "DESTINOCIDADE":{
+        "REQUIRED": "O campo Destino (Cidade) é obrigatório."
+      }
+    },
+    "TRECHOIDA": {
+      "FIELD": {
+        "ORIGEMUF": "Origem (UF)",
+        "ORIGEMCIDADE": "Origem (Cidade)",
+        "LOCALDIFICILACESSOORIGEM": "Local de difícil acesso (origem)",
+        "DATAPARTIDA": "Data da partida",
+        "MEIOTRANSPORTE": "Meio de transporte",
+        "SUGESTAO_HORARIO_PARTIDA": "Sugestão de horário para a partida",
+        "SUGESTAOHORARIOPARTIDAINICIAL": "(de)",
+        "SUGESTAOHORARIOPARTIDAFINAL": "(às)",
+        "UTILIZATRANSPORTEOFICIAL": "Desembarque com transporte oficial?",
+        "UTILIZADESPACHOBAGAGEM": "Haverá necessidade de despachar bagagem?"
+      },
+      "VALIDATION": {
+        "ORIGEMUF": {
+          "REQUIRED": "O campo Origem (UF) é obrigatório."
+        },
+        "ORIGEMCIDADE": {
+          "REQUIRED": "O campo Origem (Cidade) é obrigatório."
+        },
+        "DATAPARTIDA": {
+          "REQUIRED": "O campo Data da partida é obrigatório."
+        },
+        "SUGESTAOHORARIOPARTIDAINICIAL": {
+          "REQUIRED": "O campo (de) é obrigatório."
+        },
+        "SUGESTAOHORARIOPARTIDAFINAL": {
+          "REQUIRED": "O campo (às) é obrigatório."
+        },
+        "UTILIZADESPACHOBAGAGEM": {
+          "REQUIRED": "O campo Haverá necessidade de despachar bagagem? é obrigatório."
+        }
+      }
+    },
+    "TRECHOVOLTA": {
+      "FIELD": {
+        "DATAPARTIDA": "Data da partida",
+        "MEIOTRANSPORTE": "Meio de transporte",
+        "SUGESTAO_HORARIO_PARTIDA": "Sugestão de horário para a partida",
+        "SUGESTAOHORARIOPARTIDAINICIAL": "(de)",
+        "SUGESTAOHORARIOPARTIDAFINAL": "(às)",
+        "UTILIZATRANSPORTEOFICIAL": "Embarque com transporte oficial?",
+        "UTILIZADESPACHOBAGAGEM": "Haverá necessidade de despachar bagagem?"
+      },
+      "VALIDATION": {
+        "DATAPARTIDA": {
+          "REQUIRED": "O campo Data da partida é obrigatório."
+        },
+        "SUGESTAOHORARIOPARTIDAINICIAL": {
+          "REQUIRED": "O campo (de) é obrigatório."
+        },
+        "SUGESTAOHORARIOPARTIDAFINAL": {
+          "REQUIRED": "O campo (às) é obrigatório."
+        },
+        "UTILIZADESPACHOBAGAGEM": {
+          "REQUIRED": "O campo Haverá necessidade de despachar bagagem? é obrigatório."
+        }
+      }
+    }
+  },
+  "COMPANHIA-AEREA": {
+    "TITLE": {
+      "PAGE": "Gestão de Companhia Aérea",
+      "NEW_PAGE": "Cadastro de Companhia Aérea",
+      "EDIT_PAGE": "Alteração de Companhia Aérea",
+      "EXPORTER": "Companhia Aérea"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "SITUACAO": "Ativo",
+      "NOME": "Nome",
+      "SIGLA": "Sigla",
+      "CNPJ":"CNPJ",
+      "DATACRIACAO": "Data de Cadastro"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Companhia Aérea",
+      "EDIT": "Alterar Companhia Aérea",
+      "DEL": "Excluir Companhia Aérea"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Companhia Aérea adicionada com sucesso.",
+      "UPDATED": "Companhia Aérea atualizada com sucesso.",
+      "NOT_FOUND": "Companhia Aérea não foi encontrada.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Companhia Aérea excluída com sucesso!",
+      "ACTIVED": "Companhia Aérea foi ativada com sucesso!",
+      "INACTIVED": "Companhia Aérea foi inativada com sucesso!"
+    },
+    "VALIDATION": {
+      "NOME": {
+        "REQUIRED": "O campo Nome é obrigatório."
+      },
+      "SIGLA": {
+        "REQUIRED": "O campo Sigla é obrigatório."
+      }
+    }
+  },
+  "CONTATO": {
+    "TITLE": {
+      "PAGE": "Contato",
+      "EDIT_PAGE": "Contatos"
+    },
+    "FIELD": {
+      "NOME": "Nome do Contato",
+      "TELEFONE": "Telefone",
+      "EMAIL": "E-mail",
+      "UF": "UF",
+      "CIDADE":"Cidade",
+      "CARGO": "Cargo",
+      "CIDADEUF": "Cidade - UF"
+    },
+    "ACTION": {
+      "ADD": "Adicionar",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Contato adicionado com sucesso.",
+      "UPDATED": "Contato atualizado com sucesso.",
+      "NOT_FOUND": "Contato não foi encontrado.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Contato excluído com sucesso!",
+      "ACTIVED": "Contato foi ativado com sucesso!",
+      "INACTIVED": "Contato foi inativado com sucesso!"
+    },
+    "VALIDATION": {
+      "NOME": {
+        "REQUIRED": "O campo Nome é obrigatório."
+      },
+      "TELEFONEEMAIL": {
+        "REQUIRED": "O campo Telefone ou E-mail é obrigatório."
+      }
+    }
+  },
+  "DISTANCIA-LOCALIDADE": {
+    "TITLE": {
+      "PAGE": "Gestão de Distância entre Localidades",
+      "NEW_PAGE": "Cadastro de Distância entre Localidades",
+      "EDIT_PAGE": "Alteração de Distância entre Localidades",
+      "EXPORTER": "Distância entre Localidades"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "UFORIGEM": "UF Origem",
+      "UFDESTINO": "UF Destino",
+      "LOCALIDADEORIGEM": "Localidade Origem",
+      "LOCALIDADEDESTINO": "Localidade Destino",
+      "DISTANCIA": "Distância (em km)",
+      "SITUACAO": "Ativo",
+      "DATACRIACAO": "Data de Cadastro"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Distância de Localidades",
+      "EDIT": "Alterar",
+      "DEL": "Excluir"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Distância entre Localidades adicionada com sucesso.",
+      "UPDATED": "Distância entre Localidades atualizada com sucesso.",
+      "NOT_FOUND": "Distância entre Localidades não foi encontrada.",
+      "DELETE": "Tem certeza que deseja prosseguir com a exclusão?",
+      "DELETED_SUCCESS": "Distância entre Localidades excluída com sucesso!",
+      "ACTIVED": "Distância entre Localidades foi ativada com sucesso!",
+      "INACTIVED": "Distância entre Localidades foi inativada com sucesso!"
+    },
+    "VALIDATION": {
+      "UFORIGEM": {
+        "REQUIRED": "O campo UF Origem é obrigatório."
+      },
+      "UFDESTINO": {
+        "REQUIRED": "O campo UF Destino é obrigatório."
+      },
+      "LOCALIDADEORIGEM": {
+        "REQUIRED": "O campo Localidade Origem é obrigatório."
+      },
+      "LOCALIDADEDESTINO": {
+        "REQUIRED": "O campo Localidade Destino é obrigatório."
+      },
+      "DISTANCIA": {
+        "REQUIRED": "O campo Distância é obrigatório.",
+        "MIN": "O valor da Distância deve ser no mínimo 1"
+      }
+    }
+  },
+  "AUTORIZAR_SOLICITACAO": {
+    "TITLE": {
+      "EDIT_PAGE": "Autorizar Solicitação"
+    },
+    "FIELD": {
+      "JUSTIFICATIVA": "Justificativa",
+      "DETALHAMENTOJUSTIFICATIVA": "Detalhamento"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Solicitação Autorizada com sucesso.",
+      "UPDATED": "Solicitação Autorizada com sucesso."
+    },
+    "VALIDATION": {
+      "JUSTIFICATIVA": {
+        "REQUIRED": "O campo Justificativa é obrigatório."
+      }
+    }
+  },
+  "NAO_AUTORIZAR_SOLICITACAO": {
+    "TITLE": {
+      "EDIT_PAGE": "Não Autorizar Solicitação"
+    },
+    "FIELD": {
+      "JUSTIFICATIVA": "Justificativa",
+      "DETALHAMENTOJUSTIFICATIVA": "Detalhamento"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Solicitação Não Autorizada com sucesso.",
+      "UPDATED": "Solicitação Não Autorizada com sucesso."
+    },
+    "VALIDATION": {
+      "JUSTIFICATIVA": {
+        "REQUIRED": "O campo Justificativa é obrigatório."
+      }
+    }
+  },
+  "SERVIDOR": {
+    "FIELD": {
+      "NOME": "Nome",
+      "RAMAL": "Ramal",
+      "CPF": "CPF",
+      "MATRICULA": "Matrícula",
+      "CARGO": "Cargo",
+      "FUNCAO": "Cargo/Função Comissionada",
+      "UNIDADE": "Unidade"
+    }
+  },
+  "DEVOLVER_SOLICITACAO": {
+    "TITLE": {
+      "EDIT_PAGE": "Devolver Solicitação"
+    },
+    "FIELD": {
+      "JUSTIFICATIVA": "Justificativa",
+      "DETALHAMENTOJUSTIFICATIVA": "Detalhamento"
+    },
+    "MESSAGE": {
+      "SUCCESS": "Solicitação Devolvida com sucesso.",
+      "UPDATED": "Solicitação Devolvida com sucesso."
+    },
+    "VALIDATION": {
+      "JUSTIFICATIVA": {
+        "REQUIRED": "O campo Justificativa é obrigatório."
+      }
+    }
+  },
+  "ANALISAR_SOLICITACAO": {
+    "TITLE": {
+      "EDIT_PAGE": "Analisar Solicitação"
+    },
+    "FIELD": {
+      "ANALISE": "Análise",
+      "STATUSANALISESOLICITACAO": ""
+    },
+    "MESSAGE": {
+      "SUCCESS": "Solicitação Analisada com sucesso.",
+      "UPDATED": "Solicitação Analisada com sucesso."
+    },
+    "VALIDATION": {
+      "ANALISE": {
+        "REQUIRED": "O campo Análise é obrigatório."
+      },
+      "STATUSANALISESOLICITACAO": {
+        "REQUIRED": "O campo Recomendação é obrigatório."
+      }
+    }
+  },
+  "MENU": {
+    "HOME": "Home",
+    "EXEMPLO_SUBMENU": "Exemplos",
+    "TABELAS_SUBMENU": "Tabelas",
+    "EXEMPLO": "Exemplo",
+    "TIPO_LOCALIDADE": "Tipo de Localidade",
+    "VALOR_DIARIA": "Valor de Diária",
+    "TIPO_EVENTO": "Tipo de Evento",
+    "CLASSIFICACAO_LOCALIDADE": "Classificação de Localidade",
+    "AUXILIO_ALIMENTACAO": "Auxílio Alimentação",
+    "EVENTO": "Evento",
+    "LOCAL_DIFICIL_ACESSO": "Local de Difícil Acesso",
+    "JUSTIFICATIVA": "Justificativa",
+    "PRECO_COMBUSTIVEL": "Preço de Combustível",
+    "INDENIZACAO_TRANSPORTE": "Política de Indenização de Transporte",
+    "SOLICITACAO": "Solicitações",
+    "COMPANHIA-AEREA": "Companhia Aérea",
+    "DISTANCIA-LOCALIDADE": "Distância entre Localidades"
+  },
+  "TIMES": {
+    "JUST_NOW": "agora",
+    "YEAR": "ano",
+    "MONTH": "mês",
+    "WEEK": "semana",
+    "DAY": "dia",
+    "HOUR": "hora",
+    "MINUTE": "minuto",
+    "SECOND": "segundo",
+    "YEARS": "anos",
+    "MONTHS": "meses",
+    "WEEKS": "semanas",
+    "DAYS": "dias",
+    "HOURS": "horas",
+    "MINUTES": "minutos",
+    "SECONDS": "segundos",
+    "AGO": "atrás"
+  },
+  "ERROR_PAGE": {
+    "MSG": {
+      "BACK_DASHBOARD": "Voltar para o Dashboard",
+      "PERMISSION": "Desculpe, você não tem permissão para aceder esse recurso."
+    }
+  },
+  "primeng": {
+    "dayNames": [
+      "Domingo",
+      "Segunda",
+      "Terça",
+      "Quarta",
+      "Quinta",
+      "Sexta",
+      "Sábado"
+    ],
+    "dayNamesShort": [
+      "Dom",
+      "Seg",
+      "Ter",
+      "Qua",
+      "Qui",
+      "Sex",
+      "Sáb"
+    ],
+    "dayNamesMin": [
+      "D",
+      "S",
+      "T",
+      "Q",
+      "Q",
+      "S",
+      "S"
+    ],
+    "monthNames": [
+      "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro"
+    ],
+    "monthNamesShort": [
+      "Jan",
+      "Fev",
+      "Mar",
+      "Abr",
+      "Mai",
+      "Jun",
+      "Jul",
+      "Ago",
+      "Set",
+      "Out",
+      "Nov",
+      "Dez"
+    ],
+    "today": "Hoje",
+    "clear": "Limpar"
+  },
+  "ENUM": {
+    "NULL": "Não se aplica"
+  },
+  "VALIDATION": {
+    "REQUIRED": "O campo é obrigatório",
+    "EMAIL": "O campo e-mail deve ser um e-mail válido",
+    "PATTERN": "O campo e-mail deve ser um e-mail válido",
+    "CNPJINVALID": "O CNPJ informado é inválido.",
+    "MAX": "Foi ultrapassado o número de caracteres no campo",
+    "MIN": "O campo Valor deve constar no mínimo R$ {{min}},00.",
+    "INVALID_TYPE": "Tipo de Arquivo de formato inválido. As extensões válidos são: .pdf, .doc, .docx, .xls, .xlsx, .jpg, .png e .zip",
+    "INVALID_SIZE": "Arquivo inválido ou corrompido.",
+    "MAX_SIZE": "Arquivo excede o tamanho máximo de 10mb.",
+    "CPFINVALID": "O CPF informado é inválido.",
+    "SIZE": "Arquivo excede o tamanho máximo de 10mb."
+  }
+}

@@ -1,0 +1,14 @@
+export enum MeioTransporteEnum {
+  AEREO = 'AEREO',
+  AEREO_LABEL = 'Aéreo',
+  RODOVIARIO = 'RODOVIARIO',
+  RODOVIARIO_LABEL = 'Rodoviário',
+  FERROVIARIO = 'FERROVIARIO',
+  FERROVIARIO_LABEL = 'Ferroviário',
+  FLUVIAL = 'FLUVIAL',
+  FLUVIAL_LABEL = 'Fluvial/Marítimo',
+  VEICULO_OFICIAL = 'VEICULO_OFICIAL',
+  VEICULO_OFICIAL_LABEL = 'Veículo Oficial',
+  VEICULO_PROPRIO = 'VEICULO_PROPRIO',
+  VEICULO_PROPRIO_LABEL = 'Veículo Próprio'
+}

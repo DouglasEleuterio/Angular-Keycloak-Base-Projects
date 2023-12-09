@@ -1,0 +1,25 @@
+<div class="p-fluid formgrid grid" [formGroup]="formGroup">
+  <app-field class="field col-12 md:col-4" [noValidation]="true" page="auxilio_alimentacao">
+    <p-multiSelect
+      appFieldRef
+      [options]="orgaoList"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="orgao"
+      optionLabel="descricao"
+    ></p-multiSelect>
+  </app-field>
+
+  <app-field class="field col-4 md:col-4" [noValidation]="true" page="auxilio_alimentacao">
+    <p-inputNumber appFieldRef formControlName="dias" maxlength="2" max="99" />
+  </app-field>
+
+  <app-field class="field col-12 md:col-4" [noValidation]="true" page="auxilio_alimentacao">
+    <p-dropdown
+      appFieldRef
+      [options]="optSituacao"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="situacao"
+      class="custom-width"
+    ></p-dropdown>
+  </app-field>
+</div>

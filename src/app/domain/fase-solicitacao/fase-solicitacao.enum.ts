@@ -1,0 +1,16 @@
+export enum FaseSolicitacaoEnum {
+  SOLICITACAO = 'SOLICITACAO',
+  SOLICITACAO_LABEL = 'Solicitação',
+  TRIAGEM = 'TRIAGEM',
+  TRIAGEM_LABEL = 'Triagem',
+  AUTORIZACAO = 'AUTORIZACAO',
+  AUTORIZACAO_LABEL = 'Autorização',
+  INSTRUCAO = 'INSTRUCAO',
+  INSTRUCAO_LABEL = 'Instrução',
+  CALCULO = 'CALCULO',
+  CALCULO_LABEL = 'Cálculo',
+  PAGAMENTO = 'PAGAMENTO',
+  PAGAMENTO_LABEL = 'Pagamento',
+  PRESTACAO_CONTAS = 'PRESTACAO_CONTAS',
+  PRESTACAO_CONTAS_LABEL = 'Prestação de Contas'
+}

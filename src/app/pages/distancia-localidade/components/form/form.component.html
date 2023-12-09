@@ -1,0 +1,67 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'distancia-localidade'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="distancia-localidade">
+            <p-dropdown
+              appFieldRef
+              [options]="ufList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="ufOrigem"
+              (onChange)="onUfChange()"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="distancia-localidade">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="Sem resultados correspondentes à busca"
+              [options]="localidadeList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="localidadeOrigem"
+              optionLabel="descricaoLocalidade"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="distancia-localidade">
+            <p-dropdown
+              appFieldRef
+              [options]="ufList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="ufDestino"
+              (onChange)="onUfDestinoChange()"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="distancia-localidade">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="Sem resultados correspondentes à busca"
+              [options]="localidadeDestinoList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="localidadeDestino"
+              optionLabel="descricaoLocalidade"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="distancia-localidade">
+            <p-inputNumber appFieldRef formControlName="distancia" min="0" maxlength="5" />
+          </app-field>
+        </div>
+
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

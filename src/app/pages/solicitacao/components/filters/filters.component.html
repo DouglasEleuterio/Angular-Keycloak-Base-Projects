@@ -1,0 +1,161 @@
+<div class="p-fluid formgrid grid" [formGroup]="formGroup">
+  <app-field class="p-field col-4 md:col-4" page="solicitacao">
+    <input appFieldRef pInputText type="text" formControlName="eventos" maxlength="100" />
+  </app-field>
+
+  <div class="p-field col-2 md:col-2">
+    <label class="label" style="width: 100%"> {{ 'field.numero' | appTranslate : 'solicitacao' }} </label>
+    <div class="numero-ano">
+      <p-inputNumber appFieldRef formControlName="numero" [useGrouping]="false" maxlength="20" />
+      <div class="numero-ano-barra">/</div>
+      <p-inputNumber class="ano" appFieldRef formControlName="ano" [useGrouping]="false" maxlength="4" />
+    </div>
+  </div>
+
+  <app-field class="p-field col-6 md:col-6" page="solicitacao">
+    <input appFieldRef pInputText type="text" formControlName="nome" maxlength="100" />
+  </app-field>
+
+  <app-field class="p-field col-2 md:col-2" page="solicitacao">
+    <p-calendar
+      appFieldRef
+      formControlName="dataSolicitacaoInicial"
+      dateFormat="dd/mm/yy"
+      monthNavigator="true"
+      yearNavigator="true"
+      yearRange="1990:2050"
+      showIcon="true"
+      appDateMask
+    ></p-calendar>
+  </app-field>
+  <app-field class="p-field col-2 md:col-2" page="solicitacao">
+    <p-calendar
+      appFieldRef
+      formControlName="dataSolicitacaoFinal"
+      dateFormat="dd/mm/yy"
+      monthNavigator="true"
+      yearNavigator="true"
+      yearRange="1990:2050"
+      showIcon="true"
+      appDateMask
+    ></p-calendar>
+  </app-field>
+
+  <app-field class="p-field col-2 md:col-2" page="solicitacao">
+    <p-calendar
+      appFieldRef
+      formControlName="inicioViagemInicial"
+      dateFormat="dd/mm/yy"
+      monthNavigator="true"
+      yearNavigator="true"
+      yearRange="1990:2050"
+      showIcon="true"
+      appDateMask
+    ></p-calendar>
+  </app-field>
+  <app-field class="p-field col-2 md:col-2" page="solicitacao">
+    <p-calendar
+      appFieldRef
+      formControlName="inicioViagemFinal"
+      dateFormat="dd/mm/yy"
+      monthNavigator="true"
+      yearNavigator="true"
+      yearRange="1990:2050"
+      showIcon="true"
+      appDateMask
+    ></p-calendar>
+  </app-field>
+
+  <app-field class="p-field col-2 md:col-2" page="solicitacao">
+    <p-calendar
+      appFieldRef
+      formControlName="terminoViagemInicial"
+      dateFormat="dd/mm/yy"
+      monthNavigator="true"
+      yearNavigator="true"
+      yearRange="1990:2050"
+      showIcon="true"
+      appDateMask
+    ></p-calendar>
+  </app-field>
+  <app-field class="p-field col-2 md:col-2" page="solicitacao">
+    <p-calendar
+      appFieldRef
+      formControlName="terminoViagemFinal"
+      dateFormat="dd/mm/yy"
+      monthNavigator="true"
+      yearNavigator="true"
+      yearRange="1990:2050"
+      showIcon="true"
+      appDateMask
+    ></p-calendar>
+  </app-field>
+
+  <app-field class="p-field col-12 md:col-12" [noValidation]="true" page="solicitacao">
+    <p-multiSelect
+      appFieldRef
+      [options]="listSolicitacaoFase"
+      formControlName="faseSolicitacao"
+      optionLabel="descricao"
+      display="chip"
+      [panelStyle]="{'width':'100%'}"
+      emptyFilterMessage="{{'no_records' | appTranslate: 'shared'}}"
+      emptyMessage="{{'no_records' | appTranslate: 'shared'}}"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+    >
+      <ng-template let-value pTemplate="selectedItems">
+        <div class="flex align-items-center gap-2" *ngFor="let faseElement of fasesSelecteds">
+          <div
+            class="tkn-chip"
+            [class.tkn-vermelho]="faseElement.descricao === faseEnum.SOLICITACAO_LABEL"
+            [class.tkn-azul]="faseElement.descricao === faseEnum.TRIAGEM_LABEL"
+            [class.tkn-amarelo]="faseElement.descricao === faseEnum.AUTORIZACAO_LABEL"
+            [class.tkn-laranja]="faseElement.descricao === faseEnum.INSTRUCAO_LABEL"
+            [class.tkn-roxo]="faseElement.descricao === faseEnum.CALCULO_LABEL"
+            [class.tkn-verde]="faseElement.descricao === faseEnum.PAGAMENTO_LABEL"
+          >
+            {{ faseElement.descricao }}
+            <i class="pi pi-times-circle" (click)="removeChipFase(faseElement)" pTooltip="{{'remove_action' | appTranslate:'shared'}}"></i>
+          </div>
+        </div>
+        <div *ngIf="!fasesSelecteds || fasesSelecteds?.length === 0">{{'select' | appTranslate:'shared'}}</div>
+      </ng-template>
+    </p-multiSelect>
+  </app-field>
+
+  <app-field class="p-field col-12 md:col-12" [noValidation]="true" page="solicitacao">
+    <p-multiSelect
+      appFieldRef
+      [options]="listSituacaoSolicitacao"
+      formControlName="situacaoSolicitacao"
+      optionLabel="descricao"
+      display="chip"
+      [panelStyle]="{'width':'100%'}"
+      emptyFilterMessage="{{'no_records' | appTranslate: 'shared'}}"
+      emptyMessage="{{'no_records' | appTranslate: 'shared'}}"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+    >
+      <ng-template let-value pTemplate="selectedItems">
+        <div class="flex align-items-center gap-2" *ngFor="let stSolicitacaoElement of situacoesSelecteds">
+          <div
+            class="tkn-chip"
+            [class.tkn-vermelho]="stSolicitacaoElement.situacaoSolicitacaoFase.chave === faseEnum.SOLICITACAO"
+            [class.tkn-azul]="stSolicitacaoElement.situacaoSolicitacaoFase.chave === faseEnum.TRIAGEM"
+            [class.tkn-amarelo]="stSolicitacaoElement.situacaoSolicitacaoFase.chave === faseEnum.AUTORIZACAO"
+            [class.tkn-laranja]="stSolicitacaoElement.situacaoSolicitacaoFase.chave === faseEnum.INSTRUCAO"
+            [class.tkn-roxo]="stSolicitacaoElement.situacaoSolicitacaoFase.chave === faseEnum.CALCULO"
+            [class.tkn-verde]="stSolicitacaoElement.situacaoSolicitacaoFase.chave === faseEnum.PAGAMENTO"
+          >
+            {{ stSolicitacaoElement.descricao }}
+            <i
+              class="pi pi-times-circle"
+              (click)="removeChipStSolicitacao(stSolicitacaoElement)"
+              pTooltip="{{'remove_action' | appTranslate:'shared'}}"
+            ></i>
+          </div>
+        </div>
+        <div *ngIf="!situacoesSelecteds || situacoesSelecteds?.length === 0">{{'select' | appTranslate:'shared'}}</div>
+      </ng-template>
+    </p-multiSelect>
+  </app-field>
+</div>

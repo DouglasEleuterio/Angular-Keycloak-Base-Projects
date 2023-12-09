@@ -1,0 +1,29 @@
+<div class="field">
+  <label>{{ translateFieldName | appTranslate: page }}*:</label>
+  <p-fileUpload
+    *ngIf="!isDetail"
+    mode="basic"
+    id="documento"
+    chooseLabel="{{'action.add_document' | appTranslate: page }}"
+    (onSelect)="onSelectFile($event,documento)"
+    (click)="resetSelectedFile(documento);"
+    [showUploadButton]="false"
+    invalidFileSizeMessageSummary="{{'invalid_size' | appTranslate:'validation'}}"
+    invalidFileSizeMessageDetail="{{'max_size' | appTranslate:'validation'}}"
+    invalidFileLimitMessageDetail="{{'number_limit' | appTranslate:'validation'}}"
+    invalidFileLimitMessageSummary="{{'file_limit' | appTranslate:'validation'}}"
+    invalidFileTypeMessageDetail="{{'allowed_type' | appTranslate:'validation'}}"
+    invalidFileTypeMessageSummary="{{'invalid_type' | appTranslate:'validation'}}"
+    #documento
+  >
+    <ng-template let-file pTemplate="file">
+      <div class="p-col-12">
+        <span class="p-mx-4">{{getArquivoLabel}}</span>
+      </div>
+    </ng-template>
+  </p-fileUpload>
+  <div class="nome-arquivo" (click)="download()">
+    <span>{{getArquivoLabel}}</span>
+  </div>
+  <app-field-validator [control]="control" [submitted]="submitted" [field]="controlName" [page]="page"></app-field-validator>
+</div>

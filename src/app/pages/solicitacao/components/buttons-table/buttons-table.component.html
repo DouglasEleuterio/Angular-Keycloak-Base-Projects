@@ -1,0 +1,40 @@
+<div class="crud-actions-container">
+  <button
+    pButton
+    type="button"
+    pTooltip="{{'action.detail' | appTranslate: 'solicitacao'}}"
+    tooltipPosition="top"
+    class="p-button-primary p-button-text"
+    icon="pi pi-eye"
+    [routerLink]="routerLink('detail')"
+  ></button>
+  <button
+    *ngIf="showEdit"
+    pButton
+    type="button"
+    pTooltip="{{'action.edit' | appTranslate: 'solicitacao'}}"
+    tooltipPosition="top"
+    class="p-button-secondary p-button-text"
+    icon="pi pi-pencil"
+    [routerLink]="routerLink('edit')"
+  ></button>
+  <button
+    *ngIf="showDel"
+    pButton
+    type="button"
+    pTooltip="{{'action.del' | appTranslate: 'solicitacao'}}"
+    tooltipPosition="top"
+    class="p-button-danger p-button-text"
+    icon="pi pi-trash"
+    (click)="remove()"
+  ></button>
+  <button
+    pButton
+    type="button"
+    pTooltip="{{'action.historic' | appTranslate: 'solicitacao'}}"
+    tooltipPosition="top"
+    class="p-button-secondary p-button-text"
+    icon="pi pi-history"
+    (click)="historic()"
+  ></button>
+</div>

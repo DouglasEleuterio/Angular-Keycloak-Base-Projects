@@ -1,0 +1,126 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'local_dificil_acesso'}}</h5>
+        <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'local_dificil_acesso'}}"></button>
+      </div>
+
+      <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
+        <app-local-dificil-acesso-filters appFilterRef></app-local-dificil-acesso-filters>
+      </app-filter>
+      <div class="p-mr-2 p-mb-2">
+        <app-table-exporter
+          [empty]="tableData === null || tableData.length === 0"
+          [title]="'title.exporter' | appTranslate: 'local_dificil_acesso'"
+          filename="local_dificil_acesso_exportacao"
+          [filter]="pagination.filter"
+          [sort]="pagination.sort"
+          [service]="service"
+          [configuration]="exporterConfig"
+        ></app-table-exporter>
+      </div>
+
+      <div class="list-body">
+        <p-table
+          class="table"
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="localidade">
+                {{'field.localidade' | appTranslate:'local_dificil_acesso'}}
+                <p-sortIcon field="localidade"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="nome">
+                {{'field.nome' | appTranslate:'local_dificil_acesso'}}
+                <p-sortIcon field="nome"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="distancia">
+                {{'field.distanciaF' | appTranslate:'local_dificil_acesso'}}
+                <p-sortIcon field="distancia"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="tempo">
+                {{'field.tempoF' | appTranslate:'local_dificil_acesso'}}
+                <p-sortIcon field="tempo"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="condicoes">
+                {{'field.condicoesF' | appTranslate:'local_dificil_acesso'}}
+                <p-sortIcon field="condicoes"></p-sortIcon>
+              </th>
+              <th style="text-align: center" scope="col" colspan="1" pSortableColumn="situacao">
+                {{'field.situacao' | appTranslate:'local_dificil_acesso'}}
+                <p-sortIcon field="situacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.localidade' | appTranslate:'local_dificil_acesso'}}</span>
+                <span> {{entity.localidade.descricaoLocalidade}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.nome' | appTranslate:'local_dificil_acesso'}}</span>
+                <span style="white-space: pre"> {{entity.nome}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.distancia' | appTranslate:'local_dificil_acesso'}}</span>
+                <span style="white-space: pre"> {{entity.distancia}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.tempo' | appTranslate:'local_dificil_acesso'}}</span>
+                <span style="white-space: pre"> {{entity.tempo}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.condicoes' | appTranslate:'local_dificil_acesso'}}</span>
+                <span> {{entity.condicoes}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.situacao' | appTranslate:'local_dificil_acesso'}}</span>
+                <span>
+                  <div class="btn-situacao">
+                    <app-situacao-button
+                      (onUpdateStatus)="updateStatus($event, entity.situacao)"
+                      [entityId]="entity.id"
+                      [ativo]="entity.situacao"
+                    ></app-situacao-button>
+                  </div>
+                </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons
+                  page="local_dificil_acesso"
+                  [entityId]="entity.id"
+                  [detailPermission]="false"
+                  (onRemove)="remove($event)"
+                ></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

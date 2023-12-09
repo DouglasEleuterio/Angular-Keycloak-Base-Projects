@@ -1,0 +1,16 @@
+.crud-actions-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+:host ::ng-deep
+    .p-inputswitch.p-inputswitch-checked
+    .p-inputswitch-slider,
+:host ::ng-deep
+    .p-inputswitch.p-inputswitch-checked:hover
+    .p-inputswitch-slider {
+    background: #32CD32;
+}

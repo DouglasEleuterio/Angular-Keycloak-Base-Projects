@@ -1,0 +1,27 @@
+<div class="p-fluid formgrid grid" [formGroup]="formGroup">
+  <app-field class="field col-12 md:col-4" [noValidation]="true" page="local_dificil_acesso">
+    <p-autoComplete
+      appFieldRef
+      (onSelect)="onSelectAutoComplete($event)"
+      formControlName="localidade"
+      [suggestions]="filteredLocalidades"
+      (completeMethod)="filterLocalidades($event)"
+      field="descricaoLocalidade"
+      maxlength="100"
+    >
+      <ng-template let-integradorlocalidade pTemplate="item">
+        <div class="flex align-items-center gap-2">
+          <span>{{ integradorlocalidade.descricaoLocalidade }}</span>
+        </div>
+      </ng-template>
+    </p-autoComplete>
+  </app-field>
+
+  <app-field class="field col-12 md:col-4" [noValidation]="true" page="local_dificil_acesso">
+    <input appFieldRef pInputText type="text" formControlName="nome" />
+  </app-field>
+
+  <app-field class="field col-12 md:col-4" [noValidation]="true" page="local_dificil_acesso.filterdiff">
+    <input appFieldRef pInputText type="text" formControlName="condicoes" />
+  </app-field>
+</div>

@@ -1,0 +1,57 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'local_dificil_acesso'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="local_dificil_acesso">
+            <p-autoComplete
+              appFieldRef
+              (onSelect)="onSelectAutoComplete($event)"
+              formControlName="localidade"
+              [suggestions]="filteredLocalidades"
+              (completeMethod)="filterLocalidades($event)"
+              field="descricaoLocalidade"
+              maxlength="100"
+            >
+              <ng-template let-integradorlocalidade pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                  <span>{{ integradorlocalidade.descricaoLocalidade }}</span>
+                </div>
+              </ng-template>
+            </p-autoComplete>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="local_dificil_acesso">
+            <input appFieldRef pInputText type="text" formControlName="nome" maxlength="100" />
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="local_dificil_acesso">
+            <p-inputNumber appFieldRef formControlName="distancia" min="0" maxlength="5" />
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="local_dificil_acesso">
+            <p-inputNumber appFieldRef formControlName="tempo" min="0" max="1000" maxlength="5" />
+          </app-field>
+
+          <app-field class="field col-12 md:col-8" [submitted]="submitted" page="local_dificil_acesso">
+            <input appFieldRef pInputText type="text" formControlName="resolucao" maxlength="100" />
+          </app-field>
+
+          <app-field class="field col-12 md:col-12" [submitted]="submitted" page="local_dificil_acesso">
+            <textarea appFieldRef pInputTextarea rows="3" formControlName="condicoes" maxlength="500"></textarea>
+          </app-field>
+        </div>
+
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

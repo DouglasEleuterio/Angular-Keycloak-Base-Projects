@@ -1,0 +1,109 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'tipo_localidade'}}</h5>
+        <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'tipo_localidade'}}"></button>
+      </div>
+
+      <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
+        <app-tipo-localidade-filters appFilterRef></app-tipo-localidade-filters>
+      </app-filter>
+      <div class="p-mr-2 p-mb-2">
+        <app-table-exporter
+          [empty]="tableData === null || tableData.length === 0"
+          [title]="'title.exporter' | appTranslate: 'tipo_localidade'"
+          filename="tipo_localidade_exportacao"
+          [filter]="pagination.filter"
+          [sort]="pagination.sort"
+          [service]="service"
+          [configuration]="exporterConfig"
+        ></app-table-exporter>
+      </div>
+
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [totalRecords]="pagination.totalRecords"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="id">
+                {{'field.id' | appTranslate:'tipo_localidade'}}
+                <p-sortIcon field="id"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="descricao">
+                {{'field.descricao' | appTranslate:'tipo_localidade'}}
+                <p-sortIcon field="descricao"></p-sortIcon>
+              </th>
+              <th style="text-align: center" scope="col" colspan="1" pSortableColumn="situacao">
+                {{'field.situacao' | appTranslate:'tipo_localidade'}}
+                <p-sortIcon field="situacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="dataCriacao">
+                {{'field.dataCriacao' | appTranslate:'tipo_localidade'}}
+                <p-sortIcon field="dataCriacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.id' | appTranslate:'tipo_localidade'}}</span>
+                <span> {{entity.id}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'tipo_localidade'}}</span>
+                <span style="white-space: pre"> {{entity.descricao}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.situacao' | appTranslate:'tipo_localidade'}}</span>
+                <span>
+                  <div class="btn-situacao">
+                    <app-situacao-button
+                      (onUpdateStatus)="updateStatus($event, entity.situacao)"
+                      [entityId]="entity.id"
+                      [ativo]="entity.situacao"
+                    ></app-situacao-button>
+                  </div>
+                </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.dataCriacao' | appTranslate:'tipo_localidade'}}</span>
+                <span> {{entity.dataCriacao | date:'dd/MM/yyyy'}} </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons
+                  page="tipo_localidade"
+                  [entityId]="entity.id"
+                  [detailPermission]="false"
+                  (onRemove)="remove($event)"
+                ></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

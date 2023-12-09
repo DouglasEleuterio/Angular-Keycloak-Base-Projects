@@ -1,0 +1,433 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 *ngIf="isNew">{{ 'title.new_page' | appTranslate:'solicitacao'}}</h5>
+        <h5 *ngIf="!isNew && !isDetail">{{ 'title.edit_page' | appTranslate:'solicitacao'}}</h5>
+        <h5 *ngIf="isDetail">{{ 'title.detail_page'| appTranslate:'solicitacao'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <app-solicitacao-form-detail [id]="id" *ngIf="isDetail"></app-solicitacao-form-detail>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <div style="padding: 0 7px" class="col-12 md:col-12">
+            <div>{{ 'field.tipo_diaria' | appTranslate:'solicitacao'}} *</div>
+            <div style="display: inline-flex">
+              <div *ngFor="let elementTipoDiaria of listTipoDiaria" class="field-checkbox">
+                <p-radioButton
+                  [inputId]="elementTipoDiaria.value"
+                  [value]="elementTipoDiaria.value"
+                  formControlName="tipoDiaria"
+                ></p-radioButton>
+                <label style="margin-right: 20px" [for]="elementTipoDiaria.value">{{ elementTipoDiaria.label }}</label>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 0 7px" class="col-12 md:col-12">
+            <div>{{ 'field.tipo_solicitacao' | appTranslate:'solicitacao'}}</div>
+            <p-checkbox
+              [binary]="true"
+              (onChange)="onChangeTipoSolicitacao()"
+              formControlName="viagemPreAutorizada"
+              label="{{tipoSolicitacaoEnum.VIAGEM_PRE_AUTORIZADA_LABEL}}"
+            ></p-checkbox>
+            <p-checkbox
+              [binary]="true"
+              (onChange)="onChangeTipoSolicitacao()"
+              formControlName="solicitacaoComplementacao"
+              label="{{tipoSolicitacaoEnum.SOLICITACAO_COMPLEMENTAR_LABEL}}"
+            ></p-checkbox>
+          </div>
+
+          <app-field
+            *ngIf="this.form.solicitacaoComplementacao?.value"
+            class="field col-6 md:col-6"
+            [submitted]="submitted"
+            page="solicitacao"
+          >
+            <p-dropdown
+              (onChange)="onChangeSolicitacaoComplementacao($event?.value?.id)"
+              appFieldRef
+              [options]="listSolicitacaoAnterior"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+              formControlName="solicitacaoOriginal"
+              optionLabel="descricao"
+              dataKey="id"
+            ></p-dropdown>
+          </app-field>
+
+          <div class="field col-6 md:col-6" *ngIf="this.form.solicitacaoComplementacao?.value">
+            <app-file-upload-button
+              [isDetail]="isDetail"
+              [submitted]="submitted"
+              [tiposArquivosValidos]="tiposArquivosValidos"
+              [control]="form.documentoComplementacao"
+              controlName="documentoComplementacao"
+              page="solicitacao"
+            ></app-file-upload-button>
+          </div>
+
+          <app-field *ngIf="this.form.solicitacaoComplementacao?.value" class="col-12 md:col-12" [submitted]="submitted" page="solicitacao">
+            <textarea
+              appFieldRef
+              pInputTextarea
+              rows="1"
+              [autoResize]="true"
+              formControlName="justificativaComplementacao"
+              maxlength="2000"
+            ></textarea>
+          </app-field>
+
+          <h5 class="subtitle col-12 md:col-12">{{ 'title.solicitante' | appTranslate:'solicitacao'}}</h5>
+
+          <app-field class="field col-4 md:col-4" [submitted]="submitted" page="solicitacao">
+            <p-dropdown
+              appFieldRef
+              [options]="listTipoSolicitante"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+              formControlName="tipoSolicitante"
+              (onChange)="onChangeTipoSolicitante()"
+            ></p-dropdown>
+          </app-field>
+          <div class="col-8 md:col-8"></div>
+          <span class="field col-12 md:col-12" *ngIf="formValues.getTipoSolicitante === 'COLABORADOR_EVENTUAL'">
+            {{'message.colaborador_eventual' | appTranslate: 'solicitacao'}}
+          </span>
+        </div>
+
+        <div class="p-fluid formgrid grid" *ngIf="formValues.isColaboradorOrEventual">
+          <app-field
+            class="field col-4 md:col-4"
+            [submitted]="submitted"
+            page="solicitacao"
+            [class.readonly]="checkedSolicitacaoComplementacao"
+          >
+            <input
+              *ngIf="checkedSolicitacaoComplementacao; else nomeAc"
+              readonly
+              appFieldRef
+              pInputText
+              type="text"
+              formControlName="nome"
+            />
+            <ng-template #nomeAc>
+              <p-autoComplete
+                appFieldRef
+                (onSelect)="onSelectAutoComplete($event)"
+                formControlName="nome"
+                [suggestions]="filteredSolicitantes"
+                (completeMethod)="filterSolicitantes($event)"
+                field="nome"
+                maxlength="64"
+              >
+                <ng-template let-solicitante pTemplate="item">
+                  <div class="flex align-items-center gap-2">
+                    <span>{{ solicitante.nome }} - {{ solicitante.cpf | cnpjCpfPipe }}</span>
+                  </div>
+                </ng-template>
+              </p-autoComplete>
+            </ng-template>
+          </app-field>
+
+          <app-field class="field col-4 md:col-4" [submitted]="submitted" page="solicitacao">
+            <p-dropdown
+              appFieldRef
+              [options]="listRegimePrevidencia"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+              formControlName="regimePrevidencia"
+              optionLabel="label"
+              dataKey="value"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-2 md:col-2" [submitted]="submitted" page="solicitacao">
+            <p-calendar
+              appFieldRef
+              formControlName="dataNascimento"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+
+          <app-field class="field col-2 md:col-2" [submitted]="submitted" page="solicitacao">
+            <p-inputMask appFieldRef mask="999.999.999-99" formControlName="cpf"></p-inputMask>
+          </app-field>
+
+          <app-field class="field col-4 md:col-4" [submitted]="submitted" page="solicitacao">
+            <input appFieldRef pInputText type="text" formControlName="cargoFuncao" maxlength="64" />
+          </app-field>
+
+          <app-field class="field col-4 md:col-4" [submitted]="submitted" page="solicitacao">
+            <p-dropdown
+              appFieldRef
+              [options]="listCargos"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+              formControlName="classificacaoCargoFuncao"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="readonly field col-4 md:col-4" [noValidation]="true" page="solicitacao">
+            <input readonly appFieldRef pInputText type="text" formControlName="unidade" />
+          </app-field>
+        </div>
+
+        <div class="p-fluid formgrid grid" *ngIf="formValues.isServidorOrMagistrado">
+          <app-field
+            class="field col-3 md:col-3"
+            [submitted]="submitted"
+            page="solicitacao"
+            [class.readonly]="checkedSolicitacaoComplementacao"
+          >
+            <button
+              *ngIf="this.form.nome?.value"
+              pButton
+              type="button"
+              pTooltip="{{'action.detalhes_solicitante' | appTranslate: 'solicitacao'}}"
+              tooltipPosition="top"
+              class="p-button-text btn-actions-solicitante"
+              icon="pi pi-eye"
+              (click)="visibleModalDetalhesServidor = true"
+            ></button>
+            <input
+              *ngIf="checkedSolicitacaoComplementacao; else nomeDp"
+              readonly
+              appFieldRef
+              pInputText
+              type="text"
+              formControlName="nome"
+            />
+            <ng-template #nomeDp>
+              <button
+                *ngIf="formValues.isServidorAndAdm"
+                pButton
+                type="button"
+                pTooltip="{{'action.pesquisa_servidor' | appTranslate: 'solicitacao'}}"
+                tooltipPosition="top"
+                class="p-button-text btn-actions-solicitante"
+                icon="pi pi-search"
+                (click)="visibleModalPesquisaServidor = true"
+              ></button>
+              <p-dropdown
+                (onChange)="onChangeServidorOrMagistrado()"
+                appFieldRef
+                [options]="listServidorOrMagistrado"
+                placeholder="{{formValues.getPlaceholderNameServidorOrMagistrado}}"
+                emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+                formControlName="nome"
+                optionLabel="nome"
+              ></p-dropdown>
+            </ng-template>
+          </app-field>
+
+          <p-dialog
+            header="{{'title.modal_servidor' | appTranslate:'solicitacao'}}"
+            [(visible)]="visibleModalPesquisaServidor"
+            [style]="{ width: '80vw' }"
+            [draggable]="false"
+            [closable]="false"
+            [modal]="true"
+          >
+            <ng-template pTemplate="body">
+              <app-modal-pesquisa-servidor
+                (onSelect)="selectedSolicitante($event)"
+                (onClose)="closeModalPesquisaServidor()"
+              ></app-modal-pesquisa-servidor>
+            </ng-template>
+            <ng-template pTemplate="footer"></ng-template>
+          </p-dialog>
+
+          <app-detalhes-servidor-modal
+            [visible]="visibleModalDetalhesServidor"
+            [dadosServidor]="formValues.getDetalhesServidor"
+            (onClose)="visibleModalDetalhesServidor = false"
+          ></app-detalhes-servidor-modal>
+
+          <app-field class="readonly field col-3 md:col-3" [noValidation]="true" page="solicitacao">
+            <input readonly appFieldRef pInputText type="text" formControlName="matricula" />
+          </app-field>
+
+          <app-field class="readonly field col-3 md:col-3" [noValidation]="true" page="solicitacao">
+            <p-inputMask readonly appFieldRef mask="999.999.999-99" formControlName="cpf"></p-inputMask>
+          </app-field>
+
+          <app-field class="readonly field col-3 md:col-3" [noValidation]="true" page="solicitacao">
+            <input readonly appFieldRef pInputText type="text" formControlName="rg" />
+          </app-field>
+        </div>
+
+        <div class="p-fluid formgrid grid">
+          <h5 class="subtitle col-12 md:col-12">{{ 'title.conta_solicitante' | appTranslate:'solicitacao'}}</h5>
+
+          <app-field class="field col-3 md:col-3" [submitted]="submitted" page="solicitacao">
+            <p-dropdown
+              appFieldRef
+              [options]="listBancos"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+              formControlName="banco"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-3 md:col-3" [submitted]="submitted" page="solicitacao">
+            <input appFieldRef pInputText type="text" formControlName="agencia" maxlength="10" />
+          </app-field>
+
+          <app-field class="field col-3 md:col-3" [submitted]="submitted" page="solicitacao">
+            <input appFieldRef pInputText type="text" formControlName="contaCorrente" maxlength="10" />
+          </app-field>
+
+          <app-field class="field col-3 md:col-3" [submitted]="submitted" page="solicitacao">
+            <input appFieldRef pInputText type="text" formControlName="codigoOperacao" maxlength="3" />
+          </app-field>
+        </div>
+
+        <div class="p-fluid formgrid grid" *ngIf="formValues.isColaboradorOrMagistrado">
+          <h5 class="subtitle col-12 md:col-12">{{ 'title.informacoes_complementares' | appTranslate:'solicitacao'}}</h5>
+
+          <span class="col-12 md:col-12 msg-colaborador" *ngIf="formValues.getTipoSolicitante === 'COLABORADOR'">
+            {{'message.colaborador' | appTranslate: 'solicitacao'}}
+          </span>
+
+          <app-field class="field col-3 md:col-3" [submitted]="submitted" page="solicitacao">
+            <p-dropdown
+              (onChange)="formConfig.changeAuxilioAlimentacao()"
+              [binary]="true"
+              appFieldRef
+              [options]="simNaoOptions"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+              formControlName="recebeAuxilioAlimentacao"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-3 md:col-3" [submitted]="submitted" page="solicitacao">
+            <i
+              class="icon-help pi pi-info-circle"
+              pTooltip="{{'message.valorAuxilioAlimentacao' | appTranslate:'solicitacao'}}"
+              tooltipPosition="top"
+              fitContent="true"
+            ></i>
+            <p-inputNumber
+              appFieldRef
+              formControlName="valorAuxilioAlimentacao"
+              inputId="currency-brazil"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+              maxlength="11"
+              max="9999.99"
+              min="0.01"
+            />
+          </app-field>
+
+          <app-field class="field col-3 md:col-3" [submitted]="submitted" page="solicitacao">
+            <p-dropdown
+              (onChange)="formConfig.changeAuxilioTransporte()"
+              [binary]="true"
+              appFieldRef
+              [options]="simNaoOptions"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              emptyMessage="{{'no_records' | appTranslate:'shared'}}"
+              formControlName="recebeAuxilioTransporte"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-3 md:col-3" [submitted]="submitted" page="solicitacao">
+            <i
+              class="icon-help pi pi-info-circle"
+              pTooltip="{{'message.valorAuxilioTransporte' | appTranslate:'solicitacao'}}"
+              tooltipPosition="top"
+              fitContent="true"
+            ></i>
+            <p-inputNumber
+              appFieldRef
+              formControlName="valorAuxilioTransporte"
+              inputId="currency-brazil"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+              maxlength="11"
+              max="9999.99"
+              min="0.01"
+            />
+          </app-field>
+        </div>
+
+        <app-solicitacao-form-edit
+          *ngIf="!isNew"
+          [idSolicitacaoOriginal]="form.solicitacaoOriginal?.value?.id"
+          [idSolicitacao]="id"
+          [isDetail]="isDetail"
+          [formGroup]="formGroup"
+          [formConfig]="formConfig"
+          [submitted]="submitted"
+          [eventosBySolicitacaoOriginal]="this.form.solicitacaoOriginal?.value?.eventos"
+          [eventosByEntity]="this.form.eventos?.value"
+          (onEventosAdicionados)="getListEventosSelecteds($event)"
+        ></app-solicitacao-form-edit>
+
+        <div class="buttons-form">
+          <button
+            class="p-button-outlined"
+            type="button"
+            pButton
+            pRipple
+            (click)="cancel()"
+            label="{{'action.cancel' | appTranslate:'solicitacao'}}"
+          ></button>
+          <button *ngIf="!isDetail" type="button" pButton pRipple (click)="submit()" label="{{labelBtnSubmit}}"></button>
+
+          <button
+            style="margin-right: 5px"
+            pRipple
+            pButton
+            *ngIf="isVisibleBtnAutorizar"
+            type="button"
+            routerLink="autorizar"
+            label="{{'action.autorizar' | appTranslate:'solicitacao'}}"
+          ></button>
+
+          <button
+            pRipple
+            pButton
+            *ngIf="isVisibleBtnAnalisar"
+            type="button"
+            routerLink="analisar"
+            label="{{'action.analisar' | appTranslate:'solicitacao'}}"
+          ></button>
+
+          <button
+            class="p-button-outlined"
+            style="margin-right: 5px"
+            pRipple
+            pButton
+            *ngIf="isVisibleBtnNaoAutorizar"
+            type="button"
+            routerLink="nao-autorizar"
+            label="{{'action.nao_autorizar' | appTranslate:'solicitacao'}}"
+          ></button>
+
+          <button
+            pRipple
+            pButton
+            *ngIf="isVisibleBtnDevolver"
+            type="button"
+            routerLink="devolver"
+            label="{{'action.devolver' | appTranslate:'solicitacao'}}"
+          ></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

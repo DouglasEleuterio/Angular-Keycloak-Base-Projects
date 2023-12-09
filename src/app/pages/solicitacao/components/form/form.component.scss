@@ -1,0 +1,43 @@
+.buttons-form {
+  font-weight: 500;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.buttons-form button:first-of-type {
+  margin-right: 5px;
+}
+
+.btn-actions-solicitante {
+  padding: 0 0 5px;
+}
+
+button.btn-actions-solicitante:first-of-type {
+  padding-left: 5px;
+}
+
+:host::ng-deep .p-checkbox-label {
+  margin-right: 20px;
+}
+
+.subtitle {
+  padding: 0 7px;
+  margin-top: 20px;
+}
+
+.msg-colaborador {
+  margin-bottom: 20px;
+}
+
+.icon-help {
+  margin-left: 5px;
+}
+
+.icon-help:hover {
+  cursor: help;
+}

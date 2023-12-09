@@ -1,0 +1,87 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="list-body">
+        <p-table [value]="listaContato" sortMode="single" dataKey="id">
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="nome">
+                {{'field.nome' | appTranslate:'contato'}}
+                <p-sortIcon field="nome"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="telefone">
+                {{'field.telefone' | appTranslate:'contato'}}
+                <p-sortIcon field="nome"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="email">
+                {{'field.email' | appTranslate:'contato'}}
+                <p-sortIcon field="email"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="cidade.descricaoLocalidade">
+                {{'field.cidadeUf' | appTranslate:'contato'}}
+                <p-sortIcon field="cidade.descricaoLocalidade"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="cargo">
+                {{'field.cargo' | appTranslate:'contato'}}
+                <p-sortIcon field="cargo"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-index="rowIndex" let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.nome' | appTranslate:'contato'}}</span>
+                <span> {{entity.nome}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.telefone' | appTranslate:'contato'}}</span>
+                <span> {{valueString(convertNumberToString(entity.telefone)) | phoneFormat}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.email' | appTranslate:'contato'}}</span>
+                <span> {{entity.email}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.cidadeUf' | appTranslate:'contato'}}</span>
+                <span> {{valueString(entity.cidade.descricaoLocalidade) + '-' + valueString(entity.uf)}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.cargo' | appTranslate:'contato'}}</span>
+                <span> {{entity.cargo}} </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <div class="crud-actions-container">
+                  <button
+                    pTooltip="{{'edit' | appTranslate:'shared'}}"
+                    tooltipPosition="top"
+                    (click)="edit(entity, index)"
+                    pButton
+                    type="button"
+                    class="p-button-secondary p-button-text"
+                    icon="pi pi-pencil"
+                  ></button>
+                  <button
+                    pTooltip="{{'delete_action' | appTranslate:'shared'}}"
+                    tooltipPosition="top"
+                    (click)="remove(entity.id)"
+                    pButton
+                    type="button"
+                    class="p-button-danger p-button-text"
+                    icon="pi pi-trash"
+                  ></button>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

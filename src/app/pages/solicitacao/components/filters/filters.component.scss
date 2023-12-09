@@ -1,0 +1,55 @@
+.numero-ano {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.numero-ano-barra {
+  margin: 0 5px;
+}
+
+.ano {
+  width: 50%;
+}
+
+.tkn-chip {
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.tkn-vermelho {
+  background-color: red !important;
+  color: white !important;
+}
+
+.tkn-azul {
+  background-color: blue !important;
+  color: white !important;
+}
+
+.tkn-amarelo {
+  background-color: yellow !important;
+  color: black !important;
+}
+
+.tkn-laranja {
+  background-color: orange !important;
+  color: black !important;
+}
+
+.tkn-roxo {
+  background-color: purple !important;
+  color: white !important;
+}
+
+.tkn-verde {
+  background-color: green !important;
+  color: white !important;
+}
+
+:host::ng-deep .p-multiselect-label {
+  height: 33px !important;
+  padding: 6px 8px !important;
+}

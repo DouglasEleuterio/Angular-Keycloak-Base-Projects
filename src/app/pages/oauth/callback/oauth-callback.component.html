@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="container" *ngIf="isLoading()">
+    <p-progressSpinner></p-progressSpinner>
+    <h5>{{'msg.aguardando_validacao' | appTranslate: 'login'}}</h5>
+    <h5>{{'msg.agradecimento' | appTranslate: 'login'}}</h5>
+  </div>
+
+  <div class="container" *ngIf="isError()">
+    <i class="pi pi-times-circle" style="font-size: 4rem; color: #fd9393"></i>
+    <p style="font-weight: 600; font-size: 1.5rem; margin-top: 20px">{{'LABEL.TITLE_VALIDACAO_AUTENTICACAO' | appTranslate: 'login'}}</p>
+    <p style="font-weight: 300; font-size: 1.5rem">{{error.message}}</p>
+    <button
+      style="margin-top: 10px"
+      type="button"
+      pButton
+      label="{{'LABEL.VOLTAR_TELA_LOGIN' | appTranslate: 'login'}}"
+      [routerLink]="['/']"
+    ></button>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'devolver_solicitacao'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-8 md:col-8" [submitted]="submitted" page="devolver_solicitacao">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+              [options]="justificativaList"
+              optionLabel="descricao"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="justificativa"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-8 md:col-8" [noValidation]="true" page="devolver_solicitacao">
+            <input appFieldRef pInputText type="text" formControlName="detalhamentoJustificativa" maxlength="4000" />
+          </app-field>
+        </div>
+
+        <div style="margin-top: 20px">
+          <div class="form-buttons">
+            <button
+              pButton
+              pRipple
+              (click)="cancel()"
+              type="button"
+              label="{{'back' | appTranslate:'shared'}}"
+              class="p-button-outlined"
+            ></button>
+            <button pButton pRipple type="submit" label="{{'action.devolver' | appTranslate:'solicitacao'}}"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

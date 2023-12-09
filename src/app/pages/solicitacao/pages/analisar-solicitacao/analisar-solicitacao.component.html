@@ -1,0 +1,49 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'analisar_solicitacao'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="field col-8 md:col-8" [submitted]="submitted" page="analisar_solicitacao">
+            <input appFieldRef pInputText type="text" formControlName="analise" maxlength="4000" />
+          </app-field>
+        </div>
+
+        <div class="flex-row gap-3">
+          <div class="label">
+            <label> {{ 'field.eventos' | appTranslate : 'solicitacao' }} * </label>
+          </div>
+          <div *ngFor="let element of recomendacaoList" class="field-checkbox" style="display: inline-flex">
+            <p-radioButton [inputId]="element.value" [value]="element.value" formControlName="statusAnaliseSolicitacao"></p-radioButton>
+            <label style="margin-right: 10px" [for]="element.value">{{ element.label }}</label>
+          </div>
+          <app-field-validator
+            [control]="this.formGroup.controls.statusAnaliseSolicitacao"
+            [submitted]="submitted"
+            field="statusAnaliseSolicitacao"
+            page="analisar_solicitacao"
+          ></app-field-validator>
+        </div>
+
+        <div style="margin-top: 20px">
+          <div class="form-buttons">
+            <button
+              pButton
+              pRipple
+              (click)="cancel()"
+              type="button"
+              label="{{'back' | appTranslate:'shared'}}"
+              class="p-button-outlined"
+            ></button>
+            <button pButton pRipple type="submit" label="{{'action.confirm' | appTranslate:'solicitacao'}}"></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

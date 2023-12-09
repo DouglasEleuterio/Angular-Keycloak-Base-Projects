@@ -1,0 +1,41 @@
+<div class="p-fluid formgrid grid" [formGroup]="formGroup">
+  <app-field class="p-field col-4 md:col-4" [noValidation]="true" page="classificacao_localidade">
+    <p-dropdown
+      appFieldRef
+      [options]="ufList"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="uf"
+      (onChange)="onUfChange()"
+    ></p-dropdown>
+  </app-field>
+
+  <app-field class="p-field col-4 md:col-4" [noValidation]="true" page="classificacao_localidade">
+    <p-dropdown
+      appFieldRef
+      [filter]="true"
+      emptyFilterMessage="Sem resultados correspondentes à busca"
+      [options]="localidadeList"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="localidade"
+    ></p-dropdown>
+  </app-field>
+
+  <app-field class="field col-4 md:col-4" [noValidation]="true" page="classificacao-localidade" multiple>
+    <p-multiSelect
+      appFieldRef
+      [options]="tipoLocalidadeList"
+      placeholder="{{'select' | appTranslate:'shared'}}"
+      formControlName="tipoLocalidade"
+      optionLabel="descricao"
+      emptyFilterMessage="{{'no_records' | appTranslate: 'shared'}}"
+      emptyMessage="{{'no_records' | appTranslate: 'shared'}}"
+    >
+      <ng-template let-item pTemplate="selectedItem">
+        <span pTooltip="{{item.descricao}}">{{item.descricao | appEllipse: 40}}</span>
+      </ng-template>
+      <ng-template let-item pTemplate="item">
+        <span pTooltip="{{item.descricao}}">{{item.descricao | appEllipse: 40}}</span>
+      </ng-template>
+    </p-multiSelect>
+  </app-field>
+</div>

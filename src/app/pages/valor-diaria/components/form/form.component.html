@@ -1,0 +1,91 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'valor_diaria'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-12 md:col-6" [submitted]="submitted" page="valor_diaria">
+            <p-inputNumber
+              appFieldRef
+              formControlName="valor"
+              inputId="currency-brazil"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+              maxlength="13"
+            />
+          </app-field>
+
+          <app-field class="p-field col-12 md:col-6" [submitted]="submitted" page="valor_diaria">
+            <p-dropdown
+              appFieldRef
+              dataKey="id"
+              optionLabel="descricao"
+              [options]="listTipoLocalidade"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="tipoLocalidade"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="p-field col-12 md:col-6" [submitted]="submitted" page="valor_diaria">
+            <input appFieldRef pInputText type="text" formControlName="normativo" maxlength="100" />
+          </app-field>
+
+          <app-field class="p-field col-12 md:col-6" [submitted]="submitted" page="valor_diaria">
+            <p-calendar
+              appFieldRef
+              formControlName="dataNormativo"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              yearRange="1990:2050"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+
+          <div style="padding: 0 7px" class="p-field col-12 md:col-6">
+            <div>{{ 'field.cargos_efetivos' | appTranslate:'valor_diaria'}} *</div>
+            <div [class.form-error]="submitted && !isValidCargos">
+              <div *ngFor="let cargo of cargosEfetivos" class="field-checkbox">
+                <p-checkbox
+                  name="group"
+                  [value]="cargo"
+                  [(ngModel)]="selectedEfetivos"
+                  [ngModelOptions]="{standalone: true}"
+                  [inputId]="cargo.value"
+                ></p-checkbox>
+                <label [for]="cargo.value">{{ cargo.label }}</label>
+              </div>
+            </div>
+            <div class="color-error" *ngIf="submitted && !isValidCargos">
+              {{ 'validation.cargos_efetivos.required' | appTranslate:'valor_diaria'}}
+            </div>
+          </div>
+
+          <div style="padding: 0 7px" class="p-field col-12 md:col-6">
+            <div>{{ 'field.cargos_funcoes' | appTranslate:'valor_diaria'}}</div>
+            <div *ngFor="let cargo of cargosFuncoes" class="field-checkbox">
+              <p-checkbox
+                name="group"
+                [value]="cargo"
+                [(ngModel)]="selectedFuncoes"
+                [ngModelOptions]="{standalone: true}"
+                [inputId]="cargo.value"
+              ></p-checkbox>
+              <label [for]="cargo.value">{{ cargo.label }}</label>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 20px">
+          <app-form-buttons [isSubmitted]="isSubmitted" (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

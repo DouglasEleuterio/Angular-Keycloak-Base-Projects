@@ -1,0 +1,163 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'evento'}}</h5>
+        <button pButton pRipple routerLink="../new" label="{{'add' | appTranslate:'evento.action'}}"></button>
+      </div>
+      <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
+        <app-evento-filters appFilterRef></app-evento-filters>
+      </app-filter>
+      <div class="p-mr-2 p-mb-2">
+        <app-table-exporter
+          [empty]="tableData === null || tableData.length === 0"
+          [title]="'title.exporter' | appTranslate: 'evento'"
+          filename="evento_exportacao"
+          [filter]="pagination.filter"
+          [sort]="pagination.sort"
+          [service]="service"
+          [configuration]="exporterConfig"
+        ></app-table-exporter>
+      </div>
+
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1">{{'field.selecionar' | appTranslate:'evento'}}</th>
+              <th scope="col" colspan="1" pSortableColumn="nomeEvento">
+                {{'field.nomeEvento' | appTranslate:'evento'}}
+                <p-sortIcon field="nomeEvento"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="tipoEvento.descricao">
+                {{'field.tipoevento' | appTranslate:'evento'}}
+                <p-sortIcon field="tipoEvento.descricao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="descricao">
+                {{'field.descricao' | appTranslate:'evento'}}
+                <p-sortIcon field="descricao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="dataInicio">
+                {{'field.dataInicio' | appTranslate:'evento'}}
+                <p-sortIcon field="dataInicio"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="dataTermino">
+                {{'field.dataTermino' | appTranslate:'evento'}}
+                <p-sortIcon field="dataTermino"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="organizadora">
+                {{'field.organizadora' | appTranslate:'evento'}}
+                <p-sortIcon field="organizadora"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="situacao_condicao">
+                {{'field.situacao_condicao' | appTranslate:'evento'}}
+                <p-sortIcon field="situacao_condicao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="situacao">
+                {{'field.situacao' | appTranslate:'evento'}}
+                <p-sortIcon field="situacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.selecionar' | appTranslate:'evento'}}</span>
+                <p-checkbox
+                  *ngIf="entity.situacaoCondicao === situacaoAberto"
+                  name="group"
+                  [inputId]="entity.id"
+                  [value]="entity.id"
+                  [(ngModel)]="selected"
+                  [ngModelOptions]="{standalone: true}"
+                ></p-checkbox>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.nomeEvento' | appTranslate:'evento'}}</span>
+                <span> {{entity.nomeEvento}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.tipo_evento' | appTranslate:'evento'}}</span>
+                <span> {{entity.tipoEvento?.descricao}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'tipoEvento'}}</span>
+                <span> {{entity.descricao}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.dataInicio' | appTranslate:'evento'}}</span>
+                <span> {{entity.dataInicio | date: 'dd/MM/yyyy'}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.dataTermino' | appTranslate:'evento'}}</span>
+                <span> {{entity.dataTermino | date: 'dd/MM/yyyy'}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.organizadora' | appTranslate:'evento'}}</span>
+                <span> {{entity.organizadora}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.situacao_condicao' | appTranslate:'evento'}}</span>
+                <span> {{entity.situacaoCondicao | situacaoCondicao }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.situacao' | appTranslate:'evento'}}</span>
+                <span>
+                  <div class="btn-situacao">
+                    <app-situacao-button
+                      (onUpdateStatus)="updateStatus($event, entity.situacao)"
+                      [entityId]="entity.id"
+                      [ativo]="entity.situacao"
+                    ></app-situacao-button>
+                  </div>
+                </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons
+                  page="evento"
+                  [entityId]="entity.id"
+                  [detailPermission]="false"
+                  (onRemove)="remove($event)"
+                ></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <div style="padding: 10px 0 0 0">
+          <button
+            style="margin-right: 5px"
+            class="p-button-outlined"
+            type="button"
+            pButton
+            pRipple
+            (click)="finalizar()"
+            label="{{'ACTION.finalizar' | appTranslate:'evento'}}"
+          ></button>
+          <button type="button" pButton pRipple (click)="cancelar()" label="{{'ACTION.cancelar' | appTranslate:'evento'}}"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

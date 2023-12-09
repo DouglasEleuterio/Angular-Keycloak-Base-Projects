@@ -1,0 +1,25 @@
+.buttons-modal button {
+  padding: 0;
+}
+
+.flex-center {
+  font-weight: 500;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+}
+
+.buttons-modal {
+  justify-content: center;
+}
+
+.buttons-close-modal {
+  justify-content: flex-end;
+}
+
+.buttons-close {
+  justify-content: flex-end;
+  margin-top: 10px;
+}

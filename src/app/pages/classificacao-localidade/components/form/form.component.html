@@ -1,0 +1,52 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'classificacao_localidade'}}</h5>
+      </div>
+
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="classificacao_localidade">
+            <p-dropdown
+              appFieldRef
+              [options]="ufList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="uf"
+              (onChange)="onUfChange()"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="classificacao_localidade">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="Sem resultados correspondentes à busca"
+              [options]="localidadeList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="localidade"
+            ></p-dropdown>
+          </app-field>
+
+          <app-field class="field col-12 md:col-4" [submitted]="submitted" page="classificacao_localidade">
+            <p-dropdown
+              appFieldRef
+              dataKey="id"
+              optionLabel="descricao"
+              [options]="tipoLocalidadeList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="tipoLocalidade"
+              optionLabel="descricao"
+            ></p-dropdown>
+          </app-field>
+        </div>
+
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

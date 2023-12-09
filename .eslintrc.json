@@ -1,0 +1,58 @@
+{
+  "root": true,
+  "ignorePatterns": ["dist", "coverage"],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/recommended",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "camelCase",
+            "type": "attribute"
+          }
+        ],
+        "@angular-eslint/no-host-metadata-property": "off",
+        "@angular-eslint/no-output-on-prefix": "off",
+        "no-console": "error",
+        "semi": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": ["variable", "function", "classMethod", "classProperty"],
+            "format": ["camelCase"],
+            "leadingUnderscore": "allow"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:prettier/recommended"],
+      "rules": {}
+    }
+  ]
+}

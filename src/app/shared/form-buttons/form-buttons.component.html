@@ -1,0 +1,4 @@
+<div class="form-buttons">
+  <button pButton pRipple (click)="cancel()" type="button" label="{{'back' | appTranslate:'shared'}}" class="p-button-outlined"></button>
+  <button [disabled]="isSubmitted" pButton pRipple type="submit" *ngIf="!isDetail" label="{{'save' | appTranslate:'shared'}}"></button>
+</div>
