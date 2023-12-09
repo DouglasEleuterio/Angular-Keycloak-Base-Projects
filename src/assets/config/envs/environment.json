@@ -1,0 +1,20 @@
+{
+  "baseUrl": "http://localhost:8087",
+  "authLoginUrl": "http://localhost:8087/auth/token",
+  "authLogoutUrl": "http://localhost:8087/auth/logout",
+  "authCodeUrl": "http://3p-oauth.ddns.net:8083/auth/realms/TRE-MT/protocol/openid-connect/auth",
+  "authClientId": "base",
+  "authCallbackUrl": "http://localhost:4201/oauth/authorize/callback",
+  "authNonce": false,
+  "authChallenge": false,
+  "authScope": "profile offline_access roles",
+  "authAuthorizationResponseType": "code",
+  "authAuthorizationSecretKey": false,
+  "authParamsType": "query",
+  "authBasicAuthorization": false,
+  "authSendClientIdClientSecret": false,
+  "validationJsonMode": false,
+  "disableRefresh": false,
+  "defaultPaginationSize": 10,
+  "defaultPaginationSizeOptions": [10, 20, 50]
+}
