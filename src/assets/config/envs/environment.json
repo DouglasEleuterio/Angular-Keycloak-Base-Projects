@@ -1,8 +1,8 @@
 {
-  "baseUrl": "http://3p-oauth.ddns.net:8087",
-  "authLoginUrl": "http://3p-oauth.ddns.net:8087/auth/token",
-  "authLogoutUrl": "http://3p-oauth.ddns.net:8087/auth/logout",
-  "authCodeUrl": "http://3p-oauth.ddns.net:8083/auth/realms/TRE-MT/protocol/openid-connect/auth",
+  "baseUrl": "http://localhost:8070",
+  "authLoginUrl": "http://localhost:8070/auth/token",
+  "authLogoutUrl": "http://localhost:8070/auth/logout",
+  "authCodeUrl": "https://auth.3ptecnologia.com.br/realms/3p-apps/protocol/openid-connect/auth",
   "authClientId": "base",
   "authCallbackUrl": "http://localhost:4201/oauth/authorize/callback",
   "authNonce": false,
