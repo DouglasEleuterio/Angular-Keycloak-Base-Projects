@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
       <div class="footer-logo-container">
         <img
           id="footer-logo"
-          [src]="'assets/layout/images/logo-' + (app.colorScheme === 'light' ? 'dark' : 'light') + '.png'"
+          [src]="'assets/layout/images/logo-' + (app.colorScheme === 'light' ? 'gray' : 'gray') + '.png'"
           alt="atlantis-layout"
         />
         <span class="app-name">{{ 'name' | appTranslate : 'application' }}</span>
