@@ -1,7 +1,7 @@
 {
   "APPLICATION": {
-    "NAME": "Diárias",
-    "ORGANIZATION": "TRE - MT",
+    "NAME": "CRM",
+    "ORGANIZATION": "3P Tecnologia",
     "VERSION": "Versão: {{version}}"
   },
   "SHARED": {

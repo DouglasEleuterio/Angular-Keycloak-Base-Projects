@@ -6,8 +6,7 @@
       <div class="login-panel" style="">
         <div class="login-panel-content">
           <div class="p-ai-center logo-container">
-            <img [src]="'assets/layout/images/logo-'+ (app.colorScheme === 'light' ? 'dark' : 'light') + '.png'" class="login-logo" />
-            TRE-MT
+            <img [src]="'assets/layout/images/logo-'+ (app.colorScheme === 'light' ? 'gray' : 'gray') + '.png'" class="login-logo" />
           </div>
           <h1>{{'label.title' | appTranslate:'login'}} - {{'name' | appTranslate:'application'}}</h1>
           <div class="forms" style="margin-top: 40px; margin-bottom: 40px">
@@ -21,7 +20,7 @@
               ></button>
             </div>
           </div>
-          <div class="centro" style="margin-top: 20px">{{'label.description' | appTranslate:'login'}}</div>
+<!--          <div class="centro" style="margin-top: 20px">{{'label.description' | appTranslate:'login'}}</div>-->
         </div>
       </div>
     </form>

@@ -1,7 +1,7 @@
 export const environment = {
   production: false,
-  appName: 'Diárias',
-  version: '1.0.0',
+  appName: 'CRM',
+  version: '2.0.0',
   logLevel: 0,
   apiWhiteList: ['/auth/token']
 };
