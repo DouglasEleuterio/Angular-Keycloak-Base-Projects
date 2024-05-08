@@ -46,3 +46,19 @@ As documentações destes respectivos pacotes se encontram:
 
 1. https://primeng.org/
 2. https://www.primefaces.org/atlantis-ng/
+
+
+### Build do Docker
+* Gerar imagem
+````
+docker login -u douglaseleuterioferreira -p Fox789789@!
+````
+````
+docker build -t crm-app-v2:v2.0.0 --build-arg VERSION=2.0.0 .
+````
+````
+docker tag crm-app-v2:v2.0.0 douglaseleuterioferreira/apps:crm-app-v2
+````
+````
+docker push douglaseleuterioferreira/apps:crm-app-v2
+````
