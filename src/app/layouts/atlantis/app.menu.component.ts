@@ -22,7 +22,7 @@ export class AppMenuComponent implements OnInit {
   ngOnInit(): void {
     AppMenuModel.menu.forEach(menu => {
       if (menu.permissions && this.authenticationService.checkPermission(menu.permissions)) {
-        this.model.push(menu);
+        // this.model.push(menu);
         if (menu.items) {
           const itensComPermissao: AppMenuItem[] = [];
           menu.items.forEach(menuInterno => {

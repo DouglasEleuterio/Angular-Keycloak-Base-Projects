@@ -1239,6 +1239,7 @@
   },
   "MENU": {
     "HOME": "Home",
+    "UPLOAD": "Upload XML",
     "EXEMPLO_SUBMENU": "Exemplos",
     "TABELAS_SUBMENU": "Tabelas",
     "EXEMPLO": "Exemplo",

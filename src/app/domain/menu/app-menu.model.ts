@@ -30,6 +30,14 @@ export class AppMenuModel {
     dontNeedPermission: true
   };
 
+  public static readonly itemMenuUploadXML: AppMenuItem = {
+    label: 'menu.upload',
+    icon: 'pi pi-fw pi-file-import',
+    routerLink: ['/upload'],
+    dontNeedPermission: false,
+    permissions: [PermissionEnum.UPLOAD_ADICIONAR]
+  };
+
   public static readonly itemMenuExemplo: AppMenuItem = {
     label: 'menu.exemplo',
     icon: 'pi pi-fw pi-file-edit',
@@ -166,6 +174,8 @@ export class AppMenuModel {
   };
 
   public static readonly menu: AppMenuItem[] = [
+    AppMenuModel.itemMenuExemplo,
+    AppMenuModel.itemMenuUploadXML,
     AppMenuModel.itemMenuHome,
     AppMenuModel.menuTabelas,
     AppMenuModel.itemMenuEvento,
