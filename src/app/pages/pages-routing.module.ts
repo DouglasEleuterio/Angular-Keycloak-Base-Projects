@@ -25,6 +25,11 @@ const routes: Routes = [
     canActivate: [TableStateClearGuard]
   },
   {
+    path: 'upload',
+    loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule),
+    canActivate: [TableStateClearGuard]
+  },
+  {
     path: 'tipo-localidade',
     loadChildren: () => import('./tipo-localidade/tipo-localidade.module').then(m => m.TipoLocalidadeModule),
     canActivate: [TableStateClearGuard]

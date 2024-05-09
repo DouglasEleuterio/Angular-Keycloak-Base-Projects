@@ -43,7 +43,7 @@ export class AppMenuModel {
     icon: 'pi pi-fw pi-file-edit',
     routerLink: ['/exemplo'],
     dontNeedPermission: false,
-    permissions: [PermissionEnum.ADMINISTRADOR]
+    permissions: [PermissionEnum.EXEMPLO]
   };
 
   public static readonly itemMenuTipoLocalidade: AppMenuItem = {

@@ -644,6 +644,11 @@
       }
     }
   },
+  "UPLOAD": {
+    "TITLE": {
+      "SEND_FILES": "Enviar arquivos XML"
+    }
+  },
   "INDENIZACAO_TRANSPORTE": {
     "TITLE": {
       "PAGE": "Gestão de Política de Indenização de Transporte",
