@@ -5,6 +5,126 @@
         <h5>{{ 'title.page' | appTranslate:'xml'}}</h5>
         <button pButton pRipple routerLink="../upload" label="{{'action.upload' | appTranslate:'xml'}}"></button>
       </div>
+      <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
+        <app-xml-filters appFilterRef></app-xml-filters>
+      </app-filter>
+
+      <div class="p-mr-2 p-mb-2">
+        <app-table-exporter
+          [empty]="tableData === null || tableData.length === 0"
+          [title]="'title.exporter' | appTranslate: 'xml'"
+          filename="xml_exportacao"
+          [filter]="pagination.filter"
+          [sort]="pagination.sort"
+          [service]="service"
+          [configuration]="exporterConfig"
+        ></app-table-exporter>
+      </div>
+
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="id">
+                {{'field.id' | appTranslate:'xml'}}
+                <p-sortIcon field="id"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="versao">
+                {{'field.versao' | appTranslate:'xml'}}
+                <p-sortIcon field="versao"></p-sortIcon>
+              </th>
+
+              <th scope="col" colspan="1" pSortableColumn="destinatario">
+                {{'field.destinatario' | appTranslate:'xml'}}
+                <p-sortIcon field="NFe.infNFe.dest.xNome"></p-sortIcon>
+              </th>
+<!--
+              <th scope="col" colspan="1" pSortableColumn="tipoLocalidade">
+                {{'field.tipoLocalidade.codigo' | appTranslate:'xml'}}
+                <p-sortIcon field="tipoLocalidade.codigo"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="tipoLocalidade">
+                {{'field.situacao' | appTranslate:'xml'}}
+                <p-sortIcon field="situacao"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="id">
+                {{'field.dataCriacao' | appTranslate:'xml'}}
+                <p-sortIcon field="dataCriacao"></p-sortIcon>
+              </th>
+-->
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.id' | appTranslate:'xml'}}</span>
+                <span pTooltip="{{entity.id}}"> {{entity.id}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.versao' | appTranslate:'xml'}}</span>
+                <span pTooltip="{{entity.versao}}"> {{entity.versao}} </span>
+              </td>
+
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.localidade' | appTranslate:'xml'}}</span>
+                <span pTooltip="{{entity.NFe.infNFe.dest.xNome}}"> {{entity.NFe.infNFe.dest.xNome}} </span>
+              </td>
+<!--
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.tipoLocalidade.descricao' | appTranslate:'xml'}}</span>
+                <span pTooltip="{{entity.tipoLocalidade.descricao}}"> {{entity.tipoLocalidade.descricao}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.situacao' | appTranslate:'xml'}}</span>
+                <span>
+                  <div class="btn-situacao">
+                    <app-situacao-button
+                      (onUpdateStatus)="updateStatus($event, entity.situacao)"
+                      [entityId]="entity.id"
+                      [ativo]="entity.situacao"
+                    ></app-situacao-button>
+                  </div>
+                </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.dataCriacao' | appTranslate:'classificacao_localidade'}}</span>
+                <span> {{entity.dataCriacao | date:'dd/MM/yyyy'}} </span>
+              </td>
+-->
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons
+                  page="classificacao_localidade"
+                  [detailPermission]="false"
+                  [entityId]="entity.id"
+                  (onRemove)="remove($event)"
+                ></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
   </div>
 </div>

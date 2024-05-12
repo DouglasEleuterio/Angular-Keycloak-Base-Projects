@@ -6,9 +6,16 @@ import { UIModule } from '../../core/ui/ui.module';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { RouterLink } from '@angular/router';
+import { FormComponent } from './components/form/form.component';
+import { ToastModule } from 'primeng/toast';
+import { FileUploadModule } from 'primeng/fileupload';
+import { SharedModule } from '../../shared/shared.module';
+import { FiltersComponent } from './components/filters/filters.component';
+import { TableModule } from 'primeng/table';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
-  declarations: [ListComponent],
-  imports: [CommonModule, XmlRountingModule, UIModule, ButtonModule, RippleModule, RouterLink]
+  declarations: [ListComponent, FormComponent, FiltersComponent],
+  imports: [CommonModule, XmlRountingModule, UIModule, ButtonModule, RippleModule, RouterLink, ToastModule, FileUploadModule, SharedModule, TableModule, TooltipModule]
 })
 export class XmlModule {}

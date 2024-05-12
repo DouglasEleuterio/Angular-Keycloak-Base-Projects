@@ -1246,10 +1246,16 @@
   },
   "XML": {
     "TITLE": {
-      "PAGE": "Gestão de documentos Xml"
+      "PAGE": "Gestão de documentos Xml",
+      "EXPORTER": "Documentos XML"
     },
     "ACTION": {
       "UPLOAD": "Enviar Arquivos XML"
+    },
+    "FIELD": {
+      "ID": "Código",
+      "VERSAO": "XML Versão",
+      "DESTINATARIO": "Destinatário"
     }
   },
   "MENU": {
