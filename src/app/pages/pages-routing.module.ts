@@ -25,8 +25,8 @@ const routes: Routes = [
     canActivate: [TableStateClearGuard]
   },
   {
-    path: 'upload',
-    loadChildren: () => import('./upload/upload.module').then(m => m.UploadModule),
+    path: 'xml',
+    loadChildren: () => import('./xml/xml.module').then(m => m.XmlModule),
     canActivate: [TableStateClearGuard]
   },
   {

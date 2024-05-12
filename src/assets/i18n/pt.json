@@ -390,7 +390,7 @@
     "VALIDATION": {
       "DESCRICAO": {
         "REQUIRED": "O campo Descrição é obrigatório."
-        }
+      }
     }
   },
   "CLASSIFICACAO_LOCALIDADE": {
@@ -404,8 +404,8 @@
       "ID": "Código",
       "UF": "UF",
       "LOCALIDADE": "Localidade",
-      "TIPOLOCALIDADE.CODIGO":"Tipo de Localidade",
-      "TIPOLOCALIDADE":"Tipo de Localidade",
+      "TIPOLOCALIDADE.CODIGO": "Tipo de Localidade",
+      "TIPOLOCALIDADE": "Tipo de Localidade",
       "SITUACAO": "Ativo",
       "DATACRIACAO": "Data de Cadastro"
     },
@@ -433,13 +433,13 @@
       "TIPOLOCALIDADE": {
         "REQUIRED": "O campo Tipo de Localidade é obrigatório."
       }
-    }  
+    }
   },
   "CLASSIFICACAO-LOCALIDADE": {
     "FIELD": {
       "UF": "UF",
       "LOCALIDADE": "Localidade",
-      "TIPOLOCALIDADE":"Tipo de Localidade"
+      "TIPOLOCALIDADE": "Tipo de Localidade"
     },
     "VALIDATION": {
       "UF": {
@@ -451,7 +451,7 @@
       "TIPOLOCALIDADE": {
         "REQUIRED": "O campo Tipo de Localidade é obrigatório"
       }
-    }    
+    }
   },
   "EVENTO": {
     "TITLE": {
@@ -548,7 +548,9 @@
       "SITUACAO": "Ativo"
     },
     "FILTERDIFF": {
-      "FIELD": {"CONDICOES": "Condições de Acesso"}
+      "FIELD": {
+        "CONDICOES": "Condições de Acesso"
+      }
     },
     "ACTION": {
       "ADD": "Adicionar Local de Difícil Acesso",
@@ -965,9 +967,9 @@
         "REQUIRED": "O campo Justificativa é obrigatório."
       },
       "DESTINOUF": {
-        "REQUIRED":"O campo Destino (UF) é obrigatório."
+        "REQUIRED": "O campo Destino (UF) é obrigatório."
       },
-      "DESTINOCIDADE":{
+      "DESTINOCIDADE": {
         "REQUIRED": "O campo Destino (Cidade) é obrigatório."
       }
     },
@@ -1043,7 +1045,7 @@
       "SITUACAO": "Ativo",
       "NOME": "Nome",
       "SIGLA": "Sigla",
-      "CNPJ":"CNPJ",
+      "CNPJ": "CNPJ",
       "DATACRIACAO": "Data de Cadastro"
     },
     "ACTION": {
@@ -1079,7 +1081,7 @@
       "TELEFONE": "Telefone",
       "EMAIL": "E-mail",
       "UF": "UF",
-      "CIDADE":"Cidade",
+      "CIDADE": "Cidade",
       "CARGO": "Cargo",
       "CIDADEUF": "Cidade - UF"
     },
@@ -1242,6 +1244,14 @@
       }
     }
   },
+  "XML": {
+    "TITLE": {
+      "PAGE": "Gestão de documentos Xml"
+    },
+    "ACTION": {
+      "UPLOAD": "Enviar Arquivos XML"
+    }
+  },
   "MENU": {
     "HOME": "Home",
     "UPLOAD": "Upload XML",
@@ -1260,7 +1270,8 @@
     "INDENIZACAO_TRANSPORTE": "Política de Indenização de Transporte",
     "SOLICITACAO": "Solicitações",
     "COMPANHIA-AEREA": "Companhia Aérea",
-    "DISTANCIA-LOCALIDADE": "Distância entre Localidades"
+    "DISTANCIA-LOCALIDADE": "Distância entre Localidades",
+    "XML": "XML"
   },
   "TIMES": {
     "JUST_NOW": "agora",

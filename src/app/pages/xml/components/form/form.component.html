@@ -1,0 +1,28 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ ('title.send_files') | appTranslate:'upload'}}</h5>
+      </div>
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+      <div class="card flex justify-content-center">
+        <p-toast></p-toast>
+        <p-fileUpload
+          name="file"
+          url="http://localhost:8070/upload"
+          (onUpload)="onUpload($event)"
+          accept="text/xml"
+          multiple="true"
+          fileLimit="300"
+          maxFileSize="1000000"
+        >
+          <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+              <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+      </div>
+    </div>
+  </div>
+</div>
