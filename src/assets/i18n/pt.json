@@ -1255,7 +1255,12 @@
     "FIELD": {
       "ID": "Código",
       "VERSAO": "XML Versão",
-      "DESTINATARIO": "Destinatário"
+      "DESTINATARIO": "Destinatário",
+      "NUMERO": "Número da NF",
+      "DATAEMISSAO": "Data de Emissão",
+      "CNPJ": "CNPJ",
+      "REMETENTE": "Remetente",
+      "VALOR": "Valor Total"
     }
   },
   "MENU": {

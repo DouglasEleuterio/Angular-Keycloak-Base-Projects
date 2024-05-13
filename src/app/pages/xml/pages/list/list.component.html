@@ -9,17 +9,17 @@
         <app-xml-filters appFilterRef></app-xml-filters>
       </app-filter>
 
-      <div class="p-mr-2 p-mb-2">
-        <app-table-exporter
-          [empty]="tableData === null || tableData.length === 0"
-          [title]="'title.exporter' | appTranslate: 'xml'"
-          filename="xml_exportacao"
-          [filter]="pagination.filter"
-          [sort]="pagination.sort"
-          [service]="service"
-          [configuration]="exporterConfig"
-        ></app-table-exporter>
-      </div>
+<!--      <div class="p-mr-2 p-mb-2">-->
+<!--        <app-table-exporter-->
+<!--          [empty]="tableData === null || tableData.length === 0"-->
+<!--          [title]="'title.exporter' | appTranslate: 'xml'"-->
+<!--          filename="xml_exportacao"-->
+<!--          [filter]="pagination.filter"-->
+<!--          [sort]="pagination.sort"-->
+<!--          [service]="service"-->
+<!--          [configuration]="exporterConfig"-->
+<!--        ></app-table-exporter>-->
+<!--      </div>-->
 
       <div class="list-body">
         <p-table
@@ -40,18 +40,29 @@
         >
           <ng-template pTemplate="header">
             <tr>
-              <th scope="col" colspan="1" pSortableColumn="id">
-                {{'field.id' | appTranslate:'xml'}}
-                <p-sortIcon field="id"></p-sortIcon>
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.ide.nNF">
+                {{'field.numero' | appTranslate:'xml'}}
+                <p-sortIcon field="NFe.infNFe.ide.nNF"></p-sortIcon>
               </th>
-              <th scope="col" colspan="1" pSortableColumn="versao">
-                {{'field.versao' | appTranslate:'xml'}}
-                <p-sortIcon field="versao"></p-sortIcon>
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.ide.dhEmi">
+                {{'field.dataEmissao' | appTranslate:'xml'}}
+                <p-sortIcon field="NFe.infNFe.ide.dhEmi"></p-sortIcon>
               </th>
-
-              <th scope="col" colspan="1" pSortableColumn="destinatario">
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.dest.CNPJ">
+                {{'field.cnpj' | appTranslate:'xml'}}
+                <p-sortIcon field="NFe.infNFe.dest.CNPJ"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.dest.xNome">
                 {{'field.destinatario' | appTranslate:'xml'}}
                 <p-sortIcon field="NFe.infNFe.dest.xNome"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.emit.xNome">
+                {{'field.remetente' | appTranslate:'xml'}}
+                <p-sortIcon field="NFe.infNFe.emit.xNome"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.cobr.fat.vLiq">
+                {{'field.valor' | appTranslate:'xml'}}
+                <p-sortIcon field="NFe.infNFe.cobr.fat.vLiq"></p-sortIcon>
               </th>
 <!--
               <th scope="col" colspan="1" pSortableColumn="tipoLocalidade">
@@ -62,10 +73,7 @@
                 {{'field.situacao' | appTranslate:'xml'}}
                 <p-sortIcon field="situacao"></p-sortIcon>
               </th>
-              <th scope="col" colspan="1" pSortableColumn="id">
-                {{'field.dataCriacao' | appTranslate:'xml'}}
-                <p-sortIcon field="dataCriacao"></p-sortIcon>
-              </th>
+
 -->
               <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
             </tr>
@@ -74,16 +82,27 @@
             <tr>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.id' | appTranslate:'xml'}}</span>
-                <span pTooltip="{{entity.id}}"> {{entity.id}} </span>
+                <span pTooltip="{{entity.NFe.infNFe.ide.nNF}}"> {{entity.NFe.infNFe.ide.nNF}} </span>
               </td>
               <td colspan="1">
-                <span class="p-column-title bold"> {{'field.versao' | appTranslate:'xml'}}</span>
-                <span pTooltip="{{entity.versao}}"> {{entity.versao}} </span>
+                <span class="p-column-title bold"> {{'field.dataEmissao' | appTranslate:'xml'}}</span>
+                <span> {{entity.NFe.infNFe.ide.dhEmi | date:'dd/MM/yyyy'}} </span>
               </td>
-
               <td colspan="1">
-                <span class="p-column-title bold"> {{'field.localidade' | appTranslate:'xml'}}</span>
+                <span class="p-column-title bold"> {{'field.cnpj' | appTranslate:'xml'}}</span>
+                <span pTooltip="{{entity.NFe.infNFe.dest.CNPJ}}"> {{entity.NFe.infNFe.dest.CNPJ}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.destinatario' | appTranslate:'xml'}}</span>
                 <span pTooltip="{{entity.NFe.infNFe.dest.xNome}}"> {{entity.NFe.infNFe.dest.xNome}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.remetente' | appTranslate:'xml'}}</span>
+                <span pTooltip="{{entity.NFe.infNFe.emit.xNome}}"> {{entity.NFe.infNFe.emit.xNome}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.valor' | appTranslate:'xml'}}</span>
+                <span> {{entity.NFe.infNFe.cobr.fat.vLiq | thousandFormat}} </span>
               </td>
 <!--
               <td colspan="1">
@@ -102,16 +121,14 @@
                   </div>
                 </span>
               </td>
-              <td colspan="1">
-                <span class="p-column-title bold"> {{'field.dataCriacao' | appTranslate:'classificacao_localidade'}}</span>
-                <span> {{entity.dataCriacao | date:'dd/MM/yyyy'}} </span>
-              </td>
+
 -->
               <td colspan="1" class="actions">
                 <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
                 <app-table-buttons
                   page="classificacao_localidade"
                   [detailPermission]="false"
+                  [disabled]="true"
                   [entityId]="entity.id"
                   (onRemove)="remove($event)"
                 ></app-table-buttons>
