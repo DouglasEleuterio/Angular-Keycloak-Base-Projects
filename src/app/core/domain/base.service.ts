@@ -37,6 +37,13 @@ export abstract class BaseService<T extends BaseEntity, ID> {
     return this.http.delete<T>(`${this.getBaseUrl()}/${id}`);
   }
 
+  onDownload(id: ID, path: string): Observable<HttpResponse<Blob>> {
+    return this.http.get(`${this.getBaseUrl()}/${path}/${id}`, {
+      observe: 'response',
+      responseType: 'blob'
+    });
+  }
+
   create(entity: T): Observable<T> {
     return this.http.post<T>(this.getBaseUrl(), {
       ...entity

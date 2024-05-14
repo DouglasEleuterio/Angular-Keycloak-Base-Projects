@@ -25,6 +25,9 @@ export class TableButtonsComponent {
   removePermission?: PermissionEnum;
 
   @Input()
+  downloadPermission?: PermissionEnum;
+
+  @Input()
   disabled = false;
 
   @Input()
@@ -32,6 +35,9 @@ export class TableButtonsComponent {
 
   @Output()
   onRemove: EventEmitter<number | string> = new EventEmitter<number | string>();
+
+  @Output()
+  onDownload: EventEmitter<number | string> = new EventEmitter<number | string>();
 
   constructor(private translateService: TranslateService, private confirmationService: ConfirmationService) {}
 
@@ -42,10 +48,21 @@ export class TableButtonsComponent {
   remove(): void {
     this.confirmationService.confirm({
       message: this.translateService.instant(`${this.page}.message.delete`.toUpperCase()),
-      header: this.translateService.instant('shared.titles.delete'.toUpperCase()),
+      header: this.translateService.instant('shared.titles.download'.toUpperCase()),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.onRemove.emit(this.entityId);
+      }
+    });
+  }
+
+  download() {
+    this.confirmationService.confirm({
+      message: this.translateService.instant(`${this.page}.message.download`.toUpperCase()),
+      header: this.translateService.instant('shared.titles.download'.toUpperCase()),
+      icon: 'pi pi-download',
+      accept: () => {
+        this.onDownload.emit(this.entityId);
       }
     });
   }

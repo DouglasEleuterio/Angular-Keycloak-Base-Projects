@@ -1,7 +1,7 @@
 {
-  "baseUrl": "http://localhost:8070",
-  "authLoginUrl": "http://localhost:8070/auth/token",
-  "authLogoutUrl": "http://localhost:8070/auth/logout",
+  "baseUrl": "http://localhost:8080",
+  "authLoginUrl": "http://localhost:8080/auth/token",
+  "authLogoutUrl": "http://localhost:8080/auth/logout",
   "authCodeUrl": "https://auth.3ptecnologia.com.br/realms/3p-apps/protocol/openid-connect/auth",
   "authClientId": "contabilidade",
   "authCallbackUrl": "http://localhost:4201/oauth/authorize/callback",

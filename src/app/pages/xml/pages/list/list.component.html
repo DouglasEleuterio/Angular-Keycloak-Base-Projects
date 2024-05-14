@@ -52,9 +52,9 @@
                 {{'field.remetente' | appTranslate:'xml'}}
                 <p-sortIcon field="NFe.infNFe.emit.xNome"></p-sortIcon>
               </th>
-              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.cobr.fat.vLiq">
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.total.ICMSTot.vNF">
                 {{'field.valor' | appTranslate:'xml'}}
-<!--                <p-sortIcon field="NFe.infNFe.cobr.fat.vLiq"></p-sortIcon>-->
+                <p-sortIcon field="NFe.infNFe.total.ICMSTot.vNF"></p-sortIcon>
               </th>
               <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
             </tr>
@@ -67,7 +67,7 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.nat_op' | appTranslate:'xml'}}</span>
-                <span pTooltip="{{entity.NFe.infNFe.ide.natOp}}"> {{entity.NFe.infNFe.ide.natOp}} </span>
+                <span pTooltip="{{entity.NFe.infNFe.ide.natOp}}"> {{getNatureza(entity.NFe.infNFe.ide.natOp)}} </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.dataEmissao' | appTranslate:'xml'}}</span>
@@ -87,8 +87,7 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.valor' | appTranslate:'xml'}}</span>
-                <span *ngIf="entity.NFe.infNFe.cobr"> {{entity.NFe.infNFe.cobr.fat.vLiq | thousandFormat}} </span>
-                <span *ngIf="!entity.NFe.infNFe.cobr"> -- </span>
+                <span> {{entity.NFe.infNFe.total.ICMSTot.vNF | thousandFormat}} </span>
               </td>
               <td colspan="1" class="actions">
                 <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
@@ -97,6 +96,7 @@
                   [disabled]="false"
                   [entityId]="entity.id"
                   (onRemove)="remove($event)"
+                  (onDownload)="download($event)"
                   [showEdit]="false"
                 ></app-table-buttons>
               </td>

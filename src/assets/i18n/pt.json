@@ -67,7 +67,8 @@
       "DELETE": "Excluir",
       "CONFIRM": "Confirmar",
       "ATIVAR": "Ativar",
-      "INATIVAR": "Inativar"
+      "INATIVAR": "Inativar",
+      "DOWNLOAD": "Download"
     },
     "MSG": {
       "DELETE": "Tem certeza que deseja excluir o registro?",
@@ -1253,7 +1254,8 @@
       "UPLOAD": "Enviar Arquivos XML",
       "DETAIL": "Detalhar",
       "EDIT": "Não é possível editar",
-      "DEL": "Excluir XML"
+      "DEL": "Excluir XML",
+      "DOWNLOAD": "Baixar Arquivo XML"
     },
     "FIELD": {
       "ID": "Código",
@@ -1265,6 +1267,9 @@
       "REMETENTE": "Remetente",
       "VALOR": "Valor Total",
       "NAT_OP": "Natureza da Operação"
+    },
+    "MESSAGE": {
+      "DOWNLOAD": "Deseja realizar o download do arquivo XML?"
     }
   },
   "MENU": {

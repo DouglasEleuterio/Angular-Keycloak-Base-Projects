@@ -45,6 +45,16 @@ export class ListComponent extends PaginatorComponent {
       });
   }
 
+  download(id: string) {
+    this.service.onDownload(id, 'download').subscribe(res => {
+      const a = document.createElement('a');
+      const contentDisposition = res.headers.get('content-disposition');
+      a.download = contentDisposition.split(';')[1].split('filename')[1].split('=')[1].trim();
+      a.href = window.URL.createObjectURL(res.body);
+      a.click();
+    });
+  }
+
   get exporterConfig(): ExporterTypeConfig {
     const baseColumns = ['id;Código', 'versao;Versão', 'situacao;Ativo;Sim,Não'];
     const pdfColumns = [...baseColumns, 'dataCriacao;Data de Cadastro;dd/MM/yyyy'];
@@ -63,7 +73,19 @@ export class ListComponent extends PaginatorComponent {
       )
       .subscribe(result => {
         this.tableData = result.content;
+        console.log(this.tableData);
         this.pagination.totalRecords = result.totalElements;
       });
   }
+
+  getNatureza(natOp: string) {
+    if (natOp.toLowerCase().includes('venda') || natOp.toLowerCase().includes('vda')) return 'VENDA';
+    if (natOp.toLowerCase().includes('bonificacao')) return 'BONIFICAÇÃO';
+    if (natOp.toLowerCase().includes('brinde')) return 'BRINDE';
+    if (natOp.toLowerCase().includes('troca')) return 'TROCA';
+    else {
+      return natOp;
+    }
+  }
+
 }
