@@ -12,7 +12,7 @@ import { EnvService } from '../../../../env/env.service';
 })
 export class FormComponent {
   path = '/upload';
-  urlUpload = 'http://localhost:8080/upload';
+  urlUpload: string;
 
   uploadedFiles: any[] = [];
 
