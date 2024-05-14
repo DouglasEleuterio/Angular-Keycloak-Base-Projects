@@ -32,6 +32,10 @@
                 {{'field.numero' | appTranslate:'xml'}}
                 <p-sortIcon field="NFe.infNFe.ide.nNF"></p-sortIcon>
               </th>
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.ide.natOp">
+                {{'field.nat_op' | appTranslate:'xml'}}
+                <p-sortIcon field="NFe.infNFe.ide.natOp"></p-sortIcon>
+              </th>
               <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.ide.dhEmi">
                 {{'field.dataEmissao' | appTranslate:'xml'}}
                 <p-sortIcon field="NFe.infNFe.ide.dhEmi"></p-sortIcon>
@@ -50,16 +54,20 @@
               </th>
               <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.cobr.fat.vLiq">
                 {{'field.valor' | appTranslate:'xml'}}
-                <p-sortIcon field="NFe.infNFe.cobr.fat.vLiq"></p-sortIcon>
+<!--                <p-sortIcon field="NFe.infNFe.cobr.fat.vLiq"></p-sortIcon>-->
               </th>
               <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-entity let-expanded="expanded">
-            <tr *ngIf="!loading">
+            <tr>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.id' | appTranslate:'xml'}}</span>
                 <span pTooltip="{{entity.NFe.infNFe.ide.nNF}}"> {{entity.NFe.infNFe.ide.nNF}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.nat_op' | appTranslate:'xml'}}</span>
+                <span pTooltip="{{entity.NFe.infNFe.ide.natOp}}"> {{entity.NFe.infNFe.ide.natOp}} </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.dataEmissao' | appTranslate:'xml'}}</span>
@@ -79,16 +87,17 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.valor' | appTranslate:'xml'}}</span>
-                <span> {{entity.NFe.infNFe.cobr.fat.vLiq | thousandFormat}} </span>
+                <span *ngIf="entity.NFe.infNFe.cobr"> {{entity.NFe.infNFe.cobr.fat.vLiq | thousandFormat}} </span>
+                <span *ngIf="!entity.NFe.infNFe.cobr"> -- </span>
               </td>
               <td colspan="1" class="actions">
                 <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
                 <app-table-buttons
                   page="xml"
-                  [detailPermission]="false"
-                  [disabled]="true"
+                  [disabled]="false"
                   [entityId]="entity.id"
                   (onRemove)="remove($event)"
+                  [showEdit]="false"
                 ></app-table-buttons>
               </td>
             </tr>

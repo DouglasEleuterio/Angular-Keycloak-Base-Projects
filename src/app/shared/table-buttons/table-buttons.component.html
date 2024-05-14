@@ -18,7 +18,7 @@
     type="button"
     class="p-button-secondary p-button-text"
     icon="pi pi-pencil"
-    [disabled]="disabled"
+    [disabled]="!showEdit || disabled"
   ></button>
   <button
     *appHasPermission="[removePermission]"

@@ -27,6 +27,9 @@ export class TableButtonsComponent {
   @Input()
   disabled = false;
 
+  @Input()
+  showEdit: boolean | null = true;
+
   @Output()
   onRemove: EventEmitter<number | string> = new EventEmitter<number | string>();
 

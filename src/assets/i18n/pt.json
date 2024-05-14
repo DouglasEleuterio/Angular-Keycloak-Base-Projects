@@ -1251,7 +1251,9 @@
     },
     "ACTION": {
       "UPLOAD": "Enviar Arquivos XML",
-      "DETAIL": "Detalhar"
+      "DETAIL": "Detalhar",
+      "EDIT": "Não é possível editar",
+      "DEL": "Excluir XML"
     },
     "FIELD": {
       "ID": "Código",
@@ -1261,7 +1263,8 @@
       "DATAEMISSAO": "Data de Emissão",
       "CNPJ": "CNPJ",
       "REMETENTE": "Remetente",
-      "VALOR": "Valor Total"
+      "VALOR": "Valor Total",
+      "NAT_OP": "Natureza da Operação"
     }
   },
   "MENU": {
