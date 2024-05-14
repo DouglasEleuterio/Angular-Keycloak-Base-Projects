@@ -13,9 +13,25 @@ import { SharedModule } from '../../shared/shared.module';
 import { FiltersComponent } from './components/filters/filters.component';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { LayoutsModule } from '../../layouts/layouts.module';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, FiltersComponent],
-  imports: [CommonModule, XmlRountingModule, UIModule, ButtonModule, RippleModule, RouterLink, ToastModule, FileUploadModule, SharedModule, TableModule, TooltipModule]
+  imports: [
+    CommonModule,
+    XmlRountingModule,
+    UIModule,
+    ButtonModule,
+    RippleModule,
+    RouterLink,
+    ToastModule,
+    FileUploadModule,
+    SharedModule,
+    TableModule,
+    TooltipModule,
+    ProgressSpinnerModule,
+    LayoutsModule
+  ]
 })
 export class XmlModule {}

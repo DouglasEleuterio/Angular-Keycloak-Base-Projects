@@ -113,9 +113,11 @@ export class AuthenticationService {
     const userPermissions = this.loggedUser()?.permissions;
     if (userPermissions && userPermissions.length > 0) {
       for (const checkPermission of permissions) {
-        const permissionFound = userPermissions.find(x => x.toUpperCase() === checkPermission.toUpperCase());
-        if (!permissionFound) {
-          return false;
+        if (checkPermission) {
+          const permissionFound = userPermissions.find(x => x.toUpperCase() === checkPermission.toUpperCase());
+          if (!permissionFound) {
+            return false;
+          }
         }
       }
       return true;

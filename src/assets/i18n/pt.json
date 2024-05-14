@@ -1250,7 +1250,8 @@
       "EXPORTER": "Documentos XML"
     },
     "ACTION": {
-      "UPLOAD": "Enviar Arquivos XML"
+      "UPLOAD": "Enviar Arquivos XML",
+      "DETAIL": "Detalhar"
     },
     "FIELD": {
       "ID": "Código",

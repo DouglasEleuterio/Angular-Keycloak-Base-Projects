@@ -2,16 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { LoadingService } from 'src/app/domain/loading/loading.service';
 import { of, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
+import { ngxLoadingAnimationTypes } from 'ngx-loading';
+import { INgxLoadingConfig } from 'ngx-loading/lib/ngx-loading-config';
 
 @Component({
   selector: 'app-loading',
-  template: '<ngx-loading [show]="showLoading"></ngx-loading>'
+  template: '<ngx-loading [config]="config" [show]="showLoading"></ngx-loading>'
 })
 export class LoadingComponent implements OnInit {
   public loading: Subject<boolean> = this.loadingService.loading;
 
   show = false;
   showLoading = false;
+  config: INgxLoadingConfig = {
+    animationType: ngxLoadingAnimationTypes.wanderingCubes,
+    primaryColour: '#182b51',
+    secondaryColour: '#8a8ea6'
+  };
 
   counting = 0;
 

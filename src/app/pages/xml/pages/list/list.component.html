@@ -1,3 +1,4 @@
+<app-loading></app-loading>
 <div class="grid">
   <div class="col-12">
     <div class="card">
@@ -8,19 +9,6 @@
       <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
         <app-xml-filters appFilterRef></app-xml-filters>
       </app-filter>
-
-<!--      <div class="p-mr-2 p-mb-2">-->
-<!--        <app-table-exporter-->
-<!--          [empty]="tableData === null || tableData.length === 0"-->
-<!--          [title]="'title.exporter' | appTranslate: 'xml'"-->
-<!--          filename="xml_exportacao"-->
-<!--          [filter]="pagination.filter"-->
-<!--          [sort]="pagination.sort"-->
-<!--          [service]="service"-->
-<!--          [configuration]="exporterConfig"-->
-<!--        ></app-table-exporter>-->
-<!--      </div>-->
-
       <div class="list-body">
         <p-table
           [value]="tableData"
@@ -64,22 +52,11 @@
                 {{'field.valor' | appTranslate:'xml'}}
                 <p-sortIcon field="NFe.infNFe.cobr.fat.vLiq"></p-sortIcon>
               </th>
-<!--
-              <th scope="col" colspan="1" pSortableColumn="tipoLocalidade">
-                {{'field.tipoLocalidade.codigo' | appTranslate:'xml'}}
-                <p-sortIcon field="tipoLocalidade.codigo"></p-sortIcon>
-              </th>
-              <th scope="col" colspan="1" pSortableColumn="tipoLocalidade">
-                {{'field.situacao' | appTranslate:'xml'}}
-                <p-sortIcon field="situacao"></p-sortIcon>
-              </th>
-
--->
               <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-entity let-expanded="expanded">
-            <tr>
+            <tr *ngIf="!loading">
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.id' | appTranslate:'xml'}}</span>
                 <span pTooltip="{{entity.NFe.infNFe.ide.nNF}}"> {{entity.NFe.infNFe.ide.nNF}} </span>
@@ -104,29 +81,10 @@
                 <span class="p-column-title bold"> {{'field.valor' | appTranslate:'xml'}}</span>
                 <span> {{entity.NFe.infNFe.cobr.fat.vLiq | thousandFormat}} </span>
               </td>
-<!--
-              <td colspan="1">
-                <span class="p-column-title bold"> {{'field.tipoLocalidade.descricao' | appTranslate:'xml'}}</span>
-                <span pTooltip="{{entity.tipoLocalidade.descricao}}"> {{entity.tipoLocalidade.descricao}} </span>
-              </td>
-              <td colspan="1">
-                <span class="p-column-title bold"> {{'field.situacao' | appTranslate:'xml'}}</span>
-                <span>
-                  <div class="btn-situacao">
-                    <app-situacao-button
-                      (onUpdateStatus)="updateStatus($event, entity.situacao)"
-                      [entityId]="entity.id"
-                      [ativo]="entity.situacao"
-                    ></app-situacao-button>
-                  </div>
-                </span>
-              </td>
-
--->
               <td colspan="1" class="actions">
                 <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
                 <app-table-buttons
-                  page="classificacao_localidade"
+                  page="xml"
                   [detailPermission]="false"
                   [disabled]="true"
                   [entityId]="entity.id"

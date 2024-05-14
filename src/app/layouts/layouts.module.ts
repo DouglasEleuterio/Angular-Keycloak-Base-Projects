@@ -74,7 +74,7 @@ import { ConfigService } from './atlantis/config/app.config.service';
       fullScreenBackdrop: true
     })
   ],
-  exports: [AppMainComponent],
+  exports: [AppMainComponent, LoadingComponent],
   providers: [MessageService, MenuService, AppBreadcrumbService, LoadingService, ConfigService]
 })
 export class LayoutsModule {}
