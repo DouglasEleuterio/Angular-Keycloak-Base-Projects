@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { TranslateService } from '@ngx-translate/core';
+import { EnvService } from '../../../../env/env.service';
 
 @Component({
   selector: 'app-upload-form',
@@ -10,11 +11,19 @@ import { TranslateService } from '@ngx-translate/core';
   providers: [MessageService]
 })
 export class FormComponent {
-  urlUpload = 'http://localhost:8070/upload/list';
+  path = '/upload';
+  urlUpload = 'http://localhost:8080/upload';
 
   uploadedFiles: any[] = [];
 
-  constructor(private alertService: AlertService, private translateService: TranslateService, private messageService: MessageService) {}
+  constructor(
+    private envService: EnvService,
+    private alertService: AlertService,
+    private translateService: TranslateService,
+    private messageService: MessageService
+  ) {
+    this.urlUpload = `${this.envService.environment.baseUrl}${this.path}`;
+  }
 
   onUpload(event) {
     for (const file of event.files) {

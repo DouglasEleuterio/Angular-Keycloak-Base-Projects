@@ -9,7 +9,7 @@
         <p-toast></p-toast>
         <p-fileUpload
           name="file"
-          url="http://localhost:8070/upload"
+          [url]="urlUpload"
           (onUpload)="onUpload($event)"
           accept="text/xml"
           multiple="true"
