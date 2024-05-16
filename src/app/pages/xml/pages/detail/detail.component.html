@@ -1,0 +1,32 @@
+<app-loading></app-loading>
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.detail' | appTranslate:'xml'}}</h5>
+      </div>
+      <div class="detail-body grid">
+        <div class="col-3">
+          <app-data-label title="{{'field.destinatario' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.dest.xNome"></app-data-label>
+        </div>
+        <div class="col-3">
+          <app-data-label title="{{'field.cnpj' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.dest.CNPJ"></app-data-label>
+        </div>
+        <div class="col-3">
+          <app-data-label title="{{'field.remetente' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.emit.xNome"></app-data-label>
+        </div>
+        <div class="col-3">
+          <app-data-label title="{{'field.remetente_cnpj' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.emit.CNPJ"></app-data-label>
+        </div>
+      </div>
+      <div class="detail-body grid">
+        <div class="col-6">
+          <app-data-label title="{{'field.dataemissao' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.ide.dhEmi"></app-data-label>
+        </div>
+        <div class="col-6">
+          <app-data-label title="{{'field.valor' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vNF"></app-data-label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
