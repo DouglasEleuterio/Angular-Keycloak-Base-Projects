@@ -15,9 +15,10 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LayoutsModule } from '../../layouts/layouts.module';
+import { DetailComponent } from './pages/detail/detail.component';
 
 @NgModule({
-  declarations: [ListComponent, FormComponent, FiltersComponent],
+  declarations: [ListComponent, FormComponent, FiltersComponent, DetailComponent],
   imports: [
     CommonModule,
     XmlRountingModule,

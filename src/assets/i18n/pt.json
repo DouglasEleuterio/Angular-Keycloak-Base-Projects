@@ -1248,7 +1248,8 @@
   "XML": {
     "TITLE": {
       "PAGE": "Gestão de documentos Xml",
-      "EXPORTER": "Documentos XML"
+      "EXPORTER": "Documentos XML",
+      "DETAIL": "XML Detalhado"
     },
     "ACTION": {
       "UPLOAD": "Enviar Arquivos XML",
@@ -1261,15 +1262,17 @@
       "ID": "Código",
       "VERSAO": "XML Versão",
       "DESTINATARIO": "Destinatário",
-      "NUMERO": "Número da NF",
+      "NUMERO": "Número da N.F.",
       "DATAEMISSAO": "Data de Emissão",
       "CNPJ": "CNPJ",
       "REMETENTE": "Remetente",
       "VALOR": "Valor Total",
-      "NAT_OP": "Natureza da Operação"
+      "NAT_OP": "Natureza da Operação",
+      "REMETENTE_CNPJ": "CNPJ Remetente"
     },
     "MESSAGE": {
-      "DOWNLOAD": "Deseja realizar o download do arquivo XML?"
+      "DOWNLOAD": "Deseja realizar o download do arquivo XML?",
+      "NOT_FOUND": "Documento XML não encontrado"
     }
   },
   "MENU": {

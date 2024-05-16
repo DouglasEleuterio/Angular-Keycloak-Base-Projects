@@ -54,11 +54,11 @@ As documentações destes respectivos pacotes se encontram:
 docker login -u douglaseleuterioferreira -p Fox789789@!
 ````
 ````
-docker build -t crm-app-v2:v2.0.0 --build-arg VERSION=2.0.0 .
+docker build -t contabilidade-app:v2.0.0 --build-arg VERSION=2.0.0 .
 ````
 ````
-docker tag crm-app-v2:v2.0.0 douglaseleuterioferreira/apps:crm-app-v2
+docker tag contabilidade-app:v2.0.0 douglaseleuterioferreira/apps:contabilidade-app
 ````
 ````
-docker push douglaseleuterioferreira/apps:crm-app-v2
+docker push douglaseleuterioferreira/apps:contabilidade
 ````
