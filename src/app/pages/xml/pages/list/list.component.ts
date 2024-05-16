@@ -73,7 +73,6 @@ export class ListComponent extends PaginatorComponent {
       )
       .subscribe(result => {
         this.tableData = result.content;
-        console.log(this.tableData);
         this.pagination.totalRecords = result.totalElements;
       });
   }

@@ -16,6 +16,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LayoutsModule } from '../../layouts/layouts.module';
 import { DetailComponent } from './pages/detail/detail.component';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, FiltersComponent, DetailComponent],
@@ -32,7 +33,8 @@ import { DetailComponent } from './pages/detail/detail.component';
     TableModule,
     TooltipModule,
     ProgressSpinnerModule,
-    LayoutsModule
+    LayoutsModule,
+    DividerModule
   ]
 })
 export class XmlModule {}

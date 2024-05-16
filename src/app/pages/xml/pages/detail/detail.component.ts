@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize, switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { LoadingService } from '../../../../domain/loading/loading.service';
 import { XmlService } from '../../../../domain/xml/xml.service';
 import { AppMenuItem, AppMenuModel } from '../../../../domain/menu/app-menu.model';
 import { ValidationService } from '../../../../core/ui/notifications/validation.service';
@@ -20,7 +19,6 @@ export class DetailComponent implements OnInit {
   public entity: Xml;
 
   constructor(
-    private loadingService: LoadingService,
     private route: ActivatedRoute,
     private service: XmlService,
     private router: Router,
@@ -30,17 +28,10 @@ export class DetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadingService.startLoading();
     this.route.params
       .pipe(
         tap((params: Params) => (this.id = params.id)),
-        switchMap((params: Params) =>
-          this.service.get(params.id).pipe(
-            finalize(() => {
-              this.loadingService.stopLoading();
-            })
-          )
-        )
+        switchMap((params: Params) => this.service.get(params.id))
       )
       .subscribe({
         next: entity => this.onLoad(entity),
