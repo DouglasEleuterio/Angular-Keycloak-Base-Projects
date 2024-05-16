@@ -15,6 +15,7 @@ import { Xml } from '../../../../domain/xml/xml.model';
 })
 export class DetailComponent implements OnInit {
   private id: number | string;
+  tableData: any[] = [];
   menuBack: AppMenuItem = AppMenuModel.itemMenuXML;
   public entity: Xml;
 
@@ -48,6 +49,7 @@ export class DetailComponent implements OnInit {
         .then(() => this.alertService.defaultError(this.translateService.instant('xml.message.not_found'.toUpperCase())));
     } else {
       this.entity = entity;
+      this.tableData.push(this.entity.NFe.infNFe.det.prod);
     }
   }
 }

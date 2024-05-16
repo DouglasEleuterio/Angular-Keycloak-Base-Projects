@@ -3,6 +3,7 @@ import { Ide } from './Ide.model';
 import { Emit } from './emit.mode';
 import { Cobr } from './cobr.model';
 import { Total } from './tota.model';
+import { Det } from './det.model';
 
 export class InfNfe {
   id: string;
@@ -11,4 +12,5 @@ export class InfNfe {
   emit: Emit;
   cobr: Cobr;
   total: Total;
+  det: Det;
 }

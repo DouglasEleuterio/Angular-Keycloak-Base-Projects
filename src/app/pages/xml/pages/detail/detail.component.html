@@ -100,6 +100,7 @@
           <b>Produtos</b>
         </div>
       </p-divider>
+      <p-table [value]="tableData" [paginator]="false" [totalRecords]="tableData.length" sortMode="single" dataKey="id"> </p-table>
     </div>
   </div>
 </div>
