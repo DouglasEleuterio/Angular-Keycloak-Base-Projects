@@ -1286,7 +1286,18 @@
       "VALOR_OUTRAS_DESPESAS": "Valor de outras despesas",
       "VALOR_IPI": "Valor do IPI",
       "VALOR_TOTAL_TRIBUTOS": "V. aprox. de tributos fed., est. e mun.",
-      "VALOR_PIS": "Valor do PIS"
+      "VALOR_PIS": "Valor do PIS",
+      "PROD": {
+        "CODIGO": "Código",
+        "NOME": "Nome",
+        "NCM": "NCM",
+        "CFOP": "CFOP",
+        "QUANTIDADE": "Quantidade",
+        "VALOR_UNITARIO": "Valor unitário",
+        "VALOR_TOTAL": "Valor total",
+        "UNIDADE_COMERCIAL": "Unidade Comercial"
+
+      }
     },
     "MESSAGE": {
       "DOWNLOAD": "Deseja realizar o download do arquivo XML?",

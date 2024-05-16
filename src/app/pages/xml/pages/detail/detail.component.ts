@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { finalize, switchMap, tap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { XmlService } from '../../../../domain/xml/xml.service';
 import { AppMenuItem, AppMenuModel } from '../../../../domain/menu/app-menu.model';
@@ -7,6 +7,7 @@ import { ValidationService } from '../../../../core/ui/notifications/validation.
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Xml } from '../../../../domain/xml/xml.model';
+import { Det } from '../../../../domain/xml/det.model';
 
 @Component({
   selector: 'app-detail',
@@ -15,7 +16,7 @@ import { Xml } from '../../../../domain/xml/xml.model';
 })
 export class DetailComponent implements OnInit {
   private id: number | string;
-  tableData: any[] = [];
+  tableData: Det[] = [];
   menuBack: AppMenuItem = AppMenuModel.itemMenuXML;
   public entity: Xml;
 
@@ -49,7 +50,7 @@ export class DetailComponent implements OnInit {
         .then(() => this.alertService.defaultError(this.translateService.instant('xml.message.not_found'.toUpperCase())));
     } else {
       this.entity = entity;
-      this.tableData.push(this.entity.NFe.infNFe.det.prod);
+      this.tableData = this.entity.NFe.infNFe.det;
     }
   }
 }

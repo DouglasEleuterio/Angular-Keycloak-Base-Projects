@@ -12,5 +12,5 @@ export class InfNfe {
   emit: Emit;
   cobr: Cobr;
   total: Total;
-  det: Det;
+  det: Det[];
 }

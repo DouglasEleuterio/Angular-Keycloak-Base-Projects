@@ -29,10 +29,16 @@
           <app-data-label title="{{'field.dataemissao' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.ide.dhEmi"></app-data-label>
         </div>
         <div class="col-3">
-          <app-data-label title="{{'field.natureza_operacao' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.ide.natOp"></app-data-label>
+          <app-data-label
+            title="{{'field.natureza_operacao' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.ide.natOp"
+          ></app-data-label>
         </div>
         <div class="col-3">
-          <app-data-label title="{{'field.valor_total_nfe' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vNF"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_total_nfe' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vNF"
+          ></app-data-label>
         </div>
       </div>
       <p-divider align="center">
@@ -43,55 +49,106 @@
       </p-divider>
       <div class="detail-body grid">
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vBC && entity?.NFe.infNFe.total.ICMSTot.vBC > 0 " class="col-3">
-          <app-data-label title="{{'field.base_calculo_icms' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vBC"></app-data-label>
+          <app-data-label
+            title="{{'field.base_calculo_icms' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vBC"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMS && entity?.NFe.infNFe.total.ICMSTot.vICMS > 0 " class="col-3">
-          <app-data-label title="{{'field.valor_icms' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vICMS"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_icms' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vICMS"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSDeson && entity?.NFe.infNFe.total.ICMSTot.vICMSDeson > 0 " class="col-3">
-          <app-data-label title="{{'field.valor_icms_desonerado' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSDeson"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_icms_desonerado' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSDeson"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vBCST && entity?.NFe.infNFe.total.ICMSTot.vBCST > 0 " class="col-3">
-          <app-data-label title="{{'field.base_de_calculo_icms_st' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vBCST"></app-data-label>
+          <app-data-label
+            title="{{'field.base_de_calculo_icms_st' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vBCST"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vST && entity?.NFe.infNFe.total.ICMSTot.vST > 0" class="col-3">
-          <app-data-label title="{{'field.valor_icms_st' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vST"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_icms_st' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vST"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet && entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet > 0 " class="col-3">
-          <app-data-label title="{{'field.valor_icms_remet_uf' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_icms_remet_uf' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest && entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest > 0" class="col-3">
-          <app-data-label title="{{'field.valor_icms_destino_uf' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_icms_destino_uf' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vProd && entity?.NFe.infNFe.total.ICMSTot.vProd > 0" class="col-3">
-          <app-data-label title="{{'field.valor_total_produtos' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vProd"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_total_produtos' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vProd"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vFrete && entity?.NFe.infNFe.total.ICMSTot.vFrete > 0" class="col-3">
-          <app-data-label title="{{'field.valor_frete' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vFrete"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_frete' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vFrete"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vSeg && entity?.NFe.infNFe.total.ICMSTot.vSeg > 0" class="col-3">
-          <app-data-label title="{{'field.valor_seguro' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vSeg"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_seguro' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vSeg"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vDesc && entity?.NFe.infNFe.total.ICMSTot.vDesc > 0" class="col-3">
-          <app-data-label title="{{'field.valor_desconto' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vDesc"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_desconto' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vDesc"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vOutro && entity?.NFe.infNFe.total.ICMSTot.vOutro > 0" class="col-3">
-          <app-data-label title="{{'field.valor_outras_despesas' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vOutro"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_outras_despesas' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vOutro"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vIPI && entity?.NFe.infNFe.total.ICMSTot.vIPI > 0" class="col-3">
-          <app-data-label title="{{'field.valor_ipi' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vIPI"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_ipi' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vIPI"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vIPI && entity?.NFe.infNFe.total.ICMSTot.vIPI > 0" class="col-3">
-          <app-data-label title="{{'field.valor_ipi' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vIPI"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_ipi' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vIPI"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vPIS && entity?.NFe.infNFe.total.ICMSTot.vPIS > 0" class="col-3">
-          <app-data-label title="{{'field.valor_pis' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vPIS"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_pis' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vPIS"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vCOFINS && entity?.NFe.infNFe.total.ICMSTot.vCOFINS > 0" class="col-3">
-          <app-data-label title="{{'field.valor_cofins' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vCOFINS"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_cofins' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vCOFINS"
+          ></app-data-label>
         </div>
         <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vTotTrib && entity?.NFe.infNFe.total.ICMSTot.vTotTrib > 0" class="col-3">
-          <app-data-label title="{{'field.valor_total_tributos' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.total.ICMSTot.vTotTrib"></app-data-label>
+          <app-data-label
+            title="{{'field.valor_total_tributos' | appTranslate:'xml'}}"
+            [value]="entity?.NFe.infNFe.total.ICMSTot.vTotTrib"
+          ></app-data-label>
         </div>
       </div>
       <p-divider align="center">
@@ -100,7 +157,49 @@
           <b>Produtos</b>
         </div>
       </p-divider>
-      <p-table [value]="tableData" [paginator]="false" [totalRecords]="tableData.length" sortMode="single" dataKey="id"> </p-table>
+      <p-table [value]="tableData" [scrollable]="true" scrollHeight="300px">
+        <ng-template pTemplate="header">
+          <tr>
+            <th scope="col" colspan="1">{{'field.prod.codigo' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{'field.prod.nome' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{'field.prod.ncm' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{'field.prod.cfop' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{'field.prod.quantidade' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{'field.prod.valor_unitario' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{'field.prod.valor_total' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{'field.prod.unidade_comercial' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{'field.prod.imposto.icms' | appTranslate:'xml'}}</th>
+          </tr>
+        </ng-template>
+        <ng-template let-entity pTemplate="body">
+          <tr>
+            <td colspan="1">
+              <span pTooltip="{{entity.prod.cProd}}"> {{entity.prod.cProd}} </span>
+            </td>
+            <td colspan="1">
+              <span pTooltip="{{entity.prod.xProd}}"> {{entity.prod.xProd}} </span>
+            </td>
+            <td colspan="1">
+              <span pTooltip="{{entity.prod.NCM}}"> {{entity.prod.NCM}} </span>
+            </td>
+            <td colspan="1">
+              <span pTooltip="{{entity.prod.CFOP}}"> {{entity.prod.CFOP}} </span>
+            </td>
+            <td colspan="1">
+              <span pTooltip="{{entity.prod.qCom}}"> {{entity.prod.qCom}} </span>
+            </td>
+            <td colspan="1">
+              <span pTooltip="{{entity.prod.vUnCom}}"> {{entity.prod.vUnCom}} </span>
+            </td>
+            <td colspan="1">
+              <span pTooltip="{{entity.prod.vProd}}"> {{entity.prod.vProd}} </span>
+            </td>
+            <td colspan="1">
+              <span pTooltip="{{entity.prod.uCom}}"> {{entity.prod.uCom}} </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
   </div>
 </div>
