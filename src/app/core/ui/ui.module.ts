@@ -26,6 +26,7 @@ import { SituacaoSolicitacaoPipe } from './pipes/situacao-solicitacao.pipe';
 import { SituacaoSolicitacaoFasePipe } from './pipes/situacao-solicitacao-fase.pipe';
 import { MeioTransportePipe } from './pipes/meio-transporte.pipe';
 import { SimNaoPipe } from './pipes/sim-nao.pipe';
+import { PercentualFormatPipe } from './pipes/percentual-format.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { SimNaoPipe } from './pipes/sim-nao.pipe';
     EmptyDataPipe,
     RelativeTimePipe,
     ThousandFormatPipe,
+    PercentualFormatPipe,
     HasPermissionPipe,
     ActiveLabelPipe,
     CargoPipe,
@@ -63,6 +65,7 @@ import { SimNaoPipe } from './pipes/sim-nao.pipe';
     EmptyDataPipe,
     RelativeTimePipe,
     ThousandFormatPipe,
+    PercentualFormatPipe,
     HasPermissionPipe,
     ActiveLabelPipe,
     CargoPipe,

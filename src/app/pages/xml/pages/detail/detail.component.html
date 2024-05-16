@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h5>{{ 'title.detail' | appTranslate:'xml'}}</h5>
+        <h5>{{ 'title.detail' | appTranslate:'xml' }}</h5>
       </div>
       <p-divider align="center">
         <div class="inline-flex align-items-center">
@@ -12,21 +12,26 @@
       </p-divider>
       <div class="detail-body grid">
         <div class="col-3">
-          <app-data-label title="{{'field.destinatario' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.dest.xNome"></app-data-label>
+          <app-data-label title="{{'field.destinatario' | appTranslate:'xml'}}"
+                          [value]="entity?.NFe.infNFe.dest.xNome"></app-data-label>
         </div>
         <div class="col-3">
-          <app-data-label title="{{'field.cnpj' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.dest.CNPJ"></app-data-label>
+          <app-data-label title="{{'field.cnpj' | appTranslate:'xml'}}"
+                          [value]="entity?.NFe.infNFe.dest.CNPJ"></app-data-label>
         </div>
         <div class="col-3">
-          <app-data-label title="{{'field.remetente' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.emit.xNome"></app-data-label>
+          <app-data-label title="{{'field.remetente' | appTranslate:'xml'}}"
+                          [value]="entity?.NFe.infNFe.emit.xNome"></app-data-label>
         </div>
         <div class="col-3">
-          <app-data-label title="{{'field.remetente_cnpj' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.emit.CNPJ"></app-data-label>
+          <app-data-label title="{{'field.remetente_cnpj' | appTranslate:'xml'}}"
+                          [value]="entity?.NFe.infNFe.emit.CNPJ"></app-data-label>
         </div>
       </div>
       <div class="detail-body grid">
         <div class="col-3">
-          <app-data-label title="{{'field.dataemissao' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.ide.dhEmi"></app-data-label>
+          <app-data-label title="{{'field.dataemissao' | appTranslate:'xml'}}"
+                          [value]="entity?.NFe.infNFe.ide.dhEmi"></app-data-label>
         </div>
         <div class="col-3">
           <app-data-label
@@ -54,19 +59,22 @@
             [value]="entity?.NFe.infNFe.total.ICMSTot.vBC"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMS && entity?.NFe.infNFe.total.ICMSTot.vICMS > 0 " class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMS && entity?.NFe.infNFe.total.ICMSTot.vICMS > 0 "
+             class="col-3">
           <app-data-label
             title="{{'field.valor_icms' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vICMS"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSDeson && entity?.NFe.infNFe.total.ICMSTot.vICMSDeson > 0 " class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSDeson && entity?.NFe.infNFe.total.ICMSTot.vICMSDeson > 0 "
+             class="col-3">
           <app-data-label
             title="{{'field.valor_icms_desonerado' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSDeson"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vBCST && entity?.NFe.infNFe.total.ICMSTot.vBCST > 0 " class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vBCST && entity?.NFe.infNFe.total.ICMSTot.vBCST > 0 "
+             class="col-3">
           <app-data-label
             title="{{'field.base_de_calculo_icms_st' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vBCST"
@@ -78,13 +86,15 @@
             [value]="entity?.NFe.infNFe.total.ICMSTot.vST"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet && entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet > 0 " class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet && entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet > 0 "
+             class="col-3">
           <app-data-label
             title="{{'field.valor_icms_remet_uf' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest && entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest > 0" class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest && entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest > 0"
+             class="col-3">
           <app-data-label
             title="{{'field.valor_icms_destino_uf' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest"
@@ -96,7 +106,8 @@
             [value]="entity?.NFe.infNFe.total.ICMSTot.vProd"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vFrete && entity?.NFe.infNFe.total.ICMSTot.vFrete > 0" class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vFrete && entity?.NFe.infNFe.total.ICMSTot.vFrete > 0"
+             class="col-3">
           <app-data-label
             title="{{'field.valor_frete' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vFrete"
@@ -114,7 +125,8 @@
             [value]="entity?.NFe.infNFe.total.ICMSTot.vDesc"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vOutro && entity?.NFe.infNFe.total.ICMSTot.vOutro > 0" class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vOutro && entity?.NFe.infNFe.total.ICMSTot.vOutro > 0"
+             class="col-3">
           <app-data-label
             title="{{'field.valor_outras_despesas' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vOutro"
@@ -138,13 +150,15 @@
             [value]="entity?.NFe.infNFe.total.ICMSTot.vPIS"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vCOFINS && entity?.NFe.infNFe.total.ICMSTot.vCOFINS > 0" class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vCOFINS && entity?.NFe.infNFe.total.ICMSTot.vCOFINS > 0"
+             class="col-3">
           <app-data-label
             title="{{'field.valor_cofins' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vCOFINS"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vTotTrib && entity?.NFe.infNFe.total.ICMSTot.vTotTrib > 0" class="col-3">
+        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vTotTrib && entity?.NFe.infNFe.total.ICMSTot.vTotTrib > 0"
+             class="col-3">
           <app-data-label
             title="{{'field.valor_total_tributos' | appTranslate:'xml'}}"
             [value]="entity?.NFe.infNFe.total.ICMSTot.vTotTrib"
@@ -157,45 +171,92 @@
           <b>Produtos</b>
         </div>
       </p-divider>
-      <p-table [value]="tableData" [scrollable]="true" scrollHeight="300px">
+      <p-table [value]="tableData" [scrollable]="true" scrollDirection="horizontal" scrollHeight="200px">
         <ng-template pTemplate="header">
           <tr>
-            <th scope="col" colspan="1">{{'field.prod.codigo' | appTranslate:'xml'}}</th>
-            <th scope="col" colspan="1">{{'field.prod.nome' | appTranslate:'xml'}}</th>
-            <th scope="col" colspan="1">{{'field.prod.ncm' | appTranslate:'xml'}}</th>
-            <th scope="col" colspan="1">{{'field.prod.cfop' | appTranslate:'xml'}}</th>
-            <th scope="col" colspan="1">{{'field.prod.quantidade' | appTranslate:'xml'}}</th>
-            <th scope="col" colspan="1">{{'field.prod.valor_unitario' | appTranslate:'xml'}}</th>
-            <th scope="col" colspan="1">{{'field.prod.valor_total' | appTranslate:'xml'}}</th>
-            <th scope="col" colspan="1">{{'field.prod.unidade_comercial' | appTranslate:'xml'}}</th>
-            <th scope="col" colspan="1">{{'field.prod.imposto.icms' | appTranslate:'xml'}}</th>
+            <th scope="col" colspan="1">{{ 'field.prod.codigo' | appTranslate:'xml' }}</th>
+            <th scope="col" style="min-width: 350px" colspan="1">{{ 'field.prod.nome' | appTranslate:'xml' }}</th>
+            <th scope="col" colspan="1">{{ 'field.prod.ncm' | appTranslate:'xml' }}</th>
+            <th scope="col" colspan="1">{{ 'field.prod.cfop' | appTranslate:'xml' }}</th>
+            <th scope="col" colspan="1">{{ 'field.prod.quantidade' | appTranslate:'xml' }}</th>
+            <th scope="col" colspan="1">{{ 'field.prod.valor_unitario' | appTranslate:'xml' }}</th>
+            <th scope="col" colspan="1">{{ 'field.prod.valor_total' | appTranslate:'xml' }}</th>
+            <th scope="col" colspan="1">{{ 'field.prod.unidade_comercial' | appTranslate:'xml' }}</th>
+            <th scope="col" colspan="1" pTooltip="{{'field.imposto.cofins.cst.desc' | appTranslate:'xml'}}">
+              {{ 'field.imposto.cofins.cst.label' | appTranslate:'xml' }}
+            </th>
+            <th scope="col" colspan="1" pTooltip="{{'field.imposto.cofins.aliquota.desc' | appTranslate:'xml'}}">
+              {{ 'field.imposto.cofins.aliquota.label' | appTranslate:'xml' }}
+            </th>
+            <th scope="col" colspan="1" pTooltip="{{'field.imposto.cofins.base_calculo.desc' | appTranslate:'xml'}}">
+              {{ 'field.imposto.cofins.base_calculo.label' | appTranslate:'xml' }}
+            </th>
+            <th scope="col" colspan="1" pTooltip="{{'field.imposto.cofins.valor.desc' | appTranslate:'xml'}}">
+              {{ 'field.imposto.cofins.valor.label' | appTranslate:'xml' }}
+            </th>
+            <th scope="col" colspan="1" pTooltip="{{'field.imposto.pis.cst.desc' | appTranslate:'xml'}}">
+              {{ 'field.imposto.pis.cst.label' | appTranslate:'xml' }}
+            </th>
+            <th scope="col" colspan="1" pTooltip="{{'field.imposto.pis.aliquota.desc' | appTranslate:'xml'}}">
+              {{ 'field.imposto.pis.aliquota.label' | appTranslate:'xml' }}
+            </th>
+            <th scope="col" colspan="1" pTooltip="{{'field.imposto.pis.base_calculo.desc' | appTranslate:'xml'}}">
+              {{ 'field.imposto.pis.base_calculo.label' | appTranslate:'xml' }}
+            </th>
+            <th scope="col" colspan="1" pTooltip="{{'field.imposto.pis.valor.desc' | appTranslate:'xml'}}">
+              {{ 'field.imposto.pis.valor.label' | appTranslate:'xml' }}
+            </th>
           </tr>
         </ng-template>
         <ng-template let-entity pTemplate="body">
           <tr>
             <td colspan="1">
-              <span pTooltip="{{entity.prod.cProd}}"> {{entity.prod.cProd}} </span>
+              <span pTooltip="{{entity.prod.cProd}}"> {{ entity.prod.cProd }} </span>
             </td>
             <td colspan="1">
-              <span pTooltip="{{entity.prod.xProd}}"> {{entity.prod.xProd}} </span>
+              <span pTooltip="{{entity.prod.xProd}}"> {{ entity.prod.xProd }} </span>
             </td>
             <td colspan="1">
-              <span pTooltip="{{entity.prod.NCM}}"> {{entity.prod.NCM}} </span>
+              <span pTooltip="{{entity.prod.NCM}}"> {{ entity.prod.NCM }} </span>
             </td>
             <td colspan="1">
-              <span pTooltip="{{entity.prod.CFOP}}"> {{entity.prod.CFOP}} </span>
+              <span pTooltip="{{entity.prod.CFOP}}"> {{ entity.prod.CFOP }} </span>
             </td>
             <td colspan="1">
-              <span pTooltip="{{entity.prod.qCom}}"> {{entity.prod.qCom}} </span>
+              <span pTooltip="{{entity.prod.qCom}}"> {{ entity.prod.qCom }} </span>
             </td>
             <td colspan="1">
-              <span pTooltip="{{entity.prod.vUnCom}}"> {{entity.prod.vUnCom}} </span>
+              <span pTooltip="{{entity.prod.vUnCom}}"> {{ entity.prod.vUnCom | thousandFormat }} </span>
             </td>
             <td colspan="1">
-              <span pTooltip="{{entity.prod.vProd}}"> {{entity.prod.vProd}} </span>
+              <span pTooltip="{{entity.prod.vProd}}"> {{ entity.prod.vProd | thousandFormat }} </span>
             </td>
             <td colspan="1">
-              <span pTooltip="{{entity.prod.uCom}}"> {{entity.prod.uCom}} </span>
+              <span pTooltip="{{entity.prod.uCom}}"> {{ entity.prod.uCom }} </span>
+            </td>
+            <td colspan="1">
+              <span> {{entity.imposto.COFINS.COFINSAliq ? entity.imposto.COFINS.COFINSAliq.CST : '-'}} </span>
+            </td>
+            <td colspan="1">
+              <span> {{ entity.imposto.COFINS.COFINSAliq.vCOFINS | percentualFormat }} </span>
+            </td>
+            <td colspan="1">
+              <span> {{ entity.imposto.COFINS.COFINSAliq.vBC | thousandFormat }} </span>
+            </td>
+            <td colspan="1">
+              <span> {{ entity.imposto.COFINS.COFINSAliq.vCOFINS | thousandFormat }} </span>
+            </td>
+            <td colspan="1">
+              <span> {{ entity.imposto.COFINS.COFINSAliq ? entity.imposto.PIS.PISAliq.cst : '-' }} </span>
+            </td>
+            <td colspan="1">
+              <span> {{ entity.imposto.PIS.PISAliq.pPIS | percentualFormat }} </span>
+            </td>
+            <td colspan="1">
+              <span> {{ entity.imposto.PIS.PISAliq.vBC | thousandFormat }} </span>
+            </td>
+            <td colspan="1">
+              <span> {{ entity.imposto.PIS.PISAliq.vPIS | thousandFormat }} </span>
             </td>
           </tr>
         </ng-template>

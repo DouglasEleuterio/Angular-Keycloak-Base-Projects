@@ -1296,7 +1296,44 @@
         "VALOR_UNITARIO": "Valor unitário",
         "VALOR_TOTAL": "Valor total",
         "UNIDADE_COMERCIAL": "Unidade Comercial"
-
+      },
+      "IMPOSTO": {
+        "COFINS": {
+          "CST": {
+            "LABEL": "COFINS CST",
+            "DESC": "Código de Situação Tributária da COFINS"
+          },
+          "ALIQUOTA": {
+            "LABEL": "COFINS Aliquota",
+            "DESC": "Alíquota da COFINS (em percentual) "
+          },
+          "BASE_CALCULO": {
+            "LABEL": "COFINS Base calculo",
+            "DESC": "Valor da Base de Cálculo da COFINS"
+          },
+          "VALOR": {
+            "LABEL": "COFINS Valor",
+            "DESC": "Valor da COFINS "
+          }
+        },
+        "PIS": {
+          "CST": {
+            "LABEL": "PIS CST",
+            "DESC": "Código de Situação Tributária do PIS"
+          },
+          "ALIQUOTA": {
+            "LABEL": "PIS Aliquota",
+            "DESC": "Alíquota do PIS (em percentual)"
+          },
+          "BASE_CALCULO": {
+            "LABEL": "PIS Base calculo",
+            "DESC": "Valor da Base de Cálculo do PIS"
+          },
+          "VALOR": {
+            "LABEL": "PIS Valor",
+            "DESC": "Valor do PIS "
+          }
+        }
       }
     },
     "MESSAGE": {
