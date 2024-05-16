@@ -19,10 +19,9 @@
           [multiSortMeta]="multiSortMeta"
           [sortField]="sortField"
           [sortOrder]="sortOrder"
-          [rows]="pagination.pageSize"
-          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [rows]="5"
+          [rowsPerPageOptions]="[5, 10, 20, 50]"
           [totalRecords]="pagination.totalRecords"
-          [rowsPerPageOptions]="pagination.pageSizeOptions"
           sortMode="single"
           dataKey="id"
         >

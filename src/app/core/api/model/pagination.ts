@@ -5,14 +5,14 @@ import { EnvService } from '../../../env/env.service';
 export class Pagination {
   pageNumber = 0;
   first = 0;
-  pageSize = 10;
+  pageSize = 5;
   totalRecords: number;
   filter?: Filter;
   sort: Sort[] = [{ field: 'id', order: 'asc' }];
   multiSort?: boolean;
   paginatorKey: string;
 
-  pageSizeOptions = [10, 20, 50];
+  pageSizeOptions = [5, 10, 20, 50];
 
   constructor() {
     if (EnvService.env.defaultPaginationSize != null) {
