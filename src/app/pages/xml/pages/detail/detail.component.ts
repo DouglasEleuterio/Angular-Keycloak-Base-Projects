@@ -20,6 +20,7 @@ export class DetailComponent implements OnInit {
   tableData: Det[] = [];
   menuBack: AppMenuItem = AppMenuModel.itemMenuXML;
   public entity: Xml;
+  public isExibirMonofasico: boolean;
 
   constructor(
     private ncmService: NcmService,
@@ -30,6 +31,7 @@ export class DetailComponent implements OnInit {
     private alertService: AlertService,
     private translateService: TranslateService
   ) {
+    this.isExibirMonofasico = true;
   }
 
   ngOnInit(): void {
@@ -58,6 +60,9 @@ export class DetailComponent implements OnInit {
   }
 
   isMonofasico(ncm: string, vCOFINS: number, dataEmissao: Date) {
+    if (!this.isExibirMonofasico) {
+      return '';
+    }
     dataEmissao = new Date(dataEmissao);
     if (vCOFINS < 0.01) {
       return '';
@@ -75,7 +80,7 @@ export class DetailComponent implements OnInit {
 
     const result = resultList[0];
     if (dataEmissao.getTime() > result.inicio.getTime() && dataEmissao.getTime() < result.fim.getTime()) {
-      return 'background-color: #ececf9';
+      return 'background-color: rgb(179, 251, 174)';
     }
     return '';
   }

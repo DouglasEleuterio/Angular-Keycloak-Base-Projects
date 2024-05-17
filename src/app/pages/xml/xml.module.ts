@@ -17,6 +17,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { LayoutsModule } from '../../layouts/layouts.module';
 import { DetailComponent } from './pages/detail/detail.component';
 import { DividerModule } from 'primeng/divider';
+import { CheckboxModule } from 'primeng/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, FiltersComponent, DetailComponent],
@@ -34,7 +36,9 @@ import { DividerModule } from 'primeng/divider';
     TooltipModule,
     ProgressSpinnerModule,
     LayoutsModule,
-    DividerModule
+    DividerModule,
+    CheckboxModule,
+    FormsModule
   ]
 })
 export class XmlModule {}

@@ -169,6 +169,9 @@
           <b>Produtos</b>
         </div>
       </p-divider>
+      <div class="card flex justify-content-left">
+        <p-checkbox label="Exibir monofásico?" [(ngModel)]="isExibirMonofasico" [binary]="true" inputId="binary"></p-checkbox>
+      </div>
       <p-table [value]="tableData" [scrollable]="true" scrollDirection="horizontal" scrollHeight="400px">
         <ng-template pTemplate="header">
           <tr>
