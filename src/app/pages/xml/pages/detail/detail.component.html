@@ -206,55 +206,55 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template let-entity pTemplate="body">
+        <ng-template let-prod pTemplate="body">
           <tr>
-            <td colspan="1">
-              <span pTooltip="{{entity.prod.cProd}}"> {{ entity.prod.cProd }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.cProd}}"> {{ prod.prod.cProd }} </span>
             </td>
-            <td colspan="1">
-              <span pTooltip="{{entity.prod.xProd}}"> {{ entity.prod.xProd }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.xProd}}"> {{ prod.prod.xProd }} </span>
             </td>
-            <td colspan="1">
-              <span pTooltip="{{entity.prod.NCM}}"> {{ entity.prod.NCM }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.NCM}}"> {{ prod.prod.NCM }} </span>
             </td>
-            <td colspan="1">
-              <span pTooltip="{{entity.prod.CFOP}}"> {{ entity.prod.CFOP }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.CFOP}}"> {{ prod.prod.CFOP }} </span>
             </td>
-            <td colspan="1">
-              <span pTooltip="{{entity.prod.qCom}}"> {{ entity.prod.qCom }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.qCom}}"> {{ prod.prod.qCom }} </span>
             </td>
-            <td colspan="1">
-              <span pTooltip="{{entity.prod.vUnCom}}"> {{ entity.prod.vUnCom | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.vUnCom}}"> {{ prod.prod.vUnCom | thousandFormat }} </span>
             </td>
-            <td colspan="1">
-              <span pTooltip="{{entity.prod.vProd}}"> {{ entity.prod.vProd | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.vProd}}"> {{ prod.prod.vProd | thousandFormat }} </span>
             </td>
-            <td colspan="1">
-              <span pTooltip="{{entity.prod.uCom}}"> {{ entity.prod.uCom }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.uCom}}"> {{ prod.prod.uCom }} </span>
             </td>
-            <td colspan="1">
-              <span> {{ entity.imposto?.COFINS?.COFINSAliq?.CST }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.CST }} </span>
             </td>
-            <td colspan="1">
-              <span> {{ entity.imposto?.COFINS?.COFINSAliq?.vCOFINS | percentualFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.vCOFINS | percentualFormat }} </span>
             </td>
-            <td colspan="1">
-              <span> {{ entity.imposto?.COFINS?.COFINSAliq?.vBC | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.vBC | thousandFormat }} </span>
             </td>
-            <td colspan="1">
-              <span> {{ entity.imposto?.COFINS?.COFINSAliq?.vCOFINS | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.vCOFINS | thousandFormat }} </span>
             </td>
-            <td colspan="1">
-              <span> {{ entity.imposto?.PIS?.PISAliq?.cst }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.PIS?.PISAliq?.cst }} </span>
             </td>
-            <td colspan="1">
-              <span> {{ entity.imposto?.PIS?.PISAliq?.pPIS | percentualFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.PIS?.PISAliq?.pPIS | percentualFormat }} </span>
             </td>
-            <td colspan="1">
-              <span> {{ entity.imposto?.PIS?.PISAliq?.vBC | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.PIS?.PISAliq?.vBC | thousandFormat }} </span>
             </td>
-            <td colspan="1">
-              <span> {{ entity.imposto?.PIS?.PISAliq?.vPIS | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.PIS?.PISAliq?.vPIS | thousandFormat }} </span>
             </td>
           </tr>
         </ng-template>

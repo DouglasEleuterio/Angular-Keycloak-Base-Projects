@@ -8,6 +8,7 @@ import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Xml } from '../../../../domain/xml/xml.model';
 import { Det } from '../../../../domain/xml/det.model';
+import { NcmService } from '../../../../domain/ncm/ncm.service';
 
 @Component({
   selector: 'app-detail',
@@ -21,13 +22,15 @@ export class DetailComponent implements OnInit {
   public entity: Xml;
 
   constructor(
+    private ncmService: NcmService,
     private route: ActivatedRoute,
     private service: XmlService,
     private router: Router,
     private validationService: ValidationService,
     private alertService: AlertService,
     private translateService: TranslateService
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params
@@ -52,5 +55,28 @@ export class DetailComponent implements OnInit {
       this.entity = entity;
       this.tableData = this.entity.NFe.infNFe.det;
     }
+  }
+
+  isMonofasico(ncm: string, vCOFINS: number, dataEmissao: Date) {
+    dataEmissao = new Date(dataEmissao);
+    if (vCOFINS < 0.01) {
+      return '';
+    }
+
+    const ncmList = this.ncmService.getMonoList();
+    if (ncmList == null) {
+      return '';
+    }
+
+    const resultList = ncmList.filter(value => value.codigo === ncm);
+    if (resultList.length < 1) {
+      return '';
+    }
+
+    const result = resultList[0];
+    if (dataEmissao.getTime() > result.inicio.getTime() && dataEmissao.getTime() < result.fim.getTime()) {
+      return 'background-color: #ececf9';
+    }
+    return '';
   }
 }
