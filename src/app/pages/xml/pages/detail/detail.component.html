@@ -239,7 +239,7 @@
               <span> {{ prod.imposto?.COFINS?.COFINSAliq?.CST }} </span>
             </td>
             <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.vCOFINS | percentualFormat }} </span>
+              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.pCOFINS | percentualFormat }} </span>
             </td>
             <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
               <span> {{ prod.imposto?.COFINS?.COFINSAliq?.vBC | thousandFormat }} </span>
