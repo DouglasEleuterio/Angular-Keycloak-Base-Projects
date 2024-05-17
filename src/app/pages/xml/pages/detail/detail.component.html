@@ -30,6 +30,10 @@
       </div>
       <div class="detail-body grid">
         <div class="col-3">
+          <app-data-label title="{{'field.numero' | appTranslate:'xml'}}"
+                          [value]="entity?.NFe.infNFe.ide.nNF"></app-data-label>
+        </div>
+        <div class="col-3">
           <app-data-label title="{{'field.dataemissao' | appTranslate:'xml'}}"
                           [value]="entity?.NFe.infNFe.ide.dhEmi"></app-data-label>
         </div>
@@ -171,7 +175,7 @@
           <b>Produtos</b>
         </div>
       </p-divider>
-      <p-table [value]="tableData" [scrollable]="true" scrollDirection="horizontal" scrollHeight="200px">
+      <p-table [value]="tableData" [scrollable]="true" scrollDirection="horizontal" scrollHeight="400px">
         <ng-template pTemplate="header">
           <tr>
             <th scope="col" colspan="1">{{ 'field.prod.codigo' | appTranslate:'xml' }}</th>
@@ -235,28 +239,28 @@
               <span pTooltip="{{entity.prod.uCom}}"> {{ entity.prod.uCom }} </span>
             </td>
             <td colspan="1">
-              <span> {{entity.imposto.COFINS.COFINSAliq ? entity.imposto.COFINS.COFINSAliq.CST : '-'}} </span>
+              <span> {{ entity.imposto?.COFINS?.COFINSAliq?.CST }} </span>
             </td>
             <td colspan="1">
-              <span> {{ entity.imposto.COFINS.COFINSAliq.vCOFINS | percentualFormat }} </span>
+              <span> {{ entity.imposto?.COFINS?.COFINSAliq?.vCOFINS | percentualFormat }} </span>
             </td>
             <td colspan="1">
-              <span> {{ entity.imposto.COFINS.COFINSAliq.vBC | thousandFormat }} </span>
+              <span> {{ entity.imposto?.COFINS?.COFINSAliq?.vBC | thousandFormat }} </span>
             </td>
             <td colspan="1">
-              <span> {{ entity.imposto.COFINS.COFINSAliq.vCOFINS | thousandFormat }} </span>
+              <span> {{ entity.imposto?.COFINS?.COFINSAliq?.vCOFINS | thousandFormat }} </span>
             </td>
             <td colspan="1">
-              <span> {{ entity.imposto.COFINS.COFINSAliq ? entity.imposto.PIS.PISAliq.cst : '-' }} </span>
+              <span> {{ entity.imposto?.PIS?.PISAliq?.cst }} </span>
             </td>
             <td colspan="1">
-              <span> {{ entity.imposto.PIS.PISAliq.pPIS | percentualFormat }} </span>
+              <span> {{ entity.imposto?.PIS?.PISAliq?.pPIS | percentualFormat }} </span>
             </td>
             <td colspan="1">
-              <span> {{ entity.imposto.PIS.PISAliq.vBC | thousandFormat }} </span>
+              <span> {{ entity.imposto?.PIS?.PISAliq?.vBC | thousandFormat }} </span>
             </td>
             <td colspan="1">
-              <span> {{ entity.imposto.PIS.PISAliq.vPIS | thousandFormat }} </span>
+              <span> {{ entity.imposto?.PIS?.PISAliq?.vPIS | thousandFormat }} </span>
             </td>
           </tr>
         </ng-template>
