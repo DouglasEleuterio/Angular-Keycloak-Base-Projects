@@ -60,5 +60,5 @@ docker build -t contabilidade-app:v2.0.0 --build-arg VERSION=2.0.0 .
 docker tag contabilidade-app:v2.0.0 douglaseleuterioferreira/apps:contabilidade-app
 ````
 ````
-docker push douglaseleuterioferreira/apps:contabilidade
+docker push douglaseleuterioferreira/apps:contabilidade-app
 ````
