@@ -47,7 +47,7 @@ export class TableButtonsComponent {
 
   remove(): void {
     this.confirmationService.confirm({
-      message: this.translateService.instant(`${this.page}.message.delete`.toUpperCase()),
+      message: this.translateService.instant(`${this.page}.message.delete_confirm`.toUpperCase()),
       header: this.translateService.instant('shared.titles.delete'.toUpperCase()),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {

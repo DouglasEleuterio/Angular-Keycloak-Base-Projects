@@ -1340,7 +1340,7 @@
       "DOWNLOAD": "Deseja realizar o download do arquivo XML?",
       "NOT_FOUND": "Documento XML não encontrado",
       "DELETED_SUCCESS": "Documento e Arquivo XML removido com sucesso",
-      "DELETE": "Documento e Arquivo XML removido com sucesso"
+      "DELETE_CONFIRM": "Deseja apagar documento e Arquivo XML?"
     }
   },
   "MENU": {

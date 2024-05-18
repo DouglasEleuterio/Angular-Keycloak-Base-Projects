@@ -50,15 +50,15 @@ As documentações destes respectivos pacotes se encontram:
 
 ### Build do Docker
 * Gerar imagem
-````
+````shell
 docker login -u douglaseleuterioferreira -p Fox789789@!
 ````
-````
+````shell
 docker build -t contabilidade-app:v2.0.0 --build-arg VERSION=2.0.0 .
 ````
-````
+````shell
 docker tag contabilidade-app:v2.0.0 douglaseleuterioferreira/apps:contabilidade-app
 ````
-````
+````shell
 docker push douglaseleuterioferreira/apps:contabilidade-app
 ````
