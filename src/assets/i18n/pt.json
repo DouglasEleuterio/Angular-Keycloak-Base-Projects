@@ -1338,7 +1338,9 @@
     },
     "MESSAGE": {
       "DOWNLOAD": "Deseja realizar o download do arquivo XML?",
-      "NOT_FOUND": "Documento XML não encontrado"
+      "NOT_FOUND": "Documento XML não encontrado",
+      "DELETED_SUCCESS": "Documento e Arquivo XML removido com sucesso",
+      "DELETE": "Documento e Arquivo XML removido com sucesso"
     }
   },
   "MENU": {

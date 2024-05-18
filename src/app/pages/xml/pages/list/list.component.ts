@@ -38,7 +38,7 @@ export class ListComponent extends PaginatorComponent {
       )
       .subscribe({
         next: () => {
-          this.alertService.defaultSuccess(this.translateService.instant('classificacao_localidade.message.deleted_success'.toUpperCase()));
+          this.alertService.defaultSuccess(this.translateService.instant('xml.message.deleted_success'.toUpperCase()));
           this.fetch();
         },
         error: error => this.validationService.handleErrorAlert(error)

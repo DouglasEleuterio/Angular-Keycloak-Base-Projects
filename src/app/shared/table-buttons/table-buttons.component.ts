@@ -48,7 +48,7 @@ export class TableButtonsComponent {
   remove(): void {
     this.confirmationService.confirm({
       message: this.translateService.instant(`${this.page}.message.delete`.toUpperCase()),
-      header: this.translateService.instant('shared.titles.download'.toUpperCase()),
+      header: this.translateService.instant('shared.titles.delete'.toUpperCase()),
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.onRemove.emit(this.entityId);
