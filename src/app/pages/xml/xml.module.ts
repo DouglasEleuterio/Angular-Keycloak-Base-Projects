@@ -18,7 +18,9 @@ import { LayoutsModule } from '../../layouts/layouts.module';
 import { DetailComponent } from './pages/detail/detail.component';
 import { DividerModule } from 'primeng/divider';
 import { CheckboxModule } from 'primeng/checkbox';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, FiltersComponent, DetailComponent],
@@ -38,7 +40,10 @@ import { FormsModule } from '@angular/forms';
     LayoutsModule,
     DividerModule,
     CheckboxModule,
-    FormsModule
+    FormsModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    RxReactiveFormsModule
   ]
 })
 export class XmlModule {}
