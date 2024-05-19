@@ -1,4 +1,5 @@
 export class ICMSTot {
+  id: number;
   vCOFINS: number;
   vBCST: number;
   vICMSDeson: number;

@@ -4,10 +4,11 @@ import { PaginatorComponent } from '../../../../core/ui/components/pagination/pa
 import { LoadingService } from '../../../../domain/loading/loading.service';
 import { XmlService } from '../../../../domain/xml/xml.service';
 import { Xml } from '../../../../domain/xml/xml.model';
-import { ExporterTypeConfig } from '../../../../core/domain/model/exporter-request.model';
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ValidationService } from '../../../../core/ui/notifications/validation.service';
+import { Filter } from '../../../../core/api/filter/filter.model';
+import { BaseController } from '../../../../core/domain/base.controller';
 
 @Component({
   selector: 'app-xml-list',
@@ -17,9 +18,24 @@ import { ValidationService } from '../../../../core/ui/notifications/validation.
 export class ListComponent extends PaginatorComponent {
   tableData: Xml[] = [];
 
+  listSelect = (u: Xml) => [u.id,
+    u.NFe.infNFe.ide.id,
+    u.NFe.infNFe.ide.nNF,
+    u.NFe.infNFe.ide.dhEmi,
+    u.NFe.infNFe.ide.natOp,
+    u.NFe.infNFe.dest.id,
+    u.NFe.infNFe.dest.CNPJ,
+    u.NFe.infNFe.dest.xNome,
+    u.NFe.infNFe.emit.id,
+    u.NFe.infNFe.emit.xNome,
+    u.NFe.infNFe.total.ICMSTot.id,
+    u.NFe.infNFe.total.ICMSTot.vNF
+  ];
+
   constructor(
     private loadingService: LoadingService,
     public service: XmlService,
+    private baseController: BaseController,
     private translateService: TranslateService,
     private validationService: ValidationService,
     private alertService: AlertService
@@ -55,26 +71,20 @@ export class ListComponent extends PaginatorComponent {
     });
   }
 
-  get exporterConfig(): ExporterTypeConfig {
-    const baseColumns = ['id;Código', 'versao;Versão', 'situacao;Ativo;Sim,Não'];
-    const pdfColumns = [...baseColumns, 'dataCriacao;Data de Cadastro;dd/MM/yyyy'];
-
-    return this.generateExporterConfig(baseColumns, pdfColumns);
-  }
-
   fetch(): void {
-    this.loadingService.startLoading();
-    this.service
-      .paginate(this.pagination)
-      .pipe(
-        finalize(() => {
-          this.loadingService.stopLoading();
-        })
-      )
-      .subscribe(result => {
-        this.tableData = result.content;
-        this.pagination.totalRecords = result.totalElements;
-      });
+    // Caso não possua filtro, aplicar filtro padrão
+    if (this.pagination.filter == null) {
+      this.pagination.filter = new Filter({ search: `id!=0` }, null);
+    } else {
+      // Caso filtro definido, validar filtro.
+      this.isValidate();
+    }
+
+    this.baseController.fetchSelect(this.listSelect, this.pagination, this.service, result => {
+      console.log(result.content);
+      this.tableData = result.content;
+      this.pagination.totalRecords = result.totalElements;
+    });
   }
 
   getNatureza(natOp: string) {
@@ -87,4 +97,13 @@ export class ListComponent extends PaginatorComponent {
     }
   }
 
+  private isValidate(): void {
+    const filters = this.pagination.filter.filters;
+    if (filters.dataEmissaoInicio != null && filters.dataEmissaoFim != null) {
+      const isInvalidDatasInicio = filters.dataEmissaoInicio > filters.dataEmissaoFim;
+      if (isInvalidDatasInicio) {
+        this.alertService.defaultError(this.translateService.instant('xml.message.error_dates_inicio'.toUpperCase()));
+      }
+    }
+  }
 }

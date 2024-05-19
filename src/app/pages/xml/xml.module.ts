@@ -21,6 +21,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, FiltersComponent, DetailComponent],
@@ -43,7 +44,8 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,
-    RxReactiveFormsModule
+    RxReactiveFormsModule,
+    CalendarModule
   ]
 })
 export class XmlModule {}

@@ -6,7 +6,7 @@ import { Total } from './tota.model';
 import { Det } from './det.model';
 
 export class InfNfe {
-  id: string;
+  idB: string;
   dest: Dest;
   ide: Ide;
   emit: Emit;

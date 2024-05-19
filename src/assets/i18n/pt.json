@@ -1340,7 +1340,9 @@
       "DOWNLOAD": "Deseja realizar o download do arquivo XML?",
       "NOT_FOUND": "Documento XML não encontrado",
       "DELETED_SUCCESS": "Documento e Arquivo XML removido com sucesso",
-      "DELETE_CONFIRM": "Deseja apagar documento e Arquivo XML?"
+      "DELETE_CONFIRM": "Deseja apagar documento e Arquivo XML?",
+      "ERROR_DATES_INICIO": "A data da emissão inicial não pode ser maior que a data de emissão final",
+      "ERROR_DATES_TERMINO": "A data de emissão final não pode ser menor que data de emissão inicial"
     }
   },
   "MENU": {
