@@ -5,6 +5,6 @@ import { Arquivo } from './arquivo.model';
 export class Xml extends BaseActiveEntity {
   versao: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  NFe: NFe;
+  nfe: NFe;
   arquivo: Arquivo;
 }

@@ -7,7 +7,6 @@ import { Det } from './det.model';
 
 export class InfNfe {
   id: number;
-  idB: string;
   dest: Dest;
   ide: Ide;
   emit: Emit;

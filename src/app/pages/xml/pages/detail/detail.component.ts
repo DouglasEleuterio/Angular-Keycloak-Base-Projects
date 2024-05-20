@@ -55,7 +55,7 @@ export class DetailComponent implements OnInit {
         .then(() => this.alertService.defaultError(this.translateService.instant('xml.message.not_found'.toUpperCase())));
     } else {
       this.entity = entity;
-      this.tableData = this.entity.NFe.infNFe.det;
+      this.tableData = this.entity.nfe.inf.det;
     }
   }
 

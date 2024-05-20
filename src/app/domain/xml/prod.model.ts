@@ -1,8 +1,8 @@
 export class Prod {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  CFOP: string;
+  cfop: string;
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  NCM: string;
+  ncm: string;
   cEAN: string;
   cEANTrib: string;
   cProd: string;

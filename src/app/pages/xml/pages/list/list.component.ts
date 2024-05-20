@@ -20,20 +20,20 @@ export class ListComponent extends PaginatorComponent {
 
   listSelect = (u: Xml) => [
     u.id,
-    u.NFe.id,
-    u.NFe.infNFe.idB,
-    u.NFe.infNFe.ide.id,
-    u.NFe.infNFe.ide.nNF,
-    u.NFe.infNFe.ide.dhEmi,
-    u.NFe.infNFe.ide.natOp,
-    u.NFe.infNFe.dest.id,
-    u.NFe.infNFe.dest.CNPJ,
-    u.NFe.infNFe.dest.xNome,
-    u.NFe.infNFe.emit.id,
-    u.NFe.infNFe.emit.xNome,
-    u.NFe.infNFe.total.id,
-    u.NFe.infNFe.total.ICMSTot.id,
-    u.NFe.infNFe.total.ICMSTot.vNF
+    u.nfe.id,
+    u.nfe.inf.id,
+    u.nfe.inf.ide.id,
+    u.nfe.inf.ide.nNF,
+    u.nfe.inf.ide.dhEmi,
+    u.nfe.inf.ide.natOp,
+    u.nfe.inf.dest.id,
+    u.nfe.inf.dest.cnpj,
+    u.nfe.inf.dest.xNome,
+    u.nfe.inf.emit.id,
+    u.nfe.inf.emit.xNome,
+    u.nfe.inf.total.id,
+    u.nfe.inf.total.icmstot.id,
+    u.nfe.inf.total.icmstot.vNF
   ];
 
   constructor(

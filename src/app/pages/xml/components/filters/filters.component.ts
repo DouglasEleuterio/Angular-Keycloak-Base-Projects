@@ -39,13 +39,13 @@ export class FiltersComponent implements AfterViewInit, OnInit {
 
     const numeroNF = this.formGroup.controls.numeroNF?.value;
     if (numeroNF != null && numeroNF.trim().length > 0) {
-      restrictions.push(builder.eq('NFe.infNFe.ide.nNF', `*${numeroNF.trim()}*`));
+      restrictions.push(builder.eq('nfe.inf.ide.nNF', `*${numeroNF.trim()}*`));
     }
 
     const dataEmissaoInicio: string = this.formGroup.controls.dataEmissaoInicio?.value;
     if (dataEmissaoInicio != null && dataEmissaoInicio !== '') {
       const formattedDate = this.formattedDataString(dataEmissaoInicio, true);
-      restrictions.push(builder.ge('NFe.infNFe.ide.dhEmi', `${formattedDate}`));
+      restrictions.push(builder.ge('nfe.inf.ide.dhEmi', `${formattedDate}`));
     }
 
     if (restrictions.length > 0) {

@@ -12,44 +12,44 @@
       </p-divider>
       <div class="detail-body grid">
         <div class="col-3">
-          <app-data-label title="{{'field.destinatario' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.dest.xNome"></app-data-label>
+          <app-data-label title="{{'field.destinatario' | appTranslate:'xml'}}" [value]="entity?.nfe.inf.dest.xNome"></app-data-label>
         </div>
         <div class="col-3">
           <app-data-label
             title="{{'field.cnpj' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.dest.CNPJ | cnpjCpfPipe: true"
+            [value]="entity?.nfe.inf.dest.cnpj | cnpjCpfPipe: true"
           ></app-data-label>
         </div>
         <div class="col-3">
-          <app-data-label title="{{'field.remetente' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.emit.xNome"></app-data-label>
+          <app-data-label title="{{'field.remetente' | appTranslate:'xml'}}" [value]="entity?.nfe.inf.emit.xNome"></app-data-label>
         </div>
         <div class="col-3">
           <app-data-label
             title="{{'field.remetente_cnpj' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.emit.CNPJ | cnpjCpfPipe: true"
+            [value]="entity?.nfe.inf.emit.cnpj | cnpjCpfPipe: true"
           ></app-data-label>
         </div>
       </div>
       <div class="detail-body grid">
         <div class="col-3">
-          <app-data-label title="{{'field.numero' | appTranslate:'xml'}}" [value]="entity?.NFe.infNFe.ide.nNF"></app-data-label>
+          <app-data-label title="{{'field.numero' | appTranslate:'xml'}}" [value]="entity?.nfe.inf.ide.nNF"></app-data-label>
         </div>
         <div class="col-3">
           <app-data-label
             title="{{'field.dataemissao' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.ide.dhEmi | date: 'dd/MM/yyyy'"
+            [value]="entity?.nfe.inf.ide.dhEmi | date: 'dd/MM/yyyy'"
           ></app-data-label>
         </div>
         <div class="col-3">
           <app-data-label
             title="{{'field.natureza_operacao' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.ide.natOp"
+            [value]="entity?.nfe.inf.ide.natOp"
           ></app-data-label>
         </div>
         <div class="col-3">
           <app-data-label
             title="{{'field.valor_total_nfe' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vNF | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vNF | thousandFormat"
           ></app-data-label>
         </div>
       </div>
@@ -60,106 +60,106 @@
         </div>
       </p-divider>
       <div class="detail-body grid">
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vBC && entity?.NFe.infNFe.total.ICMSTot.vBC > 0 " class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vBC && entity?.nfe.inf.total.icmstot.vBC > 0 " class="col-3">
           <app-data-label
             title="{{'field.base_calculo_icms' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vBC | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vBC | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMS && entity?.NFe.infNFe.total.ICMSTot.vICMS > 0 " class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vICMS && entity?.nfe.inf.total.icmstot.vICMS > 0 " class="col-3">
           <app-data-label
             title="{{'field.valor_icms' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vICMS | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vICMS | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSDeson && entity?.NFe.infNFe.total.ICMSTot.vICMSDeson > 0 " class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vICMSDeson && entity?.nfe.inf.total.icmstot.vICMSDeson > 0 " class="col-3">
           <app-data-label
             title="{{'field.valor_icms_desonerado' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSDeson | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vICMSDeson | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vBCST && entity?.NFe.infNFe.total.ICMSTot.vBCST > 0 " class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vBCST && entity?.nfe.inf.total.icmstot.vBCST > 0 " class="col-3">
           <app-data-label
             title="{{'field.base_de_calculo_icms_st' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vBCST | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vBCST | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vST && entity?.NFe.infNFe.total.ICMSTot.vST > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vST && entity?.nfe.inf.total.icmstot.vST > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_icms_st' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vST | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vST | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet && entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet > 0 " class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vICMSUFRemet && entity?.nfe.inf.total.icmstot.vICMSUFRemet > 0 " class="col-3">
           <app-data-label
             title="{{'field.valor_icms_remet_uf' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSUFRemet | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vICMSUFRemet | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest && entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vICMSUFDest && entity?.nfe.inf.total.icmstot.vICMSUFDest > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_icms_destino_uf' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vICMSUFDest | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vICMSUFDest | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vProd && entity?.NFe.infNFe.total.ICMSTot.vProd > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vProd && entity?.nfe.inf.total.icmstot.vProd > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_total_produtos' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vProd | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vProd | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vFrete && entity?.NFe.infNFe.total.ICMSTot.vFrete > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vFrete && entity?.nfe.inf.total.icmstot.vFrete > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_frete' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vFrete | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vFrete | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vSeg && entity?.NFe.infNFe.total.ICMSTot.vSeg > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vSeg && entity?.nfe.inf.total.icmstot.vSeg > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_seguro' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vSeg | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vSeg | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vDesc && entity?.NFe.infNFe.total.ICMSTot.vDesc > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vDesc && entity?.nfe.inf.total.icmstot.vDesc > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_desconto' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vDesc | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vDesc | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vOutro && entity?.NFe.infNFe.total.ICMSTot.vOutro > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vOutro && entity?.nfe.inf.total.icmstot.vOutro > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_outras_despesas' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vOutro | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vOutro | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vIPI && entity?.NFe.infNFe.total.ICMSTot.vIPI > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vIPI && entity?.nfe.inf.total.icmstot.vIPI > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_ipi' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vIPI | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vIPI | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vIPI && entity?.NFe.infNFe.total.ICMSTot.vIPI > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vIPI && entity?.nfe.inf.total.icmstot.vIPI > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_ipi' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vIPI | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vIPI | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vPIS && entity?.NFe.infNFe.total.ICMSTot.vPIS > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vPIS && entity?.nfe.inf.total.icmstot.vPIS > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_pis' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vPIS | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vPIS | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vCOFINS && entity?.NFe.infNFe.total.ICMSTot.vCOFINS > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vCOFINS && entity?.nfe.inf.total.icmstot.vCOFINS > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_cofins' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vCOFINS | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vCOFINS | thousandFormat"
           ></app-data-label>
         </div>
-        <div *ngIf="entity?.NFe.infNFe.total.ICMSTot.vTotTrib && entity?.NFe.infNFe.total.ICMSTot.vTotTrib > 0" class="col-3">
+        <div *ngIf="entity?.nfe.inf.total.icmstot.vTotTrib && entity?.nfe.inf.total.icmstot.vTotTrib > 0" class="col-3">
           <app-data-label
             title="{{'field.valor_total_tributos' | appTranslate:'xml'}}"
-            [value]="entity?.NFe.infNFe.total.ICMSTot.vTotTrib | thousandFormat"
+            [value]="entity?.nfe.inf.total.icmstot.vTotTrib | thousandFormat"
           ></app-data-label>
         </div>
       </div>
@@ -211,53 +211,53 @@
         </ng-template>
         <ng-template let-prod pTemplate="body">
           <tr>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
               <span pTooltip="{{prod.prod.cProd}}"> {{ prod.prod.cProd }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
               <span pTooltip="{{prod.prod.xProd}}"> {{ prod.prod.xProd }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span pTooltip="{{prod.prod.NCM}}"> {{ prod.prod.NCM }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span pTooltip="{{prod.prod.ncm}}"> {{ prod.prod.ncm }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
               <span pTooltip="{{prod.prod.CFOP}}"> {{ prod.prod.CFOP }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
               <span pTooltip="{{prod.prod.qCom}}"> {{ prod.prod.qCom }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
               <span pTooltip="{{prod.prod.vUnCom}}"> {{ prod.prod.vUnCom | thousandFormat }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
               <span pTooltip="{{prod.prod.vProd}}"> {{ prod.prod.vProd | thousandFormat }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
               <span pTooltip="{{prod.prod.uCom}}"> {{ prod.prod.uCom }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.CST }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.pis?.pisaliq?.vPIS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.cofins?.cofinsaliq?.CST }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.pCOFINS | percentualFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.cofins?.cofinsaliq?.pCOFINS | percentualFormat }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.vBC | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.cofins?.cofinsaliq?.vBC | thousandFormat }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.COFINS?.COFINSAliq?.vCOFINS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.COFINS?.COFINSAliq?.vCOFINS | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.cofins?.cofinsaliq?.vCOFINS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.cofins?.cofinsaliq?.vCOFINS | thousandFormat }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.PIS?.PISAliq?.cst }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.pis?.pisaliq?.vPIS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.pis?.pisaliq?.cst }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.PIS?.PISAliq?.pPIS | percentualFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.pis?.pisaliq?.vPIS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.pis?.pisaliq?.pPIS | percentualFormat }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.PIS?.PISAliq?.vBC | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.pis?.pisaliq?.vPIS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.pis?.pisaliq?.vBC | thousandFormat }} </span>
             </td>
-            <td [style]="isMonofasico(prod.prod.NCM, prod.imposto?.PIS?.PISAliq?.vPIS, entity?.NFe.infNFe.ide.dhEmi)" colspan="1">
-              <span> {{ prod.imposto?.PIS?.PISAliq?.vPIS | thousandFormat }} </span>
+            <td [style]="isMonofasico(prod.prod.ncm, prod.imposto?.pis?.pisaliq?.vPIS, entity?.nfe.inf.ide.dhEmi)" colspan="1">
+              <span> {{ prod.imposto?.pis?.pisaliq?.vPIS | thousandFormat }} </span>
             </td>
           </tr>
         </ng-template>

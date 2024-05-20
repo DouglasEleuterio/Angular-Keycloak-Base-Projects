@@ -1,7 +1,6 @@
 export class Cofinsaliq {
   vCOFINS: number;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  CST: string;
+  cst: string;
   vBC: number;
   pCOFINS: number;
 }
