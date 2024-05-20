@@ -18,7 +18,10 @@ import { BaseController } from '../../../../core/domain/base.controller';
 export class ListComponent extends PaginatorComponent {
   tableData: Xml[] = [];
 
-  listSelect = (u: Xml) => [u.id,
+  listSelect = (u: Xml) => [
+    u.id,
+    u.NFe.id,
+    u.NFe.infNFe.idB,
     u.NFe.infNFe.ide.id,
     u.NFe.infNFe.ide.nNF,
     u.NFe.infNFe.ide.dhEmi,
@@ -28,6 +31,7 @@ export class ListComponent extends PaginatorComponent {
     u.NFe.infNFe.dest.xNome,
     u.NFe.infNFe.emit.id,
     u.NFe.infNFe.emit.xNome,
+    u.NFe.infNFe.total.id,
     u.NFe.infNFe.total.ICMSTot.id,
     u.NFe.infNFe.total.ICMSTot.vNF
   ];
