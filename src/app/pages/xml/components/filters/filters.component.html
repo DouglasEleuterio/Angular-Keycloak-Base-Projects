@@ -1,5 +1,5 @@
 <div class="p-fluid formgrid grid" [formGroup]="formGroup">
-  <app-field class="p-field col-6 md:col-6" page="xml">
+  <app-field class="p-field col-6 md:col-2" page="xml">
     <input appFieldRef pInputText type="text" formControlName="numeroNF" maxlength="100" />
   </app-field>
   <app-field class="p-field col-2 md:col-2" page="xml">
@@ -13,5 +13,20 @@
       showIcon="true"
       appDateMask
     ></p-calendar>
+  </app-field>
+  <app-field class="p-field col-2 md:col-2" page="xml">
+    <p-calendar
+      appFieldRef
+      formControlName="dataEmissaoFim"
+      dateFormat="dd/mm/yy"
+      monthNavigator="true"
+      yearNavigator="true"
+      yearRange="2000:2050"
+      showIcon="true"
+      appDateMask
+    ></p-calendar>
+  </app-field>
+  <app-field class="p-field col-6 md:col-2" page="xml">
+    <input appFieldRef pInputText type="text" formControlName="cnpj" maxlength="100" />
   </app-field>
 </div>

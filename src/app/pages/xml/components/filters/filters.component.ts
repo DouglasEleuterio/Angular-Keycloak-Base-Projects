@@ -30,7 +30,9 @@ export class FiltersComponent implements AfterViewInit, OnInit {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       numeroNF: [null],
-      dataEmissaoInicio: [null]
+      dataEmissaoInicio: [null],
+      dataEmissaoFim: [null],
+      cnpj: [null]
     });
   }
 
@@ -46,6 +48,17 @@ export class FiltersComponent implements AfterViewInit, OnInit {
     if (dataEmissaoInicio != null && dataEmissaoInicio !== '') {
       const formattedDate = this.formattedDataString(dataEmissaoInicio, true);
       restrictions.push(builder.ge('nfe.inf.ide.dhEmi', `${formattedDate}`));
+    }
+
+    const dataEmissaoFim: string = this.formGroup.controls.dataEmissaoFim?.value;
+    if (dataEmissaoFim != null && dataEmissaoFim !== '') {
+      const formattedDateFim = this.formattedDataString(dataEmissaoFim, false);
+      restrictions.push(builder.le('nfe.inf.ide.dhEmi', `${formattedDateFim}`));
+    }
+
+    const cnpj = this.formGroup.controls.cnpj?.value;
+    if (cnpj != null && cnpj.trim().length > 0) {
+      restrictions.push(builder.eq('nfe.inf.dest.cnpj', `*${cnpj.trim()}*`));
     }
 
     if (restrictions.length > 0) {

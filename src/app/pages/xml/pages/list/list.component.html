@@ -39,9 +39,9 @@
                 {{'field.dataEmissao' | appTranslate:'xml'}}
                 <p-sortIcon field="NFe.infNFe.ide.dhEmi"></p-sortIcon>
               </th>
-              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.dest.CNPJ">
+              <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.dest.cnpj">
                 {{'field.cnpj' | appTranslate:'xml'}}
-                <p-sortIcon field="NFe.infNFe.dest.CNPJ"></p-sortIcon>
+                <p-sortIcon field="NFe.infNFe.dest.cnpj"></p-sortIcon>
               </th>
               <th scope="col" colspan="1" pSortableColumn="NFe.infNFe.dest.xNome">
                 {{'field.destinatario' | appTranslate:'xml'}}
@@ -74,7 +74,7 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.cnpj' | appTranslate:'xml'}}</span>
-                <span pTooltip="{{entity.nfe.inf.dest.CNPJ}}"> {{entity.nfe.inf.dest.CNPJ}} </span>
+                <span pTooltip="{{entity.nfe.inf.dest.cnpj}}"> {{entity.nfe.inf.dest.cnpj | cnpjCpfPipe: true}} </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.destinatario' | appTranslate:'xml'}}</span>
