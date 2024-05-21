@@ -1,10 +1,10 @@
 {
-  "baseUrl": "https://clemente-api.3ptecnologia.com.br",
-  "authLoginUrl": "https://clemente-api.3ptecnologia.com.br/auth/token",
-  "authLogoutUrl": "https://clemente-api.3ptecnologia.com.br/auth/logout",
+  "baseUrl": "http://localhost:8081",
+  "authLoginUrl": "http://localhost:8081/auth/token",
+  "authLogoutUrl": "http://localhost:8081/auth/logout",
   "authCodeUrl": "https://auth.3ptecnologia.com.br/realms/3p-apps/protocol/openid-connect/auth",
   "authClientId": "contabilidade",
-  "authCallbackUrl": "https://clemente-app.3ptecnologia.com.br/oauth/authorize/callback",
+  "authCallbackUrl": "http://localhost:4201/oauth/authorize/callback",
   "authNonce": false,
   "authChallenge": false,
   "authScope": "profile offline_access roles",
@@ -18,4 +18,3 @@
   "defaultPaginationSize": 10,
   "defaultPaginationSizeOptions": [10, 20, 50]
 }
-

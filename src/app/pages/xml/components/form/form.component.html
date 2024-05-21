@@ -1,21 +1,29 @@
+<p-toast></p-toast>
 <div class="grid">
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h5>{{ ('title.send_files') | appTranslate:'upload'}}</h5>
+        <h5>{{ ('title.send_files') | appTranslate:'upload' }}</h5>
       </div>
-      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared'}}</p>
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <div class="card flex justify-content-center">
-        <p-toast></p-toast>
         <p-fileUpload
+          #upload
           name="file"
           [url]="urlUpload"
           (onUpload)="onUpload($event)"
           accept="text/xml"
           multiple="true"
-          fileLimit="300"
+          fileLimit="1000"
           maxFileSize="1000000"
+          chooseLabel="Selecionar"
+          uploadLabel="Enviar"
+          cancelLabel="Cancelar"
+          (onError)="envioError(upload)"
         >
+          <ng-template pTemplate="toolbar">
+            <div class="py-3">Envie até 1.000 arquivos XML</div>
+          </ng-template>
           <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
               <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
