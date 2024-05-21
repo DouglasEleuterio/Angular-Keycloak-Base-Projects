@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ValidationService } from '../../../../core/ui/notifications/validation.service';
 import { Filter } from '../../../../core/api/filter/filter.model';
 import { BaseController } from '../../../../core/domain/base.controller';
+import { Sort } from '../../../../core/api/model/sort.model';
 
 @Component({
   selector: 'app-xml-list',
@@ -77,17 +78,19 @@ export class ListComponent extends PaginatorComponent {
 
   fetch(): void {
     // Caso não possua filtro, aplicar filtro padrão
+    this.loadingService.startLoading();
     if (this.pagination.filter == null) {
       this.pagination.filter = new Filter({ search: `id!=0` }, null);
+      this.pagination.sort = [{ field: 'nfe.inf.ide.dhEmi', order: 'desc' }];
     } else {
       // Caso filtro definido, validar filtro.
       this.isValidate();
     }
 
     this.baseController.fetchSelect(this.listSelect, this.pagination, this.service, result => {
-      console.log(result.content);
       this.tableData = result.content;
       this.pagination.totalRecords = result.totalElements;
+      this.loadingService.stopLoading();
     });
   }
 
