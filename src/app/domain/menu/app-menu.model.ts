@@ -43,7 +43,7 @@ export class AppMenuModel {
     icon: 'pi pi-fw pi-file-import',
     routerLink: ['/tabela_aliquota_diferenciada'],
     dontNeedPermission: false,
-    permissions: [PermissionEnum.TABELA_INCIDENCIA_LISTAR]
+    permissions: [PermissionEnum.TABELA_ALIQUOTA_DIFERENCIADA_LISTAR]
   };
 
   public static readonly itemMenuUploadXML: AppMenuItem = {
