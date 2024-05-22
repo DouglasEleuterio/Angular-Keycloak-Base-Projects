@@ -49,4 +49,8 @@ export class ListComponent extends PaginatorComponent {
         this.pagination.totalRecords = result.totalElements;
       });
   }
+
+  remove($event: number | string) {
+    console.log(`Removendo registro id ${$event}`);
+  }
 }

@@ -1354,6 +1354,11 @@
     },
     "ACTION": {
       "ADD": "Adicionar"
+    },
+    "FIELD": {
+      "NCM": "NCM",
+      "DATA_INICIO_VIGENCIA": "Inicio Escrituração",
+      "DATA_FIM_VIGENCIA": "Fim Escrituração"
     }
   },
   "MENU": {

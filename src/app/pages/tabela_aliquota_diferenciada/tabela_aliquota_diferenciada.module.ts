@@ -6,10 +6,23 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { RouterLink } from '@angular/router';
 import { UIModule } from '../../core/ui/ui.module';
+import { TableModule } from 'primeng/table';
+import { SharedModule } from '../../shared/shared.module';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [ListComponent],
-  imports: [CommonModule, TabelaAliquotaDiferenciadaRountingModule, ButtonModule, RippleModule, RouterLink, UIModule],
+  imports: [
+    CommonModule,
+    TabelaAliquotaDiferenciadaRountingModule,
+    ButtonModule,
+    RippleModule,
+    RouterLink,
+    UIModule,
+    TableModule,
+    SharedModule,
+    TooltipModule
+  ],
   providers: []
 })
 export class TabelaAliquotaDiferenciadaModule {}

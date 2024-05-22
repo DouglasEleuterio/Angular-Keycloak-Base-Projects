@@ -5,6 +5,71 @@
         <h5>{{ 'title.page' | appTranslate:'tabela_aliquota_diferenciada' }}</h5>
         <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'tabela_aliquota_diferenciada'}}"></button>
       </div>
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="nome">
+                {{ 'field.ncm' | appTranslate:'tabela_aliquota_diferenciada' }}
+                <p-sortIcon field="ncm"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="descricao">
+                {{ 'field.data_inicio_vigencia' | appTranslate:'tabela_aliquota_diferenciada' }}
+                <p-sortIcon field="inicioVigencia"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="descricao">
+                {{ 'field.data_fim_vigencia' | appTranslate:'tabela_aliquota_diferenciada' }}
+                <p-sortIcon field="fimVigencia"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{ 'actions' | appTranslate:'shared' }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.ncm' | appTranslate:'tabela_aliquota_diferenciada' }}</span>
+                <span pTooltip="{{entity.ncm}}"> {{ entity.ncm }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.data_inicio_vigencia' | appTranslate:'tabela_aliquota_diferenciada' }}</span>
+                <span pTooltip="{{entity.inicioVigencia}}"> {{ entity.inicioVigencia | date: 'MM/yyyy' }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.data_fim_vigencia' | appTranslate:'tabela_aliquota_diferenciada' }}</span>
+                <span pTooltip="{{entity.fimVigencia}}"> {{ entity.fimVigencia | date: 'MM/yyyy' }} </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons
+                  [isDownloadVisivel]="false"
+                  page="exemplo"
+                  [entityId]="entity.id"
+                  (onRemove)="remove($event)"
+                ></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{ 'no_records' | appTranslate:'shared' }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
   </div>
 </div>

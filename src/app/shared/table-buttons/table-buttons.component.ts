@@ -33,6 +33,9 @@ export class TableButtonsComponent {
   @Input()
   showEdit: boolean | null = true;
 
+  @Input()
+  isDownloadVisivel: boolean;
+
   @Output()
   onRemove: EventEmitter<number | string> = new EventEmitter<number | string>();
 
