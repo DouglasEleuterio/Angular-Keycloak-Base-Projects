@@ -1348,6 +1348,14 @@
       "ERROR_DATES_TERMINO": "A data de emissão final não pode ser menor que data de emissão inicial"
     }
   },
+  "TABELA_ALIQUOTA_DIFERENCIADA": {
+    "TITLE": {
+      "PAGE": "Alíquotas Diferenciadas: Incidência Monofásica"
+    },
+    "ACTION": {
+      "ADD": "Adicionar"
+    }
+  },
   "MENU": {
     "HOME": "Home",
     "UPLOAD": "Upload XML",
@@ -1367,7 +1375,8 @@
     "SOLICITACAO": "Solicitações",
     "COMPANHIA-AEREA": "Companhia Aérea",
     "DISTANCIA-LOCALIDADE": "Distância entre Localidades",
-    "XML": "XML"
+    "XML": "XML",
+    "TABELA_ALIQUOTA_DIFERENCIADA": "Alíq. Diferenciadas"
   },
   "TIMES": {
     "JUST_NOW": "agora",
