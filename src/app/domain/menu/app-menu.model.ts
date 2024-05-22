@@ -40,7 +40,7 @@ export class AppMenuModel {
 
   public static readonly itemTabelaAliquotaDiferenciada: AppMenuItem = {
     label: 'menu.tabela_aliquota_diferenciada',
-    icon: 'pi pi-fw pi-file-import',
+    icon: 'pi pi-fw pi-table',
     routerLink: ['/tabela_aliquota_diferenciada'],
     dontNeedPermission: false,
     permissions: [PermissionEnum.TABELA_ALIQUOTA_DIFERENCIADA_LISTAR]
