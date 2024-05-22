@@ -38,6 +38,14 @@ export class AppMenuModel {
     permissions: [PermissionEnum.XML_LISTAR]
   };
 
+  public static readonly itemTabelaAliquotaDiferenciada: AppMenuItem = {
+    label: 'menu.tabela_aliquota_diferenciada',
+    icon: 'pi pi-fw pi-file-import',
+    routerLink: ['/tabela_aliquota_diferenciada'],
+    dontNeedPermission: false,
+    permissions: [PermissionEnum.TABELA_INCIDENCIA_LISTAR]
+  };
+
   public static readonly itemMenuUploadXML: AppMenuItem = {
     label: 'menu.upload',
     icon: 'pi pi-fw pi-file-import',
@@ -184,6 +192,7 @@ export class AppMenuModel {
   public static readonly menu: AppMenuItem[] = [
     AppMenuModel.itemMenuExemplo,
     AppMenuModel.itemMenuUploadXML,
+    AppMenuModel.itemTabelaAliquotaDiferenciada,
     AppMenuModel.itemMenuXML,
     AppMenuModel.itemMenuHome,
     AppMenuModel.menuTabelas,
