@@ -30,6 +30,12 @@ const routes: Routes = [
     canActivate: [TableStateClearGuard]
   },
   {
+    path: 'tabela_aliquota_diferenciada',
+    loadChildren: () =>
+      import('./tabela_aliquota_diferenciada/tabela_aliquota_diferenciada.module').then(m => m.TabelaAliquotaDiferenciadaModule),
+    canActivate: [TableStateClearGuard]
+  },
+  {
     path: 'tipo-localidade',
     loadChildren: () => import('./tipo-localidade/tipo-localidade.module').then(m => m.TipoLocalidadeModule),
     canActivate: [TableStateClearGuard]
