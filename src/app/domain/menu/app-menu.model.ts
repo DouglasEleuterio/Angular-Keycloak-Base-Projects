@@ -191,12 +191,12 @@ export class AppMenuModel {
 
   public static readonly menu: AppMenuItem[] = [
     AppMenuModel.itemMenuExemplo,
-    AppMenuModel.itemMenuUploadXML,
+    // AppMenuModel.itemMenuUploadXML,
     AppMenuModel.itemTabelaAliquotaDiferenciada,
-    AppMenuModel.itemMenuXML,
-    AppMenuModel.itemMenuHome,
-    AppMenuModel.menuTabelas,
-    AppMenuModel.itemMenuEvento,
-    AppMenuModel.itemMenuSolicitacao
+    AppMenuModel.itemMenuXML
+    // AppMenuModel.itemMenuHome,
+    // AppMenuModel.menuTabelas,
+    // AppMenuModel.itemMenuEvento,
+    // AppMenuModel.itemMenuSolicitacao
   ];
 }
