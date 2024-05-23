@@ -32,7 +32,7 @@ const routes: Routes = [
   {
     path: 'tabela-aliquota-diferenciada',
     loadChildren: () =>
-      import('./tabela-aliquota-diferenciada/tabela_aliquota_diferenciada.module').then(m => m.TabelaAliquotaDiferenciadaModule),
+      import('./tabela-aliquota-diferenciada/tabela-aliquota-diferenciada.module').then(m => m.TabelaAliquotaDiferenciadaModule),
     canActivate: [TableStateClearGuard]
   },
   {
