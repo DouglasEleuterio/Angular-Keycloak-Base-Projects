@@ -1361,7 +1361,8 @@
       "DATA_FIM_VIGENCIA": "Fim Escrituração"
     },
     "MESSAGE": {
-      "ERROR_DATES_INICIO": "A Data de Início (de) não pode ser maior que a Data de Início (até)."
+      "ERROR_DATES_INICIO": "A Data de Início (de) não pode ser maior que a Data de Início (até).",
+      "DELETED_SUCCESS": "Registro apagado com sucesso"
     }
   },
   "MENU": {

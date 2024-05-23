@@ -38,7 +38,7 @@ export class ListComponent extends PaginatorComponent {
     ]);
   }
 
-  listSelect = (u: TabelaAliquotaDiferenciada) => [u.id, u.ncm, u.inicioVigencia, u.fimVigencia, u.situacao];
+  listSelect = (u: TabelaAliquotaDiferenciada) => [u.id, u.ncm, u.inicioVigencia, u.fimVigencia, u.situacao, u.enumSituacao];
 
   fetch3(): void {
     this.loadingService.startLoading();
@@ -59,11 +59,11 @@ export class ListComponent extends PaginatorComponent {
     // Caso não possua filtro, aplicar filtro padrão
     this.loadingService.startLoading();
     if (this.pagination.filter == null) {
-      this.pagination.filter = new Filter({ search: `id!=0` }, null);
-      this.pagination.sort = [{ field: 'ncm', order: 'asc' }];
+      this.pagination.filter = new Filter({ search: `id!=0;situacao==true;enumSituacao==ATIVO` }, null);
+      this.pagination.sort = [{ field: 'inicioVigencia', order: 'desc' }];
     } else {
-      // Caso filtro definido, validar filtro.
-      this.isValidate();
+      // Caso filtro definido, validar filtro e adicionar situação = true.
+      this.pagination.filter.filters['search'] = `${this.pagination.filter.filters['search']};situacao==true`;
     }
 
     this.baseController.fetchSelect(this.listSelect, this.pagination, this.service, result => {
@@ -73,8 +73,24 @@ export class ListComponent extends PaginatorComponent {
     });
   }
 
-  remove($event: number | string) {
-    console.log(`Removendo registro id ${$event}`);
+  remove($event: number) {
+    this.loadingService.startLoading();
+    this.service
+      .remove($event)
+      .pipe(
+        finalize(() => {
+          this.loadingService.stopLoading();
+        })
+      )
+      .subscribe({
+        next: () => {
+          this.alertService.defaultSuccess(
+            this.translateService.instant('tabela_aliquota_diferenciada.message.deleted_success'.toUpperCase())
+          );
+          this.fetch();
+        },
+        error: error => this.validationService.handleErrorAlert(error)
+      });
   }
 
   private isValidate(): void {

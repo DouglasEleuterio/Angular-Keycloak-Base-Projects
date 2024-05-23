@@ -9,6 +9,7 @@ import { UIModule } from '../../core/ui/ui.module';
 import { TableModule } from 'primeng/table';
 import { SharedModule } from '../../shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
+import { LayoutsModule } from '../../layouts/layouts.module';
 
 @NgModule({
   declarations: [ListComponent],
@@ -21,7 +22,8 @@ import { TooltipModule } from 'primeng/tooltip';
     UIModule,
     TableModule,
     SharedModule,
-    TooltipModule
+    TooltipModule,
+    LayoutsModule
   ],
   providers: []
 })
