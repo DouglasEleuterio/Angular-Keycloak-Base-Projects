@@ -6,8 +6,7 @@
       </div>
       <div class="detail-body grid">
         <div class="col-4">
-          <app-data-label title="{{'field.ncm' | appTranslate:'tabela_aliquota_diferenciada'}}"
-                          [value]="entity?.ncm"></app-data-label>
+          <app-data-label title="{{'field.ncm' | appTranslate:'tabela_aliquota_diferenciada'}}" [value]="entity?.ncm"></app-data-label>
         </div>
         <div class="col-4">
           <app-data-label
@@ -36,7 +35,10 @@
           ></app-data-label>
         </div>
       </div>
-      <app-form-buttons [isDetail]="true" (onCancel)="cancel()"></app-form-buttons>
+      <p-divider></p-divider>
+      <div style="position: relative">
+        <app-form-buttons [isDetail]="true" (onCancel)="cancel()"></app-form-buttons>
+      </div>
     </div>
   </div>
 </div>

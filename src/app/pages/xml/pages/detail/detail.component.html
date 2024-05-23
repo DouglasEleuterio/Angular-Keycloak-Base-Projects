@@ -41,10 +41,7 @@
           ></app-data-label>
         </div>
         <div class="col-3">
-          <app-data-label
-            title="{{'field.natureza_operacao' | appTranslate:'xml'}}"
-            [value]="entity?.nfe.inf.ide.natOp"
-          ></app-data-label>
+          <app-data-label title="{{'field.natureza_operacao' | appTranslate:'xml'}}" [value]="entity?.nfe.inf.ide.natOp"></app-data-label>
         </div>
         <div class="col-3">
           <app-data-label
@@ -262,6 +259,10 @@
           </tr>
         </ng-template>
       </p-table>
+      <p-divider></p-divider>
+      <div style="position: relative">
+        <app-form-buttons [isDetail]="true" (onCancel)="cancel()"></app-form-buttons>
+      </div>
     </div>
   </div>
 </div>

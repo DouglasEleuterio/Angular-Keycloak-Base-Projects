@@ -84,4 +84,8 @@ export class DetailComponent implements OnInit {
     }
     return '';
   }
+
+  cancel(): void {
+    this.router.navigate(this.menuBack.routerLink).then();
+  }
 }

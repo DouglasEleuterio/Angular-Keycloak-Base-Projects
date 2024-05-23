@@ -16,6 +16,7 @@ import { EditComponent } from './pages/edit/edit.component';
 import { CalendarModule } from 'primeng/calendar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [ListComponent, DetailComponent, NewComponent, EditComponent],
@@ -33,7 +34,8 @@ import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive
     CalendarModule,
     ReactiveFormsModule,
     ReactiveTypedFormsModule,
-    RxReactiveFormsModule
+    RxReactiveFormsModule,
+    DividerModule
   ],
   providers: []
 })
