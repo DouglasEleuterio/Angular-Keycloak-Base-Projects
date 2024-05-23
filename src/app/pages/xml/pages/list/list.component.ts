@@ -9,7 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ValidationService } from '../../../../core/ui/notifications/validation.service';
 import { Filter } from '../../../../core/api/filter/filter.model';
 import { BaseController } from '../../../../core/domain/base.controller';
-import { Sort } from '../../../../core/api/model/sort.model';
 
 @Component({
   selector: 'app-xml-list',

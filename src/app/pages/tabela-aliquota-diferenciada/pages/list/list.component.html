@@ -23,15 +23,15 @@
         >
           <ng-template pTemplate="header">
             <tr>
-              <th scope="col" colspan="1" pSortableColumn="nome">
+              <th scope="col" colspan="1" pSortableColumn="ncm">
                 {{ 'field.ncm' | appTranslate:'tabela_aliquota_diferenciada' }}
                 <p-sortIcon field="ncm"></p-sortIcon>
               </th>
-              <th scope="col" colspan="1" pSortableColumn="descricao">
+              <th scope="col" colspan="1" pSortableColumn="inicioVigencia">
                 {{ 'field.data_inicio_vigencia' | appTranslate:'tabela_aliquota_diferenciada' }}
                 <p-sortIcon field="inicioVigencia"></p-sortIcon>
               </th>
-              <th scope="col" colspan="1" pSortableColumn="descricao">
+              <th scope="col" colspan="1" pSortableColumn="fimVigencia">
                 {{ 'field.data_fim_vigencia' | appTranslate:'tabela_aliquota_diferenciada' }}
                 <p-sortIcon field="fimVigencia"></p-sortIcon>
               </th>
@@ -46,11 +46,11 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{ 'field.data_inicio_vigencia' | appTranslate:'tabela_aliquota_diferenciada' }}</span>
-                <span pTooltip="{{entity.inicioVigencia}}"> {{ entity.inicioVigencia | date: 'MM/yyyy' }} </span>
+                <span pTooltip="{{entity.inicioVigencia | date: 'MM/yyyy' }}"> {{ entity.inicioVigencia | date: 'MM/yyyy' }} </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{ 'field.data_fim_vigencia' | appTranslate:'tabela_aliquota_diferenciada' }}</span>
-                <span pTooltip="{{entity.fimVigencia}}"> {{ entity.fimVigencia | date: 'MM/yyyy' }} </span>
+                <span pTooltip="{{entity.fimVigencia | date: 'MM/yyyy' }}"> {{ entity.fimVigencia | date: 'MM/yyyy' }} </span>
               </td>
               <td colspan="1" class="actions">
                 <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>

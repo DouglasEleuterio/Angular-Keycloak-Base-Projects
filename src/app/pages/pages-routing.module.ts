@@ -30,9 +30,9 @@ const routes: Routes = [
     canActivate: [TableStateClearGuard]
   },
   {
-    path: 'tabela_aliquota_diferenciada',
+    path: 'tabela-aliquota-diferenciada',
     loadChildren: () =>
-      import('./tabela_aliquota_diferenciada/tabela_aliquota_diferenciada.module').then(m => m.TabelaAliquotaDiferenciadaModule),
+      import('./tabela-aliquota-diferenciada/tabela_aliquota_diferenciada.module').then(m => m.TabelaAliquotaDiferenciadaModule),
     canActivate: [TableStateClearGuard]
   },
   {

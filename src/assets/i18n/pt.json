@@ -1350,7 +1350,7 @@
   },
   "TABELA_ALIQUOTA_DIFERENCIADA": {
     "TITLE": {
-      "PAGE": "Alíquotas Diferenciadas: Incidência Monofásica"
+      "PAGE": "Alíquotas Diferenciadas"
     },
     "ACTION": {
       "ADD": "Adicionar"
@@ -1359,6 +1359,9 @@
       "NCM": "NCM",
       "DATA_INICIO_VIGENCIA": "Inicio Escrituração",
       "DATA_FIM_VIGENCIA": "Fim Escrituração"
+    },
+    "MESSAGE": {
+      "ERROR_DATES_INICIO": "A Data de Início (de) não pode ser maior que a Data de Início (até)."
     }
   },
   "MENU": {

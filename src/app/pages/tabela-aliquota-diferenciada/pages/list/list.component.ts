@@ -9,6 +9,8 @@ import { AppMenuModel } from '../../../../domain/menu/app-menu.model';
 import { finalize } from 'rxjs/operators';
 import { TabelaAliquotaDiferenciadaService } from '../../../../domain/tabela-incidencia/tabela-aliquota-diferenciada.service';
 import { TabelaAliquotaDiferenciada } from '../../../../domain/tabela-incidencia/tabela-aliquota-diferenciada.model';
+import { Filter } from '../../../../core/api/filter/filter.model';
+import { BaseController } from '../../../../core/domain/base.controller';
 
 @Component({
   selector: 'app-list',
@@ -20,6 +22,7 @@ export class ListComponent extends PaginatorComponent {
 
   constructor(
     private service: TabelaAliquotaDiferenciadaService,
+    private baseController: BaseController,
     private translateService: TranslateService,
     private breadcrumbService: AppBreadcrumbService,
     private validationService: ValidationService,
@@ -30,12 +33,14 @@ export class ListComponent extends PaginatorComponent {
     this.breadcrumbService.setItems([
       AppMenuModel.itemTabelaAliquotaDiferenciada,
       {
-        label: 'tabela_aliquota_diferenciada.title.page'
+        label: 'tabela-aliquota-diferenciada.title.page'
       }
     ]);
   }
 
-  fetch(): void {
+  listSelect = (u: TabelaAliquotaDiferenciada) => [u.id, u.ncm, u.inicioVigencia, u.fimVigencia, u.situacao];
+
+  fetch3(): void {
     this.loadingService.startLoading();
     this.service
       .paginate(this.pagination)
@@ -50,7 +55,37 @@ export class ListComponent extends PaginatorComponent {
       });
   }
 
+  fetch(): void {
+    // Caso não possua filtro, aplicar filtro padrão
+    this.loadingService.startLoading();
+    if (this.pagination.filter == null) {
+      this.pagination.filter = new Filter({ search: `id!=0` }, null);
+      this.pagination.sort = [{ field: 'ncm', order: 'asc' }];
+    } else {
+      // Caso filtro definido, validar filtro.
+      this.isValidate();
+    }
+
+    this.baseController.fetchSelect(this.listSelect, this.pagination, this.service, result => {
+      this.tableData = result.content;
+      this.pagination.totalRecords = result.totalElements;
+      this.loadingService.stopLoading();
+    });
+  }
+
   remove($event: number | string) {
     console.log(`Removendo registro id ${$event}`);
+  }
+
+  private isValidate(): void {
+    const filters = this.pagination.filter.filters;
+    if (filters.inicioVigencia != null && filters.fimVigencia != null) {
+      const isInvalidDatasInicio = filters.inicioVigencia > filters.fimVigencia;
+      if (isInvalidDatasInicio) {
+        this.alertService.defaultError(
+          this.translateService.instant('tabela_aliquota_diferenciada.message.error_dates_inicio'.toUpperCase())
+        );
+      }
+    }
   }
 }
