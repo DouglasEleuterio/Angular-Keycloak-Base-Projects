@@ -10,9 +10,15 @@ import { TableModule } from 'primeng/table';
 import { SharedModule } from '../../shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { LayoutsModule } from '../../layouts/layouts.module';
+import { DetailComponent } from './pages/detail/detail.component';
+import { NewComponent } from './pages/new/new.component';
+import { EditComponent } from './pages/edit/edit.component';
+import { CalendarModule } from 'primeng/calendar';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListComponent, DetailComponent, NewComponent, EditComponent],
   imports: [
     CommonModule,
     TabelaAliquotaDiferenciadaRountingModule,
@@ -23,7 +29,11 @@ import { LayoutsModule } from '../../layouts/layouts.module';
     TableModule,
     SharedModule,
     TooltipModule,
-    LayoutsModule
+    LayoutsModule,
+    CalendarModule,
+    ReactiveFormsModule,
+    ReactiveTypedFormsModule,
+    RxReactiveFormsModule
   ],
   providers: []
 })

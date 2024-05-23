@@ -83,6 +83,10 @@
     "ERROR": {
       "404": "A requisição com o servidor retornou o status 404. Neste caso o servidor pode estar desligado ou não foi possível acessar a internet.",
       "500": "O servidor se deparou com um erro ao processar a requisição. Este erro não foi mapeado então é preciso entrar em contato com o administrador do sistema."
+    },
+    "FIELD": {
+      "DATA_CRIACAO": "Data de criação",
+      "DATA_ATUALIZACAO": "Data da últmia atualização"
     }
   },
   "LOGIN": {
@@ -1350,7 +1354,8 @@
   },
   "TABELA_ALIQUOTA_DIFERENCIADA": {
     "TITLE": {
-      "PAGE": "Alíquotas Diferenciadas"
+      "PAGE": "Alíquotas Diferenciadas",
+      "DETAIL": "Alíquota Diferenciada"
     },
     "ACTION": {
       "ADD": "Adicionar"

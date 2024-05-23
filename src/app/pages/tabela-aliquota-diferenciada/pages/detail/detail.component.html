@@ -1,0 +1,42 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.detail' | appTranslate:'tabela_aliquota_diferenciada' }}</h5>
+      </div>
+      <div class="detail-body grid">
+        <div class="col-3">
+          <app-data-label title="{{'field.ncm' | appTranslate:'tabela_aliquota_diferenciada'}}"
+                          [value]="entity?.ncm"></app-data-label>
+        </div>
+        <div class="col-3">
+          <app-data-label
+            title="{{'field.data_inicio_vigencia' | appTranslate:'tabela_aliquota_diferenciada'}}"
+            [value]="entity?.inicioVigencia | date: 'MM/yyyy'"
+          ></app-data-label>
+        </div>
+        <div class="col-3">
+          <app-data-label
+            title="{{'field.data_fim_vigencia' | appTranslate:'tabela_aliquota_diferenciada'}}"
+            [value]="entity?.fimVigencia | date: 'MM/yyyy'"
+          ></app-data-label>
+        </div>
+      </div>
+      <div class="detail-body grid">
+        <div class="col-3">
+          <app-data-label
+            title="{{'field.data_criacao' | appTranslate:'shared'}}"
+            [value]="entity?.dataCriacao | date: 'dd/MM/yyyy HH:mm:ss'"
+          ></app-data-label>
+        </div>
+        <div class="col-3">
+          <app-data-label
+            title="{{'field.data_atualizacao' | appTranslate:'shared'}}"
+            [value]="entity?.dataAtualizacao | date: 'dd/MM/yyyy HH:mm:ss'  "
+          ></app-data-label>
+        </div>
+      </div>
+      <app-form-buttons [isDetail]="true" (onCancel)="cancel()"></app-form-buttons>
+    </div>
+  </div>
+</div>
