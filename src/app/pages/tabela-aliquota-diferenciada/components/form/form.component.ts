@@ -5,9 +5,12 @@ import { TabelaAliquotaDiferenciada } from '../../../../domain/tabela-incidencia
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { plainToClass } from 'class-transformer';
 import { Exemplo } from '../../../../domain/exemplo/exemplo.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-tabela-aliquota-diferenciada-form',
@@ -35,13 +38,13 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       ncm: [null, [Validators.required, Validators.maxLength(8), Validators.minLength(8)]],
       inicioVigencia: [null, [Validators.required]],
-      fimVigencia: [null, [Validators.required]]
+      fimVigencia: [null]
     });
   }
 
   submit(): void {
     this.submitted = true;
-    if (this.formGroup.valid) {
+    if (this.formGroup.valid && this.isValidDatas()) {
       const entity: TabelaAliquotaDiferenciada = plainToClass(TabelaAliquotaDiferenciada, this.formGroup.value);
       this.onSubmit(entity, this.formGroup);
     } else {
@@ -61,5 +64,34 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     if (entity != null) {
       this.formGroup.patchValue(entity);
     }
+  }
+
+  private isValidDatas(): boolean {
+    if (this.formGroup.controls.fimVigencia?.value === null || this.formGroup.controls.fimVigencia.value === undefined) {
+      return true;
+    }
+
+    const dataInicioForm = this.formGroup.controls.inicioVigencia?.value;
+    const dataTerminoForm = this.formGroup.controls.fimVigencia?.value;
+
+    const dataInicio = this.formattedDataString(dataInicioForm, true);
+    const dataTermino = this.formattedDataString(dataTerminoForm, false);
+
+    const isInvalidDatas = dataInicio > dataTermino;
+
+    if (isInvalidDatas) {
+      this.alertService.defaultError(this.translateService.instant('tabela_aliquota_diferenciada.message.error_dates'.toUpperCase()));
+      return false;
+    }
+    return true;
+  }
+
+  formattedDataString(data: string, isInicio: boolean): string {
+    const datepipe: DatePipe = new DatePipe('en-US');
+    const maskInicio = 'yyyy-MM-ddT00:00';
+    const maskFim = 'yyyy-MM-ddT23:59';
+
+    const dateParse: Date = new Date(Date.parse(data));
+    return datepipe.transform(dateParse, isInicio ? maskInicio : maskFim);
   }
 }

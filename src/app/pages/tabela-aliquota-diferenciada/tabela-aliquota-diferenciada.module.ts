@@ -19,6 +19,7 @@ import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive
 import { DividerModule } from 'primeng/divider';
 import { FormComponent } from './components/form/form.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-mask';
 
 @NgModule({
   declarations: [ListComponent, DetailComponent, NewComponent, EditComponent, FormComponent],
@@ -38,8 +39,10 @@ import { InputTextModule } from 'primeng/inputtext';
     ReactiveTypedFormsModule,
     RxReactiveFormsModule,
     DividerModule,
-    InputTextModule
+    InputTextModule,
+    NgxMaskPipe,
+    NgxMaskDirective
   ],
-  providers: []
+  providers: [provideEnvironmentNgxMask()]
 })
 export class TabelaAliquotaDiferenciadaModule {}
