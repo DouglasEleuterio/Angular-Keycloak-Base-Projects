@@ -1354,6 +1354,8 @@
   },
   "TABELA_ALIQUOTA_DIFERENCIADA": {
     "TITLE": {
+      "NEW_PAGE": "Criar aliquota diferenciada",
+      "EDIT_PAGE": "Alterar aliquota diferenciada",
       "PAGE": "Alíquotas Diferenciadas",
       "DETAIL": "Alíquota Diferenciada"
     },
@@ -1363,11 +1365,14 @@
     "FIELD": {
       "NCM": "NCM",
       "DATA_INICIO_VIGENCIA": "Inicio Escrituração",
+      "INICIOVIGENCIA": "Inicio Escrituração",
+      "FIMVIGENCIA": "Fim Escrituração",
       "DATA_FIM_VIGENCIA": "Fim Escrituração"
     },
     "MESSAGE": {
       "ERROR_DATES_INICIO": "A Data de Início (de) não pode ser maior que a Data de Início (até).",
-      "DELETED_SUCCESS": "Registro apagado com sucesso"
+      "DELETED_SUCCESS": "Registro apagado com sucesso",
+      "SUCCESS": "Aliquota diferenciada salva"
     }
   },
   "MENU": {

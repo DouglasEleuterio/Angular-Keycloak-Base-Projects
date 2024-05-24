@@ -17,9 +17,11 @@ import { CalendarModule } from 'primeng/calendar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { DividerModule } from 'primeng/divider';
+import { FormComponent } from './components/form/form.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
-  declarations: [ListComponent, DetailComponent, NewComponent, EditComponent],
+  declarations: [ListComponent, DetailComponent, NewComponent, EditComponent, FormComponent],
   imports: [
     CommonModule,
     TabelaAliquotaDiferenciadaRountingModule,
@@ -35,7 +37,8 @@ import { DividerModule } from 'primeng/divider';
     ReactiveFormsModule,
     ReactiveTypedFormsModule,
     RxReactiveFormsModule,
-    DividerModule
+    DividerModule,
+    InputTextModule
   ],
   providers: []
 })
