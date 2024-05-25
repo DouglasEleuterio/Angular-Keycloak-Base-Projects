@@ -103,9 +103,9 @@ export class ErrorInterceptor implements HttpInterceptor {
     return throwError(() => new Error(`Error ${error}`));
   }
 
-  handle500Error(error: unknown): Observable<never> {
+  handle500Error(error: {error: ApiErrorResponse }): Observable<never> {
     this.alertService.error500();
-    return throwError(() => new Error(`Error ${error}`));
+    return throwError(() => new Error(`Error ${error.error.message}`));
   }
 
   handle404Error(error: unknown): Observable<never> {
