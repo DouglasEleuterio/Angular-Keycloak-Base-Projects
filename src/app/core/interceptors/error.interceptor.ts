@@ -103,8 +103,8 @@ export class ErrorInterceptor implements HttpInterceptor {
     return throwError(() => new Error(`Error ${error}`));
   }
 
-  handle500Error(error: {error: ApiErrorResponse }): Observable<never> {
-    this.alertService.error500();
+  handle500Error(error: { error: ApiErrorResponse }): Observable<never> {
+    // this.alertService.error500();
     return throwError(() => new Error(`Error ${error.error.message}`));
   }
 
