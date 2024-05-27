@@ -1360,7 +1360,10 @@
       "DETAIL": "Alíquota Diferenciada"
     },
     "ACTION": {
-      "ADD": "Adicionar"
+      "ADD": "Adicionar",
+      "DEL": "Apagar",
+      "EDIT": "Editar",
+      "DETAIL": "Detalhar"
     },
     "FIELD": {
       "NCM": "NCM",
@@ -1372,6 +1375,7 @@
     "MESSAGE": {
       "ERROR_DATES_INICIO": "A Data de Início (de) não pode ser maior que a Data de Início (até).",
       "DELETED_SUCCESS": "Registro apagado com sucesso",
+      "DELETE_CONFIRM": "Deseja apagar a aliquota?",
       "SUCCESS": "Aliquota diferenciada salva",
       "ERROR_DATES": "A data de Inicio da Vigencia deve ser inferior a data do Fim da vigência"
     }
