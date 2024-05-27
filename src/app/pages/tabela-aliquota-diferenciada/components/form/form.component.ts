@@ -5,11 +5,8 @@ import { TabelaAliquotaDiferenciada } from '../../../../domain/tabela-incidencia
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { plainToClass } from 'class-transformer';
-import { Exemplo } from '../../../../domain/exemplo/exemplo.model';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -60,7 +57,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     return this.formGroup.controls;
   }
 
-  patchValue(entity: Exemplo): void {
+  patchValue(entity: TabelaAliquotaDiferenciada): void {
     if (entity != null) {
       this.formGroup.patchValue(entity);
     }

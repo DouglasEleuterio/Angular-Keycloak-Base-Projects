@@ -1377,7 +1377,8 @@
       "DELETED_SUCCESS": "Registro apagado com sucesso",
       "DELETE_CONFIRM": "Deseja apagar a aliquota?",
       "SUCCESS": "Aliquota diferenciada salva",
-      "ERROR_DATES": "A data de Inicio da Vigencia deve ser inferior a data do Fim da vigência"
+      "ERROR_DATES": "A data de Inicio da Vigencia deve ser inferior a data do Fim da vigência",
+      "NOT_FOUND": "Aliquota diferenciada não encontrada"
     }
   },
   "MENU": {
