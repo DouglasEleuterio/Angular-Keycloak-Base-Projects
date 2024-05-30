@@ -1,0 +1,93 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1">
+                {{'nota_fiscal.numero' | appTranslate:'produtos_incidencia_monofasica'}}
+              </th>
+              <th scope="col" colspan="1">
+                {{'ncm.codigo' | appTranslate:'produtos_incidencia_monofasica'}}
+              </th>
+              <th scope="col" colspan="1">
+                {{'produto.descricao' | appTranslate:'produtos_incidencia_monofasica'}}
+              </th>
+              <th scope="col" colspan="1">
+                {{'pis.valor' | appTranslate:'produtos_incidencia_monofasica'}}
+              </th>
+              <th scope="col" colspan="1">
+                {{'cofins.valor' | appTranslate:'produtos_incidencia_monofasica'}}
+              </th>
+              <th scope="col" colspan="1">
+                {{'produto.valor' | appTranslate:'produtos_incidencia_monofasica'}}
+              </th>
+              <th scope="col" colspan="1">
+                {{'produto.quantidade' | appTranslate:'produtos_incidencia_monofasica'}}
+              </th>
+              <th scope="col" colspan="1">
+                {{'nota_fiscal.valor_total' | appTranslate:'produtos_incidencia_monofasica'}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.nome' | appTranslate:'produtos_incidencia_monofasica'}}</span>
+                <span> {{entity.det.infnf.ide.nNF}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
+                <span> {{entity.ncm}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
+                <span> {{entity.xProd}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
+                <span> {{entity.det.imposto.pis.pisaliq.vPIS}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
+                <span> {{entity.det.imposto.cofins.cofinsaliq.vCOFINS}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
+                <span> {{entity.vUnCom}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
+                <span> {{entity.qCom}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
+                <span> {{entity.vProd}} </span>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

@@ -36,6 +36,12 @@ const routes: Routes = [
     canActivate: [TableStateClearGuard]
   },
   {
+    path: 'produtos-incidencia-monofasica',
+    loadChildren: () =>
+      import('./produtos-incidencia-monofasica/produtos-incidencia-monofasica.module').then(m => m.ProdutosIncidenciaMonofasicaModule),
+    canActivate: [TableStateClearGuard]
+  },
+  {
     path: 'tipo-localidade',
     loadChildren: () => import('./tipo-localidade/tipo-localidade.module').then(m => m.TipoLocalidadeModule),
     canActivate: [TableStateClearGuard]
@@ -106,4 +112,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule {
+}
