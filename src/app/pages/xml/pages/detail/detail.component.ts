@@ -31,7 +31,7 @@ export class DetailComponent implements OnInit {
     private alertService: AlertService,
     private translateService: TranslateService
   ) {
-    this.isExibirMonofasico = true;
+    this.isExibirMonofasico = false;
   }
 
   ngOnInit(): void {
