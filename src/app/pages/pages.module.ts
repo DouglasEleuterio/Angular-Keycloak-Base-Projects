@@ -11,6 +11,7 @@ import { CardModule } from 'primeng/card';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'primeng/api';
 import { HomeComponent } from './home/home.component';
+import { LayoutsModule } from '../layouts/layouts.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -25,7 +26,8 @@ import { HomeComponent } from './home/home.component';
     DialogModule,
     CardModule,
     CheckboxModule,
-    SharedModule
+    SharedModule,
+    LayoutsModule
   ]
 })
 export class PagesModule {}

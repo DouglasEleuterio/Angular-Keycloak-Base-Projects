@@ -1419,6 +1419,23 @@
     "TABELA_ALIQUOTA_DIFERENCIADA": "Alíq(s). diferenciada",
     "PROTUTOS_INCIDENCIA_MONOFASICA": "Prod. Incidencia Monofasica"
   },
+  "DASHBOARD": {
+    "TITLE": {
+      "PAGE": "Dashboard"
+    },
+    "ARQUIVO": {
+      "QUANTIDADE": "Quantidade XML Enviado"
+    },
+    "DOCUMENTOS": {
+      "QUANTIDADE": "Quantidade de XML Processados"
+    },
+    "DESTINATARIO": {
+      "QUANTIDADE": "Quantidade de Empresas Processadas"
+    },
+    "ERRO": {
+      "QUANTIDADE": "Quantidade Erro no Processamento"
+    }
+  },
   "TIMES": {
     "JUST_NOW": "agora",
     "YEAR": "ano",
