@@ -59,11 +59,11 @@ export class ListComponent extends PaginatorComponent {
     // Caso não possua filtro, aplicar filtro padrão
     this.loadingService.startLoading();
     if (this.pagination.filter == null) {
-      this.pagination.filter = new Filter({ search: `id!=0;situacao==true;enumSituacao==ATIVO` }, null);
+      this.pagination.filter = new Filter({ search: `enumSituacao==ATIVO` }, null);
       this.pagination.sort = [{ field: 'inicioVigencia', order: 'desc' }];
     } else {
       // Caso filtro definido, validar filtro e adicionar situação = true.
-      this.pagination.filter.filters['search'] = `${this.pagination.filter.filters['search']};situacao==true`;
+      this.pagination.filter.filters['search'] = `${this.pagination.filter.filters['search']}`;
     }
 
     this.baseController.fetchSelect(this.listSelect, this.pagination, this.service, result => {
