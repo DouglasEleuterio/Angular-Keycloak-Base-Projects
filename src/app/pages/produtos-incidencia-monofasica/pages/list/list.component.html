@@ -1,6 +1,10 @@
+<app-loading></app-loading>
 <div class="grid">
   <div class="col-12">
     <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'produtos_incidencia_monofasica'}}</h5>
+      </div>
       <div class="list-body">
         <p-table
           [value]="tableData"
@@ -20,28 +24,28 @@
           <ng-template pTemplate="header">
             <tr>
               <th scope="col" colspan="1">
-                {{'nota_fiscal.numero' | appTranslate:'produtos_incidencia_monofasica'}}
+                {{'field.nf_numero' | appTranslate:'produtos_incidencia_monofasica'}}
               </th>
               <th scope="col" colspan="1">
-                {{'ncm.codigo' | appTranslate:'produtos_incidencia_monofasica'}}
+                {{'field.ncm' | appTranslate:'produtos_incidencia_monofasica'}}
               </th>
               <th scope="col" colspan="1">
-                {{'produto.descricao' | appTranslate:'produtos_incidencia_monofasica'}}
+                {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}
               </th>
               <th scope="col" colspan="1">
-                {{'pis.valor' | appTranslate:'produtos_incidencia_monofasica'}}
+                {{'field.pis_valor' | appTranslate:'produtos_incidencia_monofasica'}}
               </th>
               <th scope="col" colspan="1">
-                {{'cofins.valor' | appTranslate:'produtos_incidencia_monofasica'}}
+                {{'field.cofins_valor' | appTranslate:'produtos_incidencia_monofasica'}}
               </th>
               <th scope="col" colspan="1">
-                {{'produto.valor' | appTranslate:'produtos_incidencia_monofasica'}}
+                {{'field.produto_valor' | appTranslate:'produtos_incidencia_monofasica'}}
               </th>
               <th scope="col" colspan="1">
-                {{'produto.quantidade' | appTranslate:'produtos_incidencia_monofasica'}}
+                {{'field.quantidade' | appTranslate:'produtos_incidencia_monofasica'}}
               </th>
               <th scope="col" colspan="1">
-                {{'nota_fiscal.valor_total' | appTranslate:'produtos_incidencia_monofasica'}}
+                {{'field.valor_total' | appTranslate:'produtos_incidencia_monofasica'}}
               </th>
             </tr>
           </ng-template>
@@ -61,15 +65,15 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
-                <span> {{entity.det.imposto.pis.pisaliq.vPIS}} </span>
+                <span> {{entity.det.imposto.pis.pisaliq.vPIS | thousandFormat}} </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
-                <span> {{entity.det.imposto.cofins.cofinsaliq.vCOFINS}} </span>
+                <span> {{entity.det.imposto.cofins.cofinsaliq.vCOFINS | thousandFormat}} </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
-                <span> {{entity.vUnCom}} </span>
+                <span> {{entity.vUnCom | thousandFormat}} </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
@@ -77,7 +81,7 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.descricao' | appTranslate:'produtos_incidencia_monofasica'}}</span>
-                <span> {{entity.vProd}} </span>
+                <span> {{entity.vProd | thousandFormat}} </span>
               </td>
             </tr>
           </ng-template>

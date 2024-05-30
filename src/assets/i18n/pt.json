@@ -1381,6 +1381,21 @@
       "NOT_FOUND": "Aliquota diferenciada não encontrada"
     }
   },
+  "PRODUTOS_INCIDENCIA_MONOFASICA": {
+    "TITLE": {
+      "PAGE": "Produtos com Incidência Monofasica"
+    },
+    "FIELD": {
+      "NF_NUMERO": "Número NF",
+      "NCM": "NCM",
+      "DESCRICAO": "Descrição",
+      "PIS_VALOR": "Valor PIS",
+      "COFINS_VALOR": "Valor COFINS",
+      "PRODUTO_VALOR": "Valor Unitário",
+      "QUANTIDADE": "Quntidade",
+      "VALOR_TOTAL": "Valor Total"
+    }
+  },
   "MENU": {
     "HOME": "Home",
     "UPLOAD": "Upload XML",
@@ -1401,7 +1416,8 @@
     "COMPANHIA-AEREA": "Companhia Aérea",
     "DISTANCIA-LOCALIDADE": "Distância entre Localidades",
     "XML": "XML",
-    "TABELA_ALIQUOTA_DIFERENCIADA": "Alíq(s). diferenciada"
+    "TABELA_ALIQUOTA_DIFERENCIADA": "Alíq(s). diferenciada",
+    "PROTUTOS_INCIDENCIA_MONOFASICA": "Prod. Incidencia Monofasica"
   },
   "TIMES": {
     "JUST_NOW": "agora",

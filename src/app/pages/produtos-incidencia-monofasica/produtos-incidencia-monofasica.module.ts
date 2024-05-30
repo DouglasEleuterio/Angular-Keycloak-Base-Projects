@@ -8,6 +8,7 @@ import { UIModule } from '../../core/ui/ui.module';
 import { SharedModule } from '../../shared/shared.module';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
+import { LayoutsModule } from '../../layouts/layouts.module';
 
 @NgModule({
   declarations: [ListComponent],
@@ -20,7 +21,8 @@ import { TooltipModule } from 'primeng/tooltip';
     SharedModule,
     SharedModule,
     TableModule,
-    TooltipModule
+    TooltipModule,
+    LayoutsModule
   ]
 })
 export class ProdutosIncidenciaMonofasicaModule {}

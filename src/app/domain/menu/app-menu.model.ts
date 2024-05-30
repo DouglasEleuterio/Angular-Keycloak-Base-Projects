@@ -56,7 +56,7 @@ export class AppMenuModel {
 
   public static readonly itemMenuProdutosIncidenciaMonofasica: AppMenuItem = {
     label: 'menu.protutos_incidencia_monofasica',
-    icon: 'pi pi-fw pi-file-import',
+    icon: 'pi pi-fw pi-chart-line',
     routerLink: ['/produtos-incidencia-monofasica'],
     dontNeedPermission: false,
     permissions: [PermissionEnum.INCIDENCIA_MONOFASICA_LISTAR]
@@ -198,7 +198,7 @@ export class AppMenuModel {
   };
 
   public static readonly menu: AppMenuItem[] = [
-    AppMenuModel.itemMenuExemplo,
+    // AppMenuModel.itemMenuExemplo,
     // AppMenuModel.itemMenuUploadXML,
     AppMenuModel.itemTabelaAliquotaDiferenciada,
     AppMenuModel.itemMenuXML,
