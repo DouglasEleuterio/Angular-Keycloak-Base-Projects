@@ -32,7 +32,7 @@ export class ListComponent extends PaginatorComponent {
   fetch(): void {
     this.loadingService.startLoading();
     this.service
-      .paginate(this.pagination)
+      .getProdutos(this.pagination)
       .pipe(
         finalize(() => {
           this.loadingService.stopLoading();

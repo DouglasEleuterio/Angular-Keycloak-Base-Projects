@@ -5,6 +5,9 @@
       <div class="card-header">
         <h5>{{ 'title.page' | appTranslate:'produtos_incidencia_monofasica'}}</h5>
       </div>
+      <app-filter (onSearch)="filter()" (onClear)="clearFilter()" [(filters)]="pagination.filter">
+        <app-produtos-incidencia-monofasica-filters appFilterRef></app-produtos-incidencia-monofasica-filters>
+      </app-filter>
       <div class="list-body">
         <p-table
           [value]="tableData"
