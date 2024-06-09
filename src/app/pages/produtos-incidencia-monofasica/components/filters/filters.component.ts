@@ -35,11 +35,6 @@ export class FiltersComponent implements AfterViewInit, OnInit {
   private construirQueryConsulta(): FilterParam {
     const restrictions: ExpressionNode[] = [];
 
-    const numeroNF = this.formGroup.controls.numeroNF?.value;
-    if (numeroNF != null && numeroNF.trim().length > 0) {
-      restrictions.push(builder.eq('nfe.inf.ide.nNF', `*${numeroNF.trim()}*`));
-    }
-
     const dataEmissaoInicio: string = this.formGroup.controls.dataEmissaoInicio?.value;
     if (dataEmissaoInicio != null && dataEmissaoInicio !== '') {
       const formattedDate = this.formattedDataString(dataEmissaoInicio, true);
