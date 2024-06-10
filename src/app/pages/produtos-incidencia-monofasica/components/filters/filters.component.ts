@@ -38,18 +38,18 @@ export class FiltersComponent implements AfterViewInit, OnInit {
     const dataEmissaoInicio: string = this.formGroup.controls.dataEmissaoInicio?.value;
     if (dataEmissaoInicio != null && dataEmissaoInicio !== '') {
       const formattedDate = this.formattedDataString(dataEmissaoInicio, true);
-      restrictions.push(builder.ge('nfe.inf.ide.dhEmi', `${formattedDate}`));
+      restrictions.push(builder.ge('dataEmissaoInicio', `${formattedDate}`));
     }
 
     const dataEmissaoFim: string = this.formGroup.controls.dataEmissaoFim?.value;
     if (dataEmissaoFim != null && dataEmissaoFim !== '') {
       const formattedDateFim = this.formattedDataString(dataEmissaoFim, false);
-      restrictions.push(builder.le('nfe.inf.ide.dhEmi', `${formattedDateFim}`));
+      restrictions.push(builder.le('dataEmissaoFim', `${formattedDateFim}`));
     }
 
     const cnpj = this.formGroup.controls.cnpj?.value;
     if (cnpj != null && cnpj.trim().length > 0) {
-      restrictions.push(builder.eq('nfe.inf.dest.cnpj', `*${cnpj.trim()}*`));
+      restrictions.push(builder.eq('cnpj', `${cnpj.trim()}`));
     }
 
     if (restrictions.length > 0) {
@@ -62,8 +62,8 @@ export class FiltersComponent implements AfterViewInit, OnInit {
 
   formattedDataString(data: string, isInicio: boolean): string {
     const datepipe: DatePipe = new DatePipe('en-US');
-    const maskInicio = 'yyyy-MM-ddT00:00';
-    const maskFim = 'yyyy-MM-ddT23:59';
+    const maskInicio = 'yyyy-MM-dd';
+    const maskFim = 'yyyy-MM-dd';
 
     const dateParse: Date = new Date(Date.parse(data));
     return datepipe.transform(dateParse, isInicio ? maskInicio : maskFim);
