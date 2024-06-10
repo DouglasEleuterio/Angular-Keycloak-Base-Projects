@@ -13,6 +13,7 @@ import { FiltersComponent } from './components/filters/filters.component';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [ListComponent, FiltersComponent],
@@ -21,8 +22,9 @@ import { InputTextModule } from 'primeng/inputtext';
     ProdutosIncidenciaMonofasicaRoutingModuleModule,
     ButtonModule,
     RippleModule,
-    UIModule,
+    ReactiveFormsModule,
     SharedModule,
+    UIModule,
     TableModule,
     TooltipModule,
     LayoutsModule,
