@@ -22,7 +22,7 @@ import { AuthLogout } from '../../core/auth/model/logout.model';
         <a href="#" class="logo">
           <img [src]="'assets/layout/images/logo-' + (app.colorScheme === 'light' ? 'gray' : 'gray') + '.png'" />
         </a>
-        <h6 style="alignment-baseline: auto">Contabilidade</h6>
+        <h6 style="alignment-baseline: auto">Clinica</h6>
       </div>
 
       <app-menu></app-menu>

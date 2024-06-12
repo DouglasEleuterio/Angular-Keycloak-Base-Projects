@@ -3,7 +3,7 @@
   "authLoginUrl": "https://clemente-api.3ptecnologia.com.br/auth/token",
   "authLogoutUrl": "https://clemente-api.3ptecnologia.com.br/auth/logout",
   "authCodeUrl": "https://auth.3ptecnologia.com.br/realms/3p-apps/protocol/openid-connect/auth",
-  "authClientId": "contabilidade",
+  "authClientId": "clinica",
   "authCallbackUrl": "https://clemente-app.3ptecnologia.com.br/oauth/authorize/callback",
   "authNonce": false,
   "authChallenge": false,

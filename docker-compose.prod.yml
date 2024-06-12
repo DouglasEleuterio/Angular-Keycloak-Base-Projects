@@ -1,29 +1,29 @@
 version: "3.7"
 
 services:
-  contabilidade-app:
-    image: douglaseleuterioferreira/apps:contabilidade-app
+  clinica-app:
+    image: douglaseleuterioferreira/apps:clinica-app
     networks:
       - minha_rede
     #    ports:
     #      - 4201:80
     volumes:
-      - contabilidade-app:/data
+      - clinica-app:/data
     deploy:
       labels:
         - traefik.enable=true
-        - traefik.http.routers.contabilidade-app.rule=Host(`clemente-app.3ptecnologia.com.br`)
-        - traefik.http.routers.contabilidade-app.entrypoints=websecure
-        - traefik.http.routers.contabilidade-app.tls.certresolver=letsencryptresolver
-        - traefik.http.routers.contabilidade-app.priority=1
-        - traefik.http.routers.contabilidade-app.service=contabilidade-app
-        - traefik.http.services.contabilidade-app.loadbalancer.server.port=80
-        - traefik.http.services.contabilidade-app.loadbalancer.passHostHeader=true
+        - traefik.http.routers.clinica-app.rule=Host(`clemente-app.3ptecnologia.com.br`)
+        - traefik.http.routers.clinica-app.entrypoints=websecure
+        - traefik.http.routers.clinica-app.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.clinica-app.priority=1
+        - traefik.http.routers.clinica-app.service=clinica-app
+        - traefik.http.services.clinica-app.loadbalancer.server.port=80
+        - traefik.http.services.clinica-app.loadbalancer.passHostHeader=true
 
 volumes:
-  contabilidade-app:
+  clinica-app:
     external: true
-    name: contabilidade-app
+    name: clinica-app
 
 networks:
   minha_rede:
