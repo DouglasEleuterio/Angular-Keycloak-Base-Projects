@@ -1,0 +1,88 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'cliente'}}</h5>
+        <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'cliente'}}"></button>
+      </div>
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="nome">
+                {{'field.nome' | appTranslate:'cliente'}}
+                <p-sortIcon field="nome"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="descricao">
+                {{'field.cpf' | appTranslate:'cliente'}}
+                <p-sortIcon field="cpf"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="telefone">
+                {{'field.telefone' | appTranslate:'cliente'}}
+                <p-sortIcon field="telefone"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="email">
+                {{'field.email' | appTranslate:'cliente'}}
+                <p-sortIcon field="email"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="dataNascimento">
+                {{'field.data_nascimento' | appTranslate:'cliente'}}
+                <p-sortIcon field="dataNascimento"></p-sortIcon>
+              </th>
+
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.nome' | appTranslate:'cliente'}}</span>
+                <span pTooltip="{{entity.nome}}"> {{entity.nome}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.cpf' | appTranslate:'cliente'}}</span>
+                <span pTooltip="{{entity.cpf}}"> {{entity.cpf | cnpjCpfPipe: false}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.telefone' | appTranslate:'cliente'}}</span>
+                <span pTooltip="{{entity.telefone}}"> {{valueString(convertNumberToString(entity.telefone)) | phoneFormat}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.email' | appTranslate:'cliente'}}</span>
+                <span pTooltip="{{entity.email}}"> {{entity.email}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.data_nascimento' | appTranslate:'cliente'}}</span>
+                <span pTooltip="{{entity.dataNascimento}}"> {{entity.dataNascimento | date: 'dd/MM/yyyy'}} </span>
+              </td>
+
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons page="cliente" [entityId]="entity.id" (onRemove)="remove($event)"></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

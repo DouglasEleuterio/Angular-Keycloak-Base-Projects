@@ -30,6 +30,14 @@ export class AppMenuModel {
     dontNeedPermission: true
   };
 
+  public static readonly itemMenuCliente: AppMenuItem = {
+    label: 'menu.cliente',
+    icon: 'pi pi-fw pi-map-marker',
+    routerLink: ['/cliente'],
+    dontNeedPermission: false,
+    permissions: [PermissionEnum.CLIENTE_ADICIONAR]
+  };
+
   public static readonly itemMenuXML: AppMenuItem = {
     label: 'menu.xml',
     icon: 'pi pi-fw pi-file-import',
@@ -178,33 +186,34 @@ export class AppMenuModel {
     permissions: [PermissionEnum.ADMINISTRADOR]
   };
 
-  public static readonly menuTabelas: AppMenuItem = {
-    label: 'menu.tabelas_submenu',
+  public static readonly menuCadastros: AppMenuItem = {
+    label: 'menu.cadastros',
     icon: 'pi pi-fw pi-table',
     dontNeedPermission: true,
     items: [
-      AppMenuModel.itemMenuTipoLocalidade,
-      AppMenuModel.itemMenuClassificacaoLocalidade,
-      AppMenuModel.itemMenuTipoEvento,
-      AppMenuModel.itemMenuAuxilioAlimentacao,
-      AppMenuModel.itemMenuJustificativa,
-      AppMenuModel.itemMenuValorDiaria,
-      AppMenuModel.itemMenuLocalDificilAcesso,
-      AppMenuModel.itemMenuPrecoCombustivel,
-      AppMenuModel.itemMenuCompanhiaAerea,
-      AppMenuModel.itemMenuPoliticaIndenizacaoTransporte,
-      AppMenuModel.itemMenuDistanciaLocalidade
+      AppMenuModel.itemMenuCliente,
+      // AppMenuModel.itemMenuTipoLocalidade,
+      // AppMenuModel.itemMenuClassificacaoLocalidade,
+      // AppMenuModel.itemMenuTipoEvento,
+      // AppMenuModel.itemMenuAuxilioAlimentacao,
+      // AppMenuModel.itemMenuJustificativa,
+      // AppMenuModel.itemMenuValorDiaria,
+      // AppMenuModel.itemMenuLocalDificilAcesso,
+      // AppMenuModel.itemMenuPrecoCombustivel,
+      // AppMenuModel.itemMenuCompanhiaAerea,
+      // AppMenuModel.itemMenuPoliticaIndenizacaoTransporte,
+      // AppMenuModel.itemMenuDistanciaLocalidade
     ]
   };
 
   public static readonly menu: AppMenuItem[] = [
     // AppMenuModel.itemMenuExemplo,
     // AppMenuModel.itemMenuUploadXML,
-    AppMenuModel.itemTabelaAliquotaDiferenciada,
-    AppMenuModel.itemMenuXML,
-    AppMenuModel.itemMenuProdutosIncidenciaMonofasica
+    // AppMenuModel.itemTabelaAliquotaDiferenciada,
+    // AppMenuModel.itemMenuXML,
+    // AppMenuModel.itemMenuProdutosIncidenciaMonofasica
     // AppMenuModel.itemMenuHome,
-    // AppMenuModel.menuTabelas,
+    AppMenuModel.menuCadastros
     // AppMenuModel.itemMenuEvento,
     // AppMenuModel.itemMenuSolicitacao
   ];

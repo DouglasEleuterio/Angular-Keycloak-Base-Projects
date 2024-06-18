@@ -1,6 +1,6 @@
 {
   "APPLICATION": {
-    "NAME": "CRM",
+    "NAME": "Clinica",
     "ORGANIZATION": "3P Tecnologia",
     "VERSION": "Versão: {{version}}"
   },
@@ -1228,7 +1228,7 @@
       }
     }
   },
-  "ANALISAR_SOLICITACAO": {
+  "ANALISAR_.·SOLICITACAO": {
     "TITLE": {
       "EDIT_PAGE": "Analisar Solicitação"
     },
@@ -1249,156 +1249,11 @@
       }
     }
   },
-  "XML": {
-    "TITLE": {
-      "PAGE": "Gestão de documentos Xml",
-      "EXPORTER": "Documentos XML",
-      "DETAIL": "XML Detalhado"
-    },
-    "ACTION": {
-      "UPLOAD": "Enviar Arquivos XML",
-      "DETAIL": "Detalhar",
-      "EDIT": "Não é possível editar",
-      "DEL": "Excluir XML",
-      "DOWNLOAD": "Baixar Arquivo XML"
-    },
-    "FIELD": {
-      "ID": "Código",
-      "VERSAO": "XML Versão",
-      "DESTINATARIO": "Destinatário",
-      "NUMERO": "Número da N.F.",
-      "NUMERONF": "Número da N.F.",
-      "DATAEMISSAO": "Data de Emissão",
-      "DATAEMISSAOINICIO": "Data Emissão (de)",
-      "DATAEMISSAOFIM": "Data Emissão (até)",
-      "CNPJ": "CNPJ",
-      "REMETENTE": "Remetente",
-      "VALOR_TOTAL_NFE": "Valor Total da NF-e ",
-      "VALOR": "Valor Total",
-      "NAT_OP": "Natureza da Operação",
-      "REMETENTE_CNPJ": "CNPJ Remetente",
-      "NATUREZA_OPERACAO": "Natureza da Operação",
-      "BASE_CALCULO_ICMS": "Base de Calculo do ICMS",
-      "VALOR_ICMS": "Valor do ICMS",
-      "BASE_DE_CALCULO_ICMS_ST": "Base de Calculo ICMS S.T",
-      "VALOR_COFINS": "Valor da COFINS",
-      "VALOR_ICMS_ST": "Valor do ICMS S.T",
-      "VALOR_ICMS_DESONERADO": "Valor Total do ICMS desonerado ",
-      "VALOR_ICMS_REMET_UF": "V. ICMS Inter. para a UF do remetente",
-      "VALOR_ICMS_DESTINO_UF": "V. ICMS Inter. para a UF do destino",
-      "VALOR_TOTAL_PRODUTOS": "Valor total dos produtos",
-      "VALOR_FRETE": "Valor total do frete",
-      "VALOR_SEGURO": "Valor total do seguro",
-      "VALOR_DESCONTO": "Valor total do desconto",
-      "VALOR_OUTRAS_DESPESAS": "Valor de outras despesas",
-      "VALOR_IPI": "Valor do IPI",
-      "VALOR_TOTAL_TRIBUTOS": "V. aprox. de tributos fed., est. e mun.",
-      "VALOR_PIS": "Valor do PIS",
-      "PROD": {
-        "CODIGO": "Código",
-        "NOME": "Nome",
-        "NCM": "NCM",
-        "CFOP": "CFOP",
-        "QUANTIDADE": "Quantidade",
-        "VALOR_UNITARIO": "Valor unitário",
-        "VALOR_TOTAL": "Valor total",
-        "UNIDADE_COMERCIAL": "Unidade Comercial"
-      },
-      "IMPOSTO": {
-        "COFINS": {
-          "CST": {
-            "LABEL": "COFINS CST",
-            "DESC": "Código de Situação Tributária da COFINS"
-          },
-          "ALIQUOTA": {
-            "LABEL": "COFINS Aliquota",
-            "DESC": "Alíquota da COFINS (em percentual) "
-          },
-          "BASE_CALCULO": {
-            "LABEL": "COFINS Base calculo",
-            "DESC": "Valor da Base de Cálculo da COFINS"
-          },
-          "VALOR": {
-            "LABEL": "COFINS Valor",
-            "DESC": "Valor da COFINS "
-          }
-        },
-        "PIS": {
-          "CST": {
-            "LABEL": "PIS CST",
-            "DESC": "Código de Situação Tributária do PIS"
-          },
-          "ALIQUOTA": {
-            "LABEL": "PIS Aliquota",
-            "DESC": "Alíquota do PIS (em percentual)"
-          },
-          "BASE_CALCULO": {
-            "LABEL": "PIS Base calculo",
-            "DESC": "Valor da Base de Cálculo do PIS"
-          },
-          "VALOR": {
-            "LABEL": "PIS Valor",
-            "DESC": "Valor do PIS "
-          }
-        }
-      }
-    },
-    "MESSAGE": {
-      "DOWNLOAD": "Deseja realizar o download do arquivo XML?",
-      "NOT_FOUND": "Documento XML não encontrado",
-      "DELETED_SUCCESS": "Documento e Arquivo XML removido com sucesso",
-      "DELETE_CONFIRM": "Deseja apagar documento e Arquivo XML?",
-      "ERROR_DATES_INICIO": "A data da emissão inicial não pode ser maior que a data de emissão final",
-      "ERROR_DATES_TERMINO": "A data de emissão final não pode ser menor que data de emissão inicial"
-    }
-  },
-  "TABELA_ALIQUOTA_DIFERENCIADA": {
-    "TITLE": {
-      "NEW_PAGE": "Criar aliquota diferenciada",
-      "EDIT_PAGE": "Alterar aliquota diferenciada",
-      "PAGE": "Alíquotas Diferenciadas",
-      "DETAIL": "Alíquota Diferenciada"
-    },
-    "ACTION": {
-      "ADD": "Adicionar",
-      "DEL": "Apagar",
-      "EDIT": "Editar",
-      "DETAIL": "Detalhar"
-    },
-    "FIELD": {
-      "NCM": "NCM",
-      "DATA_INICIO_VIGENCIA": "Inicio Escrituração",
-      "INICIOVIGENCIA": "Inicio Escrituração",
-      "FIMVIGENCIA": "Fim Escrituração",
-      "DATA_FIM_VIGENCIA": "Fim Escrituração"
-    },
-    "MESSAGE": {
-      "ERROR_DATES_INICIO": "A Data de Início (de) não pode ser maior que a Data de Início (até).",
-      "DELETED_SUCCESS": "Registro apagado com sucesso",
-      "DELETE_CONFIRM": "Deseja apagar a aliquota?",
-      "SUCCESS": "Aliquota diferenciada salva",
-      "ERROR_DATES": "A data de Inicio da Vigencia deve ser inferior a data do Fim da vigência",
-      "NOT_FOUND": "Aliquota diferenciada não encontrada"
-    }
-  },
-  "PRODUTOS_INCIDENCIA_MONOFASICA": {
-    "TITLE": {
-      "PAGE": "Produtos com Incidência Monofasica"
-    },
-    "FIELD": {
-      "NF_NUMERO": "Número NF",
-      "NCM": "NCM",
-      "DESCRICAO": "Descrição",
-      "PIS_VALOR": "Valor PIS",
-      "COFINS_VALOR": "Valor COFINS",
-      "PRODUTO_VALOR": "Valor Unitário",
-      "QUANTIDADE": "Quntidade",
-      "VALOR_TOTAL": "Valor Total"
-    }
-  },
   "MENU": {
     "HOME": "Home",
     "UPLOAD": "Upload XML",
+    "CADASTROS": "Cadastros",
+    "CLIENTE": "Clientes",
     "EXEMPLO_SUBMENU": "Exemplos",
     "TABELAS_SUBMENU": "Tabelas",
     "EXEMPLO": "Exemplo",
@@ -1418,23 +1273,6 @@
     "XML": "XML",
     "TABELA_ALIQUOTA_DIFERENCIADA": "Alíq(s). diferenciada",
     "PROTUTOS_INCIDENCIA_MONOFASICA": "Prod. Incidencia Monofasica"
-  },
-  "DASHBOARD": {
-    "TITLE": {
-      "PAGE": "Dashboard"
-    },
-    "ARQUIVO": {
-      "QUANTIDADE": "Quantidade XML Enviado"
-    },
-    "DOCUMENTOS": {
-      "QUANTIDADE": "Quantidade de XML Processados"
-    },
-    "DESTINATARIO": {
-      "QUANTIDADE": "Quantidade de Empresas Processadas"
-    },
-    "ERRO": {
-      "QUANTIDADE": "Quantidade Erro no Processamento"
-    }
   },
   "TIMES": {
     "JUST_NOW": "agora",
@@ -1534,5 +1372,23 @@
     "MAX_SIZE": "Arquivo excede o tamanho máximo de 10mb.",
     "CPFINVALID": "O CPF informado é inválido.",
     "SIZE": "Arquivo excede o tamanho máximo de 10mb."
+  },
+  "CLIENTE": {
+    "TITLE": {
+      "PAGE": "Clientes"
+    },
+    "MESSAGE": {
+      "DELETE_CONFIRM": "Apagar registro do Cliente?"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Cliente"
+    },
+    "FIELD": {
+      "NOME": "Nome",
+      "CPF": "CPF",
+      "TELEFONE": "Telefone",
+      "DATA_NASCIMENTO": "Data de Nascimento",
+      "EMAIL": "E-mail"
+    }
   }
 }

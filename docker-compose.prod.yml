@@ -12,7 +12,7 @@ services:
     deploy:
       labels:
         - traefik.enable=true
-        - traefik.http.routers.clinica-app.rule=Host(`clemente-app.3ptecnologia.com.br`)
+        - traefik.http.routers.clinica-app.rule=Host(`clinica-app.3ptecnologia.com.br`)
         - traefik.http.routers.clinica-app.entrypoints=websecure
         - traefik.http.routers.clinica-app.tls.certresolver=letsencryptresolver
         - traefik.http.routers.clinica-app.priority=1

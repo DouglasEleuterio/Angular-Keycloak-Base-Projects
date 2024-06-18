@@ -6,5 +6,6 @@ export enum PermissionEnum {
   XML_LISTAR = 'Xml.Listar',
   XML_DOWNLOAD = 'Xml.Download',
   TABELA_ALIQUOTA_DIFERENCIADA_LISTAR = 'TabelaAliquotaDiferenciada.Listar',
-  INCIDENCIA_MONOFASICA_LISTAR = 'ProdutosIncidenciaMonofasica.Listar'
+  INCIDENCIA_MONOFASICA_LISTAR = 'ProdutosIncidenciaMonofasica.Listar',
+  CLIENTE_ADICIONAR = 'Cliente.Adicionar'
 }
