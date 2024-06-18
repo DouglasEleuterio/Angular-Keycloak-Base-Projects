@@ -1388,7 +1388,8 @@
       "CPF": "CPF",
       "TELEFONE": "Telefone",
       "DATA_NASCIMENTO": "Data de Nascimento",
-      "EMAIL": "E-mail"
+      "EMAIL": "E-mail",
+      "GENERO": "Genero"
     }
   }
 }
