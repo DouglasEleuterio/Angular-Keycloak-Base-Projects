@@ -8,12 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
   template: `
     <div class="layout-footer">
       <div class="footer-logo-container">
-        <img
-          id="footer-logo"
-          [src]="'assets/layout/images/logo-' + (app.colorScheme === 'light' ? 'gray' : 'gray') + '.png'"
-          alt="atlantis-layout"
-        />
-        <span class="app-name">{{ 'name' | appTranslate : 'application' }}</span>
+
       </div>
       <span class="copyright">&#169; {{ 'organization' | appTranslate : 'application' }} - {{ version }}</span>
     </div>

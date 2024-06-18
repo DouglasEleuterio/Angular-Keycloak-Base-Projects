@@ -7,10 +7,6 @@
   (mouseleave)="appMain.onSidebarMouseLeave($event)"
 >
   <div class="menu-logo" *ngIf="!appMain.isHorizontal() || appMain.isMobile()">
-    <a href="#" class="logo">
-      <img [src]="'assets/layout/images/logo-'+ (app.colorScheme === 'light' ? 'gray' : 'gray') + '.png'" alt="Logo" />
-    </a>
-
     <a href="#" class="app-name" *ngIf="!appMain.isSlim() || appMain.isMobile()">
       <h6 style="color: #0a061a">CRM</h6>
     </a>
