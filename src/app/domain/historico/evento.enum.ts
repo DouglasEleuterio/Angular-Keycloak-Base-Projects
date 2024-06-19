@@ -1,0 +1,7 @@
+export enum EEvento {
+  CADASTRO,
+  EDICAO,
+  EXCLUSAO,
+  ATIVACAO,
+  INATIVACAO
+}

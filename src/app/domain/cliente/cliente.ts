@@ -1,13 +1,15 @@
 import { BaseActiveEntity } from '../../core/domain/base.active.entity';
-
-enum EGenero {
-  MASCULINO = 'Masculino',
-  FEMININO = 'Feminino'
-}
+import { EGenero } from './genero.enum';
+import { Endereco } from '../endereco/endereco.model';
 
 export class Cliente extends BaseActiveEntity {
   nome: string;
-  email: string;
   cpf: string;
+  email: string;
+  telefone: number;
+  dataNascimento: Date;
   genero: EGenero;
+  endereco: Endereco;
+  dataCriacao: Date;
+  dataAtualizacao: Date;
 }

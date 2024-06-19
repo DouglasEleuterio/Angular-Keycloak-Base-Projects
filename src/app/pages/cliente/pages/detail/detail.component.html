@@ -1,0 +1,112 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.detail' | appTranslate:'cliente' }}</h5>
+      </div>
+      <p-divider align="left">
+        <div class="inline-flex align-items-center">
+          <i class="pi pi-user mr-2"></i>
+          <b>Indentificação</b>
+        </div>
+      </p-divider>
+      <div class="detail-body grid">
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label title="{{'field.nome' | appTranslate:'cliente'}}" [value]="entity.nome"></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label title="{{'field.genero' | appTranslate:'cliente'}}" [value]="entity.genero"></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label title="{{'field.cpf' | appTranslate:'cliente'}}"
+                          [value]="entity.cpf | cnpjCpfPipe: false"></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label
+            title="{{'field.telefone' | appTranslate:'cliente'}}"
+            [value]="valueString(convertNumberToString(entity.telefone)) | phoneFormat"
+          ></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label
+            title="{{'field.data_nascimento' | appTranslate:'cliente'}}"
+            [value]="entity.dataNascimento | date: 'dd/MM/yyyy'"
+          ></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3-3">
+          <app-data-label title="{{'field.email' | appTranslate:'cliente'}}" [value]="entity.email"></app-data-label>
+        </div>
+      </div>
+      <p-divider align="left">
+        <div class="inline-flex align-items-center">
+          <i class="pi pi-money-bill mr-2"></i>
+          <b>Endereço</b>
+          <div class="detail-body grid"></div>
+        </div>
+      </p-divider>
+      <div class="detail-body grid">
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label title="{{'field.logradouro' | appTranslate:'endereco'}}"
+                          [value]="entity.endereco.logradouro"></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label
+            title="{{'field.numero' | appTranslate:'endereco'}}"
+            [value]="entity.endereco.numero ? entity.endereco.numero : 'N/A' "
+          ></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label
+            title="{{'field.complemento' | appTranslate:'endereco'}}"
+            [value]="entity.endereco.complemento ? entity.endereco.complemento : 'N/A'"
+          ></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label
+            title="{{'field.bairro' | appTranslate:'endereco'}}"
+            [value]="entity.endereco.bairro ? entity.endereco.bairro : 'N/A'"
+          ></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label
+            title="{{'field.cidade' | appTranslate:'endereco'}}"
+            [value]="entity.endereco.cidade.nome ? entity.endereco.cidade.nome: 'N/A'"
+          ></app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label
+            title="{{'field.estado_uf' | appTranslate:'endereco'}}"
+            [value]="entity.endereco.cidade.estado.uf ? entity.endereco.cidade.estado.uf : 'N/A'"
+          ></app-data-label>
+        </div>
+      </div>
+      <p-divider align="left">
+        <div class="inline-flex align-items-center">
+          <i class="pi pi-shopping-cart mr-2"></i>
+          <b>Histórico</b>
+          <div class="detail-body grid"></div>
+        </div>
+      </p-divider>
+      <div class="detail-body grid">
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label title="{{'field.data_criacao' | appTranslate:'shared'}}"
+                          [value]="entity.dataCriacao | date: 'dd/MM/yyyy'">
+          </app-data-label>
+        </div>
+        <div class="p-field col-12 md:col-6 lg:col-3">
+          <app-data-label
+            title="{{'field.data_atualizacao' | appTranslate:'shared'}}"
+            [value]="entity.dataAtualizacao | date: 'dd/MM/yyyy'"
+          ></app-data-label>
+        </div>
+      </div>
+      <div *ngFor="let h of tableData">
+        <p-accordion>
+          <p-accordionTab header="{{getHeader(h)}}">
+            <p>Lorem ipsum dolor sit amet...</p>
+          </p-accordionTab>
+        </p-accordion>
+      </div>
+    </div>
+  </div>
+</div>

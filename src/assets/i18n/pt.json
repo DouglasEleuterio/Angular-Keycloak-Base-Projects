@@ -1375,7 +1375,8 @@
   },
   "CLIENTE": {
     "TITLE": {
-      "PAGE": "Clientes"
+      "PAGE": "Clientes",
+      "DETAIL": "Cliente"
     },
     "MESSAGE": {
       "DELETE_CONFIRM": "Apagar registro do Cliente?"
@@ -1390,6 +1391,16 @@
       "DATA_NASCIMENTO": "Data de Nascimento",
       "EMAIL": "E-mail",
       "GENERO": "Genero"
+    }
+  },
+  "ENDERECO": {
+    "FIELD": {
+      "LOGRADOURO": "Logradouro",
+      "NUMERO": "Número",
+      "COMPLEMENTO": "Complemento",
+      "BAIRRO": "Bairro",
+      "CIDADE": "Cidade",
+      "ESTADO_UF": "UF"
     }
   }
 }

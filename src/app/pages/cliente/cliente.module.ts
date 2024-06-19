@@ -8,9 +8,12 @@ import { ButtonModule } from 'primeng/button';
 import { SharedModule } from '../../shared/shared.module';
 import { UIModule } from '../../core/ui/ui.module';
 import { TooltipModule } from 'primeng/tooltip';
+import { DetailComponent } from './pages/detail/detail.component';
+import { DividerModule } from 'primeng/divider';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
-  declarations: [FormComponent, ListComponent],
-  imports: [CommonModule, ClienteRoutingModule, TableModule, ButtonModule, SharedModule, UIModule, TooltipModule]
+  declarations: [FormComponent, ListComponent, DetailComponent],
+  imports: [CommonModule, ClienteRoutingModule, TableModule, ButtonModule, SharedModule, UIModule, TooltipModule, DividerModule, AccordionModule]
 })
 export class ClienteModule {}

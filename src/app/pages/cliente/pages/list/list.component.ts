@@ -9,6 +9,8 @@ import { finalize } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { ValidationService } from '../../../../core/ui/notifications/validation.service';
+import { Filter } from '../../../../core/api/filter/filter.model';
+import { BaseController } from '../../../../core/domain/base.controller';
 
 @Component({
   selector: 'app-list',
@@ -18,8 +20,11 @@ import { ValidationService } from '../../../../core/ui/notifications/validation.
 export class ListComponent extends PaginatorComponent {
   tableData: Cliente[] = [];
 
+  listSelect = (u: Cliente) => [u.id, u.nome, u.cpf, u.email, u.genero, u.dataNascimento, u.telefone];
+
   constructor(
     private breadcrumbService: AppBreadcrumbService,
+    private baseController: BaseController,
     private service: ClienteService,
     private translateService: TranslateService,
     private alertService: AlertService,
@@ -30,24 +35,22 @@ export class ListComponent extends PaginatorComponent {
     this.breadcrumbService.setItems([
       AppMenuModel.itemMenuHome,
       {
-        label: 'exemplo.title.page'
+        label: 'cliente.title.page'
       }
     ]);
   }
 
   fetch(): void {
     this.loadingService.startLoading();
-    this.service
-      .paginate(this.pagination)
-      .pipe(
-        finalize(() => {
-          this.loadingService.stopLoading();
-        })
-      )
-      .subscribe(result => {
-        this.tableData = result.content;
-        this.pagination.totalRecords = result.totalElements;
-      });
+    if (this.pagination.filter == null) {
+      this.pagination.filter = new Filter({ search: `situacao==true` }, null);
+      this.pagination.sort = [{ field: 'nome', order: 'asc' }];
+    }
+    this.baseController.fetchSelect(this.listSelect, this.pagination, this.service, result => {
+      this.tableData = result.content;
+      this.pagination.totalRecords = result.totalElements;
+      this.loadingService.stopLoading();
+    });
   }
 
   remove(id: string): void {
