@@ -1376,7 +1376,8 @@
   "CLIENTE": {
     "TITLE": {
       "PAGE": "Clientes",
-      "DETAIL": "Cliente"
+      "DETAIL": "Cliente",
+      "NEW_PAGE": "Cadastrar Cliente"
     },
     "MESSAGE": {
       "DELETE_CONFIRM": "Apagar registro do Cliente?"
@@ -1389,8 +1390,16 @@
       "CPF": "CPF",
       "TELEFONE": "Telefone",
       "DATA_NASCIMENTO": "Data de Nascimento",
+      "DATANASCIMENTO": "Data de Nascimento",
       "EMAIL": "E-mail",
-      "GENERO": "Genero"
+      "GENERO": "Genero",
+      "LOGRADOURO": "Logradouro",
+      "COMPLEMENTO": "Complemento",
+      "NUMERO": "Número" ,
+      "BAIRRO": "Bairro",
+      "CEP": "CEP",
+      "ESTADO": "Estado",
+      "CIDADE": "Cidade"
     }
   },
   "ENDERECO": {

@@ -6,11 +6,30 @@
       </div>
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <p-divider align="left">
+          <div class="inline-flex align-items-center">
+            <i class="pi pi-shopping-cart mr-2"></i>
+            <b>Informações</b>
+            <div class="detail-body grid"></div>
+          </div>
+        </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-6 md:col-2" page="xml">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="nome" maxlength="100" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" page="cliente">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="cpf" maxlength="11" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="telefone" maxlength="11" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="email" maxlength="11" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="genero" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" page="cliente">
             <p-calendar
               appFieldRef
               formControlName="dataNascimento"
@@ -20,6 +39,36 @@
               showIcon="true"
               appDateMask
             ></p-calendar>
+          </app-field>
+        </div>
+        <p-divider align="left">
+          <div class="inline-flex align-items-center">
+            <i class="pi pi-shopping-cart mr-2"></i>
+            <b>Endereço</b>
+            <div class="detail-body grid"></div>
+          </div>
+        </p-divider>
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="logradouro" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-6" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="complemento" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-2" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="numero" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-2" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="bairro" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="cep" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-2" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="estado" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-2" page="cliente">
+            <input appFieldRef pInputText type="text" formControlName="cidade" maxlength="100" />
           </app-field>
         </div>
         <div style="margin-top: 20px">

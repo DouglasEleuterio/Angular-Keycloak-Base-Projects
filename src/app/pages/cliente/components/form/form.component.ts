@@ -5,9 +5,7 @@ import { Cliente } from '../../../../domain/cliente/cliente';
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { plainToClass } from 'class-transformer';
 
 @Component({
@@ -36,15 +34,14 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       nome: [null, [Validators.required]],
       cpf: [null, [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
-      fimVigencia: [null],
-      email: [null, Validators.required],
       telefone: [null, Validators.required],
-      dataNascimento: [null, Validators.required],
       genero: [null, Validators.required],
+      dataNascimento: [null, Validators.required],
+      email: [null, Validators.required],
       logradouro: [null, Validators.required],
       numero: [null, Validators.required],
-      complemento: [null, Validators.required],
-      bairro: [null, Validators.required],
+      complemento: [null],
+      bairro: [null],
       cep: [null, Validators.required],
       cidadeId: [null, Validators.required]
     });
