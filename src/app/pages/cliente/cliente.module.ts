@@ -11,9 +11,31 @@ import { TooltipModule } from 'primeng/tooltip';
 import { DetailComponent } from './pages/detail/detail.component';
 import { DividerModule } from 'primeng/divider';
 import { AccordionModule } from 'primeng/accordion';
+import { NewComponent } from './pages/new/new.component';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
+import { NgxMaskDirective } from 'ngx-mask';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
-  declarations: [FormComponent, ListComponent, DetailComponent],
-  imports: [CommonModule, ClienteRoutingModule, TableModule, ButtonModule, SharedModule, UIModule, TooltipModule, DividerModule, AccordionModule]
+  declarations: [FormComponent, ListComponent, DetailComponent, NewComponent],
+  imports: [
+    CommonModule,
+    ClienteRoutingModule,
+    TableModule,
+    ButtonModule,
+    SharedModule,
+    UIModule,
+    TooltipModule,
+    DividerModule,
+    AccordionModule,
+    CalendarModule,
+    InputTextModule,
+    NgxMaskDirective,
+    ReactiveFormsModule,
+    ReactiveTypedFormsModule,
+    RxReactiveFormsModule
+  ]
 })
 export class ClienteModule {}
