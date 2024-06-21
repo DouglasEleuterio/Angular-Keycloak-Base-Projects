@@ -17,6 +17,9 @@ import { InputTextModule } from 'primeng/inputtext';
 import { NgxMaskDirective } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { DropdownModule } from 'primeng/dropdown';
+import { EstadoService } from '../../domain/endereco/estado.service';
+import { CidadeService } from '../../domain/endereco/cidade.service';
 
 @NgModule({
   declarations: [FormComponent, ListComponent, DetailComponent, NewComponent],
@@ -35,7 +38,9 @@ import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive
     NgxMaskDirective,
     ReactiveFormsModule,
     ReactiveTypedFormsModule,
-    RxReactiveFormsModule
-  ]
+    RxReactiveFormsModule,
+    DropdownModule
+  ],
+  providers: [EstadoService, CidadeService]
 })
 export class ClienteModule {}

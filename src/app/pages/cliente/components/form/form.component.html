@@ -24,7 +24,7 @@
             <input appFieldRef pInputText type="text" formControlName="telefone" maxlength="11" />
           </app-field>
           <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
-            <input appFieldRef pInputText type="text" formControlName="email" maxlength="11" />
+            <input appFieldRef pInputText type="text" formControlName="email" maxlength="100" />
           </app-field>
           <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="genero" />
@@ -64,11 +64,28 @@
           <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="cep" maxlength="100" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-2" page="cliente">
-            <input appFieldRef pInputText type="text" formControlName="estado" maxlength="100" />
+          <app-field class="p-field col-12 md:col-6 lg:col-2" [submitted]="submitted" page="cliente">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+              [options]="estadoList"
+              optionLabel="nome"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="estado"
+              (onChange)="getCidadesList()"
+            ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-2" page="cliente">
-            <input appFieldRef pInputText type="text" formControlName="cidade" maxlength="100" />
+          <app-field class="p-field col-12 md:col-6 lg:col-2" [submitted]="submitted" page="cliente">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+              [options]="cidadeList"
+              optionLabel="nome"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="cidade"
+            ></p-dropdown>
           </app-field>
         </div>
         <div style="margin-top: 20px">
