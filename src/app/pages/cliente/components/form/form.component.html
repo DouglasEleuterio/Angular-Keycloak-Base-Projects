@@ -23,11 +23,18 @@
           <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="telefone" maxlength="11" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="email" maxlength="100" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
-            <input appFieldRef pInputText type="text" formControlName="genero" />
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" page="cliente">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+              [options]="generoList"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="genero"
+            ></p-dropdown>
           </app-field>
           <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" page="cliente">
             <p-calendar
@@ -49,22 +56,22 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-6" page="cliente">
+          <app-field class="p-field col-12 md:col-6 lg:col-5" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="logradouro" maxlength="100" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-6" page="cliente">
+          <app-field class="p-field col-12 md:col-6 lg:col-5" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="complemento" maxlength="100" />
           </app-field>
           <app-field class="p-field col-12 md:col-6 lg:col-2" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="numero" maxlength="100" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-2" page="cliente">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="bairro" maxlength="100" />
           </app-field>
           <app-field class="p-field col-12 md:col-6 lg:col-3" page="cliente">
-            <input appFieldRef pInputText type="text" formControlName="cep" maxlength="100" />
+            <input appFieldRef pInputText type="text" formControlName="cep" maxlength="9" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-2" [submitted]="submitted" page="cliente">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" page="cliente">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -76,7 +83,7 @@
               (onChange)="getCidadesList()"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-2" [submitted]="submitted" page="cliente">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" page="cliente">
             <p-dropdown
               appFieldRef
               [filter]="true"

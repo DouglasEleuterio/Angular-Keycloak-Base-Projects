@@ -15,6 +15,7 @@ import { EstadoService } from '../../../../domain/endereco/estado.service';
 import { Cidade } from '../../../../domain/endereco/cidade.model';
 import { CidadeService } from '../../../../domain/endereco/cidade.service';
 import { Endereco } from '../../../../domain/endereco/endereco.model';
+import { EGenero } from '../../../../domain/cliente/genero.enum';
 
 @Component({
   selector: 'app-cliente-form',
@@ -29,6 +30,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   onCancel: () => void;
   estadoList: Estado[] = [];
   cidadeList: Cidade[] = [];
+  generoList: any[] = [];
 
   constructor(
     protected alertService: AlertService,
@@ -45,6 +47,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   ngOnInit(): void {
     this.getEstadosList();
     this.buildFormGroup();
+    this.generoList.push(EGenero.MASCULINO.toUpperCase());
+    this.generoList.push(EGenero.FEMININO.toUpperCase());
   }
 
   buildFormGroup(): void {
@@ -67,6 +71,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   submit(): void {
     this.submitted = true;
+    this.log(this.formGroup.value);
     if (this.formGroup.valid && this.isValidDatas()) {
       const entity: Cliente = this.buildCliente();
       this.onSubmit(entity, this.formGroup);
