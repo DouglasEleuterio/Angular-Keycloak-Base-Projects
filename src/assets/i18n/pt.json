@@ -1383,7 +1383,10 @@
       "DELETE_CONFIRM": "Apagar registro do Cliente?"
     },
     "ACTION": {
-      "ADD": "Adicionar Cliente"
+      "ADD": "Adicionar",
+      "DETAIL": "Visualizar",
+      "EDIT": "Editar",
+      "DEL": "Apagar"
     },
     "FIELD": {
       "NOME": "Nome",

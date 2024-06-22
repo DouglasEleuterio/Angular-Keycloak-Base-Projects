@@ -26,7 +26,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   public entity: Cliente;
   tableData: Historico[] = [];
 
-  menuBack: AppMenuItem = AppMenuModel.itemMenuHome;
+  menuBack: AppMenuItem = AppMenuModel.itemMenuCliente;
 
   listHistoricoSelect = (u: Historico) => [
     u.id,
