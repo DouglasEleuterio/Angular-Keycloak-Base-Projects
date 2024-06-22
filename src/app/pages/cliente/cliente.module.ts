@@ -20,9 +20,10 @@ import { ReactiveTypedFormsModule, RxReactiveFormsModule } from '@rxweb/reactive
 import { DropdownModule } from 'primeng/dropdown';
 import { EstadoService } from '../../domain/endereco/estado.service';
 import { CidadeService } from '../../domain/endereco/cidade.service';
+import { EditComponent } from './pages/edit/edit.component';
 
 @NgModule({
-  declarations: [FormComponent, ListComponent, DetailComponent, NewComponent],
+  declarations: [FormComponent, ListComponent, DetailComponent, NewComponent, EditComponent],
   imports: [
     CommonModule,
     ClienteRoutingModule,
