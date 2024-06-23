@@ -55,7 +55,8 @@
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <div class="p-fluid formgrid grid">
+        {{this.formGroup.get('endereco').value | json}}
+        <div class="p-fluid formgrid grid" formGroupName="endereco">
           <app-field class="p-field col-12 md:col-6 lg:col-5" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="logradouro" maxlength="100" />
           </app-field>

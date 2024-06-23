@@ -5,16 +5,13 @@ import { Cliente } from '../../../../domain/cliente/cliente';
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { plainToClass } from 'class-transformer';
 import { from } from '../../../../core/api/select/select';
 import { Estado } from '../../../../domain/endereco/estado.model';
 import { EstadoService } from '../../../../domain/endereco/estado.service';
 import { Cidade } from '../../../../domain/endereco/cidade.model';
 import { CidadeService } from '../../../../domain/endereco/cidade.service';
-import { Endereco } from '../../../../domain/endereco/endereco.model';
 import { EGenero } from '../../../../domain/cliente/genero.enum';
 
 @Component({
@@ -25,12 +22,16 @@ import { EGenero } from '../../../../domain/cliente/genero.enum';
 export class FormComponent extends BaseFormComponent implements OnInit {
   @Input() isNew: boolean;
 
+  public estado: Estado;
+
   formGroup: FormGroup;
   onSubmit: (entity: Cliente, formGroup) => void;
   onCancel: () => void;
   estadoList: Estado[] = [];
   cidadeList: Cidade[] = [];
   generoList: any[] = [];
+  cidadeSelecionada: Cidade;
+  estadoSelecionado: Estado;
 
   constructor(
     protected alertService: AlertService,
@@ -59,13 +60,15 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       genero: [null, Validators.required],
       dataNascimento: [null, Validators.required],
       email: [null, Validators.required],
-      logradouro: [null, Validators.required],
-      numero: [null, Validators.required],
-      complemento: [null],
-      bairro: [null],
-      cep: [null, Validators.required],
-      estado: [null, Validators.required],
-      cidade: [null, Validators.required]
+      endereco: this.formBuilder.group({
+        logradouro: [null, Validators.required],
+        numero: [null, Validators.required],
+        complemento: [null],
+        bairro: [null],
+        cep: [null, Validators.required],
+        cidade: [null, Validators.required],
+        estado: [null, Validators.required]
+      })
     });
   }
 
@@ -73,23 +76,11 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.submitted = true;
     this.log(this.formGroup.value);
     if (this.formGroup.valid && this.isValidDatas()) {
-      const entity: Cliente = this.buildCliente();
+      const entity: Cliente = plainToClass(Cliente, this.formGroup.value);
       this.onSubmit(entity, this.formGroup);
     } else {
       this.validationError();
     }
-  }
-
-  private buildCliente(): Cliente {
-    const cliente = plainToClass(Cliente, this.formGroup.value);
-    cliente.endereco = new Endereco();
-    cliente.endereco.logradouro = this.formGroup.get('logradouro').value;
-    cliente.endereco.cep = this.formGroup.get('cep').value;
-    cliente.endereco.bairro = this.formGroup.get('bairro').value;
-    cliente.endereco.numero = this.formGroup.get('numero').value;
-    cliente.endereco.complemento = this.formGroup.get('complemento').value;
-    cliente.endereco.cidade = plainToClass(Cidade, this.formGroup.get('cidade').value);
-    return cliente;
   }
 
   cancel(): void {
@@ -136,7 +127,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   getCidadesList() {
     const query = from<Cidade>()
       .select((u: Cidade) => [u.id, u.nome])
-      .where(x => x.eq('estado.id', this.formGroup.get('estado').value.id))
+      .where(x => x.eq('estado.id', this.formGroup.get('endereco.estado').value.id))
       .asc(x => x.nome)
       .getQuery();
 

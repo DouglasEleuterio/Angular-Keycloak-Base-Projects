@@ -1377,7 +1377,8 @@
     "TITLE": {
       "PAGE": "Clientes",
       "DETAIL": "Cliente",
-      "NEW_PAGE": "Cadastrar Cliente"
+      "NEW_PAGE": "Cadastrar Cliente",
+      "EDIT_PAGE": "Alterar Cliente"
     },
     "MESSAGE": {
       "DELETE_CONFIRM": "Apagar registro do Cliente?"
