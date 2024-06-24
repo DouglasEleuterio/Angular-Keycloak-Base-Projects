@@ -55,7 +55,6 @@
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        {{this.formGroup.get('endereco').value | json}}
         <div class="p-fluid formgrid grid" formGroupName="endereco">
           <app-field class="p-field col-12 md:col-6 lg:col-5" page="cliente">
             <input appFieldRef pInputText type="text" formControlName="logradouro" maxlength="100" />
@@ -79,6 +78,7 @@
               emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
               [options]="estadoList"
               optionLabel="nome"
+              optionValue="id"
               placeholder="{{'select' | appTranslate:'shared'}}"
               formControlName="estado"
               (onChange)="getCidadesList()"
@@ -91,6 +91,7 @@
               emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
               [options]="cidadeList"
               optionLabel="nome"
+              optionValue="id"
               placeholder="{{'select' | appTranslate:'shared'}}"
               formControlName="cidade"
             ></p-dropdown>

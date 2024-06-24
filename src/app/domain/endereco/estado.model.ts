@@ -3,4 +3,6 @@ export class Estado {
   nome: string;
   codigoIBGE: string;
   uf: string;
+  dataCriacao: Date;
+  dataAtualizacao: Date;
 }

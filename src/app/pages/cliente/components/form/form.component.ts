@@ -94,6 +94,9 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   patchValue(entity: Cliente): void {
     if (entity != null) {
       this.formGroup.patchValue(entity);
+      this.formGroup.controls['endereco'].get('estado').setValue(entity.endereco.cidade.estado.id);
+      this.formGroup.controls['endereco'].get('cidade').setValue(entity.endereco.cidade.id);
+      this.getCidadesList();
     }
   }
 
@@ -127,7 +130,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   getCidadesList() {
     const query = from<Cidade>()
       .select((u: Cidade) => [u.id, u.nome])
-      .where(x => x.eq('estado.id', this.formGroup.get('endereco.estado').value.id))
+      .where(x => x.eq('estado.id', this.formGroup.get('endereco.estado').value))
       .asc(x => x.nome)
       .getQuery();
 
