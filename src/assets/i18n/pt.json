@@ -1381,7 +1381,9 @@
       "EDIT_PAGE": "Alterar Cliente"
     },
     "MESSAGE": {
-      "DELETE_CONFIRM": "Apagar registro do Cliente?"
+      "DELETE_CONFIRM": "Apagar registro do Cliente?",
+      "UPDATED": "Cliente Atualizado com Sucesso",
+      "SUCCESS": "Cliente Cadastro com Sucesso"
     },
     "ACTION": {
       "ADD": "Adicionar",

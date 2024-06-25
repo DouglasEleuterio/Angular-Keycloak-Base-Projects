@@ -61,6 +61,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       dataNascimento: [null, Validators.required],
       email: [null, Validators.required],
       endereco: this.formBuilder.group({
+        id: [null],
         logradouro: [null, Validators.required],
         numero: [null, Validators.required],
         complemento: [null],
