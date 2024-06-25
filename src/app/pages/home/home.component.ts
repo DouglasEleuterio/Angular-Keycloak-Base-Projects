@@ -7,7 +7,7 @@ import { FileService } from '../../domain/file/file.service';
 @Component({
   templateUrl: './home.component.html'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   xmlProcessado: number;
   arquivosEnviados: number;
   arquivosErro: number;
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     this.breadcrumbService.setItems([{ label: '' }, { label: '', routerLink: [''] }]);
   }
 
-  ngOnInit(): void {
+  ngaOnInit(): void {
     this.loadingService.startLoading();
     this.xmlService.getQuantidadeXmlProcessado().subscribe(total => {
       this.xmlProcessado = total;
