@@ -1387,10 +1387,10 @@
       "SUCCESS": "Cliente Cadastro com Sucesso"
     },
     "ACTION": {
-      "ADD": "Adicionar",
-      "DETAIL": "Visualizar",
-      "EDIT": "Editar",
-      "DEL": "Apagar"
+      "ADD": "Adicionar Cliente",
+      "DETAIL": "Visualizar Cliente",
+      "EDIT": "Editar Cliente",
+      "DEL": "Apagar Cliente"
     },
     "FIELD": {
       "NOME": "Nome",
@@ -1407,6 +1407,28 @@
       "CEP": "CEP",
       "ESTADO": "Estado",
       "CIDADE": "Cidade"
+    }
+  },
+  "PROCEDIMENTO": {
+    "TITLE": {
+      "PAGE": "Procedimentos"
+    },
+    "FIELD": {
+      "NOME": "Nome",
+      "VALOR": "Valor",
+      "QUANTIDADE_SESSOES": "Quantidade Sessão",
+      "INTERVALO_ENTRE_SESSOES": "Intervalo Entre Sessão"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Procedimento",
+      "DETAIL": "Visualizar Procedimento",
+      "EDIT": "Editar Procedimento",
+      "DEL": "Apagar Procedimento"
+    },
+    "MESSAGE": {
+      "DELETE_CONFIRM": "Apagar registro do Procedimento?",
+      "UPDATED": "Procedimento Atualizado com Sucesso",
+      "SUCCESS": "Procedimento Cadastro com Sucesso"
     }
   },
   "ENDERECO": {

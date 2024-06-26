@@ -1,1 +1,78 @@
-<p>list works!</p>
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'procedimento'}}</h5>
+        <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'procedimento'}}"></button>
+      </div>
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1" pSortableColumn="nome">
+                {{'field.nome' | appTranslate:'procedimento'}}
+                <p-sortIcon field="nome"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="valor">
+                {{'field.valor' | appTranslate:'procedimento'}}
+                <p-sortIcon field="valor"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="quantidadeSessoes">
+                {{'field.quantidade_sessoes' | appTranslate:'procedimento'}}
+                <p-sortIcon field="quantidadeSessoes"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" pSortableColumn="intervaloEntreSessoes">
+                {{'field.intervalo_entre_Sessoes' | appTranslate:'procedimento'}}
+                <p-sortIcon field="intervaloEntreSessoes"></p-sortIcon>
+              </th>
+              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.nome' | appTranslate:'procedimento'}}</span>
+                <span pTooltip="{{entity.nome}}"> {{entity.nome}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.valor' | appTranslate:'procedimento'}}</span>
+                <span pTooltip="{{entity.valor}}"> {{entity.valor}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.quantidadeSessoes' | appTranslate:'procedimento'}}</span>
+                <span pTooltip="{{entity.quantidadeSessoes}}"> {{entity.quantidadeSessoes}} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.intervaloEntreSessoes' | appTranslate:'procedimento'}}</span>
+                <span pTooltip="{{entity.intervaloEntreSessoes}}"> {{entity.intervaloEntreSessoes}} </span>
+              </td>
+              <td colspan="1" class="actions">
+                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <app-table-buttons page="procedimento" [entityId]="entity.id" (onRemove)="remove($event)"></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
