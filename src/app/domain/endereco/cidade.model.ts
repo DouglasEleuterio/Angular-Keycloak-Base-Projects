@@ -5,4 +5,6 @@ export class Cidade {
   nome: string;
   codigoIBGE: string;
   estado: Estado;
+  dataCriacao: Date;
+  dataAtualizacao: Date;
 }

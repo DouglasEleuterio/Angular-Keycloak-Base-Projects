@@ -8,4 +8,6 @@ export class Endereco {
   bairro: string;
   cep: string;
   cidade: Cidade;
+  dataCriacao: Date;
+  dataAtualizacao: Date;
 }

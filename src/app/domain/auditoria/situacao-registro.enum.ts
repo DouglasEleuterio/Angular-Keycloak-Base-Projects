@@ -1,4 +1,4 @@
 export enum ESituacaoRegistro {
-  ANTERIOR,
-  ATUAL
+  ANTERIOR = 'ANTERIOR',
+  ATUAL = 'ATUAL'
 }

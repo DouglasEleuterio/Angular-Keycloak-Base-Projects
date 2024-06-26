@@ -22,7 +22,7 @@ export class EditComponent implements OnInit, AfterViewInit {
 
   menuBack: AppMenuItem = AppMenuModel.itemMenuCliente;
 
-  private id: number | string;
+  private id: number;
 
   private entity: Cliente;
 

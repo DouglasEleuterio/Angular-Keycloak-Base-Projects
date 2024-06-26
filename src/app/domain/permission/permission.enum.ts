@@ -1,5 +1,5 @@
 export enum PermissionEnum {
-  ADMINISTRADOR = 'ADMINISTRADOR',
+  ADMINISTRADOR = 'Clinica.Administrador',
   OPERADOR = 'OPERADOR',
   EXEMPLO = 'Exemplo.Listar',
   UPLOAD_ADICIONAR = 'Upload.Adicionar',

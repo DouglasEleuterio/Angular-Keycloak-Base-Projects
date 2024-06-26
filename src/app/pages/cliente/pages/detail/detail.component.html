@@ -18,8 +18,7 @@
           <app-data-label title="{{'field.genero' | appTranslate:'cliente'}}" [value]="entity.genero"></app-data-label>
         </div>
         <div class="p-field col-12 md:col-6 lg:col-3">
-          <app-data-label title="{{'field.cpf' | appTranslate:'cliente'}}"
-                          [value]="entity.cpf | cnpjCpfPipe: false"></app-data-label>
+          <app-data-label title="{{'field.cpf' | appTranslate:'cliente'}}" [value]="entity.cpf | cnpjCpfPipe: false"></app-data-label>
         </div>
         <div class="p-field col-12 md:col-6 lg:col-3">
           <app-data-label
@@ -46,8 +45,7 @@
       </p-divider>
       <div class="detail-body grid">
         <div class="p-field col-12 md:col-6 lg:col-3">
-          <app-data-label title="{{'field.logradouro' | appTranslate:'endereco'}}"
-                          [value]="entity.endereco.logradouro"></app-data-label>
+          <app-data-label title="{{'field.logradouro' | appTranslate:'endereco'}}" [value]="entity.endereco.logradouro"></app-data-label>
         </div>
         <div class="p-field col-12 md:col-6 lg:col-3">
           <app-data-label
@@ -89,8 +87,7 @@
       </p-divider>
       <div class="detail-body grid">
         <div class="p-field col-12 md:col-6 lg:col-3">
-          <app-data-label title="{{'field.data_criacao' | appTranslate:'shared'}}"
-                          [value]="entity.dataCriacao | date: 'dd/MM/yyyy'">
+          <app-data-label title="{{'field.data_criacao' | appTranslate:'shared'}}" [value]="entity.dataCriacao | date: 'dd/MM/yyyy'">
           </app-data-label>
         </div>
         <div class="p-field col-12 md:col-6 lg:col-3">
@@ -101,9 +98,14 @@
         </div>
       </div>
       <div *ngFor="let h of tableData">
-        <p-accordion>
-          <p-accordionTab header="{{getHeader(h)}}">
-            <p>Lorem ipsum dolor sit amet...</p>
+        <p-accordion (onOpen)="obterRegistrosAuditoria(h)">
+          <p-accordionTab [disabled]="!isUsuarioAdminEEventoEdicao(h)" header="{{getHeader(h)}}">
+            <p-card header="Anterior">
+              <ngx-json-viewer [json]="dadoAntigo" [expanded]="false"></ngx-json-viewer>
+            </p-card>
+            <p-card header="Atual">
+              <ngx-json-viewer [json]="dadoAtual" [expanded]="false"></ngx-json-viewer>
+            </p-card>
           </p-accordionTab>
         </p-accordion>
       </div>

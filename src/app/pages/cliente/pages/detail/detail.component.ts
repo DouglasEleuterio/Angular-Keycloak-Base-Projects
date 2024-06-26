@@ -15,6 +15,12 @@ import { Historico } from '../../../../domain/historico/historico.model';
 import { HistoricoService } from '../../../../domain/historico/historico.service';
 import { ETipoEntidade } from '../../../../domain/historico/tipo-entidade.enum';
 import * as moment from 'moment';
+import { AuthenticationService } from '../../../../core/auth/auth.service';
+import { PermissionEnum } from '../../../../domain/permission/permission.enum';
+import { AuditoriaService } from '../../../../domain/auditoria/auditoria-service';
+import { Auditoria } from '../../../../domain/auditoria/auditoria.model';
+import { ESituacaoRegistro } from '../../../../domain/auditoria/situacao-registro.enum';
+import { EEvento } from '../../../../domain/historico/evento.enum';
 
 @Component({
   selector: 'app-detail',
@@ -24,30 +30,29 @@ import * as moment from 'moment';
 export class DetailComponent extends PaginatorComponent implements OnInit {
   private id: number | string;
   public entity: Cliente;
+  auditorias: Auditoria[] = [];
   tableData: Historico[] = [];
+  dadoAntigo: Cliente;
+  dadoAtual: Cliente;
 
   menuBack: AppMenuItem = AppMenuModel.itemMenuCliente;
 
-  listHistoricoSelect = (u: Historico) => [
-    u.id,
-    u.tipoEvento,
-    u.dataOcorrencia,
-    u.nomeUsuario,
-    u.idEntidadeGeradora,
-    u.tipoEntidade,
-    u.auditorias
-  ];
+  listHistoricoSelect = (u: Historico) => [u.id, u.tipoEvento, u.dataOcorrencia, u.nomeUsuario, u.idEntidadeGeradora, u.tipoEntidade];
+
+  listAuditoriaSelect = (u: Auditoria) => [u.id, u.situacaoRegistro, u.dado];
 
   constructor(
     private route: ActivatedRoute,
     private service: ClienteService,
     private historicoService: HistoricoService,
+    private auditoriaService: AuditoriaService,
     private router: Router,
     private validationService: ValidationService,
     private alertService: AlertService,
     private baseController: BaseController,
     private loadingService: LoadingService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private authenticationService: AuthenticationService
   ) {
     super('PaginationHistoricoCliente');
   }
@@ -112,6 +117,24 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   fetch(): void {}
 
   getHeader(h: Historico) {
-    return `Data evento: ${moment(h.dataOcorrencia).format('DD/MM/YYYY HH:mm:ss')} | Tipo de Evento: ${h.tipoEvento} | Nome Usuário: ${h.nomeUsuario}`;
+    return `Data evento: ${moment(h.dataOcorrencia).format('DD/MM/YYYY HH:mm:ss')} | Tipo de Evento: ${h.tipoEvento} | Nome Usuário: ${
+      h.nomeUsuario
+    }`;
   }
+
+  obterRegistrosAuditoria(h: Historico) {
+    this.pagination.filter = new Filter({ search: `historico.id==${h.id}` }, null);
+    this.baseController.fetch(this.pagination, this.auditoriaService, result => {
+      this.auditorias = result.content;
+      const entity: Cliente = JSON.parse(result.content[0].dado);
+      this.dadoAtual = JSON.parse(this.auditorias.find(auditoria => auditoria.situacaoRegistro == ESituacaoRegistro.ATUAL).dado);
+      this.dadoAntigo = JSON.parse(this.auditorias.find(auditoria => auditoria.situacaoRegistro == ESituacaoRegistro.ANTERIOR).dado);
+    });
+  }
+
+  isUsuarioAdminEEventoEdicao(h: Historico) {
+    return this.authenticationService.checkPermission([PermissionEnum.ADMINISTRADOR]) && h.tipoEvento == EEvento.EDICAO;
+  }
+
+  protected readonly EEvento = EEvento;
 }

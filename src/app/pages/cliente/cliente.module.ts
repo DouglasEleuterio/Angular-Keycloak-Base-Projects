@@ -21,6 +21,8 @@ import { DropdownModule } from 'primeng/dropdown';
 import { EstadoService } from '../../domain/endereco/estado.service';
 import { CidadeService } from '../../domain/endereco/cidade.service';
 import { EditComponent } from './pages/edit/edit.component';
+import { CardModule } from 'primeng/card';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @NgModule({
   declarations: [FormComponent, ListComponent, DetailComponent, NewComponent, EditComponent],
@@ -40,7 +42,9 @@ import { EditComponent } from './pages/edit/edit.component';
     ReactiveFormsModule,
     ReactiveTypedFormsModule,
     RxReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    CardModule,
+    NgxJsonViewerModule
   ],
   providers: [EstadoService, CidadeService]
 })
