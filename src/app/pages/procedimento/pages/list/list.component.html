@@ -50,7 +50,7 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.valor' | appTranslate:'procedimento'}}</span>
-                <span pTooltip="{{entity.valor}}"> {{entity.valor}} </span>
+                <span pTooltip="{{entity.valor}}"> {{entity.valor | thousandFormat}} </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.quantidadeSessoes' | appTranslate:'procedimento'}}</span>
@@ -58,7 +58,9 @@
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.intervaloEntreSessoes' | appTranslate:'procedimento'}}</span>
-                <span pTooltip="{{entity.intervaloEntreSessoes}}"> {{entity.intervaloEntreSessoes}} </span>
+                <span pTooltip="{{entity.intervaloEntreSessoes}}">
+                  {{entity.intervaloEntreSessoes === null ? '-' : entity.intervaloEntreSessoes}}
+                </span>
               </td>
               <td colspan="1" class="actions">
                 <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>

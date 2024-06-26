@@ -11,7 +11,15 @@
             <input appFieldRef pInputText type="text" formControlName="nome" maxlength="100" />
           </app-field>
           <app-field class="p-field col-12 md:col-6 lg:col-3" page="procedimento">
-            <input appFieldRef pInputText type="number" formControlName="valor" maxlength="11" />
+            <p-inputNumber
+              appFieldRef
+              formControlName="valor"
+              inputId="currency-brazil"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+              maxlength="13"
+            />
           </app-field>
           <app-field class="p-field col-12 md:col-6 lg:col-3" page="procedimento" labelName="quantidade_sessoes">
             <input appFieldRef pInputText type="number" formControlName="quantidadeSessoes" maxlength="11" />
