@@ -25,6 +25,11 @@ const routes: Routes = [
     canActivate: [TableStateClearGuard]
   },
   {
+    path: 'procedimento',
+    loadChildren: () => import('./procedimento/procedimento.module').then(m => m.ProcedimentoModule),
+    canActivate: [TableStateClearGuard]
+  },
+  {
     path: 'exemplo',
     loadChildren: () => import('./exemplo/exemplo.module').then(m => m.ExemploModule),
     canActivate: [TableStateClearGuard]
@@ -117,5 +122,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class PagesRoutingModule {
-}
+export class PagesRoutingModule {}
