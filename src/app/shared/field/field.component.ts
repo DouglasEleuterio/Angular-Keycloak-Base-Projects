@@ -26,6 +26,9 @@ export class FieldComponent implements DoCheck {
   page: string;
 
   @Input()
+  labelName: string;
+
+  @Input()
   hideLabel?: boolean;
 
   @Input()
@@ -44,6 +47,9 @@ export class FieldComponent implements DoCheck {
   }
 
   get translateFieldName(): string {
+    if (this.labelName !== null && this.labelName !== undefined) {
+      return `field.${this.labelName}`;
+    }
     return `field.${this.controlName}`;
   }
 

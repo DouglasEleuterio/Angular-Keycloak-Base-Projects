@@ -8,9 +8,18 @@ import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { UIModule } from '../../core/ui/ui.module';
 import { RippleModule } from 'primeng/ripple';
+import { FormComponent } from './components/form/form.component';
+import { CalendarModule } from 'primeng/calendar';
+import { DividerModule } from 'primeng/divider';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { PaginatorModule } from 'primeng/paginator';
+import { ReactiveFormsModule } from '@angular/forms';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { NewComponent } from './pages/new/new.component';
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListComponent, FormComponent, NewComponent],
   imports: [
     CommonModule,
     ProcedimentoRoutingModule,
@@ -20,7 +29,14 @@ import { RippleModule } from 'primeng/ripple';
     TableModule,
     TooltipModule,
     UIModule,
-    RippleModule
+    RippleModule,
+    CalendarModule,
+    DividerModule,
+    DropdownModule,
+    InputTextModule,
+    PaginatorModule,
+    ReactiveFormsModule,
+    RxReactiveFormsModule
   ]
 })
 export class ProcedimentoModule {}

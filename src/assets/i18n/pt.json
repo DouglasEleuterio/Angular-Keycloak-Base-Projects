@@ -1382,15 +1382,16 @@
       "EDIT_PAGE": "Alterar Cliente"
     },
     "MESSAGE": {
-      "DELETE_CONFIRM": "Apagar registro do Cliente?",
+      "DELETE_CONFIRM": "Excluir registro do Cliente?",
       "UPDATED": "Cliente Atualizado com Sucesso",
+      "DELETED_SUCCES": "Cliente excluido com sucesso",
       "SUCCESS": "Cliente Cadastro com Sucesso"
     },
     "ACTION": {
       "ADD": "Adicionar Cliente",
       "DETAIL": "Visualizar Cliente",
       "EDIT": "Editar Cliente",
-      "DEL": "Apagar Cliente"
+      "DEL": "Excluir Cliente"
     },
     "FIELD": {
       "NOME": "Nome",
@@ -1411,24 +1412,28 @@
   },
   "PROCEDIMENTO": {
     "TITLE": {
-      "PAGE": "Procedimentos"
+      "PAGE": "Procedimentos",
+      "DETAIL": "PROCEDIMENTO.TITLE.DETAIL",
+      "NEW_PAGE": "Cadastrar Procedimento",
+      "EDIT_PAGE": "Alterar Procedimento"
     },
     "FIELD": {
       "NOME": "Nome",
       "VALOR": "Valor",
       "QUANTIDADE_SESSOES": "Quantidade Sessão",
-      "INTERVALO_ENTRE_SESSOES": "Intervalo Entre Sessão"
+      "INTERVALO_ENTRE_SESSOES": "Intervalo Entre Sessão (dias)"
     },
     "ACTION": {
       "ADD": "Adicionar Procedimento",
       "DETAIL": "Visualizar Procedimento",
       "EDIT": "Editar Procedimento",
-      "DEL": "Apagar Procedimento"
+      "DEL": "Excluir Procedimento"
     },
     "MESSAGE": {
-      "DELETE_CONFIRM": "Apagar registro do Procedimento?",
+      "DELETE_CONFIRM": "Excluir registro do Procedimento?",
       "UPDATED": "Procedimento Atualizado com Sucesso",
-      "SUCCESS": "Procedimento Cadastro com Sucesso"
+      "SUCCESS": "Procedimento Cadastro com Sucesso",
+      "DELETED_SUCCES": "Procedimento excluido com sucesso"
     }
   },
   "ENDERECO": {
