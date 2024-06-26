@@ -1,0 +1,29 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'procedimento' }}</h5>
+      </div>
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" page="procedimento">
+            <input appFieldRef pInputText type="text" formControlName="nome" maxlength="100" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-3" page="procedimento">
+            <input appFieldRef pInputText type="number" formControlName="valor" maxlength="11" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-3" page="procedimento" labelName="quantidade_sessoes">
+            <input appFieldRef pInputText type="number" formControlName="quantidadeSessoes" maxlength="11" />
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-6" page="procedimento" labelName="intervalo_entre_sessoes">
+            <input appFieldRef pInputText type="number" formControlName="intervaloEntreSessoes" maxlength="100" />
+          </app-field>
+        </div>
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
