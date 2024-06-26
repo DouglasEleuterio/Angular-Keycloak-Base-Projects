@@ -1272,7 +1272,8 @@
     "DISTANCIA-LOCALIDADE": "Distância entre Localidades",
     "XML": "XML",
     "TABELA_ALIQUOTA_DIFERENCIADA": "Alíq(s). diferenciada",
-    "PROTUTOS_INCIDENCIA_MONOFASICA": "Prod. Incidencia Monofasica"
+    "PROTUTOS_INCIDENCIA_MONOFASICA": "Prod. Incidencia Monofasica",
+    "PROCEDIMENTO": "Procedimento"
   },
   "TIMES": {
     "JUST_NOW": "agora",

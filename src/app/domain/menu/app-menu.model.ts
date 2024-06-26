@@ -38,6 +38,14 @@ export class AppMenuModel {
     permissions: [PermissionEnum.CLIENTE_ADICIONAR]
   };
 
+  public static readonly itemMenuProcedimento: AppMenuItem = {
+    label: 'menu.procedimento',
+    icon: 'pi pi-fw pi-map-marker',
+    routerLink: ['/procedimento'],
+    dontNeedPermission: false,
+    permissions: [PermissionEnum.PROCEDIMENTO_ADICIONAR]
+  };
+
   public static readonly itemMenuXML: AppMenuItem = {
     label: 'menu.xml',
     icon: 'pi pi-fw pi-file-import',
@@ -192,6 +200,7 @@ export class AppMenuModel {
     dontNeedPermission: true,
     items: [
       AppMenuModel.itemMenuCliente,
+      AppMenuModel.itemMenuProcedimento
       // AppMenuModel.itemMenuTipoLocalidade,
       // AppMenuModel.itemMenuClassificacaoLocalidade,
       // AppMenuModel.itemMenuTipoEvento,
