@@ -43,7 +43,15 @@ export class AppMenuModel {
     icon: 'pi pi-fw pi-map-marker',
     routerLink: ['/procedimento'],
     dontNeedPermission: false,
-    permissions: [PermissionEnum.PROCEDIMENTO_ADICIONAR]
+    permissions: [PermissionEnum.PROCEDIMENTO_LISTAR]
+  };
+
+  public static readonly itemMenuAquisicao: AppMenuItem = {
+    label: 'menu.aquisicao',
+    icon: 'pi pi-fw pi-shopping-cart',
+    routerLink: ['/aquisicao'],
+    dontNeedPermission: false,
+    permissions: [PermissionEnum.AQUISICAO_LISTAR]
   };
 
   public static readonly itemMenuXML: AppMenuItem = {
@@ -216,13 +224,13 @@ export class AppMenuModel {
   };
 
   public static readonly menu: AppMenuItem[] = [
-    // AppMenuModel.itemMenuExemplo,
+    AppMenuModel.itemMenuAquisicao,
+    AppMenuModel.menuCadastros
     // AppMenuModel.itemMenuUploadXML,
     // AppMenuModel.itemTabelaAliquotaDiferenciada,
     // AppMenuModel.itemMenuXML,
     // AppMenuModel.itemMenuProdutosIncidenciaMonofasica
     // AppMenuModel.itemMenuHome,
-    AppMenuModel.menuCadastros
     // AppMenuModel.itemMenuEvento,
     // AppMenuModel.itemMenuSolicitacao
   ];
