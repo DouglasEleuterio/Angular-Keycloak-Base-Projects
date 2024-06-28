@@ -1446,5 +1446,36 @@
       "CIDADE": "Cidade",
       "ESTADO_UF": "UF"
     }
+  },
+  "AQUISICAO": {
+    "TITLE": {
+      "PAGE": "Aquisições",
+      "DETAIL": "AQUISICAO.TITLE.DETAIL",
+      "NEW_PAGE": "Cadastrar Aquisição",
+      "EDIT_PAGE": "Alterar Aquisição"
+    },
+    "FIELD": {
+      "CLIENTE": {
+        "NOME": "Cliente"
+      },
+      "PROCEDIMENTO": {
+        "NOME": "Procedimento",
+        "QUANTIDADE_SESSOES": "Sessões"
+      },
+      "VALOR_AQUISICAO": "Valor",
+      "DATA_AQUISICAO": "Data da Aquisição"
+    },
+    "ACTION": {
+      "ADD": "Adicionar Aquisição",
+      "DETAIL": "Visualizar Aquisição",
+      "EDIT": "Editar Aquisição",
+      "DEL": "Excluir Aquisição"
+    },
+    "MESSAGE": {
+      "DELETE_CONFIRM": "Excluir registro da Aquisição?",
+      "UPDATED": "Aquisição Atualizada com Sucesso",
+      "SUCCESS": "Aquisição Cadastra com Sucesso",
+      "DELETED_SUCCES": "Aquisição excluida com sucesso"
+    }
   }
 }

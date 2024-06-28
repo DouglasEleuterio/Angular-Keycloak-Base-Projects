@@ -31,12 +31,16 @@
                 {{'field.procedimento.nome' | appTranslate:'aquisicao'}}
                 <p-sortIcon field="aquisicaoProcedimento.nome"></p-sortIcon>
               </th>
+              <th scope="col" colspan="1" pSortableColumn="procedimento.quantidadeSessoes">
+                {{'field.procedimento.quantidade_sessoes' | appTranslate:'aquisicao'}}
+                <p-sortIcon field="procedimento.quantidadeSessoes"></p-sortIcon>
+              </th>
               <th scope="col" colspan="1" pSortableColumn="dataAquisicao">
                 {{'field.data_aquisicao' | appTranslate:'aquisicao'}}
                 <p-sortIcon field="dataAquisicao"></p-sortIcon>
               </th>
               <th scope="col" colspan="1" pSortableColumn="valorAquisicao">
-                {{'field.valor_aquisicao' | appTranslate:'procedimento'}}
+                {{'field.valor_aquisicao' | appTranslate:'aquisicao'}}
                 <p-sortIcon field="valorAquisicao"></p-sortIcon>
               </th>
               <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
@@ -49,15 +53,20 @@
                 <span pTooltip="{{entity.cliente.nome}}"> {{entity.cliente.nome}} </span>
               </td>
               <td colspan="1">
-                <span class="p-column-title bold"> {{'field.cpf' | appTranslate:'aquisicao'}}</span>
+                <span class="p-column-title bold"> {{'field.aquisicaoProcedimento.nome' | appTranslate:'aquisicao'}}</span>
                 <span pTooltip="{{entity.aquisicaoProcedimento.nome}}"> {{entity.aquisicaoProcedimento.nome}} </span>
               </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.aquisicaoProcedimento.quantidadeSessoes' | appTranslate:'aquisicao'}}</span>
+                <span pTooltip="{{entity.aquisicaoProcedimento.quantidadeSessoes}}"> {{entity.aquisicaoProcedimento.quantidadeSessoes}} </span>
+              </td>
+
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.data_aquisicao' | appTranslate:'aquisicao'}}</span>
                 <span pTooltip="{{entity.dataAquisicao}}"> {{entity.dataAquisicao | date: 'dd/MM/yyyy'}} </span>
               </td>
               <td colspan="1">
-                <span class="p-column-title bold"> {{'field.valor' | appTranslate:'procedimento'}}</span>
+                <span class="p-column-title bold"> {{'field.valor' | appTranslate:'aquisicao'}}</span>
                 <span pTooltip="{{entity.valorAquisicao}}"> {{entity.valorAquisicao | thousandFormat}} </span>
               </td>
               <td colspan="1" class="actions">
