@@ -25,7 +25,6 @@ import { NewComponent } from './pages/new/new.component';
     ProcedimentoRoutingModule,
     ButtonModule,
     SharedModule,
-    SharedModule,
     TableModule,
     TooltipModule,
     UIModule,
