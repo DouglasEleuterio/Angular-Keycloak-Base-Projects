@@ -30,6 +30,11 @@ const routes: Routes = [
     canActivate: [TableStateClearGuard]
   },
   {
+    path: 'aquisicao',
+    loadChildren: () => import('./aquisicao/aquisicao.module').then(m => m.AquisicaoModule),
+    canActivate: [TableStateClearGuard]
+  },
+  {
     path: 'exemplo',
     loadChildren: () => import('./exemplo/exemplo.module').then(m => m.ExemploModule),
     canActivate: [TableStateClearGuard]
