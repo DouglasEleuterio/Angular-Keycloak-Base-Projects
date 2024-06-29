@@ -20,7 +20,7 @@ import { AquisicaoService } from '../../../../domain/aquisicao/aquisicao.service
 export class ListComponent extends PaginatorComponent {
   tableData: Aquisicao[] = [];
 
-  listSelect = (u: Aquisicao) => [u.id, u.cliente, u.dataAquisicao, u.aquisicaoProcedimento, u.valorAquisicao];
+  listSelect = (u: Aquisicao) => [u.id, u.cliente, u.dataAquisicao, u.procedimentos, u.valorAquisicao];
 
   constructor(
     private breadcrumbService: AppBreadcrumbService,
