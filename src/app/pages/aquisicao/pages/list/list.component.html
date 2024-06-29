@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h5>{{ 'title.page' | appTranslate:'aquisicao'}}</h5>
+        <h5>{{ 'title.page' | appTranslate:'aquisicao' }}</h5>
         <button pButton pRipple routerLink="../new" label="{{'action.add' | appTranslate:'aquisicao'}}"></button>
       </div>
       <div class="list-body">
@@ -23,61 +23,58 @@
         >
           <ng-template pTemplate="header">
             <tr>
-              <th scope="col" colspan="1" pSortableColumn="cliente.nome">
-                {{'field.cliente.nome' | appTranslate:'aquisicao'}}
+              <th scope="col" colspan="2" pSortableColumn="cliente.nome">
+                {{ 'field.cliente.nome' | appTranslate:'aquisicao' }}
                 <p-sortIcon field="cliente.nome"></p-sortIcon>
               </th>
-<!--              <th scope="col" colspan="1" pSortableColumn="aquisicaoProcedimento.nome">-->
-<!--                {{'field.procedimento.nome' | appTranslate:'aquisicao'}}-->
-<!--                <p-sortIcon field="aquisicaoProcedimento.nome"></p-sortIcon>-->
-<!--              </th>-->
-<!--              <th scope="col" colspan="1" pSortableColumn="procedimento.quantidadeSessoes">-->
-<!--                {{'field.procedimento.quantidade_sessoes' | appTranslate:'aquisicao'}}-->
-<!--                <p-sortIcon field="procedimento.quantidadeSessoes"></p-sortIcon>-->
-<!--              </th>-->
+              <th scope="col" colspan="2">{{ 'field.procedimento.nome' | appTranslate:'aquisicao' }}</th>
+              <th scope="col" colspan="1">{{ 'field.procedimento.quantidade_sessoes' | appTranslate:'aquisicao' }}</th>
               <th scope="col" colspan="1" pSortableColumn="dataAquisicao">
-                {{'field.data_aquisicao' | appTranslate:'aquisicao'}}
+                {{ 'field.data_aquisicao' | appTranslate:'aquisicao' }}
                 <p-sortIcon field="dataAquisicao"></p-sortIcon>
               </th>
               <th scope="col" colspan="1" pSortableColumn="valorAquisicao">
-                {{'field.valor_aquisicao' | appTranslate:'aquisicao'}}
+                {{ 'field.valor_aquisicao' | appTranslate:'aquisicao' }}
                 <p-sortIcon field="valorAquisicao"></p-sortIcon>
               </th>
-              <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
+              <th scope="col" colspan="1" class="actions">{{ 'actions' | appTranslate:'shared' }}</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-entity let-expanded="expanded">
             <tr>
-              <td colspan="1">
-                <span class="p-column-title bold"> {{'field.nome' | appTranslate:'aquisicao'}}</span>
-                <span pTooltip="{{entity.cliente.nome}}"> {{entity.cliente.nome}} </span>
+              <td colspan="2">
+                <span class="p-column-title bold"> {{ 'field.nome' | appTranslate:'aquisicao' }}</span>
+                <span pTooltip="{{entity.cliente.nome}}"> {{ entity.cliente.nome }} </span>
               </td>
-<!--              <td colspan="1">-->
-<!--                <span class="p-column-title bold"> {{'field.aquisicaoProcedimento.nome' | appTranslate:'aquisicao'}}</span>-->
-<!--                <span pTooltip="{{entity.aquisicaoProcedimento.nome}}"> {{entity.aquisicaoProcedimento.nome}} </span>-->
-<!--              </td>-->
-<!--              <td colspan="1">-->
-<!--                <span class="p-column-title bold"> {{'field.aquisicaoProcedimento.quantidadeSessoes' | appTranslate:'aquisicao'}}</span>-->
-<!--                <span pTooltip="{{entity.aquisicaoProcedimento.quantidadeSessoes}}"> {{entity.aquisicaoProcedimento.quantidadeSessoes}} </span>-->
-<!--              </td>-->
-
-              <td colspan="1">
-                <span class="p-column-title bold"> {{'field.data_aquisicao' | appTranslate:'aquisicao'}}</span>
-                <span pTooltip="{{entity.dataAquisicao}}"> {{entity.dataAquisicao | date: 'dd/MM/yyyy'}} </span>
+              <td colspan="2">
+                <div *ngFor="let p of entity.procedimentos; let last = last">
+                  <span pTooltip="{{p.nome}}" [ngStyle]="{'border-bottom': last ? 'none' : '1px solid black'}"
+                    >{{ formatarNome(p.nome) }}</span
+                  >
+                </div>
               </td>
               <td colspan="1">
-                <span class="p-column-title bold"> {{'field.valor' | appTranslate:'aquisicao'}}</span>
-                <span pTooltip="{{entity.valorAquisicao}}"> {{entity.valorAquisicao | thousandFormat}} </span>
+                <div *ngFor="let p of entity.procedimentos">
+                  <span pTooltip="{{p.quantidadeSessoes}}"> {{ p.quantidadeSessoes }} </span>
+                </div>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.data_aquisicao' | appTranslate:'aquisicao' }}</span>
+                <span pTooltip="{{entity.dataAquisicao}}"> {{ entity.dataAquisicao | date: 'dd/MM/yyyy' }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.valor' | appTranslate:'aquisicao' }}</span>
+                <span pTooltip="{{entity.valorAquisicao}}"> {{ entity.valorAquisicao | thousandFormat }} </span>
               </td>
               <td colspan="1" class="actions">
-                <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
+                <span class="p-column-title bold"> {{ 'actions' | appTranslate:'shared' }}</span>
                 <app-table-buttons page="aquisicao" [entityId]="entity.id" (onRemove)="remove($event)"></app-table-buttons>
               </td>
             </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
-              <td style="text-align: center" colspan="99">{{'no_records' | appTranslate:'shared'}}</td>
+              <td style="text-align: center" colspan="99">{{ 'no_records' | appTranslate:'shared' }}</td>
             </tr>
           </ng-template>
         </p-table>

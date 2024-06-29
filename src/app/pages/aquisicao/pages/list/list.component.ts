@@ -20,7 +20,16 @@ import { AquisicaoService } from '../../../../domain/aquisicao/aquisicao.service
 export class ListComponent extends PaginatorComponent {
   tableData: Aquisicao[] = [];
 
-  listSelect = (u: Aquisicao) => [u.id, u.cliente.id, u.cliente.nome, u.dataAquisicao, u.procedimentos.id, u.procedimentos.nome, u.valorAquisicao];
+  listSelect = (u: Aquisicao) => [
+    u.id,
+    u.cliente.id,
+    u.cliente.nome,
+    u.dataAquisicao,
+    u.procedimentos.id,
+    u.procedimentos.nome,
+    u.procedimentos.quantidadeSessoes,
+    u.valorAquisicao
+  ];
 
   constructor(
     private breadcrumbService: AppBreadcrumbService,
@@ -69,5 +78,12 @@ export class ListComponent extends PaginatorComponent {
         },
         error: error => this.validationService.handleErrorAlert(error)
       });
+  }
+
+  formatarNome(nome: string): string {
+    if (nome.length > 10) {
+      return nome.substring(0, 30).concat('...');
+    }
+    return nome;
   }
 }
