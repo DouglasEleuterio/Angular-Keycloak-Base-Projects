@@ -23,6 +23,8 @@ import { CidadeService } from '../../domain/endereco/cidade.service';
 import { EditComponent } from './pages/edit/edit.component';
 import { CardModule } from 'primeng/card';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { RippleModule } from 'primeng/ripple';
+import { SplitterModule } from 'primeng/splitter';
 
 @NgModule({
   declarations: [FormComponent, ListComponent, DetailComponent, NewComponent, EditComponent],
@@ -44,7 +46,9 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     RxReactiveFormsModule,
     DropdownModule,
     CardModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    RippleModule,
+    SplitterModule
   ],
   providers: [EstadoService, CidadeService]
 })

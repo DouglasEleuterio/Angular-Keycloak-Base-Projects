@@ -21,6 +21,7 @@ import { AuditoriaService } from '../../../../domain/auditoria/auditoria-service
 import { Auditoria } from '../../../../domain/auditoria/auditoria.model';
 import { ESituacaoRegistro } from '../../../../domain/auditoria/situacao-registro.enum';
 import { EEvento } from '../../../../domain/historico/evento.enum';
+import { ClienteAuditoria } from '../../../../domain/cliente/cliente-auditoria.model';
 
 @Component({
   selector: 'app-detail',
@@ -32,8 +33,8 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   public entity: Cliente;
   auditorias: Auditoria[] = [];
   tableData: Historico[] = [];
-  dadoAntigo: Cliente;
-  dadoAtual: Cliente;
+  dadoAntigo: ClienteAuditoria;
+  dadoAtual: ClienteAuditoria;
 
   menuBack: AppMenuItem = AppMenuModel.itemMenuCliente;
 

@@ -100,12 +100,18 @@
       <div *ngFor="let h of tableData">
         <p-accordion (onOpen)="obterRegistrosAuditoria(h)">
           <p-accordionTab [disabled]="!isUsuarioAdminEEventoEdicao(h)" header="{{getHeader(h)}}">
-            <p-card header="Anterior">
-              <ngx-json-viewer [json]="dadoAntigo" [expanded]="false"></ngx-json-viewer>
-            </p-card>
-            <p-card header="Atual">
-              <ngx-json-viewer [json]="dadoAtual" [expanded]="false"></ngx-json-viewer>
-            </p-card>
+            <p-splitter [style]="[{ height: '300px' }, {width: '100px'}]" styleClass="mb-5">
+              <ng-template pTemplate>
+                <div class="col flex align-items-center justify-content-center">
+                  <ngx-json-viewer [json]="dadoAntigo" [expanded]="true"></ngx-json-viewer>
+                </div>
+              </ng-template>
+              <ng-template pTemplate>
+                <div class="col flex align-items-center justify-content-center">
+                  <ngx-json-viewer [json]="dadoAtual" [expanded]="true"></ngx-json-viewer>
+                </div>
+              </ng-template>
+            </p-splitter>
           </p-accordionTab>
         </p-accordion>
       </div>
