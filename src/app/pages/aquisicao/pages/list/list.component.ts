@@ -20,7 +20,7 @@ import { AquisicaoService } from '../../../../domain/aquisicao/aquisicao.service
 export class ListComponent extends PaginatorComponent {
   tableData: Aquisicao[] = [];
 
-  listSelect = (u: Aquisicao) => [
+  listSelect = (u: any) => [
     u.id,
     u.cliente.id,
     u.cliente.nome,

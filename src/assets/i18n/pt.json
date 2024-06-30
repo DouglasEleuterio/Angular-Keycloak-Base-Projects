@@ -1462,7 +1462,8 @@
         "NOME": "Procedimento",
         "QUANTIDADE_SESSOES": "Sessões"
       },
-      "VALOR_AQUISICAO": "Valor",
+      "VALOR_AQUISICAO": "Valor total",
+      "VALOR_DESCONTO": "Valor Desconto",
       "DATA_AQUISICAO": "Data da Aquisição"
     },
     "ACTION": {

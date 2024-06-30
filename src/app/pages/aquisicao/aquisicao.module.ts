@@ -9,9 +9,16 @@ import { TooltipModule } from 'primeng/tooltip';
 import { UIModule } from '../../core/ui/ui.module';
 import { RippleModule } from 'primeng/ripple';
 import { AquisicaoRoutingModule } from './aquisicao-routing.module';
+import { FormComponent } from './components/form/form.component';
+import { NewComponent } from './pages/new/new.component';
+import { ProcedimentoModule } from '../procedimento/procedimento.module';
+import { PaginatorModule } from 'primeng/paginator';
+import { CalendarModule } from 'primeng/calendar';
+import { ChipsModule } from 'primeng/chips';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListComponent, FormComponent, NewComponent],
   imports: [
     CommonModule,
     ButtonModule,
@@ -22,7 +29,12 @@ import { AquisicaoRoutingModule } from './aquisicao-routing.module';
     TooltipModule,
     UIModule,
     RippleModule,
-    AquisicaoRoutingModule
+    AquisicaoRoutingModule,
+    ProcedimentoModule,
+    PaginatorModule,
+    ReactiveFormsModule,
+    CalendarModule,
+    ChipsModule
   ]
 })
 export class AquisicaoModule {}
