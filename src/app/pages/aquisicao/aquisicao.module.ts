@@ -16,6 +16,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DividerModule } from 'primeng/divider';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, NewComponent],
@@ -34,7 +35,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     PaginatorModule,
     ReactiveFormsModule,
     CalendarModule,
-    ChipsModule
+    ChipsModule,
+    DividerModule
   ]
 })
 export class AquisicaoModule {}

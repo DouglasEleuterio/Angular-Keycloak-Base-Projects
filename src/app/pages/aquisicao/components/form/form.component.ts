@@ -3,9 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { BaseFormComponent } from '../../../../core/ui/components/form/base-form.component';
 import { plainToClass } from 'class-transformer';
 import { from } from '../../../../core/api/select/select';
@@ -127,5 +125,13 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
     this.formGroup.controls['procedimento'].setValue(null);
     this.formGroup.controls['valorAquisicao'].setValue(valorTotalProcedimentos);
+    const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimento.id);
+    this.procedimentos.splice(indexProcedimento);
+  }
+
+  onRowRemove(procedimento: Procedimento) {
+    this.procedimentos.push(procedimento);
+    const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimento.id);
+    this.procedimentosInseridos.splice(indexProcedimento);
   }
 }
