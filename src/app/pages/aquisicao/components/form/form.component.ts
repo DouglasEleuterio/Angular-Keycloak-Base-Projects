@@ -126,12 +126,13 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.formGroup.controls['procedimento'].setValue(null);
     this.formGroup.controls['valorAquisicao'].setValue(valorTotalProcedimentos);
     const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimento.id);
-    this.procedimentos.splice(indexProcedimento);
+    this.procedimentos.splice(indexProcedimento, 1);
   }
 
-  onRowRemove(procedimento: Procedimento) {
+  onRowRemoveAA(procedimento: Procedimento) {
+    const indexProcedimento = this.procedimentosInseridos.findIndex(value => value.id === procedimento.id);
     this.procedimentos.push(procedimento);
-    const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimento.id);
-    this.procedimentosInseridos.splice(indexProcedimento);
+    this.procedimentosInseridos.splice(indexProcedimento, 1);
+    this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
   }
 }

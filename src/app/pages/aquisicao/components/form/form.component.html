@@ -71,7 +71,7 @@
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <p-table [value]="procedimentosInseridos" dataKey="idAux" [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table [value]="procedimentosInseridos" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
           <ng-template pTemplate="header">
             <tr>
               <th style="width: 20%">Nome</th>
@@ -133,7 +133,7 @@
                     pRipple
                     type="button"
                     icon="pi pi-times"
-                    (click)="onRowRemove(procedimento, ri)"
+                    (click)="onRowRemoveAA(procedimento)"
                     class="p-button-rounded p-button-text p-button-danger"
                   ></button>
                 </div>
