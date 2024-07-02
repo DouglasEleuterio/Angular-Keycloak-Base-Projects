@@ -7,10 +7,28 @@
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
         <div class="p-fluid formgrid grid">
+          <div
+            *ngFor="let tipoProcedimento of tipoProcedimentoList"
+            class="field-checkbox col-12 md:col-6 lg:col-6"
+            style="display: inline-flex"
+          >
+            <p-radioButton
+              [inputId]="tipoProcedimento.value"
+              name="tipoProcedimento"
+              [value]="tipoProcedimento.value"
+              (onClick)="definirRegrasFormulario(tipoProcedimento.value)"
+              formControlName="tipoProcedimento"
+            ></p-radioButton>
+            <label style="margin-right: 10px">{{ tipoProcedimento.label }}</label>
+          </div>
           <app-field class="p-field col-12 md:col-6 lg:col-6" page="procedimento">
             <input appFieldRef pInputText type="text" formControlName="nome" maxlength="100" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-3" page="procedimento">
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-3"
+            page="procedimento"
+            *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_UNICA"
+          >
             <p-inputNumber
               appFieldRef
               formControlName="valor"
@@ -21,12 +39,116 @@
               maxlength="13"
             />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-3" page="procedimento" labelName="quantidade_sessoes">
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-3"
+            page="procedimento"
+            labelName="quantidade_sessoes"
+            *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_UNICA"
+          >
             <input appFieldRef pInputText type="number" formControlName="quantidadeSessoes" maxlength="11" />
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-6" page="procedimento" labelName="intervalo_entre_sessoes">
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-6"
+            page="procedimento"
+            labelName="intervalo_entre_sessoes"
+            *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_UNICA"
+          >
             <input appFieldRef pInputText type="number" formControlName="intervaloEntreSessoes" maxlength="100" />
           </app-field>
+          <app-field
+            class="p-field col-12 md:col-4 lg:col-4"
+            page="procedimento"
+            labelName="nome_regiao"
+            *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_MULTIPLA"
+          >
+            <input appFieldRef pInputText type="text" formControlName="nomeRegiao" maxlength="100" />
+          </app-field>
+          <div class="card justify-content-center" *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_MULTIPLA">
+            <button
+              pButton
+              pRipple
+              (click)="adicionarRegiao()"
+              type="button"
+              label="Inserir"
+              icon="pi pi-arrow-down"
+              class="p-button p-button-text p-button-success"
+            ></button>
+          </div>
+        </div>
+
+        <p-divider align="left" *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_MULTIPLA">
+          <div class="inline-flex align-items-center">
+            <i class="pi pi-shopping-cart mr-2"></i>
+            <b>Regiões</b>
+            <div class="detail-body grid"></div>
+          </div>
+        </p-divider>
+        <div *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_MULTIPLA">
+          <p-table [value]="regioesInseridas" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+              <tr>
+                <th style="width: 20%">Nome</th>
+                <th style="width: 20%">Preço</th>
+                <th style="width: 20%">Quantidade Sessões</th>
+                <th style="width: 20%">Intervalo entre Sessões</th>
+                <th style="width: 20%">Ações</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-regiao let-editing="editing" let-ri="rowIndex">
+              <tr>
+                <td [pEditableColumn]="regiao.nome" pEditableColumnField="nome">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="text" required [(ngModel)]="regiao.nome" [ngModelOptions]="{standalone: true}" />
+                    </ng-template>
+                    <ng-template pTemplate="output"> {{ regiao.nome }}</ng-template>
+                  </p-cellEditor>
+                </td>
+                <td [pEditableColumn]="regiao.valor" pEditableColumnField="valor">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="number" required [(ngModel)]="regiao.valor" [ngModelOptions]="{standalone: true}" />
+                    </ng-template>
+                    <ng-template pTemplate="output"> {{ regiao.valor | thousandFormat }}</ng-template>
+                  </p-cellEditor>
+                </td>
+                <td>
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input
+                        pInputText
+                        type="number"
+                        required
+                        [(ngModel)]="regiao.quantidadeSessoes"
+                        [ngModelOptions]="{standalone: true}"
+                      />
+                    </ng-template>
+                    <ng-template pTemplate="output"> {{ regiao.quantidadeSessoes }}</ng-template>
+                  </p-cellEditor>
+                </td>
+                <td [pEditableColumn]="regiao.intervaloEntreSessoes" pEditableColumnField="intervaloEntreSessoes">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="number" [(ngModel)]="regiao.intervaloEntreSessoes" [ngModelOptions]="{standalone: true}" />
+                    </ng-template>
+                    <ng-template pTemplate="output"> {{ regiao.intervaloEntreSessoes }}</ng-template>
+                  </p-cellEditor>
+                </td>
+                <td>
+                  <div class="flex align-items-center justify-content-center gap-2">
+                    <button
+                      pButton
+                      pRipple
+                      type="button"
+                      icon="pi pi-times"
+                      (click)="onRowRemove(regiao)"
+                      class="p-button-rounded p-button-text p-button-danger"
+                    ></button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
         <div style="margin-top: 20px">
           <app-form-buttons (onCancel)="cancel()"></app-form-buttons>

@@ -17,6 +17,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NewComponent } from './pages/new/new.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, NewComponent],
@@ -35,7 +36,8 @@ import { NewComponent } from './pages/new/new.component';
     InputTextModule,
     PaginatorModule,
     ReactiveFormsModule,
-    RxReactiveFormsModule
+    RxReactiveFormsModule,
+    RadioButtonModule
   ]
 })
 export class ProcedimentoModule {}
