@@ -17,6 +17,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { ChipsModule } from 'primeng/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DividerModule } from 'primeng/divider';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, NewComponent],
@@ -36,7 +37,8 @@ import { DividerModule } from 'primeng/divider';
     ReactiveFormsModule,
     CalendarModule,
     ChipsModule,
-    DividerModule
+    DividerModule,
+    RxReactiveFormsModule
   ]
 })
 export class AquisicaoModule {}

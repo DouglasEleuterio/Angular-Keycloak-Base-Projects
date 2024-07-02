@@ -7,7 +7,8 @@
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'"
+                     page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -19,7 +20,8 @@
               formControlName="cliente"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'"
+                     page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataAquisicao"
@@ -51,7 +53,8 @@
           <!--              locale="pt-BR"-->
           <!--            />-->
           <!--          </app-field>-->
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'"
+                     page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -141,8 +144,134 @@
             </tr>
           </ng-template>
         </p-table>
-        <!--        {{formGroup.value | json}}-->
+        <p-divider align="left">
+          <div class="inline-flex align-items-center">
+            <i class="pi pi-shopping-cart mr-2"></i>
+            <b>Pagamento</b>
+            <div class="detail-body grid"></div>
+          </div>
+        </p-divider>
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'"
+                     page="aquisicao">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+              [options]="formasPagamento"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+              formControlName="formaPagamento"
+            ></p-dropdown>
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'"
+                     page="aquisicao">
+            <p-calendar
+              appFieldRef
+              formControlName="dataPagamento"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [labelName]="'valor_pagamento'" page="aquisicao">
+            <p-inputNumber
+              appFieldRef
+              formControlName="valorPagamento"
+              inputId="currency-brazil"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+            />
+          </app-field>
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-6"
+            page="aquisicao"
+            labelName="quantidade_parcelas"
+            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+          >
+            <input appFieldRef pInputText disabled type="number" formControlName="quantidadeParcelas" maxlength="100" />
+          </app-field>
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-4"
+            [labelName]="'valor_taxa'"
+            page="aquisicao"
+            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO || formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_DEBITO || formGroup.controls['formaPagamento'].value === EFormaPagamento.PIX "
+          >
+            <p-inputNumber
+              appFieldRef
+              disabled
+              formControlName="taxa"
+              inputId="currency-brazil"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+            />
+          </app-field>
+        </div>
+        <p-divider align="left" *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO">
+          <div class="inline-flex align-items-center">
+            <i class="pi pi-shopping-cart mr-2"></i>
+            <b>Parcela</b>
+            <div class="detail-body grid"></div>
+          </div>
+        </p-divider>
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_credito'" page="aquisicao">
+            <p-calendar
+              appFieldRef
+              formControlName="dataCredito"
+              dateFormat="dd/mm/yy"
+              monthNavigator="true"
+              yearNavigator="true"
+              showIcon="true"
+              appDateMask
+            ></p-calendar>
+          </app-field>
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-4"
+            [labelName]="'valor_credito'"
+            page="aquisicao"
+            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+          >
+            <p-inputNumber
+              appFieldRef
+              disabled
+              formControlName="valorCredito"
+              inputId="currency-brazil"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+            />
+          </app-field>
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-4"
+            [labelName]="'valor_taxa'"
+            page="aquisicao"
+            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+          >
+            <p-inputNumber
+              appFieldRef
+              disabled
+              formControlName="valorTaxa"
+              inputId="currency-brazil"
+              mode="currency"
+              currency="BRL"
+              locale="pt-BR"
+            />
+          </app-field>
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-6"
+            page="aquisicao"
+            labelName="numero_parcela"
+            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+          >
+            <input appFieldRef pInputText disabled type="number" formControlName="numeroParcela" maxlength="100" />
+          </app-field>
+        </div>
       </form>
+      {{ formGroup.value | json }}
     </div>
   </div>
 </div>

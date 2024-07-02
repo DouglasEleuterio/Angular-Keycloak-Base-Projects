@@ -25,6 +25,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   formGroup: FormGroup;
   onSubmit: (entity: Aquisicao, formGroup) => void;
   onCancel: () => void;
+  protected readonly EFormaPagamento = EFormaPagamento;
 
   procedimentos: Procedimento[];
   clientes: Cliente[];
@@ -48,7 +49,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.getClienteList();
     this.getProcedimentoList();
     this.formasPagamento.push(EFormaPagamento.CARTAO_CREDITO);
-    this.formasPagamento.push(EFormaPagamento.CARTAO_CREDITO);
+    this.formasPagamento.push(EFormaPagamento.CARTAO_DEBITO);
     this.formasPagamento.push(EFormaPagamento.PIX);
     this.formasPagamento.push(EFormaPagamento.EM_ABERTO);
     this.buildFormGroup();
@@ -57,13 +58,29 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   buildFormGroup(): void {
     this.formGroup = this.formBuilder.group({
       cliente: [null, [Validators.required]],
-      procedimentos: [null],
       dataAquisicao: [null, Validators.required],
       valorAquisicao: [null],
       valorDesconto: [null],
-      pagamentos: [null],
 
-      procedimento: [null]
+      procedimento: [null],
+      procedimentos: [null],
+
+      pagamentos: [null],
+      pagamento: [null],
+
+      dataPagamento: [null],
+      valorPagamento: [null],
+      formaPagamento: [null],
+      quantidadeParcelas: [null],
+      taxa: [null],
+
+      parcelas: [null],
+      parcela: [null],
+
+      dataCredito: [null],
+      valorCredito: [null],
+      valorTaxa: [null],
+      numeroParcela: [null]
     });
   }
 
@@ -135,4 +152,5 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.procedimentosInseridos.splice(indexProcedimento, 1);
     this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
   }
+
 }
