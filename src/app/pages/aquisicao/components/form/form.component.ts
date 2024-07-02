@@ -152,5 +152,4 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.procedimentosInseridos.splice(indexProcedimento, 1);
     this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
   }
-
 }

@@ -1464,7 +1464,16 @@
       },
       "VALOR_AQUISICAO": "Valor total",
       "VALOR_DESCONTO": "Valor Desconto",
-      "DATA_AQUISICAO": "Data da Aquisição"
+      "DATA_AQUISICAO": "Data da Aquisição",
+      "FORMA_PAGAMENTO": "Forma de Pagamento",
+      "DATA_PAGAMENTO": "Data do Pagamento",
+      "VALOR_PAGAMENTO": "Valor do Pagamento",
+      "QUANTIDADE_PARCELAS": "Quantidade de Parcelas",
+      "VALOR_TAXA": "Valor total da Taxa",
+      "DATA_CREDITO": "Data de Compensação",
+      "VALOR_CREDITO": "Valor do Crédito",
+      "NUMERO_PARCELA": "Número da Parcela",
+      "VALOR_TAXA_PARCELA": "Valor da Taxa"
     },
     "ACTION": {
       "ADD": "Adicionar Aquisição",

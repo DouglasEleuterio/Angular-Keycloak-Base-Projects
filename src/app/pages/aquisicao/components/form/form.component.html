@@ -7,8 +7,7 @@
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -20,8 +19,7 @@
               formControlName="cliente"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataAquisicao"
@@ -53,8 +51,7 @@
           <!--              locale="pt-BR"-->
           <!--            />-->
           <!--          </app-field>-->
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -152,8 +149,7 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -163,8 +159,7 @@
               formControlName="formaPagamento"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataPagamento"
@@ -218,7 +213,13 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_credito'" page="aquisicao">
+          <app-field
+            class="p-field col-12 md:col-6 lg:col-4"
+            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+            [submitted]="submitted"
+            [labelName]="'data_credito'"
+            page="aquisicao"
+          >
             <p-calendar
               appFieldRef
               formControlName="dataCredito"
@@ -247,7 +248,7 @@
           </app-field>
           <app-field
             class="p-field col-12 md:col-6 lg:col-4"
-            [labelName]="'valor_taxa'"
+            [labelName]="'valor_taxa_parcela'"
             page="aquisicao"
             *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
           >
