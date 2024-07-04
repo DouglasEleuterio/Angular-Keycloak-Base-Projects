@@ -14,6 +14,8 @@ export class FormButtonsComponent {
 
   @Output() onCancel: EventEmitter<void> = new EventEmitter();
 
+  @Input() isDisabled = false;
+
   cancel(): void {
     this.onCancel.emit();
   }

@@ -12,7 +12,6 @@ import { Procedimento } from '../../../../domain/procedimento/procedimento-model
 import { Options } from '../../../../domain/options/options.interface';
 import { ETipoProcedimento } from '../../../../domain/procedimento/tipo-procedimento.enum';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
-import any = jasmine.any;
 
 @Component({
   selector: 'app-procedimento-form',
@@ -60,8 +59,6 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
     //Valores iniciais
     this.formGroup.get('tipoProcedimento').setValue(ETipoProcedimento.APLICACAO_UNICA);
-    this.formGroup.get('quantidadeSessoes').setValue(1);
-    this.formGroup.get('intervaloEntreSessoes').setValue(30);
     this.definirRegrasFormulario();
   }
 
@@ -91,16 +88,35 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   definirRegrasFormulario() {
     if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_UNICA) {
-      this.formGroup.get('valor').setValidators([Validators.required]);
-      this.formGroup.get('quantidadeSessoes').setValidators([Validators.required]);
-      this.formGroup.get('intervaloEntreSessoes').setValidators([Validators.required]);
-      this.formGroup.get('regioes').setValidators(null);
+      this.formGroup = this.formBuilder.group({
+        nome: [null, Validators.required],
+        valor: [null, Validators.required],
+        quantidadeSessoes: [null, Validators.required],
+        intervaloEntreSessoes: [null, Validators.required],
+        tipoProcedimento: [null, Validators.required],
+        nomeRegiao: [null],
+        regioes: [null]
+      });
+      this.formGroup.get('regioes').setValue(null);
+      this.regioesInseridas = [];
+      this.formGroup.get('tipoProcedimento').setValue(ETipoProcedimento.APLICACAO_UNICA);
+      this.formGroup.get('quantidadeSessoes').setValue(1);
+      this.formGroup.get('intervaloEntreSessoes').setValue(30);
     }
     if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_MULTIPLA) {
-      this.formGroup.get('valor').setValidators(null);
-      this.formGroup.get('quantidadeSessoes').setValidators(null);
-      this.formGroup.get('intervaloEntreSessoes').setValidators(null);
-      this.formGroup.get('regioes').setValidators([Validators.required]);
+      this.formGroup = this.formBuilder.group({
+        nome: [null, Validators.required],
+        valor: [null],
+        quantidadeSessoes: [null],
+        intervaloEntreSessoes: [null],
+        tipoProcedimento: [null, Validators.required],
+        nomeRegiao: [null],
+        regioes: [null, Validators.required]
+      });
+      this.formGroup.get('valor').setValue(null);
+      this.formGroup.get('tipoProcedimento').setValue(ETipoProcedimento.APLICACAO_MULTIPLA);
+      this.formGroup.get('quantidadeSessoes').setValue(1);
+      this.formGroup.get('intervaloEntreSessoes').setValue(30);
     }
   }
 

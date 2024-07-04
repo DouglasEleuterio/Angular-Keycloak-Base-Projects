@@ -157,12 +157,9 @@
           </p-table>
         </div>
         <div style="margin-top: 20px">
-          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+          <app-form-buttons (onCancel)="cancel()" [isDisabled]="!formGroup.valid"></app-form-buttons>
         </div>
       </form>
-      {{formGroup.value | json}}
-      <br />
-      {{formGroup.valid | json}}
     </div>
   </div>
 </div>

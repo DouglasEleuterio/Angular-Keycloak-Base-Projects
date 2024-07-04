@@ -20,7 +20,7 @@ import { finalize } from 'rxjs/operators';
 export class ListComponent extends PaginatorComponent {
   tableData: Procedimento[] = [];
 
-  listSelect = (u: Procedimento) => [
+  listSelect = (u: any) => [
     u.id,
     u.nome,
     u.valor,
@@ -29,7 +29,8 @@ export class ListComponent extends PaginatorComponent {
     u.intervaloEntreSessoes,
     u.dataCriacao,
     u.dataAtualizacao,
-    u.regioes
+    u.regioes.id,
+    u.regioes.nome
   ];
 
   constructor(
