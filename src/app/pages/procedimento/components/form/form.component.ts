@@ -61,7 +61,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     //Valores iniciais
     this.formGroup.get('tipoProcedimento').setValue(ETipoProcedimento.APLICACAO_UNICA);
     this.formGroup.get('quantidadeSessoes').setValue(1);
-    this.formGroup.get('intervaloEntreSessoes').setValue(7);
+    this.formGroup.get('intervaloEntreSessoes').setValue(30);
     this.definirRegrasFormulario();
   }
 
@@ -91,11 +91,12 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   definirRegrasFormulario() {
     if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_UNICA) {
-      this.formGroup.get('valor').setValidators([Validators.required, Validators.maxLength(11), Validators.minLength(11)]);
+      this.formGroup.get('valor').setValidators([Validators.required]);
       this.formGroup.get('quantidadeSessoes').setValidators([Validators.required]);
       this.formGroup.get('intervaloEntreSessoes').setValidators([Validators.required]);
+      this.formGroup.get('regioes').setValidators(null);
     }
-    if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_UNICA) {
+    if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_MULTIPLA) {
       this.formGroup.get('valor').setValidators(null);
       this.formGroup.get('quantidadeSessoes').setValidators(null);
       this.formGroup.get('intervaloEntreSessoes').setValidators(null);
