@@ -12,6 +12,7 @@ import { Procedimento } from '../../../../domain/procedimento/procedimento-model
 import { Options } from '../../../../domain/options/options.interface';
 import { ETipoProcedimento } from '../../../../domain/procedimento/tipo-procedimento.enum';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
+import any = jasmine.any;
 
 @Component({
   selector: 'app-procedimento-form',
@@ -19,6 +20,8 @@ import { Regiao } from '../../../../domain/procedimento/regiao.model';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent extends BaseFormComponent implements OnInit {
+  protected readonly eTipoProcedimento = ETipoProcedimento;
+
   @Input() isNew: boolean;
 
   formGroup: FormGroup;
@@ -47,21 +50,24 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   buildFormGroup(): void {
     this.formGroup = this.formBuilder.group({
       nome: [null, [Validators.required]],
-      valor: [null, [Validators.required, Validators.maxLength(11), Validators.minLength(11)]],
+      valor: [null],
       quantidadeSessoes: [null],
       intervaloEntreSessoes: [null],
       tipoProcedimento: [null],
-      nomeRegiao: [null]
+      nomeRegiao: [null],
+      regioes: [null]
     });
+
+    //Valores iniciais
     this.formGroup.get('tipoProcedimento').setValue(ETipoProcedimento.APLICACAO_UNICA);
     this.formGroup.get('quantidadeSessoes').setValue(1);
     this.formGroup.get('intervaloEntreSessoes').setValue(7);
+    this.definirRegrasFormulario();
   }
 
   submit(): void {
     this.submitted = true;
-    this.log(this.formGroup.value);
-    if (this.formGroup.valid) {
+    if (this.isFormValid() && this.formGroup.valid) {
       const entity: Procedimento = plainToClass(Procedimento, this.formGroup.value);
       this.onSubmit(entity, this.formGroup);
     } else {
@@ -83,25 +89,54 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     }
   }
 
-  definirRegrasFormulario(value: string | boolean) {
-    console.log('Tipo procedimento :: ' + value);
+  definirRegrasFormulario() {
+    if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_UNICA) {
+      this.formGroup.get('valor').setValidators([Validators.required, Validators.maxLength(11), Validators.minLength(11)]);
+      this.formGroup.get('quantidadeSessoes').setValidators([Validators.required]);
+      this.formGroup.get('intervaloEntreSessoes').setValidators([Validators.required]);
+    }
+    if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_UNICA) {
+      this.formGroup.get('valor').setValidators(null);
+      this.formGroup.get('quantidadeSessoes').setValidators(null);
+      this.formGroup.get('intervaloEntreSessoes').setValidators(null);
+      this.formGroup.get('regioes').setValidators([Validators.required]);
+    }
   }
 
-  protected readonly ETipoProcedimento = ETipoProcedimento;
-
   adicionarRegiao() {
-    const regiao = new Regiao();
-    regiao.nome = this.formGroup.get('nomeRegiao').value;
-    regiao.valor = 0;
-    regiao.id = Math.random().valueOf();
-    regiao.quantidadeSessoes = 1;
-    regiao.intervaloEntreSessoes = 7;
+    const regiao: Regiao = {
+      id: Math.random().valueOf(),
+      nome: this.formGroup.get('nomeRegiao').value,
+      quantidadeSessoes: this.formGroup.get('quantidadeSessoes').value,
+      intervaloEntreSessoes: this.formGroup.get('intervaloEntreSessoes').value,
+      valor: this.formGroup.get('valor').value,
+      persistida: false
+    };
     this.regioesInseridas.push(regiao);
     this.formGroup.get('nomeRegiao').setValue(null);
+    this.formGroup.get('regioes').setValue(this.regioesInseridas);
   }
 
   onRowRemove(regiao: Regiao) {
     const indexRegiao = this.regioesInseridas.findIndex(value => value.id === regiao.id);
     this.regioesInseridas.splice(indexRegiao, 1);
+    this.formGroup.get('regioes').setValue(this.regioesInseridas);
+  }
+
+  isFormValid(): boolean {
+    //Validar se dados das regiões foram informados
+    let isValid = true;
+    const regioes: Regiao[] = this.formGroup.get('regioes').value;
+    for (const regiao of regioes) {
+      if (regiao.valor == undefined || regiao.valor == 0) {
+        this.alertService.error('Erro', `Região ${regiao.nome} sem valor definido`);
+        isValid = false;
+      }
+      if (regiao.nome == undefined || null) {
+        this.alertService.error('Erro', `Nome da região não informado`);
+        isValid = false;
+      }
+    }
+    return isValid;
   }
 }

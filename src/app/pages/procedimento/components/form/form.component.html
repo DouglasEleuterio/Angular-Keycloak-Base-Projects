@@ -16,7 +16,7 @@
               [inputId]="tipoProcedimento.value"
               name="tipoProcedimento"
               [value]="tipoProcedimento.value"
-              (onClick)="definirRegrasFormulario(tipoProcedimento.value)"
+              (onClick)="definirRegrasFormulario()"
               formControlName="tipoProcedimento"
             ></p-radioButton>
             <label style="margin-right: 10px">{{ tipoProcedimento.label }}</label>
@@ -27,7 +27,7 @@
           <app-field
             class="p-field col-12 md:col-6 lg:col-3"
             page="procedimento"
-            *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_UNICA"
+            *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_UNICA"
           >
             <p-inputNumber
               appFieldRef
@@ -43,15 +43,15 @@
             class="p-field col-12 md:col-6 lg:col-3"
             page="procedimento"
             labelName="quantidade_sessoes"
-            *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_UNICA"
+            *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_UNICA"
           >
-            <input appFieldRef pInputText type="number" formControlName="quantidadeSessoes" maxlength="11" />
+            <input appFieldRef pInputText type="number" formControlName="quantidadeSessoes" />
           </app-field>
           <app-field
             class="p-field col-12 md:col-6 lg:col-6"
             page="procedimento"
             labelName="intervalo_entre_sessoes"
-            *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_UNICA"
+            *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_UNICA"
           >
             <input appFieldRef pInputText type="number" formControlName="intervaloEntreSessoes" maxlength="100" />
           </app-field>
@@ -59,11 +59,11 @@
             class="p-field col-12 md:col-4 lg:col-4"
             page="procedimento"
             labelName="nome_regiao"
-            *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_MULTIPLA"
+            *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_MULTIPLA"
           >
             <input appFieldRef pInputText type="text" formControlName="nomeRegiao" maxlength="100" />
           </app-field>
-          <div class="card justify-content-center" *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_MULTIPLA">
+          <div class="card justify-content-center" *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_MULTIPLA">
             <button
               pButton
               pRipple
@@ -76,14 +76,14 @@
           </div>
         </div>
 
-        <p-divider align="left" *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_MULTIPLA">
+        <p-divider align="left" *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_MULTIPLA">
           <div class="inline-flex align-items-center">
             <i class="pi pi-shopping-cart mr-2"></i>
             <b>Regiões</b>
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <div *ngIf="formGroup.get('tipoProcedimento').value === ETipoProcedimento.APLICACAO_MULTIPLA">
+        <div *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_MULTIPLA">
           <p-table [value]="regioesInseridas" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template pTemplate="header">
               <tr>
@@ -129,7 +129,13 @@
                 <td [pEditableColumn]="regiao.intervaloEntreSessoes" pEditableColumnField="intervaloEntreSessoes">
                   <p-cellEditor>
                     <ng-template pTemplate="input">
-                      <input pInputText type="number" [(ngModel)]="regiao.intervaloEntreSessoes" [ngModelOptions]="{standalone: true}" />
+                      <input
+                        pInputText
+                        type="number"
+                        required
+                        [(ngModel)]="regiao.intervaloEntreSessoes"
+                        [ngModelOptions]="{standalone: true}"
+                      />
                     </ng-template>
                     <ng-template pTemplate="output"> {{ regiao.intervaloEntreSessoes }}</ng-template>
                   </p-cellEditor>
@@ -154,6 +160,9 @@
           <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
         </div>
       </form>
+      {{formGroup.value | json}}
+      <br />
+      {{formGroup.valid | json}}
     </div>
   </div>
 </div>

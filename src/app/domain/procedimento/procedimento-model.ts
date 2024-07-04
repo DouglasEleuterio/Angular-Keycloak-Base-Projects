@@ -1,3 +1,5 @@
+import { Regiao } from './regiao.model';
+
 export class Procedimento {
   id: number;
   idAux: number;
@@ -6,6 +8,7 @@ export class Procedimento {
   situacao: boolean;
   quantidadeSessoes: number;
   intervaloEntreSessoes: number;
+  regioes: Regiao[];
   dataCriacao: Date;
   dataAtualizacao: Date;
 }

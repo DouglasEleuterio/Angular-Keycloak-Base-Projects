@@ -28,7 +28,8 @@ export class ListComponent extends PaginatorComponent {
     u.quantidadeSessoes,
     u.intervaloEntreSessoes,
     u.dataCriacao,
-    u.dataAtualizacao
+    u.dataAtualizacao,
+    u.regioes
   ];
 
   constructor(
