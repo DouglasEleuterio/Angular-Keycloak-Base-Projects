@@ -60,6 +60,24 @@
               optionLabel="nome"
               formControlName="procedimento"
               placeholder="{{'select' | appTranslate:'shared'}}"
+              (onChange)="procedimentoChange()"
+            ></p-dropdown>
+          </app-field>
+          <app-field
+            *ngIf="exibirSelectRegiao()"
+            class="p-field col-12 md:col-6 lg:col-4"
+            [submitted]="submitted"
+            [labelName]="'regiao.nome'"
+            page="aquisicao"
+          >
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+              [options]="regioes"
+              optionLabel="nome"
+              formControlName="regiao"
+              placeholder="{{'select' | appTranslate:'shared'}}"
               (onChange)="inserirProcedimento()"
             ></p-dropdown>
           </app-field>
@@ -286,7 +304,7 @@
           </div>
         </div>
       </form>
-      <!--      {{ formGroup.value | json }}-->
+      {{ formGroup.value | json }}
     </div>
   </div>
 </div>

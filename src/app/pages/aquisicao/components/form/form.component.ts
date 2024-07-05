@@ -3,7 +3,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { BaseFormComponent } from '../../../../core/ui/components/form/base-form.component';
 import { plainToClass } from 'class-transformer';
 import { from } from '../../../../core/api/select/select';
@@ -13,6 +15,7 @@ import { ProcedimentoService } from '../../../../domain/procedimento/procediment
 import { Cliente } from '../../../../domain/cliente/cliente';
 import { ClienteService } from '../../../../domain/cliente/cliente.service';
 import { EFormaPagamento } from '../../../../domain/pagamento/forma-pagamento.enum';
+import { Regiao } from '../../../../domain/procedimento/regiao.model';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -30,8 +33,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   procedimentos: Procedimento[];
   clientes: Cliente[];
   formasPagamento: EFormaPagamento[] = [];
-
   procedimentosInseridos: Procedimento[] = [];
+  regioes: Regiao[] = [];
 
   constructor(
     protected alertService: AlertService,
@@ -136,14 +139,42 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   }
 
   inserirProcedimento() {
-    const procedimento = this.formGroup.controls['procedimento'].value;
-    this.procedimentosInseridos.push(procedimento);
-    const valorTotalProcedimentos = this.procedimentosInseridos.reduce((sum, { valor }) => sum + valor, 0);
-    this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
-    this.formGroup.controls['procedimento'].setValue(null);
-    this.formGroup.controls['valorAquisicao'].setValue(valorTotalProcedimentos);
-    const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimento.id);
-    this.procedimentos.splice(indexProcedimento, 1);
+    this.regioes = [];
+    //Recupera procedimento do formulário
+    const procedimentosInseridosNoFormulario: Procedimento[] = this.formGroup.controls['procedimentos'].value;
+
+    //Se o procedimento não possuir regiões, retiro ele da lista de procedimentos para selecionar quando já selecionado.
+    const procedimentoSelecionadoDrop: Procedimento = this.formGroup.controls['procedimento'].value;
+    console.log('Procedimento selecionado no drop');
+    console.log(procedimentoSelecionadoDrop);
+    // Existe regiao com id != null nesse procedimento
+    if (procedimentoSelecionadoDrop.regioes.find(proc => proc.id != null) == undefined) {
+      const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionadoDrop.id);
+      this.procedimentos.splice(indexProcedimento, 1);
+      this.formGroup.controls['procedimento'].setValue(null);
+    }
+    // const indexProcedimento = this.procedimentos.findIndex(
+    //   value => value.regioes && value.regioes.length > 0 && value.regioes[0].id != null && value.id === procedimentoSelecionadoDrop.id
+    // );
+    //
+    // this.procedimentos.splice(indexProcedimento, 1);
+    // this.formGroup.controls['procedimento'].setValue(null);
+    //
+    // Se exitir procedimentos no formulario, Verifica se o procedimento já foi inserido, para validar se inclui região no procedimento
+    // if (procedimentosInseridosNoFormulario && procedimentosInseridosNoFormulario.length > 0) {
+    // }
+    //
+    // this.formGroup.controls['procedimentos'].setValue(procedimentosInseridosNoFormulario);
+
+    //Coisas velhas
+    // const procedimento = this.formGroup.controls['procedimento'].value;
+    // this.procedimentosInseridos.push(procedimento);
+    // const valorTotalProcedimentos = this.procedimentosInseridos.reduce((sum, { valor }) => sum + valor, 0);
+    // this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
+    // this.formGroup.controls['procedimento'].setValue(null);
+    // this.formGroup.controls['valorAquisicao'].setValue(valorTotalProcedimentos);
+    // const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimento.id);
+    // this.procedimentos.splice(indexProcedimento, 1);
   }
 
   onRowRemoveAA(procedimento: Procedimento) {
@@ -151,5 +182,44 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.procedimentos.push(procedimento);
     this.procedimentosInseridos.splice(indexProcedimento, 1);
     this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
+  }
+
+  procedimentoChange() {
+    //Se o procedimento não possuir regiões, retiro ele da lista de procedimentos depois de inserido na lista de procedimentos da aquisicao;
+    const procedimentoSelecionadoDrop: Procedimento = this.formGroup.controls['procedimento'].value;
+    // Existe regiao com id != null nesse procedimento
+    if (procedimentoSelecionadoDrop.regioes.find(proc => proc.id != null) == undefined) {
+      //Remover do drop
+      const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionadoDrop.id);
+      this.procedimentos.splice(indexProcedimento, 1);
+      this.formGroup.controls['procedimento'].setValue(null);
+
+      //Inser na lista de Procedimentos da aquisicao
+      let procedimentosParaAdquirir: Procedimento[] = this.formGroup.controls['procedimentos'].value;
+      if (procedimentosParaAdquirir == null) {
+        procedimentosParaAdquirir = [];
+      }
+      //Limpar lista de regioes com id e nome null para inserir no fommulário
+      procedimentoSelecionadoDrop.regioes = null;
+      //Inserir procedimento no formulário
+      procedimentosParaAdquirir.push(procedimentoSelecionadoDrop);
+      this.formGroup.controls['procedimentos'].setValue(procedimentosParaAdquirir);
+      return;
+    }
+    const procedimentoSelecionado: Procedimento = this.formGroup.controls['procedimento'].value;
+    this.regioes = procedimentoSelecionado.regioes;
+  }
+
+  exibirSelectRegiao() {
+    const procedimentoSelecionado: Procedimento = this.formGroup.controls['procedimento'].value;
+    if (
+      procedimentoSelecionado &&
+      procedimentoSelecionado.regioes &&
+      procedimentoSelecionado.regioes.length > 0 &&
+      procedimentoSelecionado.regioes[0].id
+    ) {
+      return true;
+    }
+    return false;
   }
 }
