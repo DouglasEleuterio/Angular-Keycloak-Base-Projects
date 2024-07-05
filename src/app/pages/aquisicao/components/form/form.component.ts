@@ -25,7 +25,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   formGroup: FormGroup;
   onSubmit: (entity: Aquisicao, formGroup) => void;
   onCancel: () => void;
-  protected readonly EFormaPagamento = EFormaPagamento;
+  protected readonly eFormaPagamento = EFormaPagamento;
 
   procedimentos: Procedimento[];
   clientes: Cliente[];
@@ -111,7 +111,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   getProcedimentoList(): void {
     const query = from<Procedimento>()
-      .select((u: Procedimento) => [u.nome, u.id, u.valor, u.quantidadeSessoes, u.intervaloEntreSessoes])
+      .select((u: any) => [u.nome, u.id, u.valor, u.quantidadeSessoes, u.intervaloEntreSessoes, u.regioes.id, u.regioes.nome])
       .where(u => u.eq('situacao', 'true'))
       .asc(x => x.nome)
       .getQuery();

@@ -7,8 +7,7 @@
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -20,8 +19,7 @@
               formControlName="cliente"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataAquisicao"
@@ -53,8 +51,7 @@
           <!--              locale="pt-BR"-->
           <!--            />-->
           <!--          </app-field>-->
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -152,8 +149,7 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -163,8 +159,7 @@
               formControlName="formaPagamento"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataPagamento"
@@ -189,7 +184,7 @@
             class="p-field col-12 md:col-6 lg:col-6"
             page="aquisicao"
             labelName="quantidade_parcelas"
-            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
           >
             <input appFieldRef pInputText disabled type="number" formControlName="quantidadeParcelas" maxlength="100" />
           </app-field>
@@ -197,7 +192,7 @@
             class="p-field col-12 md:col-6 lg:col-4"
             [labelName]="'valor_taxa'"
             page="aquisicao"
-            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO || formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_DEBITO || formGroup.controls['formaPagamento'].value === EFormaPagamento.PIX "
+            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO || formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_DEBITO || formGroup.controls['formaPagamento'].value === eFormaPagamento.PIX "
           >
             <p-inputNumber
               appFieldRef
@@ -210,7 +205,7 @@
             />
           </app-field>
         </div>
-        <p-divider align="left" *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO">
+        <p-divider align="left" *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO">
           <div class="inline-flex align-items-center">
             <i class="pi pi-shopping-cart mr-2"></i>
             <b>Parcela</b>
@@ -220,7 +215,7 @@
         <div class="p-fluid formgrid grid">
           <app-field
             class="p-field col-12 md:col-6 lg:col-4"
-            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
             [submitted]="submitted"
             [labelName]="'data_credito'"
             page="aquisicao"
@@ -239,7 +234,7 @@
             class="p-field col-12 md:col-6 lg:col-4"
             [labelName]="'valor_credito'"
             page="aquisicao"
-            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
           >
             <p-inputNumber
               appFieldRef
@@ -255,7 +250,7 @@
             class="p-field col-12 md:col-6 lg:col-4"
             [labelName]="'valor_taxa_parcela'"
             page="aquisicao"
-            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
           >
             <p-inputNumber
               appFieldRef
@@ -271,7 +266,7 @@
             class="p-field col-12 md:col-6 lg:col-6"
             page="aquisicao"
             labelName="numero_parcela"
-            *ngIf="formGroup.controls['formaPagamento'].value === EFormaPagamento.CARTAO_CREDITO"
+            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
           >
             <input appFieldRef pInputText disabled type="number" formControlName="numeroParcela" maxlength="100" />
           </app-field>
@@ -291,7 +286,7 @@
           </div>
         </div>
       </form>
-<!--      {{ formGroup.value | json }}-->
+      <!--      {{ formGroup.value | json }}-->
     </div>
   </div>
 </div>
