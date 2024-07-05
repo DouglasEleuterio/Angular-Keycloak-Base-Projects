@@ -138,15 +138,13 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .subscribe(clientes => (this.clientes = clientes));
   }
 
-  inserirProcedimento() {
+  inserirProcedimentoComRegiao() {
     this.regioes = [];
     //Recupera procedimento do formulário
     const procedimentosInseridosNoFormulario: Procedimento[] = this.formGroup.controls['procedimentos'].value;
 
     //Se o procedimento não possuir regiões, retiro ele da lista de procedimentos para selecionar quando já selecionado.
     const procedimentoSelecionadoDrop: Procedimento = this.formGroup.controls['procedimento'].value;
-    console.log('Procedimento selecionado no drop');
-    console.log(procedimentoSelecionadoDrop);
     // Existe regiao com id != null nesse procedimento
     if (procedimentoSelecionadoDrop.regioes.find(proc => proc.id != null) == undefined) {
       const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionadoDrop.id);
@@ -185,29 +183,29 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   }
 
   procedimentoChange() {
-    //Se o procedimento não possuir regiões, retiro ele da lista de procedimentos depois de inserido na lista de procedimentos da aquisicao;
-    const procedimentoSelecionadoDrop: Procedimento = this.formGroup.controls['procedimento'].value;
-    // Existe regiao com id != null nesse procedimento
-    if (procedimentoSelecionadoDrop.regioes.find(proc => proc.id != null) == undefined) {
-      //Remover do drop
-      const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionadoDrop.id);
-      this.procedimentos.splice(indexProcedimento, 1);
-      this.formGroup.controls['procedimento'].setValue(null);
-
-      //Inser na lista de Procedimentos da aquisicao
-      let procedimentosParaAdquirir: Procedimento[] = this.formGroup.controls['procedimentos'].value;
-      if (procedimentosParaAdquirir == null) {
-        procedimentosParaAdquirir = [];
-      }
-      //Limpar lista de regioes com id e nome null para inserir no fommulário
-      procedimentoSelecionadoDrop.regioes = null;
-      //Inserir procedimento no formulário
-      procedimentosParaAdquirir.push(procedimentoSelecionadoDrop);
-      this.formGroup.controls['procedimentos'].setValue(procedimentosParaAdquirir);
-      return;
-    }
     const procedimentoSelecionado: Procedimento = this.formGroup.controls['procedimento'].value;
-    this.regioes = procedimentoSelecionado.regioes;
+    // Existe regiao com id != null nesse procedimento
+    if (procedimentoSelecionado.regioes.find(regiao => regiao.id == null)) {
+      this.inserirProcedimentoSemRegiao(procedimentoSelecionado);
+    } else {
+      this.inserirRegioesDadoProcedimento(procedimentoSelecionado);
+    }
+  }
+
+  inserirRegioesDadoProcedimento(procedimento: Procedimento) {
+    this.regioes = procedimento.regioes;
+  }
+
+  inserirProcedimentoSemRegiao(procedimentoSelecionado: Procedimento) {
+    //O procedimento selecionado, não possui regiao.
+    let backupDosProcedimentosJaInseridos: Procedimento[] = this.formGroup.controls['procedimentos'].value;
+    backupDosProcedimentosJaInseridos == null ? (backupDosProcedimentosJaInseridos = []) : backupDosProcedimentosJaInseridos;
+    procedimentoSelecionado.regioes = null;
+    backupDosProcedimentosJaInseridos.push(procedimentoSelecionado);
+    this.formGroup.controls['procedimentos'].setValue(backupDosProcedimentosJaInseridos);
+    this.formGroup.controls['procedimento'].setValue(null);
+    const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionado.id);
+    this.procedimentos.splice(indexProcedimento, 1);
   }
 
   exibirSelectRegiao() {
