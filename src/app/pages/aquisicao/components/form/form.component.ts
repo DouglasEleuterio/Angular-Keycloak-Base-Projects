@@ -16,6 +16,7 @@ import { Cliente } from '../../../../domain/cliente/cliente';
 import { ClienteService } from '../../../../domain/cliente/cliente.service';
 import { EFormaPagamento } from '../../../../domain/pagamento/forma-pagamento.enum';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
+import { dataUri } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -298,4 +299,10 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     }
     return false;
   }
+
+  onRowRemove(node: any, data: any) {
+    console.log({ node, data });
+  }
+
+  protected readonly dataUri = dataUri;
 }

@@ -93,6 +93,7 @@
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th *ngFor="let col of columns">{{ col.header }}</th>
+              <th>Remover</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
@@ -110,6 +111,19 @@
                   </ng-template>
                   <ng-template pTemplate="output">{{ rowData[col.field] }}</ng-template>
                 </p-treeTableCellEditor>
+              </td>
+              <td>
+                <div class="flex align-items-center justify-content-center gap-2">
+                  <button
+                    *ngIf="!rowNode.node.children"
+                    (click)="onRowRemove(rowNode, rowData)"
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="pi pi-times"
+                    class="p-button-rounded p-button-text p-button-danger"
+                  ></button>
+                </div>
               </td>
             </tr>
           </ng-template>
