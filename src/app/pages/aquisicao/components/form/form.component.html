@@ -7,8 +7,7 @@
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -20,8 +19,7 @@
               formControlName="cliente"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataAquisicao"
@@ -53,8 +51,7 @@
           <!--              locale="pt-BR"-->
           <!--            />-->
           <!--          </app-field>-->
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -92,76 +89,32 @@
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <p-table [value]="procedimentosInseridos" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
-          <ng-template pTemplate="header">
+        <p-treeTable [value]="exemplo" [columns]="cols" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
+          <ng-template pTemplate="header" let-columns>
             <tr>
-              <th style="width: 20%">Nome</th>
-              <th style="width: 20%">Preço</th>
-              <th style="width: 20%">Quantidade Sessões</th>
-              <th style="width: 20%">Intervalo entre Sessões</th>
-              <th style="width: 20%">Ações</th>
+              <th *ngFor="let col of columns">{{ col.header }}</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-procedimento let-editing="editing" let-ri="rowIndex">
+          <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
             <tr>
-              <td>
-                <p-cellEditor>
+              <td
+                *ngFor="let col of columns; let i = index"
+                ttEditableColumn
+                [ttEditableColumnDisabled]="i === 0"
+                [ngClass]="{ 'p-toggler-column': i === 0 }"
+              >
+                <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
+                <p-treeTableCellEditor>
                   <ng-template pTemplate="input">
-                    <input pInputText type="text" />
+                    <input pInputText type="text" [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}" />
                   </ng-template>
-                  <ng-template pTemplate="output"> {{ procedimento.nome }}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input pInputText type="text" />
-                  </ng-template>
-                  <ng-template pTemplate="output"> {{ procedimento.valor | thousandFormat }}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td [pEditableColumn]="procedimento.quantidadeSessoes" pEditableColumnField="quantidadeSessoes">
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="number"
-                      required
-                      [(ngModel)]="procedimento.quantidadeSessoes"
-                      [ngModelOptions]="{standalone: true}"
-                    />
-                  </ng-template>
-                  <ng-template pTemplate="output"> {{ procedimento.quantidadeSessoes }}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td [pEditableColumn]="procedimento.intervaloEntreSessoes" pEditableColumnField="intervaloEntreSessoes">
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input
-                      pInputText
-                      type="number"
-                      [(ngModel)]="procedimento.intervaloEntreSessoes"
-                      [ngModelOptions]="{standalone: true}"
-                    />
-                  </ng-template>
-                  <ng-template pTemplate="output"> {{ procedimento.intervaloEntreSessoes }}</ng-template>
-                </p-cellEditor>
-              </td>
-              <td>
-                <div class="flex align-items-center justify-content-center gap-2">
-                  <button
-                    pButton
-                    pRipple
-                    type="button"
-                    icon="pi pi-times"
-                    (click)="onRowRemoveAA(procedimento)"
-                    class="p-button-rounded p-button-text p-button-danger"
-                  ></button>
-                </div>
+                  <ng-template pTemplate="output">{{ rowData[col.field] }}</ng-template>
+                </p-treeTableCellEditor>
               </td>
             </tr>
           </ng-template>
-        </p-table>
+        </p-treeTable>
+
         <p-divider align="left">
           <div class="inline-flex align-items-center">
             <i class="pi pi-shopping-cart mr-2"></i>
@@ -170,8 +123,7 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -181,8 +133,7 @@
               formControlName="formaPagamento"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataPagamento"

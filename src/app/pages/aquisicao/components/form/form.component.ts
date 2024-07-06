@@ -35,6 +35,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   formasPagamento: EFormaPagamento[] = [];
   procedimentosInseridos: Procedimento[] = [];
   regioes: Regiao[] = [];
+  exemplo: any[] = [];
+  cols: any[];
 
   constructor(
     protected alertService: AlertService,
@@ -56,6 +58,39 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.formasPagamento.push(EFormaPagamento.PIX);
     this.formasPagamento.push(EFormaPagamento.EM_ABERTO);
     this.buildFormGroup();
+    this.exemplo.push({
+      data: {
+        name: 'Cloud'
+      },
+      children: [
+        {
+          data: {
+            name: 'backup-1.zip',
+            size: '10mb',
+            type: 'Zip'
+          }
+        },
+        {
+          data: {
+            name: 'backup-2.zip',
+            size: '10mb',
+            type: 'Zip'
+          }
+        }
+      ]
+    });
+    this.exemplo.push({
+      data: {
+        name: 'Cloud',
+        size: '20mb',
+        type: 'Folder'
+      }
+    });
+    this.cols = [
+      { field: 'name', header: 'Name' },
+      { field: 'size', header: 'Size' },
+      { field: 'type', header: 'Type' }
+    ];
   }
 
   buildFormGroup(): void {
