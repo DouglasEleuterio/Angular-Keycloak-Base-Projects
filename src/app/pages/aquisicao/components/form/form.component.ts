@@ -68,6 +68,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       procedimento: [null],
       procedimentos: [null],
 
+      regiao: [null],
+
       pagamentos: [null],
       pagamento: [null],
 
@@ -114,7 +116,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   getProcedimentoList(): void {
     const query = from<Procedimento>()
-      .select((u: any) => [u.nome, u.id, u.valor, u.quantidadeSessoes, u.intervaloEntreSessoes, u.regioes.id, u.regioes.nome])
+      .select((u: any) => [u.nome, u.id, u.valor, u.quantidadeSessoes, u.intervaloEntreSessoes, u.regioes.id, u.regioes.nome, u.regioes.valor, u.regioes.quantidadeSessoes, u.regioes.intervaloEntreSessoes])
       .where(u => u.eq('situacao', 'true'))
       .asc(x => x.nome)
       .getQuery();
@@ -138,19 +140,49 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .subscribe(clientes => (this.clientes = clientes));
   }
 
-  inserirProcedimentoComRegiao() {
-    this.regioes = [];
-    //Recupera procedimento do formulário
-    const procedimentosInseridosNoFormulario: Procedimento[] = this.formGroup.controls['procedimentos'].value;
+  onRegiaoChange() {
+    const regiaoSelecionada: Regiao = this.formGroup.controls['regiao'].value;
+
+    //Obter o procedimento da regiao selecionada
+    const procedimento: Procedimento = this.formGroup.controls['procedimento'].value;
+    const procedimentoCopia: Procedimento = { ...procedimento };
+    //Limpar todos as regioes do procedimento no formulário
+    procedimentoCopia.regioes = [];
+
+    let backupDosProcedimentosJaInseridos: Procedimento[] = this.formGroup.controls['procedimentos'].value;
+    backupDosProcedimentosJaInseridos == null ? (backupDosProcedimentosJaInseridos = []) : backupDosProcedimentosJaInseridos;
+    if (backupDosProcedimentosJaInseridos.find(proc => proc.id === procedimentoCopia.id)) {
+      //O procedimento já está inserido no formulário
+      backupDosProcedimentosJaInseridos.find(proc => proc.id == procedimentoCopia.id).regioes.push(regiaoSelecionada);
+    } else {
+      //O procedimento ainda não está inserido no formulário
+      procedimentoCopia.regioes.push(regiaoSelecionada);
+      backupDosProcedimentosJaInseridos.push(procedimentoCopia);
+    }
+    // backupDosProcedimentosJaInseridos.push(procedimentoSelecionado);
+    this.formGroup.controls['procedimentos'].setValue(backupDosProcedimentosJaInseridos);
+
+    //Retirar regiao selecionada do select de regiões
+    const indexRegiao: number = this.regioes.findIndex(value => value.id === regiaoSelecionada.id);
+    this.regioes.splice(indexRegiao, 1);
+    this.formGroup.controls['regiao'].setValue(null);
+    //Se todas as regiões do procedimento foi utilizada, remova o procedimento do select e da lista de procedimentos
+    if (this.regioes.length == 0) {
+      this.formGroup.controls['procedimento'].setValue(null);
+      this.procedimentos.splice(
+        this.procedimentos.findIndex(proc => proc.id === procedimento.id),
+        1
+      );
+    }
 
     //Se o procedimento não possuir regiões, retiro ele da lista de procedimentos para selecionar quando já selecionado.
-    const procedimentoSelecionadoDrop: Procedimento = this.formGroup.controls['procedimento'].value;
+    // const procedimentoSelecionadoDrop: Procedimento = this.formGroup.controls['procedimento'].value;
     // Existe regiao com id != null nesse procedimento
-    if (procedimentoSelecionadoDrop.regioes.find(proc => proc.id != null) == undefined) {
-      const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionadoDrop.id);
-      this.procedimentos.splice(indexProcedimento, 1);
-      this.formGroup.controls['procedimento'].setValue(null);
-    }
+    // if (procedimentoSelecionadoDrop.regioes.find(proc => proc.id != null) == undefined) {
+    //   const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionadoDrop.id);
+    //   this.procedimentos.splice(indexProcedimento, 1);
+    //   this.formGroup.controls['procedimento'].setValue(null);
+    // }
     // const indexProcedimento = this.procedimentos.findIndex(
     //   value => value.regioes && value.regioes.length > 0 && value.regioes[0].id != null && value.id === procedimentoSelecionadoDrop.id
     // );
