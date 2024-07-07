@@ -6,8 +6,16 @@
       </div>
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <p-divider align="left">
+          <div class="inline-flex align-items-center">
+            <i class="pi pi-user mr-2"></i>
+            <b>Paciente</b>
+            <div class="detail-body grid"></div>
+          </div>
+        </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'cliente.nome'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'cliente.nome'"
+                     page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -19,7 +27,8 @@
               formControlName="cliente"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'data_aquisicao'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'data_aquisicao'"
+                     page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataAquisicao"
@@ -30,7 +39,17 @@
               appDateMask
             ></p-calendar>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
+        </div>
+        <p-divider align="left">
+          <div class="inline-flex align-items-center">
+            <i class="pi pi-shopping-cart mr-2"></i>
+            <b>Procedimentos</b>
+            <div class="detail-body grid"></div>
+          </div>
+        </p-divider>
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'procedimento.nome'"
+                     page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -42,7 +61,8 @@
               (onChange)="procedimentoChange()"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'regiao.nome'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'regiao.nome'"
+                     page="aquisicao">
             <p-dropdown
               [disabled]="true"
               appFieldRef
@@ -56,13 +76,6 @@
             ></p-dropdown>
           </app-field>
         </div>
-        <p-divider *ngIf="formGroup.controls['regioes'].value && formGroup.controls['regioes'].value.length > 0" align="left">
-          <div class="inline-flex align-items-center">
-            <i class="pi pi-shopping-cart mr-2"></i>
-            <b>Procedimentos</b>
-            <div class="detail-body grid"></div>
-          </div>
-        </p-divider>
         <p-table
           *ngIf="formGroup.controls['regioes'].value && formGroup.controls['regioes'].value.length > 0"
           [value]="formGroup.controls['regioes'].value"
@@ -93,7 +106,8 @@
               <td [pEditableColumn]="regiao.quantidadeSessoes" pEditableColumnField="code">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
-                    <input pInputText type="number" [(ngModel)]="regiao.quantidadeSessoes" [ngModelOptions]="{standalone: true}" />
+                    <input pInputText type="number" [(ngModel)]="regiao.quantidadeSessoes"
+                           [ngModelOptions]="{standalone: true}" />
                   </ng-template>
                   <ng-template pTemplate="output"> {{ regiao.quantidadeSessoes }}</ng-template>
                 </p-cellEditor>
@@ -101,7 +115,8 @@
               <td [pEditableColumn]="regiao.intervaloEntreSessoes" pEditableColumnField="code">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
-                    <input pInputText type="number" [(ngModel)]="regiao.intervaloEntreSessoes" [ngModelOptions]="{standalone: true}" />
+                    <input pInputText type="number" [(ngModel)]="regiao.intervaloEntreSessoes"
+                           [ngModelOptions]="{standalone: true}" />
                   </ng-template>
                   <ng-template pTemplate="output"> {{ regiao.intervaloEntreSessoes }}</ng-template>
                 </p-cellEditor>
@@ -118,13 +133,14 @@
         </p-table>
         <p-divider align="left">
           <div class="inline-flex align-items-center">
-            <i class="pi pi-shopping-cart mr-2"></i>
+            <i class="pi pi-money-bill mr-2"></i>
             <b>Pagamento</b>
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'"
+                     page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -134,7 +150,8 @@
               formControlName="formaPagamento"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'"
+                     page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataPagamento"
@@ -182,7 +199,7 @@
         </div>
         <p-divider align="left" *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO">
           <div class="inline-flex align-items-center">
-            <i class="pi pi-shopping-cart mr-2"></i>
+            <i class="pi pi-money-bill mr-2"></i>
             <b>Parcela</b>
             <div class="detail-body grid"></div>
           </div>
@@ -248,7 +265,7 @@
         </div>
       </form>
     </div>
-    <p-accordion>
+    <p-accordion *ngIf="false">
       <p-accordionTab header="Formulário">
         <pre>{{ formGroup.value | json }}</pre>
       </p-accordionTab>
