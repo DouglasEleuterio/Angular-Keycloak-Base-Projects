@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DividerModule } from 'primeng/divider';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { TreeTableModule } from 'primeng/treetable';
+import { NgxJsonViewerModule } from 'ngx-json-viewer';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, NewComponent],
@@ -40,7 +41,8 @@ import { TreeTableModule } from 'primeng/treetable';
     ChipsModule,
     DividerModule,
     RxReactiveFormsModule,
-    TreeTableModule
+    TreeTableModule,
+    NgxJsonViewerModule
   ]
 })
 export class AquisicaoModule {}

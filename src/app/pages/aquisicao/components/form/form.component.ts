@@ -3,9 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { BaseFormComponent } from '../../../../core/ui/components/form/base-form.component';
 import { plainToClass } from 'class-transformer';
 import { from } from '../../../../core/api/select/select';
@@ -37,7 +35,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   procedimentosInseridos: Procedimento[] = [];
   regioes: Regiao[] = [];
   exemplo: any[] = [];
-  cols: any[];
+  procedimentoTable: { nome: string; valor: number; regiao: string; quantidadeSessoes: number; intevaloEntreSessoes: number };
 
   constructor(
     protected alertService: AlertService,
@@ -59,39 +57,6 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.formasPagamento.push(EFormaPagamento.PIX);
     this.formasPagamento.push(EFormaPagamento.EM_ABERTO);
     this.buildFormGroup();
-    this.exemplo.push({
-      data: {
-        name: 'Cloud'
-      },
-      children: [
-        {
-          data: {
-            name: 'backup-1.zip',
-            size: '10mb',
-            type: 'Zip'
-          }
-        },
-        {
-          data: {
-            name: 'backup-2.zip',
-            size: '10mb',
-            type: 'Zip'
-          }
-        }
-      ]
-    });
-    this.exemplo.push({
-      data: {
-        name: 'Cloud',
-        size: '20mb',
-        type: 'Folder'
-      }
-    });
-    this.cols = [
-      { field: 'name', header: 'Name' },
-      { field: 'size', header: 'Size' },
-      { field: 'type', header: 'Type' }
-    ];
   }
 
   buildFormGroup(): void {
@@ -103,6 +68,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
       procedimento: [null],
       procedimentos: [null],
+      procedimentosTable: [null],
 
       regiao: [null],
 
@@ -254,7 +220,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     // this.procedimentos.splice(indexProcedimento, 1);
   }
 
-  onRowRemoveAA(procedimento: Procedimento) {
+  onRowRemove(procedimento: Procedimento) {
     const indexProcedimento = this.procedimentosInseridos.findIndex(value => value.id === procedimento.id);
     this.procedimentos.push(procedimento);
     this.procedimentosInseridos.splice(indexProcedimento, 1);
@@ -263,9 +229,10 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   procedimentoChange() {
     const procedimentoSelecionado: Procedimento = this.formGroup.controls['procedimento'].value;
-    // Existe regiao com id != null nesse procedimento
+    // Existe regiao com id == null nesse procedimento
     if (procedimentoSelecionado.regioes.find(regiao => regiao.id == null)) {
       this.inserirProcedimentoSemRegiao(procedimentoSelecionado);
+      this.inserirProcedimentoSemRegiaoTabela(procedimentoSelecionado);
     } else {
       this.inserirRegioesDadoProcedimento(procedimentoSelecionado);
     }
@@ -287,6 +254,25 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.procedimentos.splice(indexProcedimento, 1);
   }
 
+  private inserirProcedimentoSemRegiaoTabela(procedimentoSelecionado: Procedimento) {
+    let backupDosProcedimentosJaInseridos: {
+      nome: string;
+      valor: number;
+      regiao: string;
+      quantidadeSessoes: number;
+      intevaloEntreSessoes: number;
+    }[] = this.formGroup.controls['procedimentosTable'].value;
+    backupDosProcedimentosJaInseridos == null ? (backupDosProcedimentosJaInseridos = []) : backupDosProcedimentosJaInseridos;
+    backupDosProcedimentosJaInseridos.push({
+      nome: procedimentoSelecionado.nome,
+      valor: procedimentoSelecionado.valor,
+      regiao: '-',
+      intevaloEntreSessoes: procedimentoSelecionado.intervaloEntreSessoes,
+      quantidadeSessoes: procedimentoSelecionado.intervaloEntreSessoes
+    });
+    this.formGroup.controls['procedimentosTable'].setValue(backupDosProcedimentosJaInseridos);
+  }
+
   exibirSelectRegiao() {
     const procedimentoSelecionado: Procedimento = this.formGroup.controls['procedimento'].value;
     if (
@@ -299,10 +285,4 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     }
     return false;
   }
-
-  onRowRemove(node: any, data: any) {
-    console.log({ node, data });
-  }
-
-  protected readonly dataUri = dataUri;
 }

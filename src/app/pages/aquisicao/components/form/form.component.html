@@ -89,46 +89,31 @@
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <p-treeTable [value]="exemplo" [columns]="cols" [scrollable]="true" [tableStyle]="{'min-width':'50rem'}">
-          <ng-template pTemplate="header" let-columns>
+        <p-table [value]="formGroup.controls['procedimentosTable'].value" [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="header">
             <tr>
-              <th *ngFor="let col of columns">{{ col.header }}</th>
-              <th>Remover</th>
+              <th>Nome</th>
+              <th>Valor</th>
+              <th>Região</th>
+              <th>Quantidade de Sessões</th>
+              <th>Intervalo Entre Sessões</th>
+              <th style="width: 5rem">Remover</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-rowNode let-rowData="rowData" let-columns="columns">
+          <ng-template pTemplate="body" let-product>
             <tr>
-              <td
-                *ngFor="let col of columns; let i = index"
-                ttEditableColumn
-                [ttEditableColumnDisabled]="i === 0"
-                [ngClass]="{ 'p-toggler-column': i === 0 }"
-              >
-                <p-treeTableToggler [rowNode]="rowNode" *ngIf="i === 0"></p-treeTableToggler>
-                <p-treeTableCellEditor>
-                  <ng-template pTemplate="input">
-                    <input pInputText type="text" [(ngModel)]="rowData[col.field]" [ngModelOptions]="{standalone: true}" />
-                  </ng-template>
-                  <ng-template pTemplate="output">{{ rowData[col.field] }}</ng-template>
-                </p-treeTableCellEditor>
-              </td>
+              <td>{{ product.nome }}</td>
+              <td>{{ product.valor }}</td>
+              <td>{{ product.regiao }}</td>
+              <td>{{ product.quantidadeSessoes }}</td>
+              <td>{{ product.intevaloEntreSessoes }}</td>
               <td>
-                <div class="flex align-items-center justify-content-center gap-2">
-                  <button
-                    *ngIf="!rowNode.node.children"
-                    (click)="onRowRemove(rowNode, rowData)"
-                    pButton
-                    pRipple
-                    type="button"
-                    icon="pi pi-times"
-                    class="p-button-rounded p-button-text p-button-danger"
-                  ></button>
-                </div>
+                <button type="button" pButton pRipple icon="pi pi-plus" (click)="onRowRemove(product)"></button>
               </td>
             </tr>
+            {{formGroup.controls['procedimentos'].value | json}}
           </ng-template>
-        </p-treeTable>
-
+        </p-table>
         <p-divider align="left">
           <div class="inline-flex align-items-center">
             <i class="pi pi-shopping-cart mr-2"></i>
@@ -259,37 +244,7 @@
             <input appFieldRef pInputText disabled type="number" formControlName="numeroParcela" maxlength="100" />
           </app-field>
         </div>
-        <div class="p-fluid formgrid grid">
-          <div class="p-field col-6">
-            <app-data-label
-              title="{{'field.valor_aquisicao' | appTranslate:'aquisicao'}}"
-              [value]="formGroup.controls['valorAquisicao'].value | thousandFormat"
-            ></app-data-label>
-          </div>
-          <div class="p-field col-6">
-            <app-data-label
-              title="{{'field.valor_desconto' | appTranslate:'aquisicao'}}"
-              [value]="formGroup.controls['valorDesconto'].value | thousandFormat"
-            ></app-data-label>
-          </div>
-        </div>
       </form>
-      <p-divider align="left">
-        <div class="inline-flex align-items-center">
-          <i class="pi pi-shopping-cart mr-2"></i>
-          <b>Procedimento</b>
-          <div class="detail-body grid"></div>
-        </div>
-      </p-divider>
-      {{ formGroup.value['procedimento'] | json }}
-      <p-divider align="left">
-        <div class="inline-flex align-items-center">
-          <i class="pi pi-shopping-cart mr-2"></i>
-          <b>Procedimentos</b>
-          <div class="detail-body grid"></div>
-        </div>
-      </p-divider>
-      {{ formGroup.value['procedimentos'] | json }}
     </div>
   </div>
 </div>

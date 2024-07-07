@@ -62,3 +62,33 @@ docker tag clinica-app:v2.0.0 douglaseleuterioferreira/apps:clinica-app
 ````shell
 docker push douglaseleuterioferreira/apps:clinica-app
 ````
+
+# Trilha para o desenvolvimento eficiente
+## Proposito: 
+Desenvolver soluções rápidas, como foco na criação de produtos a serem validados.
+## Problemática:
+O desenvolvimento de software para organizações modernas precisa ser rápido e acompanhar as constantes mudanças. Um processo ágil, focado na validação, substituirá a criação de protótipos, gerando um produto final durante o processo de validação.
+## Motivação:
+Após o desenvolvimento das primeiras telas para o sistema da clínica, mudanças foram solicitadas, o que resultou em modificações desde a base de dados até os formulários, gerando grande esfoço para adequação.
+
+## Solução:
+Seguir uma abordagem de desenvolvimento baseado em frontend, sem conexão com API.
+Desenvolver tela, validar com o cliente, após refinado e atendido as necessidades, realizar conexão com API.
+
+## Roteiro:
+Analisar necessidade do cliente, propor modelo de dados para solução.
+Criar classes modelo para entidades propostas.
+Desenvolver telas baseado nos modelos definidos.
+Validação de telas com cliente, realizar alterações/refinamentos.
+Criar API para atender as telas e realizar conexão;
+
+
+# Clinica
+
+## Vendas:
+Registrar vendas de procedimentos, indentificando: Paciente, Procedimento, Pagamento, Agendamento do Atendimento.
+Procedimento: Nome do Procedimento, Região de Aplicação, Quantidade de Sessões Vendidas.
+Pagamento: Vários pagamentos podem ser utilizados
+Agendamento: Utilizar intervalo das sessões para realizar pré-agendamento automático.
+
+
