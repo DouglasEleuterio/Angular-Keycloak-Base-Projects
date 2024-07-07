@@ -7,7 +7,7 @@
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'cliente.nome'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'cliente.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -19,7 +19,7 @@
               formControlName="cliente"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_aquisicao'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'data_aquisicao'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataAquisicao"
@@ -30,28 +30,7 @@
               appDateMask
             ></p-calendar>
           </app-field>
-          <!--          <app-field class="p-field col-12 md:col-6 lg:col-4" [labelName]="'valor_aquisicao'" page="aquisicao">-->
-          <!--            <p-inputNumber-->
-          <!--              appFieldRef-->
-          <!--              formControlName="valorAquisicao"-->
-          <!--              inputId="currency-brazil"-->
-          <!--              mode="currency"-->
-          <!--              currency="BRL"-->
-          <!--              locale="pt-BR"-->
-          <!--              maxlength="13"-->
-          <!--            />-->
-          <!--          </app-field>-->
-          <!--          <app-field class="p-field col-12 md:col-6 lg:col-4" [labelName]="'valor_desconto'" page="aquisicao">-->
-          <!--            <p-inputNumber-->
-          <!--              appFieldRef-->
-          <!--              formControlName="valorDesconto"-->
-          <!--              inputId="currency-brazil"-->
-          <!--              mode="currency"-->
-          <!--              currency="BRL"-->
-          <!--              locale="pt-BR"-->
-          <!--            />-->
-          <!--          </app-field>-->
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -63,14 +42,9 @@
               (onChange)="procedimentoChange()"
             ></p-dropdown>
           </app-field>
-          <app-field
-            *ngIf="exibirSelectRegiao()"
-            class="p-field col-12 md:col-6 lg:col-4"
-            [submitted]="submitted"
-            [labelName]="'regiao.nome'"
-            page="aquisicao"
-          >
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'regiao.nome'" page="aquisicao">
             <p-dropdown
+              [disabled]="true"
               appFieldRef
               [filter]="true"
               emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
@@ -78,40 +52,68 @@
               optionLabel="nome"
               formControlName="regiao"
               placeholder="{{'select' | appTranslate:'shared'}}"
-              (onChange)="onRegiaoChange()"
+              (onChange)="onRegiaoSelect()"
             ></p-dropdown>
           </app-field>
         </div>
-        <p-divider align="left">
+        <p-divider *ngIf="formGroup.controls['regioes'].value && formGroup.controls['regioes'].value.length > 0" align="left">
           <div class="inline-flex align-items-center">
             <i class="pi pi-shopping-cart mr-2"></i>
             <b>Procedimentos</b>
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <p-table [value]="formGroup.controls['procedimentosTable'].value" [tableStyle]="{ 'min-width': '50rem' }">
+        <p-table
+          *ngIf="formGroup.controls['regioes'].value && formGroup.controls['regioes'].value.length > 0"
+          [value]="formGroup.controls['regioes'].value"
+          [tableStyle]="{ 'min-width': '50rem' }"
+        >
           <ng-template pTemplate="header">
             <tr>
               <th>Nome</th>
-              <th>Valor</th>
               <th>Região</th>
+              <th>Valor</th>
               <th>Quantidade de Sessões</th>
               <th>Intervalo Entre Sessões</th>
               <th style="width: 5rem">Remover</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-product>
+          <ng-template pTemplate="body" let-regiao let-editing="editing">
             <tr>
-              <td>{{ product.nome }}</td>
-              <td>{{ product.valor }}</td>
-              <td>{{ product.regiao }}</td>
-              <td>{{ product.quantidadeSessoes }}</td>
-              <td>{{ product.intevaloEntreSessoes }}</td>
+              <td>{{ regiao.procedimento.nome }}</td>
+              <td>{{ regiao.nome }}</td>
+              <td [pEditableColumn]="regiao.valor" pEditableColumnField="code">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="number" [(ngModel)]="regiao.valor" [ngModelOptions]="{standalone: true}" />
+                  </ng-template>
+                  <ng-template pTemplate="output"> {{ regiao.valor | thousandFormat }}</ng-template>
+                </p-cellEditor>
+              </td>
+              <td [pEditableColumn]="regiao.quantidadeSessoes" pEditableColumnField="code">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="number" [(ngModel)]="regiao.quantidadeSessoes" [ngModelOptions]="{standalone: true}" />
+                  </ng-template>
+                  <ng-template pTemplate="output"> {{ regiao.quantidadeSessoes }}</ng-template>
+                </p-cellEditor>
+              </td>
+              <td [pEditableColumn]="regiao.intervaloEntreSessoes" pEditableColumnField="code">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="number" [(ngModel)]="regiao.intervaloEntreSessoes" [ngModelOptions]="{standalone: true}" />
+                  </ng-template>
+                  <ng-template pTemplate="output"> {{ regiao.intervaloEntreSessoes }}</ng-template>
+                </p-cellEditor>
+              </td>
               <td>
-                <button type="button" pButton pRipple icon="pi pi-plus" (click)="onRowRemove(product)"></button>
+                <p-button
+                  icon="pi pi-times"
+                  styleClass="p-button-rounded p-button-danger p-button-text"
+                  (click)="onRowRemove(regiao)"
+                ></p-button>
               </td>
             </tr>
-            {{formGroup.controls['procedimentos'].value | json}}
           </ng-template>
         </p-table>
         <p-divider align="left">
@@ -246,5 +248,10 @@
         </div>
       </form>
     </div>
+    <p-accordion>
+      <p-accordionTab header="Formulário">
+        <pre>{{ formGroup.value | json }}</pre>
+      </p-accordionTab>
+    </p-accordion>
   </div>
 </div>

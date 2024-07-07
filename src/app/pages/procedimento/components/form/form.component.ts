@@ -127,7 +127,6 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       quantidadeSessoes: this.formGroup.get('quantidadeSessoes').value,
       intervaloEntreSessoes: this.formGroup.get('intervaloEntreSessoes').value,
       valor: this.formGroup.get('valor').value,
-      persistida: false
     };
     this.regioesInseridas.push(regiao);
     this.formGroup.get('nomeRegiao').setValue(null);

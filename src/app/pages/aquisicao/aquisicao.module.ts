@@ -20,6 +20,8 @@ import { DividerModule } from 'primeng/divider';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { TreeTableModule } from 'primeng/treetable';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
+import { SplitterModule } from 'primeng/splitter';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, NewComponent],
@@ -42,7 +44,9 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
     DividerModule,
     RxReactiveFormsModule,
     TreeTableModule,
-    NgxJsonViewerModule
+    NgxJsonViewerModule,
+    SplitterModule,
+    AccordionModule
   ]
 })
 export class AquisicaoModule {}

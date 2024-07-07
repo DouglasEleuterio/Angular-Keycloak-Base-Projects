@@ -1,10 +1,7 @@
-import { Regiao } from './regiao.model';
-
-export class Procedimento {
+export class ProcedimentoSemRegiao {
   id?: number;
   nome?: string;
   situacao?: boolean;
-  regioes?: Regiao[];
   dataCriacao?: Date;
   dataAtualizacao?: Date;
 }

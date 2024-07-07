@@ -3,7 +3,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { BaseFormComponent } from '../../../../core/ui/components/form/base-form.component';
 import { plainToClass } from 'class-transformer';
 import { from } from '../../../../core/api/select/select';
@@ -14,7 +16,7 @@ import { Cliente } from '../../../../domain/cliente/cliente';
 import { ClienteService } from '../../../../domain/cliente/cliente.service';
 import { EFormaPagamento } from '../../../../domain/pagamento/forma-pagamento.enum';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
-import { dataUri } from '@rxweb/reactive-form-validators';
+import { FormDatas } from './form-datas';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -35,7 +37,6 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   procedimentosInseridos: Procedimento[] = [];
   regioes: Regiao[] = [];
   exemplo: any[] = [];
-  procedimentoTable: { nome: string; valor: number; regiao: string; quantidadeSessoes: number; intevaloEntreSessoes: number };
 
   constructor(
     protected alertService: AlertService,
@@ -50,8 +51,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getClienteList();
-    this.getProcedimentoList();
+    this.getClientesMock();
+    this.getProcedimentosMock();
     this.formasPagamento.push(EFormaPagamento.CARTAO_CREDITO);
     this.formasPagamento.push(EFormaPagamento.CARTAO_DEBITO);
     this.formasPagamento.push(EFormaPagamento.PIX);
@@ -71,6 +72,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       procedimentosTable: [null],
 
       regiao: [null],
+      regioes: [null],
 
       pagamentos: [null],
       pagamento: [null],
@@ -116,6 +118,12 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     }
   }
 
+  getProcedimentosMock(): void {
+    FormDatas.getProcedimentos()
+      .pipe()
+      .subscribe(procedimentos => (this.procedimentos = procedimentos));
+  }
+
   getProcedimentoList(): void {
     const query = from<Procedimento>()
       .select((u: any) => [
@@ -140,6 +148,12 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .subscribe(procedimentos => (this.procedimentos = procedimentos));
   }
 
+  getClientesMock(): void {
+    FormDatas.getClientes()
+      .pipe()
+      .subscribe(clientes => (this.clientes = clientes));
+  }
+
   getClienteList(): void {
     const query = from<Cliente>()
       .select((u: Cliente) => [u.nome, u.id])
@@ -153,136 +167,61 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .subscribe(clientes => (this.clientes = clientes));
   }
 
-  onRegiaoChange() {
+  onRegiaoSelect() {
     const regiaoSelecionada: Regiao = this.formGroup.controls['regiao'].value;
-
-    //Obter o procedimento da regiao selecionada
-    const procedimento: Procedimento = this.formGroup.controls['procedimento'].value;
-    const procedimentoCopia: Procedimento = { ...procedimento };
-    //Limpar todos as regioes do procedimento no formulário
-    procedimentoCopia.regioes = [];
+    let regioes: Regiao[] = this.formGroup.controls['regioes'].value;
 
     let backupDosProcedimentosJaInseridos: Procedimento[] = this.formGroup.controls['procedimentos'].value;
+
+    //Existem Procedimentos inseridos na tabela?
     backupDosProcedimentosJaInseridos == null ? (backupDosProcedimentosJaInseridos = []) : backupDosProcedimentosJaInseridos;
-    if (backupDosProcedimentosJaInseridos.find(proc => proc.id === procedimentoCopia.id)) {
-      //O procedimento já está inserido no formulário
-      backupDosProcedimentosJaInseridos.find(proc => proc.id == procedimentoCopia.id).regioes.push(regiaoSelecionada);
+
+    //O procedimento está inserido no formulário?
+    if (backupDosProcedimentosJaInseridos.find(proc => proc.id === regiaoSelecionada.procedimento.id)) {
+      const procedimentoInserido = backupDosProcedimentosJaInseridos.find(proc => proc.id == regiaoSelecionada.procedimento.id);
+      if (procedimentoInserido.regioes.find(reg => reg.id === regiaoSelecionada.id) === undefined) {
+        procedimentoInserido.regioes.push(regiaoSelecionada);
+      } else {
+        this.alertService.defaultWarn('Região já inserida');
+        this.formGroup.controls['regiao'].setValue(null);
+        return;
+      }
     } else {
       //O procedimento ainda não está inserido no formulário
-      procedimentoCopia.regioes.push(regiaoSelecionada);
-      backupDosProcedimentosJaInseridos.push(procedimentoCopia);
+      //Criar um novo procedimento e inserir a região
+      const procedimento: Procedimento = this.formGroup.controls['procedimento'].value;
+      procedimento.regioes = [];
+      procedimento.regioes.push(regiaoSelecionada);
+      backupDosProcedimentosJaInseridos.push(procedimento);
     }
-    // backupDosProcedimentosJaInseridos.push(procedimentoSelecionado);
     this.formGroup.controls['procedimentos'].setValue(backupDosProcedimentosJaInseridos);
+    regioes == null ? (regioes = []) : regioes;
+    regioes.push(regiaoSelecionada);
+    this.formGroup.controls['regioes'].setValue(regioes);
 
-    //Retirar regiao selecionada do select de regiões
-    const indexRegiao: number = this.regioes.findIndex(value => value.id === regiaoSelecionada.id);
-    this.regioes.splice(indexRegiao, 1);
     this.formGroup.controls['regiao'].setValue(null);
-    //Se todas as regiões do procedimento foi utilizada, remova o procedimento do select e da lista de procedimentos
-    if (this.regioes.length == 0) {
-      this.formGroup.controls['procedimento'].setValue(null);
-      this.procedimentos.splice(
-        this.procedimentos.findIndex(proc => proc.id === procedimento.id),
-        1
-      );
+  }
+
+  onRowRemove(regiao: Regiao) {
+    const procedimento = this.formGroup.controls['procedimentos'].value.find(procedimento => procedimento.id == regiao.procedimento.id);
+    procedimento.regioes.splice(
+      procedimento.regioes.findIndex(reg => reg.id == regiao.id),
+      1
+    );
+
+    if (procedimento.regioes.length < 1) {
+      this.formGroup.controls['procedimentos'].value.splice(proc => proc.id == procedimento.id, 1);
     }
-
-    //Se o procedimento não possuir regiões, retiro ele da lista de procedimentos para selecionar quando já selecionado.
-    // const procedimentoSelecionadoDrop: Procedimento = this.formGroup.controls['procedimento'].value;
-    // Existe regiao com id != null nesse procedimento
-    // if (procedimentoSelecionadoDrop.regioes.find(proc => proc.id != null) == undefined) {
-    //   const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionadoDrop.id);
-    //   this.procedimentos.splice(indexProcedimento, 1);
-    //   this.formGroup.controls['procedimento'].setValue(null);
-    // }
-    // const indexProcedimento = this.procedimentos.findIndex(
-    //   value => value.regioes && value.regioes.length > 0 && value.regioes[0].id != null && value.id === procedimentoSelecionadoDrop.id
-    // );
-    //
-    // this.procedimentos.splice(indexProcedimento, 1);
-    // this.formGroup.controls['procedimento'].setValue(null);
-    //
-    // Se exitir procedimentos no formulario, Verifica se o procedimento já foi inserido, para validar se inclui região no procedimento
-    // if (procedimentosInseridosNoFormulario && procedimentosInseridosNoFormulario.length > 0) {
-    // }
-    //
-    // this.formGroup.controls['procedimentos'].setValue(procedimentosInseridosNoFormulario);
-
-    //Coisas velhas
-    // const procedimento = this.formGroup.controls['procedimento'].value;
-    // this.procedimentosInseridos.push(procedimento);
-    // const valorTotalProcedimentos = this.procedimentosInseridos.reduce((sum, { valor }) => sum + valor, 0);
-    // this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
-    // this.formGroup.controls['procedimento'].setValue(null);
-    // this.formGroup.controls['valorAquisicao'].setValue(valorTotalProcedimentos);
-    // const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimento.id);
-    // this.procedimentos.splice(indexProcedimento, 1);
+    const regioes: Regiao[] = this.formGroup.controls['regioes'].value;
+    regioes.splice(regioes.indexOf(regiao), 1);
+    this.formGroup.controls['regioes'].setValue(regioes);
   }
 
-  onRowRemove(procedimento: Procedimento) {
-    const indexProcedimento = this.procedimentosInseridos.findIndex(value => value.id === procedimento.id);
-    this.procedimentos.push(procedimento);
-    this.procedimentosInseridos.splice(indexProcedimento, 1);
-    this.formGroup.controls['procedimentos'].setValue(this.procedimentosInseridos);
-  }
-
+  //Carregar lista de Regiões do Procedimento
   procedimentoChange() {
+    this.regioes = [];
     const procedimentoSelecionado: Procedimento = this.formGroup.controls['procedimento'].value;
-    // Existe regiao com id == null nesse procedimento
-    if (procedimentoSelecionado.regioes.find(regiao => regiao.id == null)) {
-      this.inserirProcedimentoSemRegiao(procedimentoSelecionado);
-      this.inserirProcedimentoSemRegiaoTabela(procedimentoSelecionado);
-    } else {
-      this.inserirRegioesDadoProcedimento(procedimentoSelecionado);
-    }
+    procedimentoSelecionado.regioes.forEach(reg => this.regioes.push(reg));
   }
 
-  inserirRegioesDadoProcedimento(procedimento: Procedimento) {
-    this.regioes = procedimento.regioes;
-  }
-
-  inserirProcedimentoSemRegiao(procedimentoSelecionado: Procedimento) {
-    //O procedimento selecionado, não possui regiao.
-    let backupDosProcedimentosJaInseridos: Procedimento[] = this.formGroup.controls['procedimentos'].value;
-    backupDosProcedimentosJaInseridos == null ? (backupDosProcedimentosJaInseridos = []) : backupDosProcedimentosJaInseridos;
-    procedimentoSelecionado.regioes = null;
-    backupDosProcedimentosJaInseridos.push(procedimentoSelecionado);
-    this.formGroup.controls['procedimentos'].setValue(backupDosProcedimentosJaInseridos);
-    this.formGroup.controls['procedimento'].setValue(null);
-    const indexProcedimento = this.procedimentos.findIndex(value => value.id === procedimentoSelecionado.id);
-    this.procedimentos.splice(indexProcedimento, 1);
-  }
-
-  private inserirProcedimentoSemRegiaoTabela(procedimentoSelecionado: Procedimento) {
-    let backupDosProcedimentosJaInseridos: {
-      nome: string;
-      valor: number;
-      regiao: string;
-      quantidadeSessoes: number;
-      intevaloEntreSessoes: number;
-    }[] = this.formGroup.controls['procedimentosTable'].value;
-    backupDosProcedimentosJaInseridos == null ? (backupDosProcedimentosJaInseridos = []) : backupDosProcedimentosJaInseridos;
-    backupDosProcedimentosJaInseridos.push({
-      nome: procedimentoSelecionado.nome,
-      valor: procedimentoSelecionado.valor,
-      regiao: '-',
-      intevaloEntreSessoes: procedimentoSelecionado.intervaloEntreSessoes,
-      quantidadeSessoes: procedimentoSelecionado.intervaloEntreSessoes
-    });
-    this.formGroup.controls['procedimentosTable'].setValue(backupDosProcedimentosJaInseridos);
-  }
-
-  exibirSelectRegiao() {
-    const procedimentoSelecionado: Procedimento = this.formGroup.controls['procedimento'].value;
-    if (
-      procedimentoSelecionado &&
-      procedimentoSelecionado.regioes &&
-      procedimentoSelecionado.regioes.length > 0 &&
-      procedimentoSelecionado.regioes[0].id
-    ) {
-      return true;
-    }
-    return false;
-  }
 }

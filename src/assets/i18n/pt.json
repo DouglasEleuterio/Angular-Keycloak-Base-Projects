@@ -59,6 +59,7 @@
     "PROPERTY": "Propriedades",
     "WELCOME": "Bem-Vindo(a)",
     "TITLES": {
+      "WARN": "Atenção",
       "VALIDATION": "Validação",
       "ERROR": "Atenção",
       "INFO": "Detalhes",
