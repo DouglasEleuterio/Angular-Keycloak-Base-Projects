@@ -7,7 +7,7 @@ COPY package.json ./
 RUN npm install --force
 COPY . .
 
-RUN npm run replace-version --build_version=${VERSION} --env_file="/usr/src/app/src/environments/environment.*"
+RUN npm run replace-version --build_version=${VERSION} --env_file="/usr/src/app/src/environments/environment.prod.*"
 RUN npm run build:docker
 
 # RUN echo 'Instalação do certbot'
