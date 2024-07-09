@@ -3,9 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { BaseFormComponent } from '../../../../core/ui/components/form/base-form.component';
 import { plainToClass } from 'class-transformer';
 import { from } from '../../../../core/api/select/select';
@@ -17,6 +15,7 @@ import { ClienteService } from '../../../../domain/cliente/cliente.service';
 import { EFormaPagamento } from '../../../../domain/pagamento/forma-pagamento.enum';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
 import { FormDatas } from './form-datas';
+import { Pagamento } from '../../../../domain/pagamento/pagamento.model';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -37,6 +36,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   procedimentosInseridos: Procedimento[] = [];
   regioes: Regiao[] = [];
   exemplo: any[] = [];
+  disabledAdicionarPagamento = true;
 
   constructor(
     protected alertService: AlertService,
@@ -75,21 +75,11 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       regioes: [null],
 
       pagamentos: [null],
-      pagamento: [null],
 
-      dataPagamento: [null],
-      valorPagamento: [null],
       formaPagamento: [null],
-      quantidadeParcelas: [null],
-      taxa: [null],
-
-      parcelas: [null],
-      parcela: [null],
-
-      dataCredito: [null],
-      valorCredito: [null],
+      valorPagamento: [null],
       valorTaxa: [null],
-      numeroParcela: [null]
+      dataPagamento: [null]
     });
   }
 
@@ -227,9 +217,12 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   getValorTotalProcedimentos(): number {
     const procedimentos = this.getProcedimentosInForm();
     const valorTotal = procedimentos.reduce(function (valorTotal, obj) {
-      return valorTotal + obj.regioes.reduce(function (valorTotal, obj) {
-        return valorTotal + obj.valor * obj.quantidadeSessoes;
-      }, 0);
+      return (
+        valorTotal +
+        obj.regioes.reduce(function (valorTotal, obj) {
+          return valorTotal + obj.valor * obj.quantidadeSessoes;
+        }, 0)
+      );
     }, 0);
 
     return valorTotal;
@@ -237,5 +230,62 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   getProcedimentosInForm(): Procedimento[] {
     return this.formGroup.controls['procedimentos'].value;
+  }
+
+  onAddPagamento(): void {
+    this.getPagamentosInForm() === null ? this.formGroup.controls['pagamentos'].setValue([]) : this.getPagamentosInForm();
+
+    this.setPagamentoInPagamentosForm({
+      formaPagamento: this.getFormaPagamentoInForm(),
+      valorPagamento: this.getValorPagamentoInForm(),
+      taxa: Number.parseFloat(this.getValorTaxaInForm()),
+      dataPagamento: this.getDataPagamentoInForm()
+    });
+  }
+
+  onValorDePagamentoAlterado() {
+    this.disabledAdicionarPagamento =
+      this.getFormaPagamentoInForm() == null ||
+      this.getDataPagamentoInForm() == null ||
+      this.getValorPagamentoInForm() == null ||
+      this.getValorTaxaInForm() == null;
+  }
+
+  onRowRemovePagamento(index: any) {
+    const procedimentos: Procedimento[] = this.getPagamentosInForm();
+    procedimentos.splice(index, 1);
+    this.formGroup.controls['pagamentos'].setValue(procedimentos);
+  }
+
+  getValorTotalPagamentos(): number {
+    return this.getPagamentosInForm().reduce(function (valorTotal, obj) {
+      return valorTotal + obj.valorPagamento;
+    }, 0);
+  }
+
+  getPagamentosInForm(): any {
+    return this.formGroup.controls['pagamentos'].value;
+  }
+
+  setPagamentoInPagamentosForm(pagamento: Pagamento): void {
+    const backupPagamentos: Pagamento[] = this.getPagamentosInForm();
+    backupPagamentos.push(pagamento);
+    this.formGroup.controls['pagamentos'].setValue(backupPagamentos);
+  }
+
+  getFormaPagamentoInForm(): any {
+    return this.formGroup.controls['formaPagamento'].value;
+  }
+
+  getValorPagamentoInForm(): any {
+    return this.formGroup.controls['valorPagamento'].value;
+  }
+
+  getValorTaxaInForm(): any {
+    return this.formGroup.controls['valorTaxa'].value;
+  }
+
+  getDataPagamentoInForm(): any {
+    return this.formGroup.controls['dataPagamento'].value;
   }
 }

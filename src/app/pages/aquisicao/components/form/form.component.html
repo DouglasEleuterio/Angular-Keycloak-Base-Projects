@@ -125,7 +125,7 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="footer">
-            <span>Valor total: {{ getValorTotalProcedimentos() | thousandFormat}}</span>
+            <span>Valor procedimentos: {{ getValorTotalProcedimentos() | thousandFormat }}</span>
           </ng-template>
         </p-table>
         <p-divider align="left">
@@ -136,8 +136,9 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-3 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'forma_pagamento'" page="aquisicao">
             <p-dropdown
+              (onChange)="onValorDePagamentoAlterado()"
               appFieldRef
               [filter]="true"
               emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
@@ -146,9 +147,10 @@
               formControlName="formaPagamento"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-3 lg:col-3" [labelName]="'valor_pagamento'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [labelName]="'valor_pagamento'" page="aquisicao">
             <p-inputNumber
               appFieldRef
+              (onInput)="onValorDePagamentoAlterado()"
               formControlName="valorPagamento"
               inputId="currency-brazil"
               mode="currency"
@@ -156,42 +158,100 @@
               locale="pt-BR"
             />
           </app-field>
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-6"
-            page="aquisicao"
-            labelName="quantidade_parcelas"
-            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
-          >
-            <input appFieldRef pInputText disabled type="number" formControlName="quantidadeParcelas" maxlength="100" />
-          </app-field>
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-4"
-            [labelName]="'valor_taxa'"
-            page="aquisicao"
-            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO || formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_DEBITO || formGroup.controls['formaPagamento'].value === eFormaPagamento.PIX "
-          >
+          <app-field class="p-field col-12 md:col-4 lg:col-4" [labelName]="'valor_taxa'" page="aquisicao">
             <p-inputNumber
               appFieldRef
-              disabled
-              formControlName="taxa"
+              (onInput)="onValorDePagamentoAlterado()"
+              formControlName="valorTaxa"
               inputId="currency-brazil"
               mode="currency"
               currency="BRL"
               locale="pt-BR"
             />
           </app-field>
-          <app-field class="p-field col-12 md:col-3 lg:col-3" [submitted]="submitted" [labelName]="'data_pagamento'" page="aquisicao">
+          <app-field class="p-field col-6 md:col-4 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataPagamento"
               dateFormat="dd/mm/yy"
+              (onSelect)="onValorDePagamentoAlterado()"
+              (onInput)="onValorDePagamentoAlterado()"
               monthNavigator="true"
               yearNavigator="true"
               showIcon="true"
               appDateMask
             ></p-calendar>
           </app-field>
+          <label class="label">
+            <span>&nbsp;</span>
+            <p-button
+              [disabled]="disabledAdicionarPagamento"
+              class="col-6 md:col-4 lg:col-4"
+              label="Adicionar Pagamento"
+              icon="pi pi-arrow-down"
+              styleClass="p-button-outlined p-button-success"
+              (click)="onAddPagamento()"
+            ></p-button>
+          </label>
         </div>
+        <p-divider align="left">
+          <div class="inline-flex align-items-center">
+            <i class="pi pi-money-bill mr-2"></i>
+            <b>Total</b>
+            <div class="detail-body grid"></div>
+          </div>
+        </p-divider>
+        <p-table
+          *ngIf="formGroup.controls['pagamentos'].value && formGroup.controls['pagamentos'].value.length > 0"
+          [value]="formGroup.controls['pagamentos'].value"
+          [tableStyle]="{ 'min-width': '50rem' }"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Forma de Pagamento</th>
+              <th>Valor</th>
+              <th>Taxa</th>
+              <th>Data do Pagamento</th>
+              <th style="width: 5rem">Remover</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-pagamento let-index let-editing="editing">
+            <tr>
+              <td>{{ pagamento.formaPagamento }}</td>
+              <td [pEditableColumn]="pagamento.valorPagamento" pEditableColumnField="code">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="number" [(ngModel)]="pagamento.valorPagamento" [ngModelOptions]="{standalone: true}" />
+                  </ng-template>
+                  <ng-template pTemplate="output"> {{ pagamento.valorPagamento | thousandFormat }}</ng-template>
+                </p-cellEditor>
+              </td>
+              <td [pEditableColumn]="pagamento.taxa" pEditableColumnField="code">
+                <p-cellEditor>
+                  <ng-template pTemplate="input">
+                    <input pInputText type="number" [(ngModel)]="pagamento.taxa" [ngModelOptions]="{standalone: true}" />
+                  </ng-template>
+                  <ng-template pTemplate="output"> {{ pagamento.taxa | thousandFormat }}</ng-template>
+                </p-cellEditor>
+              </td>
+              <td>{{ pagamento.dataPagamento | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <p-button
+                  icon="pi pi-times"
+                  styleClass="p-button-rounded p-button-danger p-button-text"
+                  (click)="onRowRemovePagamento(index)"
+                ></p-button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="footer">
+            <span>Valor Pagamentos: {{ getValorTotalPagamentos() | thousandFormat }}</span>
+            <p></p>
+            <span *ngIf="formGroup.controls['regioes'].value && formGroup.controls['regioes'].value.length > 0"
+              >Valor Desconto: {{ getValorTotalProcedimentos() - getValorTotalPagamentos() | thousandFormat }}</span
+            >
+          </ng-template>
+        </p-table>
       </form>
     </div>
     <p-accordion *ngIf="false">
