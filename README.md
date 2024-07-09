@@ -92,3 +92,6 @@ Pagamento: Vários pagamentos podem ser utilizados
 Agendamento: Utilizar intervalo das sessões para realizar pré-agendamento automático.
 
 
+## Pagamento
+Conceito de Valor Final:
+Valor dos Procedimentos = (Preço do Produto x Quantidade de Sessões) - Taxa Operacional - Desconto

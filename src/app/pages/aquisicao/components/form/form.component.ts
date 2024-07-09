@@ -224,4 +224,18 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     procedimentoSelecionado.regioes.forEach(reg => this.regioes.push(reg));
   }
 
+  getValorTotalProcedimentos(): number {
+    const procedimentos = this.getProcedimentosInForm();
+    const valorTotal = procedimentos.reduce(function (valorTotal, obj) {
+      return valorTotal + obj.regioes.reduce(function (valorTotal, obj) {
+        return valorTotal + obj.valor * obj.quantidadeSessoes;
+      }, 0);
+    }, 0);
+
+    return valorTotal;
+  }
+
+  getProcedimentosInForm(): Procedimento[] {
+    return this.formGroup.controls['procedimentos'].value;
+  }
 }

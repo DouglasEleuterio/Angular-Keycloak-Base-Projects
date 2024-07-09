@@ -14,8 +14,7 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'cliente.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'cliente.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -27,8 +26,7 @@
               formControlName="cliente"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'data_aquisicao'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'data_aquisicao'" page="aquisicao">
             <p-calendar
               appFieldRef
               formControlName="dataAquisicao"
@@ -48,8 +46,7 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'procedimento.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -61,8 +58,7 @@
               (onChange)="procedimentoChange()"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'regiao.nome'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'regiao.nome'" page="aquisicao">
             <p-dropdown
               [disabled]="true"
               appFieldRef
@@ -106,8 +102,7 @@
               <td [pEditableColumn]="regiao.quantidadeSessoes" pEditableColumnField="code">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
-                    <input pInputText type="number" [(ngModel)]="regiao.quantidadeSessoes"
-                           [ngModelOptions]="{standalone: true}" />
+                    <input pInputText type="number" [(ngModel)]="regiao.quantidadeSessoes" [ngModelOptions]="{standalone: true}" />
                   </ng-template>
                   <ng-template pTemplate="output"> {{ regiao.quantidadeSessoes }}</ng-template>
                 </p-cellEditor>
@@ -115,8 +110,7 @@
               <td [pEditableColumn]="regiao.intervaloEntreSessoes" pEditableColumnField="code">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
-                    <input pInputText type="number" [(ngModel)]="regiao.intervaloEntreSessoes"
-                           [ngModelOptions]="{standalone: true}" />
+                    <input pInputText type="number" [(ngModel)]="regiao.intervaloEntreSessoes" [ngModelOptions]="{standalone: true}" />
                   </ng-template>
                   <ng-template pTemplate="output"> {{ regiao.intervaloEntreSessoes }}</ng-template>
                 </p-cellEditor>
@@ -130,6 +124,9 @@
               </td>
             </tr>
           </ng-template>
+          <ng-template pTemplate="footer">
+            <span>Valor total: {{ getValorTotalProcedimentos() | thousandFormat}}</span>
+          </ng-template>
         </p-table>
         <p-divider align="left">
           <div class="inline-flex align-items-center">
@@ -139,8 +136,7 @@
           </div>
         </p-divider>
         <div class="p-fluid formgrid grid">
-          <app-field class="p-field col-12 md:col-6 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'"
-                     page="aquisicao">
+          <app-field class="p-field col-12 md:col-3 lg:col-3" [submitted]="submitted" [labelName]="'forma_pagamento'" page="aquisicao">
             <p-dropdown
               appFieldRef
               [filter]="true"
@@ -150,19 +146,7 @@
               formControlName="formaPagamento"
             ></p-dropdown>
           </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [submitted]="submitted" [labelName]="'data_pagamento'"
-                     page="aquisicao">
-            <p-calendar
-              appFieldRef
-              formControlName="dataPagamento"
-              dateFormat="dd/mm/yy"
-              monthNavigator="true"
-              yearNavigator="true"
-              showIcon="true"
-              appDateMask
-            ></p-calendar>
-          </app-field>
-          <app-field class="p-field col-12 md:col-6 lg:col-4" [labelName]="'valor_pagamento'" page="aquisicao">
+          <app-field class="p-field col-12 md:col-3 lg:col-3" [labelName]="'valor_pagamento'" page="aquisicao">
             <p-inputNumber
               appFieldRef
               formControlName="valorPagamento"
@@ -196,71 +180,16 @@
               locale="pt-BR"
             />
           </app-field>
-        </div>
-        <p-divider align="left" *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO">
-          <div class="inline-flex align-items-center">
-            <i class="pi pi-money-bill mr-2"></i>
-            <b>Parcela</b>
-            <div class="detail-body grid"></div>
-          </div>
-        </p-divider>
-        <div class="p-fluid formgrid grid">
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-4"
-            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
-            [submitted]="submitted"
-            [labelName]="'data_credito'"
-            page="aquisicao"
-          >
+          <app-field class="p-field col-12 md:col-3 lg:col-3" [submitted]="submitted" [labelName]="'data_pagamento'" page="aquisicao">
             <p-calendar
               appFieldRef
-              formControlName="dataCredito"
+              formControlName="dataPagamento"
               dateFormat="dd/mm/yy"
               monthNavigator="true"
               yearNavigator="true"
               showIcon="true"
               appDateMask
             ></p-calendar>
-          </app-field>
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-4"
-            [labelName]="'valor_credito'"
-            page="aquisicao"
-            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
-          >
-            <p-inputNumber
-              appFieldRef
-              disabled
-              formControlName="valorCredito"
-              inputId="currency-brazil"
-              mode="currency"
-              currency="BRL"
-              locale="pt-BR"
-            />
-          </app-field>
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-4"
-            [labelName]="'valor_taxa_parcela'"
-            page="aquisicao"
-            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
-          >
-            <p-inputNumber
-              appFieldRef
-              disabled
-              formControlName="valorTaxa"
-              inputId="currency-brazil"
-              mode="currency"
-              currency="BRL"
-              locale="pt-BR"
-            />
-          </app-field>
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-6"
-            page="aquisicao"
-            labelName="numero_parcela"
-            *ngIf="formGroup.controls['formaPagamento'].value === eFormaPagamento.CARTAO_CREDITO"
-          >
-            <input appFieldRef pInputText disabled type="number" formControlName="numeroParcela" maxlength="100" />
           </app-field>
         </div>
       </form>

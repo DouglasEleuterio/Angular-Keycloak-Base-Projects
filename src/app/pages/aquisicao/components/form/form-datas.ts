@@ -19,9 +19,9 @@ export class FormDatas {
   }
 
   private static buildProcedimentos() {
-    const clientes: Procedimento[] = [];
+    const procedimentos: Procedimento[] = [];
 
-    clientes.push(
+    procedimentos.push(
       {
         id: 1,
         nome: 'Depilação a Lazer',
@@ -65,8 +65,38 @@ export class FormDatas {
             procedimento: { id: 2, nome: 'Limpeza de Pele' }
           }
         ]
+      },
+      {
+        id: 3,
+        nome: 'Botox',
+        regioes: [
+          {
+            id: 5,
+            nome: 'Terço Superior - Masculino',
+            valor: 850,
+            quantidadeSessoes: 1,
+            intervaloEntreSessoes: 30,
+            procedimento: { id: 3, nome: 'Botox' }
+          },
+          {
+            id: 6,
+            nome: 'Terço Superior - Feminino',
+            valor: 800,
+            quantidadeSessoes: 1,
+            intervaloEntreSessoes: 30,
+            procedimento: { id: 3, nome: 'Botox' }
+          },
+          {
+            id: 7,
+            nome: 'Full face',
+            valor: 1200,
+            quantidadeSessoes: 1,
+            intervaloEntreSessoes: 30,
+            procedimento: { id: 3, nome: 'Botox' }
+          }
+        ]
       }
     );
-    return clientes;
+    return procedimentos;
   }
 }
