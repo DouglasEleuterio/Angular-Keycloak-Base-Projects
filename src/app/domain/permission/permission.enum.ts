@@ -9,5 +9,6 @@ export enum PermissionEnum {
   INCIDENCIA_MONOFASICA_LISTAR = 'ProdutosIncidenciaMonofasica.Listar',
   CLIENTE_ADICIONAR = 'Cliente.Adicionar',
   PROCEDIMENTO_LISTAR = 'Procedimento.Listar',
-  AQUISICAO_LISTAR = 'Procedimento.Adicionar'
+  AQUISICAO_LISTAR = 'Procedimento.Adicionar',
+  PRE_AGENDAMENTO_LISTAR = 'PreAgendamento.Listar'
 }

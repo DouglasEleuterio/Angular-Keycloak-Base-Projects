@@ -54,6 +54,14 @@ export class AppMenuModel {
     permissions: [PermissionEnum.AQUISICAO_LISTAR]
   };
 
+  public static readonly itemPreAgendamento: AppMenuItem = {
+    label: 'menu.pre_agendamento',
+    icon: 'pi pi-fw pi-shopping-cart',
+    routerLink: ['/pre-agendamento'],
+    dontNeedPermission: false,
+    permissions: [PermissionEnum.PRE_AGENDAMENTO_LISTAR]
+  };
+
   public static readonly itemMenuXML: AppMenuItem = {
     label: 'menu.xml',
     icon: 'pi pi-fw pi-file-import',
@@ -225,7 +233,8 @@ export class AppMenuModel {
 
   public static readonly menu: AppMenuItem[] = [
     AppMenuModel.itemMenuAquisicao,
-    AppMenuModel.menuCadastros
+    AppMenuModel.menuCadastros,
+    AppMenuModel.itemPreAgendamento
     // AppMenuModel.itemMenuUploadXML,
     // AppMenuModel.itemTabelaAliquotaDiferenciada,
     // AppMenuModel.itemMenuXML,

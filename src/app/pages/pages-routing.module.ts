@@ -35,6 +35,11 @@ const routes: Routes = [
     canActivate: [TableStateClearGuard]
   },
   {
+    path: 'pre-agendamento',
+    loadChildren: () => import('./pre-agendamento/pre-agendamento.module').then(m => m.PreAgendamentoModule),
+    canActivate: [TableStateClearGuard]
+  },
+  {
     path: 'exemplo',
     loadChildren: () => import('./exemplo/exemplo.module').then(m => m.ExemploModule),
     canActivate: [TableStateClearGuard]
