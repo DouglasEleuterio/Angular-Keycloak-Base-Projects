@@ -11,7 +11,7 @@ import { AppBreadcrumbService } from '../../../layouts/atlantis/app.breadcrumb.s
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends PaginatorComponent {
-  preAgendamentos: PreAgendamento[] = [];
+  tableData: PreAgendamento[] = [];
 
   constructor(private breadcrumbService: AppBreadcrumbService) {
     super('PaginationPreAgendamento');
@@ -27,7 +27,7 @@ export class ListComponent extends PaginatorComponent {
     ListDatas.getAgendamentos()
       .pipe()
       .subscribe(value => {
-        this.preAgendamentos = value;
+        this.tableData = value;
       });
   }
 }

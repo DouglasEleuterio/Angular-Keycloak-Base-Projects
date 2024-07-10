@@ -1256,6 +1256,7 @@
     "CADASTROS": "Cadastros",
     "AQUISICAO": "Aquisição",
     "CLIENTE": "Clientes",
+    "PRE_AGENDAMENTO": "Pré Agendamento",
     "EXEMPLO_SUBMENU": "Exemplos",
     "TABELAS_SUBMENU": "Tabelas",
     "EXEMPLO": "Exemplo",
@@ -1491,6 +1492,22 @@
       "UPDATED": "Aquisição Atualizada com Sucesso",
       "SUCCESS": "Aquisição Cadastra com Sucesso",
       "DELETED_SUCCES": "Aquisição excluida com sucesso"
+    }
+  },
+  "PRE_AGENDAMENTO": {
+    "ACTION": {
+      "DETAIL": "Visualizar",
+      "EDIT": "Editar",
+      "DEL": "Apagar"
+    },
+    "TITLE": {
+      "PAGE": "Pré Agendamento"
+    },
+    "FIELD": {
+      "NOME_PROCEDIMENTO": "Procedimento",
+      "CLIENTE": {
+        "NOME": "Nome Paciente"
+      }
     }
   }
 }

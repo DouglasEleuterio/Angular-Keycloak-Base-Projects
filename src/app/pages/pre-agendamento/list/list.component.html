@@ -1,1 +1,60 @@
-<p>list works!</p>
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'pre_agendamento' }}</h5>
+      </div>
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1">
+                {{ 'field.cliente.nome' | appTranslate:'pre_agendamento' }}
+              </th>
+              <th scope="col" colspan="1">
+                {{ 'field.nome_procedimento' | appTranslate:'pre_agendamento' }}
+              </th>
+              <th scope="col" colspan="1" class="actions">{{ 'actions' | appTranslate:'shared' }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.cliente.nome' | appTranslate:'pre_agendamento' }}</span>
+                <span pTooltip="{{entity.cliente.nome}}"> {{ entity.cliente.nome }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.nome_procedimento' | appTranslate:'pre_agendamento' }}</span>
+                <span pTooltip="{{entity.nomeProcedimento}}"> {{ entity.nomeProcedimento }} </span>
+              </td>
+
+              <td colspan="2" class="actions">
+                <span class="p-column-title bold"> {{ 'actions' | appTranslate:'shared' }}</span>
+                <app-table-buttons page="pre_agendamento" [entityId]="entity.id" [showRemove]="false" [showEdit]="false"></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{ 'no_records' | appTranslate:'shared' }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

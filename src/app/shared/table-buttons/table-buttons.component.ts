@@ -34,6 +34,9 @@ export class TableButtonsComponent {
   showEdit: boolean | null = true;
 
   @Input()
+  showRemove: boolean | null = true;
+
+  @Input()
   isDownloadVisivel: boolean;
 
   @Output()

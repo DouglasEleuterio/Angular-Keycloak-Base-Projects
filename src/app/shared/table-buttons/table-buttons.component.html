@@ -29,7 +29,7 @@
     type="button"
     class="p-button-danger p-button-text"
     icon="pi pi-trash"
-    [disabled]="disabled"
+    [disabled]="!showRemove ||disabled"
   ></button>
   <div *ngIf="isDownloadVisivel">
     <button
