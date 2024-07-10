@@ -22,12 +22,8 @@
         >
           <ng-template pTemplate="header">
             <tr>
-              <th scope="col" colspan="1">
-                {{ 'field.cliente.nome' | appTranslate:'pre_agendamento' }}
-              </th>
-              <th scope="col" colspan="1">
-                {{ 'field.nome_procedimento' | appTranslate:'pre_agendamento' }}
-              </th>
+              <th scope="col" colspan="1">{{ 'field.cliente.nome' | appTranslate:'pre_agendamento' }}</th>
+              <th scope="col" colspan="1">{{ 'field.nome_procedimento' | appTranslate:'pre_agendamento' }}</th>
               <th scope="col" colspan="1" class="actions">{{ 'actions' | appTranslate:'shared' }}</th>
             </tr>
           </ng-template>
@@ -44,7 +40,12 @@
 
               <td colspan="2" class="actions">
                 <span class="p-column-title bold"> {{ 'actions' | appTranslate:'shared' }}</span>
-                <app-table-buttons page="pre_agendamento" [entityId]="entity.id" [showRemove]="false" [showEdit]="false"></app-table-buttons>
+                <app-table-buttons
+                  page="pre_agendamento"
+                  [entityId]="entity.id"
+                  [showRemove]="false"
+                  [showEdit]="false"
+                ></app-table-buttons>
               </td>
             </tr>
           </ng-template>

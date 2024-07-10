@@ -1501,13 +1501,17 @@
       "DEL": "Apagar"
     },
     "TITLE": {
-      "PAGE": "Pré Agendamento"
+      "PAGE": "Pré Agendamento",
+      "DETAIL": "Pré Agendamento"
     },
     "FIELD": {
       "NOME_PROCEDIMENTO": "Procedimento",
       "CLIENTE": {
         "NOME": "Nome Paciente"
       }
+    },
+    "MESSAGE": {
+      "NOT_FOUND": "Pré agendamento não encontrado"
     }
   }
 }

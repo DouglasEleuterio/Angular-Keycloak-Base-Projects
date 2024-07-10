@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { PreAgendamento } from '../../../domain/pre-agendamento/pre-agendamento';
-import { PaginatorComponent } from '../../../core/ui/components/pagination/paginator.component';
+import { PreAgendamento } from '../../../../domain/pre-agendamento/pre-agendamento';
+import { PaginatorComponent } from '../../../../core/ui/components/pagination/paginator.component';
 import { ListDatas } from './list-datas';
-import { AppMenuModel } from '../../../domain/menu/app-menu.model';
-import { AppBreadcrumbService } from '../../../layouts/atlantis/app.breadcrumb.service';
+import { AppMenuModel } from '../../../../domain/menu/app-menu.model';
+import { AppBreadcrumbService } from '../../../../layouts/atlantis/app.breadcrumb.service';
 
 @Component({
   selector: 'app-list',
