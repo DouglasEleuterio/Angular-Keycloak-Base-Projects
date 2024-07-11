@@ -1,10 +1,10 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { CalendarOptions, DateSelectArg, EventApi, EventClickArg } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
 import { createEventId, INITIAL_EVENTS } from '../event-utils';
+import { date } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-calendar-root',
@@ -12,15 +12,63 @@ import { createEventId, INITIAL_EVENTS } from '../event-utils';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent {
+  @Input()
+  diaInicial: Date | null = null;
+
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
-    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin],
+    locale: 'brLocale',
+    firstDay: 1,
+    plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin],
     headerToolbar: {
-      left: 'prev,next today',
+      left: 'prev today next',
       center: 'title',
-      right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+      right: 'timeGridWeek dayGridMonth dia'
     },
-    initialView: 'dayGridMonth',
+    buttonText: {
+      today: 'hoje',
+      month: 'mês',
+      week: 'semana',
+      day: 'dia',
+      list: 'lista',
+      // next: 'proximo',
+      // prev: 'anterior',
+      nextYear: 'próximo ano',
+      prevYear: 'ano anterior'
+    },
+    initialDate: this.diaInicial,
+    views: {
+      timeGridWeek: {
+        type: 'timeGridWeek',
+        scrollTime: '08:00:00',
+        slotDuration: '00:05:00',
+        slotMaxTime: '19:00:00',
+        slotLabelInterval: { minute: 30 },
+        slotLabelFormat: {
+          hour: '2-digit',
+          minute: '2-digit',
+          omitZeroMinute: false,
+          meridiem: 'lowercase'
+        }
+      },
+      dia: {
+        type: 'timeGrid',
+        slotMinTime: '08:00:00',
+        slotDuration: '00:05:00',
+        slotMaxTime: '19:00:00',
+        slotLabelInterval: { minute: 5 },
+        slotLabelFormat: {
+          hour: '2-digit',
+          minute: '2-digit',
+          omitZeroMinute: false,
+          meridiem: 'lowercase'
+        }
+      }
+    },
+    hiddenDays: [0],
+    dayHeaders: true,
+    dayHeaderFormat: { weekday: 'long' },
+    initialView: 'timeGridWeek',
     initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
@@ -37,6 +85,7 @@ export class CalendarComponent {
     */
   };
   currentEvents: EventApi[] = [];
+  eventos: any[] = [];
 
   constructor(private changeDetector: ChangeDetectorRef) {}
 
@@ -74,6 +123,7 @@ export class CalendarComponent {
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
+    this.eventos = events;
     this.changeDetector.detectChanges();
   }
 }

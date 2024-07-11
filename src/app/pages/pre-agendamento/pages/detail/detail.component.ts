@@ -19,6 +19,7 @@ export class DetailComponent implements OnInit {
   private id: number | string;
 
   menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
+  dataInicial: Date = new Date('1990-09-24');
 
   constructor(
     private route: ActivatedRoute,
@@ -42,6 +43,8 @@ export class DetailComponent implements OnInit {
           this.router.navigate(this.menuBack.routerLink).then(() => this.validationService.handle(null, error));
         }
       });
+
+    this.dataInicial = new Date('1990-09-24');
   }
 
   onLoad(entity: PreAgendamento): void {
