@@ -1,9 +1,23 @@
 import { EventInput } from '@fullcalendar/core';
+import * as moment from 'moment';
+
+const date = new Date();
 
 let eventGuid = 0;
-const TODAY_STR = new Date().toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
+const TODAY_STR = date.toISOString().replace(/T.*$/, ''); // YYYY-MM-DD of today
+const TOMORROW_STR = moment(date).add(1, 'day').format('YYYY-MM-DD');
 
 export const INITIAL_EVENTS: EventInput[] = [
+  {
+    id: createEventId(),
+    title: 'Locação equipamento',
+    paciente: 'Goiania',
+    whatsapp: '(62)99999-9999',
+    start: TOMORROW_STR + 'T00:00:00',
+    end: TOMORROW_STR + 'T23:59:00',
+    backgroundColor: '#717ec3',
+    overlap: false
+  },
   {
     id: createEventId(),
     title: 'Depilação Lazer - Virilha Completa - Luciana Pereira',
@@ -13,8 +27,8 @@ export const INITIAL_EVENTS: EventInput[] = [
     whatsapp: '(62)99999-9999',
     start: TODAY_STR + 'T09:30:00',
     end: TODAY_STR + 'T09:45:00',
-
-    backgroundColor: '#799496'
+    backgroundColor: '#799496',
+    overlap: false
   },
   {
     id: createEventId(),

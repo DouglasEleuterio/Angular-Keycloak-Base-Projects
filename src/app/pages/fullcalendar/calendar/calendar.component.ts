@@ -42,8 +42,11 @@ export class CalendarComponent {
         type: 'timeGridWeek',
         scrollTime: '08:00:00',
         slotDuration: '00:05:00',
-        slotMaxTime: '19:00:00',
-        slotLabelInterval: { minute: 30 },
+        dayHeaders: true,
+        dayHeaderFormat: { weekday: 'long', day: 'numeric' },
+        slotMaxTime: '21:00:00',
+        nowIndicator: true,
+        slotLabelInterval: { minute: 10 },
         slotLabelFormat: {
           hour: '2-digit',
           minute: '2-digit',
@@ -54,9 +57,10 @@ export class CalendarComponent {
       dia: {
         type: 'timeGrid',
         slotMinTime: '08:00:00',
-        slotDuration: '00:05:00',
-        slotMaxTime: '19:00:00',
+        slotDuration: '00:02:00',
+        slotMaxTime: '21:00:00',
         slotLabelInterval: { minute: 5 },
+        nowIndicator: true,
         slotLabelFormat: {
           hour: '2-digit',
           minute: '2-digit',
