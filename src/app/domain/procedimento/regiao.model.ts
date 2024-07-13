@@ -7,4 +7,5 @@ export class Regiao {
   quantidadeSessoes?: number;
   intervaloEntreSessoes?: number;
   procedimento?: ProcedimentoSemRegiao;
+  persistida?: boolean;
 }

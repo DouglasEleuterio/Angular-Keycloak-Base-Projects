@@ -36,7 +36,7 @@ export class ListDatas {
     ];
   }
 
-  static getAgendamento(id: string): Observable<PreAgendamento> {
+  static getAgendamento(id: number): Observable<PreAgendamento> {
     return of(this.buildPreAgendamentos().find(agd => agd.id == id))
   }
 }

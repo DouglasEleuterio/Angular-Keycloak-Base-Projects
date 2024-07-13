@@ -23,14 +23,14 @@ export class ListComponent extends PaginatorComponent {
   listSelect = (u: any) => [
     u.id,
     u.nome,
-    u.valor,
     u.situacao,
-    u.quantidadeSessoes,
-    u.intervaloEntreSessoes,
     u.dataCriacao,
     u.dataAtualizacao,
     u.regioes.id,
-    u.regioes.nome
+    u.regioes.nome,
+    u.regioes.valor,
+    u.regioes.intervaloEntreSessoes,
+    u.regioes.quantidadeSessoes
   ];
 
   constructor(

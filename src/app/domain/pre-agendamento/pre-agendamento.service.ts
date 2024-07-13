@@ -9,12 +9,12 @@ import { ListDatas } from '../../pages/pre-agendamento/pages/list/list-datas';
 @Injectable({
   providedIn: 'root'
 })
-export class PreAgendamentoService extends BaseActiveService<PreAgendamento, string> {
+export class PreAgendamentoService extends BaseActiveService<PreAgendamento, number> {
   constructor(http: HttpClient, envService: EnvService) {
     super(http, envService, 'pre-agendamento');
   }
 
-  get(id: string): Observable<PreAgendamento> {
+  get(id: number): Observable<PreAgendamento> {
     return ListDatas.getAgendamento(id);
   }
 }

@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ProcedimentoRoutingModule } from './procedimento-routing.module';
 import { ListComponent } from './pages/list/list.component';
 import { ButtonModule } from 'primeng/button';
-import { SharedModule } from '../../shared/shared.module';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { UIModule } from '../../core/ui/ui.module';
@@ -18,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NewComponent } from './pages/new/new.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, NewComponent],
@@ -25,7 +25,6 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     CommonModule,
     ProcedimentoRoutingModule,
     ButtonModule,
-    SharedModule,
     TableModule,
     TooltipModule,
     UIModule,
@@ -37,7 +36,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     PaginatorModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
-    RadioButtonModule
+    RadioButtonModule,
+    SharedModule
   ]
 })
 export class ProcedimentoModule {}

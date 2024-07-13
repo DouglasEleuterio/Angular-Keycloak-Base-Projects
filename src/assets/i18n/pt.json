@@ -1437,7 +1437,7 @@
       "DELETE_CONFIRM": "Excluir registro do Procedimento?",
       "UPDATED": "Procedimento Atualizado com Sucesso",
       "SUCCESS": "Procedimento Cadastro com Sucesso",
-      "DELETED_SUCCES": "Procedimento excluido com sucesso"
+      "DELETED_SUCCESS": "Procedimento excluido com sucesso"
     }
   },
   "ENDERECO": {

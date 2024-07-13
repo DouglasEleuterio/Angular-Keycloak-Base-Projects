@@ -13,7 +13,6 @@ import { UIModule } from '../../core/ui/ui.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from 'primeng/button';
-import { SharedModule } from '../../shared/shared.module';
 import { RippleModule } from 'primeng/ripple';
 import { FiltersComponent } from './components/filters/filters.component';
 import { AccordionModule } from 'primeng/accordion';
@@ -29,6 +28,7 @@ import { NewComponent } from './pages/new/new.component';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { ExemploRoutingModule } from './exemplo-routing.module';
 import { ExemploService } from '../../domain/exemplo/exemplo.service';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, EditComponent, DetailComponent, FiltersComponent, NewComponent],
@@ -44,7 +44,6 @@ import { ExemploService } from '../../domain/exemplo/exemplo.service';
     ReactiveFormsModule,
     TranslateModule,
     ButtonModule,
-    SharedModule,
     RippleModule,
     ExemploRoutingModule,
     ToggleButtonModule,
@@ -54,7 +53,8 @@ import { ExemploService } from '../../domain/exemplo/exemplo.service';
     RadioButtonModule,
     OrderListModule,
     PanelModule,
-    RxReactiveFormsModule
+    RxReactiveFormsModule,
+    SharedModule
   ],
   providers: [ExemploService, TreeDragDropService]
 })

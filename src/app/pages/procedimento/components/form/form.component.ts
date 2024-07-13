@@ -4,13 +4,9 @@ import { BaseFormComponent } from '../../../../core/ui/components/form/base-form
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { plainToClass } from 'class-transformer';
 import { Procedimento } from '../../../../domain/procedimento/procedimento-model';
-import { Options } from '../../../../domain/options/options.interface';
-import { ETipoProcedimento } from '../../../../domain/procedimento/tipo-procedimento.enum';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
 
 @Component({
@@ -19,18 +15,12 @@ import { Regiao } from '../../../../domain/procedimento/regiao.model';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent extends BaseFormComponent implements OnInit {
-  protected readonly eTipoProcedimento = ETipoProcedimento;
-
   @Input() isNew: boolean;
 
   formGroup: FormGroup;
   onSubmit: (entity: Procedimento, formGroup) => void;
   onCancel: () => void;
   regioesInseridas: Regiao[] = [];
-  tipoProcedimentoList: Options[] = [
-    { label: 'Aplicação Única região', value: ETipoProcedimento.APLICACAO_UNICA.toString() },
-    { label: 'Aplicação Multiplas regiões', value: ETipoProcedimento.APLICACAO_MULTIPLA.toString() }
-  ];
 
   constructor(
     protected alertService: AlertService,
@@ -49,23 +39,22 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   buildFormGroup(): void {
     this.formGroup = this.formBuilder.group({
       nome: [null, [Validators.required]],
-      valor: [null],
       quantidadeSessoes: [null],
-      intervaloEntreSessoes: [null],
-      tipoProcedimento: [null],
       nomeRegiao: [null],
+      valor: [null],
+      intervaloEntreSessoes: [null],
       regioes: [null]
     });
 
-    //Valores iniciais
-    this.formGroup.get('tipoProcedimento').setValue(ETipoProcedimento.APLICACAO_UNICA);
-    this.definirRegrasFormulario();
+    this.formGroup.get('valor').setValue(0);
+    this.formGroup.get('quantidadeSessoes').setValue(1);
+    this.formGroup.get('intervaloEntreSessoes').setValue(30);
   }
 
   submit(): void {
     this.submitted = true;
     if (this.isFormValid() && this.formGroup.valid) {
-      const entity: Procedimento = plainToClass(Procedimento, this.formGroup.value);
+      const entity: Procedimento = { nome: this.formGroup.get('nome').value, regioes: this.formGroup.get('regioes').value };
       this.onSubmit(entity, this.formGroup);
     } else {
       this.validationError();
@@ -86,40 +75,6 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     }
   }
 
-  definirRegrasFormulario() {
-    if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_UNICA) {
-      this.formGroup = this.formBuilder.group({
-        nome: [null, Validators.required],
-        valor: [null, Validators.required],
-        quantidadeSessoes: [null, Validators.required],
-        intervaloEntreSessoes: [null, Validators.required],
-        tipoProcedimento: [null, Validators.required],
-        nomeRegiao: [null],
-        regioes: [null]
-      });
-      this.formGroup.get('regioes').setValue(null);
-      this.regioesInseridas = [];
-      this.formGroup.get('tipoProcedimento').setValue(ETipoProcedimento.APLICACAO_UNICA);
-      this.formGroup.get('quantidadeSessoes').setValue(1);
-      this.formGroup.get('intervaloEntreSessoes').setValue(30);
-    }
-    if (this.formGroup.get('tipoProcedimento').value == ETipoProcedimento.APLICACAO_MULTIPLA) {
-      this.formGroup = this.formBuilder.group({
-        nome: [null, Validators.required],
-        valor: [null],
-        quantidadeSessoes: [null],
-        intervaloEntreSessoes: [null],
-        tipoProcedimento: [null, Validators.required],
-        nomeRegiao: [null],
-        regioes: [null, Validators.required]
-      });
-      this.formGroup.get('valor').setValue(null);
-      this.formGroup.get('tipoProcedimento').setValue(ETipoProcedimento.APLICACAO_MULTIPLA);
-      this.formGroup.get('quantidadeSessoes').setValue(1);
-      this.formGroup.get('intervaloEntreSessoes').setValue(30);
-    }
-  }
-
   adicionarRegiao() {
     const regiao: Regiao = {
       id: Math.random().valueOf(),
@@ -127,6 +82,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       quantidadeSessoes: this.formGroup.get('quantidadeSessoes').value,
       intervaloEntreSessoes: this.formGroup.get('intervaloEntreSessoes').value,
       valor: this.formGroup.get('valor').value,
+      persistida: false
     };
     this.regioesInseridas.push(regiao);
     this.formGroup.get('nomeRegiao').setValue(null);

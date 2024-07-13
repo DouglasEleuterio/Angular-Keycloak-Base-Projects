@@ -5,7 +5,6 @@ import { ClienteRoutingModule } from './cliente-routing.module';
 import { ListComponent } from './pages/list/list.component';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { SharedModule } from '../../shared/shared.module';
 import { UIModule } from '../../core/ui/ui.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { DetailComponent } from './pages/detail/detail.component';
@@ -25,6 +24,7 @@ import { CardModule } from 'primeng/card';
 import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { RippleModule } from 'primeng/ripple';
 import { SplitterModule } from 'primeng/splitter';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [FormComponent, ListComponent, DetailComponent, NewComponent, EditComponent],
@@ -33,7 +33,6 @@ import { SplitterModule } from 'primeng/splitter';
     ClienteRoutingModule,
     TableModule,
     ButtonModule,
-    SharedModule,
     UIModule,
     TooltipModule,
     DividerModule,
@@ -48,7 +47,8 @@ import { SplitterModule } from 'primeng/splitter';
     CardModule,
     NgxJsonViewerModule,
     RippleModule,
-    SplitterModule
+    SplitterModule,
+    SharedModule
   ],
   providers: [EstadoService, CidadeService]
 })

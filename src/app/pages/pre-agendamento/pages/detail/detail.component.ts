@@ -16,7 +16,7 @@ import { PreAgendamentoService } from '../../../../domain/pre-agendamento/pre-ag
 export class DetailComponent implements OnInit {
 
   public entity: PreAgendamento;
-  private id: number | string;
+  private id: number;
 
   menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
   dataInicial: Date = new Date('1990-09-24');

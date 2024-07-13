@@ -26,7 +26,6 @@ import { DateMaskDirective } from './masks/date-mask.directive';
 import { TableExporterComponent } from './table-exporter/table-exporter.component';
 import { SituacaoButtonComponent } from './situacao-button/situacao-button.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
-import { SituacaoButtonPrecoCombustivelComponent } from './situacao-button-preco-combustivel/situacao-button-preco-combustivel.component';
 import { FileUploadButtonComponent } from './file-upload-button/file-upload-button.component';
 import { FileUploadModule } from 'primeng/fileupload';
 
@@ -39,7 +38,6 @@ import { FileUploadModule } from 'primeng/fileupload';
     FormButtonsComponent,
     SituacaoButtonComponent,
     FileUploadButtonComponent,
-    SituacaoButtonPrecoCombustivelComponent,
     FilterPanelComponent,
     FilterRefDirective,
     FilterComponent,
@@ -72,7 +70,6 @@ import { FileUploadModule } from 'primeng/fileupload';
     FormButtonsComponent,
     SituacaoButtonComponent,
     FileUploadButtonComponent,
-    SituacaoButtonPrecoCombustivelComponent,
     FilterPanelComponent,
     FieldComponent,
     FieldRefDirective,

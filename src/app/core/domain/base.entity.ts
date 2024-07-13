@@ -1,5 +1,6 @@
 export class BaseEntity {
-  id?: number | string;
+  id?: number;
+  situacao?: boolean;
   dataCriacao?: Date;
   dataAtualizacao?: Date;
 }

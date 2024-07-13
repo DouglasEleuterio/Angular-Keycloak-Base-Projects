@@ -7,63 +7,13 @@
       <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
       <form (ngSubmit)="submit()" [formGroup]="formGroup">
         <div class="p-fluid formgrid grid">
-          <div
-            *ngFor="let tipoProcedimento of tipoProcedimentoList"
-            class="field-checkbox col-12 md:col-6 lg:col-6"
-            style="display: inline-flex"
-          >
-            <p-radioButton
-              [inputId]="tipoProcedimento.value"
-              name="tipoProcedimento"
-              [value]="tipoProcedimento.value"
-              (onClick)="definirRegrasFormulario()"
-              formControlName="tipoProcedimento"
-            ></p-radioButton>
-            <label style="margin-right: 10px">{{ tipoProcedimento.label }}</label>
-          </div>
           <app-field class="p-field col-12 md:col-6 lg:col-6" page="procedimento">
             <input appFieldRef pInputText type="text" formControlName="nome" maxlength="100" />
           </app-field>
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-3"
-            page="procedimento"
-            *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_UNICA"
-          >
-            <p-inputNumber
-              appFieldRef
-              formControlName="valor"
-              inputId="currency-brazil"
-              mode="currency"
-              currency="BRL"
-              locale="pt-BR"
-              maxlength="13"
-            />
-          </app-field>
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-3"
-            page="procedimento"
-            labelName="quantidade_sessoes"
-            *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_UNICA"
-          >
-            <input appFieldRef pInputText type="number" formControlName="quantidadeSessoes" />
-          </app-field>
-          <app-field
-            class="p-field col-12 md:col-6 lg:col-6"
-            page="procedimento"
-            labelName="intervalo_entre_sessoes"
-            *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_UNICA"
-          >
-            <input appFieldRef pInputText type="number" formControlName="intervaloEntreSessoes" maxlength="100" />
-          </app-field>
-          <app-field
-            class="p-field col-12 md:col-4 lg:col-4"
-            page="procedimento"
-            labelName="nome_regiao"
-            *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_MULTIPLA"
-          >
+          <app-field class="p-field col-12 md:col-4 lg:col-4" page="procedimento" labelName="nome_regiao">
             <input appFieldRef pInputText type="text" formControlName="nomeRegiao" maxlength="100" />
           </app-field>
-          <div class="card justify-content-center" *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_MULTIPLA">
+          <div class="card justify-content-center">
             <button
               pButton
               pRipple
@@ -76,14 +26,14 @@
           </div>
         </div>
 
-        <p-divider align="left" *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_MULTIPLA">
+        <p-divider align="left">
           <div class="inline-flex align-items-center">
             <i class="pi pi-shopping-cart mr-2"></i>
             <b>Regiões</b>
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <div *ngIf="formGroup.get('tipoProcedimento').value === eTipoProcedimento.APLICACAO_MULTIPLA">
+        <div>
           <p-table [value]="regioesInseridas" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template pTemplate="header">
               <tr>
