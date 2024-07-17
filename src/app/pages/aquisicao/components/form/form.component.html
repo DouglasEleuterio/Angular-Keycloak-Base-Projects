@@ -140,6 +140,8 @@
             <p-dropdown
               (onChange)="onValorDePagamentoAlterado()"
               appFieldRef
+              optionValue="value"
+              optionLabel="label"
               [filter]="true"
               emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
               [options]="formasPagamento"
@@ -252,9 +254,12 @@
             >
           </ng-template>
         </p-table>
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
       </form>
     </div>
-    <p-accordion *ngIf="false">
+    <p-accordion *ngIf="true">
       <p-accordionTab header="Formulário">
         <pre>{{ formGroup.value | json }}</pre>
       </p-accordionTab>

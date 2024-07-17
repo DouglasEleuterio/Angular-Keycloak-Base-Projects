@@ -16,6 +16,7 @@ import { EFormaPagamento } from '../../../../domain/pagamento/forma-pagamento.en
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
 import { FormDatas } from './form-datas';
 import { Pagamento } from '../../../../domain/pagamento/pagamento.model';
+import { FormaPagamento } from '../../../../domain/forma-pagamento.model';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -32,7 +33,12 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   procedimentos: Procedimento[];
   clientes: Cliente[];
-  formasPagamento: EFormaPagamento[] = [];
+  formasPagamento: FormaPagamento[] = [
+    { value: 'PIX', label: 'Pix' },
+    { value: 'CARTAO_CREDITO', label: 'Cartão de Crédito' },
+    { value: 'CARTAO_DEBITO', label: 'Cartão de Débito' },
+    { value: 'EM_ABERTO', label: 'Em Aberto' }
+  ];
   procedimentosInseridos: Procedimento[] = [];
   regioes: Regiao[] = [];
   exemplo: any[] = [];
@@ -53,10 +59,6 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   ngOnInit(): void {
     this.getClientesMock();
     this.getProcedimentosMock();
-    this.formasPagamento.push(EFormaPagamento.CARTAO_CREDITO);
-    this.formasPagamento.push(EFormaPagamento.CARTAO_DEBITO);
-    this.formasPagamento.push(EFormaPagamento.PIX);
-    this.formasPagamento.push(EFormaPagamento.EM_ABERTO);
     this.buildFormGroup();
   }
 
@@ -86,6 +88,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     this.log(this.formGroup.value);
+    this.tratarDatas();
     if (this.formGroup.valid) {
       const entity: Aquisicao = plainToClass(Aquisicao, this.formGroup.value);
       this.onSubmit(entity, this.formGroup);
@@ -170,6 +173,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     if (backupDosProcedimentosJaInseridos.find(proc => proc.id === regiaoSelecionada.procedimento.id)) {
       const procedimentoInserido = backupDosProcedimentosJaInseridos.find(proc => proc.id == regiaoSelecionada.procedimento.id);
       if (procedimentoInserido.regioes.find(reg => reg.id === regiaoSelecionada.id) === undefined) {
+        //Limpando id para não enviar na request, dando a entender que é um update.
+        regiaoSelecionada.id = null;
         procedimentoInserido.regioes.push(regiaoSelecionada);
       } else {
         this.alertService.defaultWarn('Região já inserida');
@@ -181,6 +186,10 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       //Criar um novo procedimento e inserir a região
       const procedimento: Procedimento = this.formGroup.controls['procedimento'].value;
       procedimento.regioes = [];
+      //Limpando id para não enviar na request, dando a entender que é um update.
+      procedimento.id = null;
+      //Limpando id para não enviar na request, dando a entender que é um update.
+      regiaoSelecionada.id = null;
       procedimento.regioes.push(regiaoSelecionada);
       backupDosProcedimentosJaInseridos.push(procedimento);
     }
@@ -190,6 +199,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.formGroup.controls['regioes'].setValue(regioes);
 
     this.formGroup.controls['regiao'].setValue(null);
+    this.formGroup.controls['valorAquisicao'].setValue(this.getValorTotalProcedimentos());
   }
 
   onRowRemove(regiao: Regiao) {
@@ -241,6 +251,11 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       taxa: Number.parseFloat(this.getValorTaxaInForm()),
       dataPagamento: this.getDataPagamentoInForm()
     });
+    this.formGroup.controls['valorDesconto'].setValue(
+      this.getValorTotalProcedimentos() - this.getValorTotalPagamentos() == null
+        ? 0
+        : this.getValorTotalProcedimentos() - this.getValorTotalPagamentos()
+    );
   }
 
   onValorDePagamentoAlterado() {
@@ -287,5 +302,14 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   getDataPagamentoInForm(): any {
     return this.formGroup.controls['dataPagamento'].value;
+  }
+
+  getDataAquisicao(): any {
+    return this.formGroup.controls['dataAquisicao'].value;
+  }
+
+  private tratarDatas() {
+    const dataAquisicao = this.getDataAquisicao().toISOString().split('T')[0];
+    this.formGroup.controls['dataAquisicao'].setValue(dataAquisicao);
   }
 }
