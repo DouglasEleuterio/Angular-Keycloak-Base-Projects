@@ -57,7 +57,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getClientesMock();
+    this.getClientes();
+    this.getProcedimentos();
     this.getProcedimentosMock();
     this.buildFormGroup();
   }
@@ -117,19 +118,18 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .subscribe(procedimentos => (this.procedimentos = procedimentos));
   }
 
-  getProcedimentoList(): void {
+  getProcedimentos(): void {
     const query = from<Procedimento>()
       .select((u: any) => [
         u.nome,
         u.id,
-        u.valor,
-        u.quantidadeSessoes,
-        u.intervaloEntreSessoes,
         u.regioes.id,
         u.regioes.nome,
         u.regioes.valor,
         u.regioes.quantidadeSessoes,
-        u.regioes.intervaloEntreSessoes
+        u.regioes.intervaloEntreSessoes,
+        u.regioes.procedimento.id,
+        u.regioes.procedimento.nome
       ])
       .where(u => u.eq('situacao', 'true'))
       .asc(x => x.nome)
@@ -141,13 +141,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .subscribe(procedimentos => (this.procedimentos = procedimentos));
   }
 
-  getClientesMock(): void {
-    FormDatas.getClientes()
-      .pipe()
-      .subscribe(clientes => (this.clientes = clientes));
-  }
-
-  getClienteList(): void {
+  getClientes(): void {
     const query = from<Cliente>()
       .select((u: Cliente) => [u.nome, u.id])
       .where(u => u.eq('situacao', 'true'))
@@ -170,8 +164,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     backupDosProcedimentosJaInseridos == null ? (backupDosProcedimentosJaInseridos = []) : backupDosProcedimentosJaInseridos;
 
     //O procedimento está inserido no formulário?
-    if (backupDosProcedimentosJaInseridos.find(proc => proc.id === regiaoSelecionada.procedimento.id)) {
-      const procedimentoInserido = backupDosProcedimentosJaInseridos.find(proc => proc.id == regiaoSelecionada.procedimento.id);
+    if (backupDosProcedimentosJaInseridos.find(proc => proc.nome === regiaoSelecionada.procedimento.nome)) {
+      const procedimentoInserido = backupDosProcedimentosJaInseridos.find(proc => proc.nome == regiaoSelecionada.procedimento.nome);
       if (procedimentoInserido.regioes.find(reg => reg.id === regiaoSelecionada.id) === undefined) {
         //Limpando id para não enviar na request, dando a entender que é um update.
         regiaoSelecionada.id = null;
@@ -184,7 +178,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     } else {
       //O procedimento ainda não está inserido no formulário
       //Criar um novo procedimento e inserir a região
-      const procedimento: Procedimento = this.formGroup.controls['procedimento'].value;
+      const { value: procedimento } = this.formGroup.controls['procedimento'];
       procedimento.regioes = [];
       //Limpando id para não enviar na request, dando a entender que é um update.
       procedimento.id = null;
@@ -226,16 +220,13 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   getValorTotalProcedimentos(): number {
     const procedimentos = this.getProcedimentosInForm();
-    const valorTotal = procedimentos.reduce(function (valorTotal, obj) {
-      return (
-        valorTotal +
-        obj.regioes.reduce(function (valorTotal, obj) {
-          return valorTotal + obj.valor * obj.quantidadeSessoes;
-        }, 0)
-      );
-    }, 0);
-
-    return valorTotal;
+    let total = 0;
+    for (const procedimento of procedimentos) {
+      for (const regioe of procedimento.regioes) {
+        total = total + regioe.valor * regioe.quantidadeSessoes;
+      }
+    }
+    return total;
   }
 
   getProcedimentosInForm(): Procedimento[] {
@@ -256,6 +247,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
         ? 0
         : this.getValorTotalProcedimentos() - this.getValorTotalPagamentos()
     );
+    this.formGroup.controls['valorAquisicao'].setValue(this.getValorTotalProcedimentos());
   }
 
   onValorDePagamentoAlterado() {
