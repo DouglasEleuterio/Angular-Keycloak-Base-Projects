@@ -28,7 +28,6 @@
                 <p-sortIcon field="cliente.nome"></p-sortIcon>
               </th>
               <th scope="col" colspan="2">{{ 'field.procedimento.nome' | appTranslate:'aquisicao' }}</th>
-              <th scope="col" colspan="1">{{ 'field.procedimento.quantidade_sessoes' | appTranslate:'aquisicao' }}</th>
               <th scope="col" colspan="1" pSortableColumn="dataAquisicao">
                 {{ 'field.data_aquisicao' | appTranslate:'aquisicao' }}
                 <p-sortIcon field="dataAquisicao"></p-sortIcon>
@@ -51,11 +50,6 @@
                   <span pTooltip="{{p.nome}}" [ngStyle]="{'border-bottom': last ? 'none' : '1px solid black'}"
                     >{{ formatarNome(p.nome) }}</span
                   >
-                </div>
-              </td>
-              <td colspan="1">
-                <div *ngFor="let p of entity.procedimentos">
-                  <span pTooltip="{{p.quantidadeSessoes}}"> {{ p.quantidadeSessoes }} </span>
                 </div>
               </td>
               <td colspan="1">
