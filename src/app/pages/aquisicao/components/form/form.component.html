@@ -219,8 +219,8 @@
           </ng-template>
           <ng-template pTemplate="body" let-pagamento let-index let-editing="editing">
             <tr>
-              <td>{{ pagamento.formaPagamento }}</td>
-              <td [pEditableColumn]="pagamento.valorPagamento" pEditableColumnField="code">
+              <td>{{ formatarNomePagamento(pagamento.formaPagamento) }}</td>
+              <td [pEditableColumn]="pagamento.valorPagamento" (change)="atualizaValorDesconto()" pEditableColumnField="code">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input pInputText type="number" [(ngModel)]="pagamento.valorPagamento" [ngModelOptions]="{standalone: true}" />

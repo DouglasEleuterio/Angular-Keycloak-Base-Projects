@@ -29,7 +29,9 @@ export class ListComponent extends PaginatorComponent {
     u.dataAquisicao,
     u.procedimentos.id,
     u.procedimentos.nome,
-    u.procedimentos.regioes.nome
+    u.procedimentos.regioes.nome,
+    u.pagamentos.id,
+    u.pagamentos.valorPagamento
   ];
 
   constructor(
@@ -86,5 +88,9 @@ export class ListComponent extends PaginatorComponent {
       return nome.substring(0, 30).concat('...');
     }
     return nome;
+  }
+
+  getValorPago(entity: Aquisicao) {
+    return entity.pagamentos.reduce((previousValue, currentValue) => previousValue + currentValue.valorPagamento, 0);
   }
 }

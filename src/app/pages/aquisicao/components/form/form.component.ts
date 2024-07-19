@@ -3,7 +3,9 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { BaseFormComponent } from '../../../../core/ui/components/form/base-form.component';
 import { plainToClass } from 'class-transformer';
 import { from } from '../../../../core/api/select/select';
@@ -242,12 +244,16 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       taxa: Number.parseFloat(this.getValorTaxaInForm()),
       dataPagamento: this.getDataPagamentoInForm()
     });
+    this.atualizaValorDesconto();
+    this.formGroup.controls['valorAquisicao'].setValue(this.getValorTotalProcedimentos());
+  }
+
+  atualizaValorDesconto() {
     this.formGroup.controls['valorDesconto'].setValue(
       this.getValorTotalProcedimentos() - this.getValorTotalPagamentos() == null
         ? 0
         : this.getValorTotalProcedimentos() - this.getValorTotalPagamentos()
     );
-    this.formGroup.controls['valorAquisicao'].setValue(this.getValorTotalProcedimentos());
   }
 
   onValorDePagamentoAlterado() {
@@ -303,5 +309,9 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   private tratarDatas() {
     const dataAquisicao = this.getDataAquisicao().toISOString().split('T')[0];
     this.formGroup.controls['dataAquisicao'].setValue(dataAquisicao);
+  }
+
+  formatarNomePagamento(formaPagamento: any) {
+    return this.formasPagamento.find(forma => forma.value == formaPagamento).label;
   }
 }

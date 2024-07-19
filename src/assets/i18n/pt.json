@@ -1468,7 +1468,8 @@
       "REGIAO": {
         "NOME": "Região do procedimento"
       },
-      "VALOR_AQUISICAO": "Valor total",
+      "VALOR_AQUISICAO": "Valor Procedimentos",
+      "VALOR_PAGO": "Valor Pago",
       "VALOR_DESCONTO": "Valor Desconto",
       "DATA_AQUISICAO": "Data da Aquisição",
       "FORMA_PAGAMENTO": "Forma de Pagamento",

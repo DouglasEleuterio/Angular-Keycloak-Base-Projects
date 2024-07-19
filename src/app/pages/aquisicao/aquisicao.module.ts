@@ -21,9 +21,10 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { SplitterModule } from 'primeng/splitter';
 import { AccordionModule } from 'primeng/accordion';
 import { SharedModule } from '../../shared/shared.module';
+import { EditComponent } from './pages/edit/edit.component';
 
 @NgModule({
-  declarations: [ListComponent, FormComponent, NewComponent],
+  declarations: [ListComponent, FormComponent, NewComponent, EditComponent],
   imports: [
     CommonModule,
     ButtonModule,
