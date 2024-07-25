@@ -51,12 +51,16 @@
               appFieldRef
               [filter]="true"
               emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
-              [options]="procedimentos"
+              [options]="proceEnum | keyvalue"
               optionLabel="nome"
               formControlName="procedimento"
               placeholder="{{'select' | appTranslate:'shared'}}"
               (onChange)="procedimentoChange()"
-            ></p-dropdown>
+            >
+              <ng-template let-item pTemplate="item">
+                <div>{{ item.value }}</div>
+              </ng-template>
+            </p-dropdown>
           </app-field>
           <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'regiao.nome'" page="aquisicao">
             <p-dropdown
@@ -89,7 +93,7 @@
           </ng-template>
           <ng-template pTemplate="body" let-regiao let-editing="editing">
             <tr>
-              <td>{{ regiao.procedimento.nome }}</td>
+              <td>{{ getNomeProcedimento(regiao.procedimento.nome) }}</td>
               <td>{{ regiao.nome }}</td>
               <td [pEditableColumn]="regiao.valor" pEditableColumnField="code">
                 <p-cellEditor>

@@ -1,7 +1,11 @@
-import { Regiao } from './regiao.model';
 import { BaseEntity } from '../../core/domain/base.entity';
+import { ProcedimentoEnum } from './procedimento-enum';
 
 export class Procedimento extends BaseEntity {
-  nome?: string;
-  regioes?: Regiao[];
+  id: number;
+  nome: ProcedimentoEnum;
+  regiao: string;
+  quantidadeSessoes: number;
+  intervaloEntreSessoes: number;
+  valor: number;
 }

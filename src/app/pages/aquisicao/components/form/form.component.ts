@@ -3,9 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { BaseFormComponent } from '../../../../core/ui/components/form/base-form.component';
 import { plainToClass } from 'class-transformer';
 import { from } from '../../../../core/api/select/select';
@@ -16,9 +14,9 @@ import { Cliente } from '../../../../domain/cliente/cliente';
 import { ClienteService } from '../../../../domain/cliente/cliente.service';
 import { EFormaPagamento } from '../../../../domain/pagamento/forma-pagamento.enum';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
-import { FormDatas } from './form-datas';
 import { Pagamento } from '../../../../domain/pagamento/pagamento.model';
 import { FormaPagamento } from '../../../../domain/forma-pagamento.model';
+import { ProcedimentoEnum } from '../../../../domain/procedimento/procedimento-enum';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -34,6 +32,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   protected readonly eFormaPagamento = EFormaPagamento;
 
   procedimentos: Procedimento[];
+  proceEnum: ProcedimentoEnum[] = [];
   clientes: Cliente[];
   formasPagamento: FormaPagamento[] = [
     { value: 'PIX', label: 'Pix' },
@@ -56,12 +55,13 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     private clienteService: ClienteService
   ) {
     super(logService, alertService, translateService, validationFormFieldService);
+    this.proceEnum.push(ProcedimentoEnum.BOTOX);
+    this.proceEnum.push(ProcedimentoEnum.BOTOX_NEFERTITI);
   }
 
   ngOnInit(): void {
     this.getClientes();
     this.getProcedimentos();
-    this.getProcedimentosMock();
     this.buildFormGroup();
   }
 
@@ -114,25 +114,9 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     }
   }
 
-  getProcedimentosMock(): void {
-    FormDatas.getProcedimentos()
-      .pipe()
-      .subscribe(procedimentos => (this.procedimentos = procedimentos));
-  }
-
   getProcedimentos(): void {
     const query = from<Procedimento>()
-      .select((u: any) => [
-        u.nome,
-        u.id,
-        u.regioes.id,
-        u.regioes.nome,
-        u.regioes.valor,
-        u.regioes.quantidadeSessoes,
-        u.regioes.intervaloEntreSessoes,
-        u.regioes.procedimento.id,
-        u.regioes.procedimento.nome
-      ])
+      .select((u: Procedimento) => [u.nome, u.id, u.regiao, u.quantidadeSessoes, u.intervaloEntreSessoes, u.valor])
       .where(u => u.eq('situacao', 'true'))
       .asc(x => x.nome)
       .getQuery();
@@ -156,79 +140,15 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .subscribe(clientes => (this.clientes = clientes));
   }
 
-  onRegiaoSelect() {
-    const regiaoSelecionada: Regiao = this.formGroup.controls['regiao'].value;
-    let regioes: Regiao[] = this.formGroup.controls['regioes'].value;
+  onRegiaoSelect() {}
 
-    let backupDosProcedimentosJaInseridos: Procedimento[] = this.formGroup.controls['procedimentos'].value;
-
-    //Existem Procedimentos inseridos na tabela?
-    backupDosProcedimentosJaInseridos == null ? (backupDosProcedimentosJaInseridos = []) : backupDosProcedimentosJaInseridos;
-
-    //O procedimento está inserido no formulário?
-    if (backupDosProcedimentosJaInseridos.find(proc => proc.nome === regiaoSelecionada.procedimento.nome)) {
-      const procedimentoInserido = backupDosProcedimentosJaInseridos.find(proc => proc.nome == regiaoSelecionada.procedimento.nome);
-      if (procedimentoInserido.regioes.find(reg => reg.id === regiaoSelecionada.id) === undefined) {
-        //Limpando id para não enviar na request, dando a entender que é um update.
-        regiaoSelecionada.id = null;
-        procedimentoInserido.regioes.push(regiaoSelecionada);
-      } else {
-        this.alertService.defaultWarn('Região já inserida');
-        this.formGroup.controls['regiao'].setValue(null);
-        return;
-      }
-    } else {
-      //O procedimento ainda não está inserido no formulário
-      //Criar um novo procedimento e inserir a região
-      const { value: procedimento } = this.formGroup.controls['procedimento'];
-      procedimento.regioes = [];
-      //Limpando id para não enviar na request, dando a entender que é um update.
-      procedimento.id = null;
-      //Limpando id para não enviar na request, dando a entender que é um update.
-      regiaoSelecionada.id = null;
-      procedimento.regioes.push(regiaoSelecionada);
-      backupDosProcedimentosJaInseridos.push(procedimento);
-    }
-    this.formGroup.controls['procedimentos'].setValue(backupDosProcedimentosJaInseridos);
-    regioes == null ? (regioes = []) : regioes;
-    regioes.push(regiaoSelecionada);
-    this.formGroup.controls['regioes'].setValue(regioes);
-
-    this.formGroup.controls['regiao'].setValue(null);
-    this.formGroup.controls['valorAquisicao'].setValue(this.getValorTotalProcedimentos());
-  }
-
-  onRowRemove(regiao: Regiao) {
-    const procedimento = this.formGroup.controls['procedimentos'].value.find(procedimento => procedimento.id == regiao.procedimento.id);
-    procedimento.regioes.splice(
-      procedimento.regioes.findIndex(reg => reg.id == regiao.id),
-      1
-    );
-
-    if (procedimento.regioes.length < 1) {
-      this.formGroup.controls['procedimentos'].value.splice(proc => proc.id == procedimento.id, 1);
-    }
-    const regioes: Regiao[] = this.formGroup.controls['regioes'].value;
-    regioes.splice(regioes.indexOf(regiao), 1);
-    this.formGroup.controls['regioes'].setValue(regioes);
-  }
+  onRowRemove(regiao: Regiao) {}
 
   //Carregar lista de Regiões do Procedimento
-  procedimentoChange() {
-    this.regioes = [];
-    const procedimentoSelecionado: Procedimento = this.formGroup.controls['procedimento'].value;
-    procedimentoSelecionado.regioes.forEach(reg => this.regioes.push(reg));
-  }
+  procedimentoChange() {}
 
   getValorTotalProcedimentos(): number {
-    const procedimentos = this.getProcedimentosInForm();
-    let total = 0;
-    for (const procedimento of procedimentos) {
-      for (const regioe of procedimento.regioes) {
-        total = total + regioe.valor * regioe.quantidadeSessoes;
-      }
-    }
-    return total;
+    return 0;
   }
 
   getProcedimentosInForm(): Procedimento[] {
@@ -313,5 +233,14 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   formatarNomePagamento(formaPagamento: any) {
     return this.formasPagamento.find(forma => forma.value == formaPagamento).label;
+  }
+
+  enumToArray = (enumObj: any) => {
+    return Object.entries(enumObj).map(([key, value]) => ({ key, value }));
+  };
+
+  getNomeProcedimento(nome: any) {
+    const enums = this.enumToArray(this.proceEnum);
+    return enums.filter(value => value.key == nome);
   }
 }

@@ -103,12 +103,6 @@ export class EditComponent implements OnInit, AfterViewInit {
   private carregarFormulario(form: FormComponent) {
     form.formGroup.controls['cliente'].setValue(this.entity.cliente.id);
     form.formGroup.controls['dataAquisicao'].setValue(this.entity.dataAquisicao);
-    const regioes: Regiao[] = [];
-    this.entity.procedimentos.forEach(proc => {
-      proc.regioes.forEach(reg => regioes.push(reg));
-    });
-    form.formGroup.controls['regioes'].setValue(regioes);
-
     const pagamentos: Pagamento[] = [];
     this.entity.pagamentos.forEach(pagamento => {
       pagamentos.push(pagamento);

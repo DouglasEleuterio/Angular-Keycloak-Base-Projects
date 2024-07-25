@@ -8,6 +8,7 @@ import { ValidationFormFieldService } from '../../../../core/ui/components/valid
 import { plainToClass } from 'class-transformer';
 import { Procedimento } from '../../../../domain/procedimento/procedimento-model';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
+import { Cliente } from '../../../../domain/cliente/cliente';
 
 @Component({
   selector: 'app-procedimento-form',
@@ -54,7 +55,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   submit(): void {
     this.submitted = true;
     if (this.isFormValid() && this.formGroup.valid) {
-      const entity: Procedimento = { nome: this.formGroup.get('nome').value, regioes: this.formGroup.get('regioes').value };
+      const entity: Procedimento = plainToClass(Procedimento, this.formGroup.value);
       this.onSubmit(entity, this.formGroup);
     } else {
       this.validationError();
