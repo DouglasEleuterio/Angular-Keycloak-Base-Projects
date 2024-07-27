@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { PaginatorComponent } from '../../../../core/ui/components/pagination/paginator.component';
-import { Procedimento } from '../../../../domain/procedimento/procedimento-model';
 import { AppMenuModel } from '../../../../domain/menu/app-menu.model';
 import { AppBreadcrumbService } from '../../../../layouts/atlantis/app.breadcrumb.service';
 import { BaseController } from '../../../../core/domain/base.controller';
@@ -11,6 +10,8 @@ import { LoadingService } from '../../../../domain/loading/loading.service';
 import { ProcedimentoService } from '../../../../domain/procedimento/procedimento.service';
 import { Filter } from '../../../../core/api/filter/filter.model';
 import { finalize } from 'rxjs/operators';
+import { ProcedimentoCreateRequest } from '../../../../domain/procedimento/create/procedimento-create-request-model';
+import { RegiaoCreateRequest } from '../../../../domain/procedimento/create/regiao-create-request-model';
 
 @Component({
   selector: 'app-list',
@@ -18,20 +19,9 @@ import { finalize } from 'rxjs/operators';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends PaginatorComponent {
-  tableData: Procedimento[] = [];
+  tableData: ProcedimentoCreateRequest[] = [];
 
-  listSelect = (u: any) => [
-    u.id,
-    u.nome,
-    u.situacao,
-    u.dataCriacao,
-    u.dataAtualizacao,
-    u.regioes.id,
-    u.regioes.nome,
-    u.regioes.valor,
-    u.regioes.intervaloEntreSessoes,
-    u.regioes.quantidadeSessoes
-  ];
+  listSelect = (u: any) => [u.id, u.nome, u.regioes.id, u.regioes.nome, u.situacao, u.dataCriacao, u.dataAtualizacao];
 
   constructor(
     private breadcrumbService: AppBreadcrumbService,
@@ -80,5 +70,9 @@ export class ListComponent extends PaginatorComponent {
         },
         error: error => this.validationService.handleErrorAlert(error)
       });
+  }
+
+  getTotalRegioes(regioes: RegiaoCreateRequest[]): number {
+    return regioes.filter(reg => reg.nome !== null).length;
   }
 }

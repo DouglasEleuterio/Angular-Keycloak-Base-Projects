@@ -6,9 +6,9 @@ import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { plainToClass } from 'class-transformer';
-import { Procedimento } from '../../../../domain/procedimento/procedimento-model';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
-import { Cliente } from '../../../../domain/cliente/cliente';
+import { ProcedimentoCreateRequest } from '../../../../domain/procedimento/create/procedimento-create-request-model';
+import { RegiaoCreateRequest } from '../../../../domain/procedimento/create/regiao-create-request-model';
 
 @Component({
   selector: 'app-procedimento-form',
@@ -19,9 +19,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   @Input() isNew: boolean;
 
   formGroup: FormGroup;
-  onSubmit: (entity: Procedimento, formGroup) => void;
+  onSubmit: (entity: ProcedimentoCreateRequest, formGroup) => void;
   onCancel: () => void;
-  regioesInseridas: Regiao[] = [];
 
   constructor(
     protected alertService: AlertService,
@@ -31,6 +30,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     super(logService, alertService, translateService, validationFormFieldService);
+    this.buildFormGroup();
   }
 
   ngOnInit(): void {
@@ -40,22 +40,18 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   buildFormGroup(): void {
     this.formGroup = this.formBuilder.group({
       nome: [null, [Validators.required]],
-      quantidadeSessoes: [null],
-      nomeRegiao: [null],
-      valor: [null],
-      intervaloEntreSessoes: [null],
-      regioes: [null]
-    });
+      id: [null],
+      regioes: [null],
 
-    this.formGroup.get('valor').setValue(0);
-    this.formGroup.get('quantidadeSessoes').setValue(1);
-    this.formGroup.get('intervaloEntreSessoes').setValue(30);
+      nomeRegiao: [null]
+    });
+    this.formGroup.controls['regioes'].setValue([]);
   }
 
   submit(): void {
     this.submitted = true;
     if (this.isFormValid() && this.formGroup.valid) {
-      const entity: Procedimento = plainToClass(Procedimento, this.formGroup.value);
+      const entity: ProcedimentoCreateRequest = plainToClass(ProcedimentoCreateRequest, this.formGroup.value);
       this.onSubmit(entity, this.formGroup);
     } else {
       this.validationError();
@@ -70,46 +66,60 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     return this.formGroup.controls;
   }
 
-  patchValue(entity: Procedimento): void {
+  patchValue(entity: ProcedimentoCreateRequest): void {
     if (entity != null) {
       this.formGroup.patchValue(entity);
     }
   }
 
-  adicionarRegiao() {
-    const regiao: Regiao = {
-      id: Math.random().valueOf(),
-      nome: this.formGroup.get('nomeRegiao').value,
-      quantidadeSessoes: this.formGroup.get('quantidadeSessoes').value,
-      intervaloEntreSessoes: this.formGroup.get('intervaloEntreSessoes').value,
-      valor: this.formGroup.get('valor').value,
-      persistida: false
+  public adicionarRegiao() {
+    const nomeRegiaoInput = this.getNomeRegiaoInForm();
+    const regioesBkp = this.getRegioesInForm();
+    if (this.filtrarRegiaoPorNome(nomeRegiaoInput).length > 0) {
+      this.alertService.error('Inválido', 'Região já inserida');
+      return;
+    }
+    const regiaoCreate: RegiaoCreateRequest = {
+      nome: this.getNomeRegiaoInForm(),
+      quantidadeSessoes: 1,
+      intervaloEntreSessoes: 30,
+      valor: 0
     };
-    this.regioesInseridas.push(regiao);
+    regioesBkp.push(regiaoCreate);
+    this.formGroup.get('regioes').setValue(regioesBkp);
     this.formGroup.get('nomeRegiao').setValue(null);
-    this.formGroup.get('regioes').setValue(this.regioesInseridas);
   }
 
-  onRowRemove(regiao: Regiao) {
-    const indexRegiao = this.regioesInseridas.findIndex(value => value.id === regiao.id);
-    this.regioesInseridas.splice(indexRegiao, 1);
-    this.formGroup.get('regioes').setValue(this.regioesInseridas);
+  public onRowRemove(regiao: RegiaoCreateRequest): void {
+    const regioesBkp = this.getRegioesInForm();
+    regioesBkp.splice(regioesBkp.indexOf(regiao), 1);
+    this.formGroup.get('regioes').setValue(regioesBkp);
   }
 
-  isFormValid(): boolean {
-    //Validar se dados das regiões foram informados
+  private isFormValid(): boolean {
     let isValid = true;
-    const regioes: Regiao[] = this.formGroup.get('regioes').value;
+    const regioes: RegiaoCreateRequest[] = this.formGroup.get('regioes').value;
     for (const regiao of regioes) {
       if (regiao.valor == undefined || regiao.valor == 0) {
         this.alertService.error('Erro', `Região ${regiao.nome} sem valor definido`);
         isValid = false;
       }
-      if (regiao.nome == undefined || null) {
+      if (regiao.nome == undefined || null || '') {
         this.alertService.error('Erro', `Nome da região não informado`);
         isValid = false;
       }
     }
     return isValid;
+  }
+  private getNomeRegiaoInForm(): string {
+    return this.formGroup.controls['nomeRegiao'].value;
+  }
+
+  public getRegioesInForm(): RegiaoCreateRequest[] {
+    return this.formGroup.controls['regioes'].value;
+  }
+
+  private filtrarRegiaoPorNome(nomeRegiaoInput: string): Regiao[] {
+    return this.getRegioesInForm().filter(reg => reg.nome == nomeRegiaoInput);
   }
 }

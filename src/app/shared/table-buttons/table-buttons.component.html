@@ -1,14 +1,16 @@
 <div class="crud-actions-container">
-  <button
-    *appHasPermission="[detailPermission]"
-    pButton
-    type="button"
-    [routerLink]="routerLink('detail')"
-    pTooltip="{{'action.detail' | appTranslate:page}}"
-    tooltipPosition="top"
-    class="p-button-primary p-button-text"
-    icon="pi pi-eye"
-  ></button>
+  <div *ngIf="showView">
+    <button
+      *appHasPermission="[detailPermission]"
+      pButton
+      type="button"
+      [routerLink]="routerLink('detail')"
+      pTooltip="{{'action.detail' | appTranslate:page}}"
+      tooltipPosition="top"
+      class="p-button-primary p-button-text"
+      icon="pi pi-eye"
+    ></button>
+  </div>
   <button
     *appHasPermission="[editPermission]"
     pTooltip="{{'action.edit' | appTranslate:page}}"

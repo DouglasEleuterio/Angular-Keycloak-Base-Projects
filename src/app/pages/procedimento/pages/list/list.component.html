@@ -23,22 +23,34 @@
         >
           <ng-template pTemplate="header">
             <tr>
-              <th scope="col" colspan="1" pSortableColumn="nome">
+              <th scope="col" colspan="1" pSortableColumn="nome" style="min-width: 70%">
                 {{'field.nome' | appTranslate:'procedimento'}}
                 <p-sortIcon field="nome"></p-sortIcon>
+              </th>
+              <th style="max-width: 10%" scope="col" colspan="1" class="actions">
+                {{'field.quantidade-regioes' | appTranslate:'procedimento'}}
               </th>
               <th scope="col" colspan="1" class="actions">{{'actions' | appTranslate:'shared'}}</th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+          <ng-template pTemplate="body" let-entity>
             <tr>
               <td colspan="1">
                 <span class="p-column-title bold"> {{'field.nome' | appTranslate:'procedimento'}}</span>
                 <span pTooltip="{{entity.nome}}"> {{entity.nome}} </span>
               </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{'field.quantidade-regioes' | appTranslate:'procedimento'}}</span>
+                <span> {{getTotalRegioes(entity.regioes)}} </span>
+              </td>
               <td colspan="1" class="actions">
                 <span class="p-column-title bold"> {{'actions' | appTranslate:'shared'}}</span>
-                <app-table-buttons page="procedimento" [entityId]="entity.id" (onRemove)="remove($event)"></app-table-buttons>
+                <app-table-buttons
+                  page="procedimento"
+                  [entityId]="entity.id"
+                  [showView]="false"
+                  (onRemove)="remove($event)"
+                ></app-table-buttons>
               </td>
             </tr>
           </ng-template>

@@ -33,8 +33,8 @@
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <div>
-          <p-table [value]="regioesInseridas" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
+        <div *ngIf="getRegioesInForm()">
+          <p-table [value]="getRegioesInForm()" dataKey="id" [tableStyle]="{ 'min-width': '50rem' }">
             <ng-template pTemplate="header">
               <tr>
                 <th style="width: 20%">Nome</th>

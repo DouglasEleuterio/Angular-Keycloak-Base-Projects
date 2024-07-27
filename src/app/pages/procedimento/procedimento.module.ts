@@ -18,9 +18,10 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { NewComponent } from './pages/new/new.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SharedModule } from '../../shared/shared.module';
+import { EditComponent } from './pages/edit/edit.component';
 
 @NgModule({
-  declarations: [ListComponent, FormComponent, NewComponent],
+  declarations: [ListComponent, FormComponent, NewComponent, EditComponent],
   imports: [
     CommonModule,
     ProcedimentoRoutingModule,

@@ -9,8 +9,8 @@ import { AppBreadcrumbService } from '../../../../layouts/atlantis/app.breadcrum
 import { ProcedimentoService } from '../../../../domain/procedimento/procedimento.service';
 import { FormGroup } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
-import { Procedimento } from '../../../../domain/procedimento/procedimento-model';
 import { FormComponent } from '../../components/form/form.component';
+import { ProcedimentoCreateRequest } from '../../../../domain/procedimento/create/procedimento-create-request-model';
 
 @Component({
   selector: 'app-new',
@@ -36,11 +36,11 @@ export class NewComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.form.onSubmit = (entity: Procedimento, formGroup) => this.onSubmit(entity, formGroup);
+    this.form.onSubmit = (entity: ProcedimentoCreateRequest, formGroup) => this.onSubmit(entity, formGroup);
     this.form.onCancel = () => this.router.navigate(this.menuBack.routerLink).then();
   }
 
-  onSubmit(entity: Procedimento, formGroup: FormGroup): void {
+  onSubmit(entity: ProcedimentoCreateRequest, formGroup: FormGroup): void {
     this.form.startSending();
     this.loadingService.startLoading();
     this.service

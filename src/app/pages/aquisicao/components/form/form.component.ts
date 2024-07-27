@@ -17,6 +17,7 @@ import { Regiao } from '../../../../domain/procedimento/regiao.model';
 import { Pagamento } from '../../../../domain/pagamento/pagamento.model';
 import { FormaPagamento } from '../../../../domain/forma-pagamento.model';
 import { ProcedimentoEnum } from '../../../../domain/procedimento/procedimento-enum';
+import { ProcedimentoCreateRequest } from '../../../../domain/procedimento/create/procedimento-create-request-model';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -115,8 +116,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   }
 
   getProcedimentos(): void {
-    const query = from<Procedimento>()
-      .select((u: Procedimento) => [u.nome, u.id, u.regiao, u.quantidadeSessoes, u.intervaloEntreSessoes, u.valor])
+    const query = from<ProcedimentoCreateRequest>()
+      .select((u: ProcedimentoCreateRequest) => [u.nome, u.id])
       .where(u => u.eq('situacao', 'true'))
       .asc(x => x.nome)
       .getQuery();

@@ -1425,7 +1425,8 @@
       "VALOR": "Valor",
       "QUANTIDADE_SESSOES": "Quantidade Sessão",
       "INTERVALO_ENTRE_SESSOES": "Intervalo Entre Sessão (dias)",
-      "NOME_REGIAO": "Região"
+      "NOME_REGIAO": "Região",
+      "QUANTIDADE-REGIOES": "Quantidade de Regiões"
     },
     "ACTION": {
       "ADD": "Adicionar Procedimento",
