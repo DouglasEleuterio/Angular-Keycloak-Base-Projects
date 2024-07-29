@@ -18,6 +18,7 @@ import { Pagamento } from '../../../../domain/pagamento/pagamento.model';
 import { FormaPagamento } from '../../../../domain/forma-pagamento.model';
 import { ProcedimentoEnum } from '../../../../domain/procedimento/procedimento-enum';
 import { ProcedimentoCreateRequest } from '../../../../domain/procedimento/create/procedimento-create-request-model';
+import { RegiaoCreateRequest } from '../../../../domain/procedimento/create/regiao-create-request-model';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -35,16 +36,16 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   procedimentos: Procedimento[];
   proceEnum: ProcedimentoEnum[] = [];
   clientes: Cliente[];
+  regioesProcedimentoSelecionado: RegiaoCreateRequest[] = [];
   formasPagamento: FormaPagamento[] = [
     { value: 'PIX', label: 'Pix' },
     { value: 'CARTAO_CREDITO', label: 'Cartão de Crédito' },
     { value: 'CARTAO_DEBITO', label: 'Cartão de Débito' },
     { value: 'EM_ABERTO', label: 'Em Aberto' }
   ];
-  procedimentosInseridos: Procedimento[] = [];
   regioes: Regiao[] = [];
-  exemplo: any[] = [];
   disabledAdicionarPagamento = true;
+  public procedimentosForSelect: { id: string; name: string }[] = [];
 
   constructor(
     protected alertService: AlertService,
@@ -77,6 +78,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       procedimentos: [null],
       procedimentosTable: [null],
 
+      procedimentoSelecionadoForm: [null],
+
       regiao: [null],
       regioes: [null],
 
@@ -85,7 +88,9 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       formaPagamento: [null],
       valorPagamento: [null],
       valorTaxa: [null],
-      dataPagamento: [null]
+      dataPagamento: [null],
+
+      procedimentosDaAquisicao: [null]
     });
   }
 
@@ -123,9 +128,13 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .getQuery();
 
     this.procedimentoService
-      .fetchSelect<Procedimento[]>(query)
+      .fetchSelect<any[]>(query)
       .pipe()
-      .subscribe(procedimentos => (this.procedimentos = procedimentos));
+      .subscribe(procedimentos =>
+        procedimentos.forEach(value => {
+          this.procedimentosForSelect.push({ id: value.id, name: value.nome });
+        })
+      );
   }
 
   getClientes(): void {
@@ -141,12 +150,41 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .subscribe(clientes => (this.clientes = clientes));
   }
 
-  onRegiaoSelect() {}
+  getRegioesFromProcedimento(): void {
+    const query = from<ProcedimentoCreateRequest>()
+      .select((u: any) => [
+        u.nome,
+        u.id,
+        u.regioes.id,
+        u.regioes.nome,
+        u.regioes.intervaloEntreSessoes,
+        u.regioes.valor,
+        u.regioes.quantidadeSessoes
+      ])
+      .where(u => u.eq('id', this.getProcedimentoInForm()))
+      .asc(x => x.nome)
+      .getQuery();
+
+    this.procedimentoService
+      .fetchSelect<any[]>(query)
+      .pipe()
+      .subscribe(procedimentos =>
+        procedimentos.forEach(value => {
+          value.regioes.forEach(regiao => this.regioesProcedimentoSelecionado.push(regiao));
+        })
+      );
+  }
+
+  onRegiaoSelect() {
+    this.getProcedimentosDaAquisicao().push(this.getRegiaoSelecionadaInForm());
+  }
 
   onRowRemove(regiao: Regiao) {}
 
   //Carregar lista de Regiões do Procedimento
-  procedimentoChange() {}
+  procedimentoChange() {
+    this.getRegioesFromProcedimento();
+  }
 
   getValorTotalProcedimentos(): number {
     return 0;
@@ -211,8 +249,16 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     return this.formGroup.controls['formaPagamento'].value;
   }
 
+  getRegiaoSelecionadaInForm(): any {
+    return this.formGroup.controls['regiao'].value;
+  }
+
   getValorPagamentoInForm(): any {
     return this.formGroup.controls['valorPagamento'].value;
+  }
+
+  getProcedimentoInForm(): string {
+    return this.formGroup.controls['procedimentoSelecionadoForm'].value;
   }
 
   getValorTaxaInForm(): any {
@@ -225,6 +271,10 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   getDataAquisicao(): any {
     return this.formGroup.controls['dataAquisicao'].value;
+  }
+
+  getProcedimentosDaAquisicao(): RegiaoCreateRequest[] {
+    return this.formGroup.controls['procedimentosDaAquisicao'].value;
   }
 
   private tratarDatas() {
