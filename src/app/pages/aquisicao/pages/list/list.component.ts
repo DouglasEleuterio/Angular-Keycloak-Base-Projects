@@ -27,9 +27,9 @@ export class ListComponent extends PaginatorComponent {
     u.cliente.id,
     u.cliente.nome,
     u.dataAquisicao,
-    u.procedimentos.id,
-    u.procedimentos.nome,
-    u.procedimentos.regioes.nome,
+    u.procedimentosDaAquisicao.id,
+    u.procedimentosDaAquisicao.nome,
+    u.procedimentosDaAquisicao.procedimento,
     u.pagamentos.id,
     u.pagamentos.valorPagamento
   ];

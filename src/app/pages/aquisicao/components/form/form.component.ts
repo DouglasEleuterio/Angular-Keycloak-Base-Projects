@@ -186,7 +186,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       return;
     }
     const procedimentoDaAquisicao: ProcedimentoAquisicaoRequest = {
-      id: this.getRegiaoSelecionadaInForm().id,
+      procedimentoOrigemId: this.getRegiaoSelecionadaInForm().id,
       nome: this.getRegiaoSelecionadaInForm().nome,
       intervaloEntreSessoes: this.getRegiaoSelecionadaInForm().intervaloEntreSessoes,
       valor: this.getRegiaoSelecionadaInForm().valor,
