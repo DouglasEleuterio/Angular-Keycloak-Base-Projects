@@ -52,7 +52,6 @@
               [filter]="true"
               emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
               [options]="procedimentosForSelect"
-              optionValue="id"
               optionLabel="name"
               formControlName="procedimentoSelecionadoForm"
               placeholder="{{'select' | appTranslate:'shared'}}"
@@ -91,16 +90,9 @@
           </ng-template>
           <ng-template pTemplate="body" let-regiao let-editing="editing">
             <tr>
-              <td>{{ getNomeProcedimento(regiao.procedimento.nome) }}</td>
+              <td>{{ regiao.procedimento }}</td>
               <td>{{ regiao.nome }}</td>
-              <td [pEditableColumn]="regiao.valor" pEditableColumnField="code">
-                <p-cellEditor>
-                  <ng-template pTemplate="input">
-                    <input pInputText type="number" [(ngModel)]="regiao.valor" [ngModelOptions]="{standalone: true}" />
-                  </ng-template>
-                  <ng-template pTemplate="output"> {{ regiao.valor | thousandFormat }}</ng-template>
-                </p-cellEditor>
-              </td>
+              <td>{{ regiao.valor | thousandFormat }}</td>
               <td [pEditableColumn]="regiao.quantidadeSessoes" pEditableColumnField="code">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
@@ -205,11 +197,7 @@
             <div class="detail-body grid"></div>
           </div>
         </p-divider>
-        <p-table
-          *ngIf="formGroup.controls['pagamentos'].value && formGroup.controls['pagamentos'].value.length > 0"
-          [value]="formGroup.controls['pagamentos'].value"
-          [tableStyle]="{ 'min-width': '50rem' }"
-        >
+        <p-table *ngIf="getPagamentosInForm().length > 0" [value]="getPagamentosInForm()" [tableStyle]="{ 'min-width': '50rem' }">
           <ng-template pTemplate="header">
             <tr>
               <th>Forma de Pagamento</th>
@@ -249,11 +237,10 @@
             </tr>
           </ng-template>
           <ng-template pTemplate="footer">
+            <hr />
             <span>Valor Pagamentos: {{ getValorTotalPagamentos() | thousandFormat }}</span>
             <p></p>
-            <span *ngIf="formGroup.controls['regioes'].value && formGroup.controls['regioes'].value.length > 0"
-              >Valor Desconto: {{ getValorTotalProcedimentos() - getValorTotalPagamentos() | thousandFormat }}</span
-            >
+            <span>Valor Desconto: {{getValorDesconto() | thousandFormat}}</span>
           </ng-template>
         </p-table>
         <div style="margin-top: 20px">

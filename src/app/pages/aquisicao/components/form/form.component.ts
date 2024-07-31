@@ -19,6 +19,7 @@ import { FormaPagamento } from '../../../../domain/forma-pagamento.model';
 import { ProcedimentoEnum } from '../../../../domain/procedimento/procedimento-enum';
 import { ProcedimentoCreateRequest } from '../../../../domain/procedimento/create/procedimento-create-request-model';
 import { RegiaoCreateRequest } from '../../../../domain/procedimento/create/regiao-create-request-model';
+import { ProcedimentoAquisicaoRequest } from '../../../../domain/procedimento/create/procedimento-aquisicao-create-request';
 
 @Component({
   selector: 'app-aquisicao-form',
@@ -75,13 +76,10 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       valorDesconto: [null],
 
       procedimento: [null],
-      procedimentos: [null],
-      procedimentosTable: [null],
 
       procedimentoSelecionadoForm: [null],
 
       regiao: [null],
-      regioes: [null],
 
       pagamentos: [null],
 
@@ -92,6 +90,10 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
       procedimentosDaAquisicao: [null]
     });
+
+    this.formGroup.controls['procedimentosDaAquisicao'].setValue([]);
+    this.formGroup.controls['pagamentos'].setValue([]);
+    this.formGroup.controls['valorDesconto'].setValue(0);
   }
 
   submit(): void {
@@ -130,11 +132,13 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.procedimentoService
       .fetchSelect<any[]>(query)
       .pipe()
-      .subscribe(procedimentos =>
+      .subscribe(procedimentos => {
+        procedimentos = procedimentos.filter(p => p.id != null);
+
         procedimentos.forEach(value => {
           this.procedimentosForSelect.push({ id: value.id, name: value.nome });
-        })
-      );
+        });
+      });
   }
 
   getClientes(): void {
@@ -161,7 +165,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
         u.regioes.valor,
         u.regioes.quantidadeSessoes
       ])
-      .where(u => u.eq('id', this.getProcedimentoInForm()))
+      .where(u => u.eq('id', this.getProcedimentoInForm().id))
       .asc(x => x.nome)
       .getQuery();
 
@@ -170,16 +174,35 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       .pipe()
       .subscribe(procedimentos =>
         procedimentos.forEach(value => {
+          this.regioesProcedimentoSelecionado = [];
           value.regioes.forEach(regiao => this.regioesProcedimentoSelecionado.push(regiao));
         })
       );
   }
 
   onRegiaoSelect() {
-    this.getProcedimentosDaAquisicao().push(this.getRegiaoSelecionadaInForm());
+    const idRegiaoSelecionada = this.getRegiaoSelecionadaInForm().id;
+    if (this.getProcedimentosDaAquisicao().find(value => value.id === idRegiaoSelecionada)) {
+      return;
+    }
+    const procedimentoDaAquisicao: ProcedimentoAquisicaoRequest = {
+      id: this.getRegiaoSelecionadaInForm().id,
+      nome: this.getRegiaoSelecionadaInForm().nome,
+      intervaloEntreSessoes: this.getRegiaoSelecionadaInForm().intervaloEntreSessoes,
+      valor: this.getRegiaoSelecionadaInForm().valor,
+      quantidadeSessoes: this.getRegiaoSelecionadaInForm().quantidadeSessoes,
+      procedimento: this.getProcedimentoInForm().name
+    };
+    this.getProcedimentosDaAquisicao().push(procedimentoDaAquisicao);
+    this.atualizaValorDesconto();
   }
 
-  onRowRemove(regiao: Regiao) {}
+  onRowRemove(regiao: Regiao) {
+    const regiaoOnList = this.getProcedimentosDaAquisicao().filter(value => value.id == regiao.id);
+    const index = this.getProcedimentosDaAquisicao().indexOf(regiaoOnList[0]);
+    this.getProcedimentosDaAquisicao().splice(index, 1);
+    this.atualizaValorDesconto();
+  }
 
   //Carregar lista de Regiões do Procedimento
   procedimentoChange() {
@@ -187,16 +210,15 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   }
 
   getValorTotalProcedimentos(): number {
-    return 0;
-  }
-
-  getProcedimentosInForm(): Procedimento[] {
-    return this.formGroup.controls['procedimentos'].value;
+    const valorAquisicao = this.getProcedimentosDaAquisicao().reduce(
+      (previousValue, currentValue) => previousValue + currentValue.valor * currentValue.quantidadeSessoes,
+      0
+    );
+    this.formGroup.controls['valorAquisicao'].setValue(valorAquisicao);
+    return valorAquisicao;
   }
 
   onAddPagamento(): void {
-    this.getPagamentosInForm() === null ? this.formGroup.controls['pagamentos'].setValue([]) : this.getPagamentosInForm();
-
     this.setPagamentoInPagamentosForm({
       formaPagamento: this.getFormaPagamentoInForm(),
       valorPagamento: this.getValorPagamentoInForm(),
@@ -204,15 +226,10 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       dataPagamento: this.getDataPagamentoInForm()
     });
     this.atualizaValorDesconto();
-    this.formGroup.controls['valorAquisicao'].setValue(this.getValorTotalProcedimentos());
   }
 
   atualizaValorDesconto() {
-    this.formGroup.controls['valorDesconto'].setValue(
-      this.getValorTotalProcedimentos() - this.getValorTotalPagamentos() == null
-        ? 0
-        : this.getValorTotalProcedimentos() - this.getValorTotalPagamentos()
-    );
+    this.formGroup.controls['valorDesconto'].setValue(this.getValorTotalProcedimentos() - this.getValorTotalPagamentos());
   }
 
   onValorDePagamentoAlterado() {
@@ -223,33 +240,27 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       this.getValorTaxaInForm() == null;
   }
 
-  onRowRemovePagamento(index: any) {
-    const procedimentos: Procedimento[] = this.getPagamentosInForm();
-    procedimentos.splice(index, 1);
-    this.formGroup.controls['pagamentos'].setValue(procedimentos);
-  }
-
   getValorTotalPagamentos(): number {
     return this.getPagamentosInForm().reduce(function (valorTotal, obj) {
       return valorTotal + obj.valorPagamento;
     }, 0);
   }
 
-  getPagamentosInForm(): any {
-    return this.formGroup.controls['pagamentos'].value;
+  setPagamentoInPagamentosForm(pagamento: Pagamento): void {
+    const pagamentosAnterior = this.getPagamentosInForm();
+    pagamentosAnterior.push(pagamento);
+    this.formGroup.controls['pagamentos'].setValue(pagamentosAnterior);
   }
 
-  setPagamentoInPagamentosForm(pagamento: Pagamento): void {
-    const backupPagamentos: Pagamento[] = this.getPagamentosInForm();
-    backupPagamentos.push(pagamento);
-    this.formGroup.controls['pagamentos'].setValue(backupPagamentos);
+  getPagamentosInForm(): Pagamento[] {
+    return this.formGroup.controls['pagamentos'].value;
   }
 
   getFormaPagamentoInForm(): any {
     return this.formGroup.controls['formaPagamento'].value;
   }
 
-  getRegiaoSelecionadaInForm(): any {
+  getRegiaoSelecionadaInForm(): RegiaoCreateRequest {
     return this.formGroup.controls['regiao'].value;
   }
 
@@ -257,7 +268,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     return this.formGroup.controls['valorPagamento'].value;
   }
 
-  getProcedimentoInForm(): string {
+  getProcedimentoInForm(): { id: string; name: string } {
     return this.formGroup.controls['procedimentoSelecionadoForm'].value;
   }
 
@@ -273,8 +284,16 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     return this.formGroup.controls['dataAquisicao'].value;
   }
 
-  getProcedimentosDaAquisicao(): RegiaoCreateRequest[] {
+  getProcedimentosDaAquisicao(): ProcedimentoAquisicaoRequest[] {
     return this.formGroup.controls['procedimentosDaAquisicao'].value;
+  }
+
+  getValorDesconto(): number {
+    return this.formGroup.controls['valorDesconto'].value;
+  }
+
+  getValorAquisicao(): number {
+    return this.formGroup.controls['valorAquisicao'].value;
   }
 
   private tratarDatas() {
@@ -286,12 +305,5 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     return this.formasPagamento.find(forma => forma.value == formaPagamento).label;
   }
 
-  enumToArray = (enumObj: any) => {
-    return Object.entries(enumObj).map(([key, value]) => ({ key, value }));
-  };
-
-  getNomeProcedimento(nome: any) {
-    const enums = this.enumToArray(this.proceEnum);
-    return enums.filter(value => value.key == nome);
-  }
+  onRowRemovePagamento(index: any) {}
 }
