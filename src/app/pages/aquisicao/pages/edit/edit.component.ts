@@ -11,8 +11,6 @@ import { AquisicaoService } from '../../../../domain/aquisicao/aquisicao.service
 import { FormGroup } from '@angular/forms';
 import { FormComponent } from '../../components/form/form.component';
 import { Aquisicao } from '../../../../domain/aquisicao/aquisicao-model';
-import { Regiao } from '../../../../domain/procedimento/regiao.model';
-import { Pagamento } from '../../../../domain/pagamento/pagamento.model';
 
 @Component({
   selector: 'app-procedimento-edit',
@@ -74,7 +72,9 @@ export class EditComponent implements OnInit, AfterViewInit {
     } else {
       this.entity = entity;
       this.form.patchValue(this.entity);
-      this.carregarFormulario(this.form);
+      const cliente = { id: entity.cliente.id, nome: entity.cliente.nome };
+      this.form.formGroup.controls['cliente'].setValue(cliente);
+      // this.carregarFormulario(this.form);
     }
   }
 
@@ -100,12 +100,12 @@ export class EditComponent implements OnInit, AfterViewInit {
       });
   }
 
-  private carregarFormulario(form: FormComponent) {
-    form.formGroup.controls['cliente'].setValue(this.entity.cliente.id);
-    form.formGroup.controls['dataAquisicao'].setValue(this.entity.dataAquisicao);
-    const pagamentos: Pagamento[] = [];
-    this.entity.pagamentos.forEach(pagamento => {
-      pagamentos.push(pagamento);
-    });
-  }
+  // private carregarFormulario(form: FormComponent) {
+  //   form.formGroup.controls['cliente'].setValue(this.entity.cliente.id);
+  //   form.formGroup.controls['dataAquisicao'].setValue(this.entity.dataAquisicao);
+  //   const pagamentos: Pagamento[] = [];
+  //   this.entity.pagamentos.forEach(pagamento => {
+  //     pagamentos.push(pagamento);
+  //   });
+  // }
 }

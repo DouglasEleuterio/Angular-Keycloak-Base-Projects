@@ -204,6 +204,11 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.atualizaValorDesconto();
   }
 
+  onRowRemovePagamento(index: number) {
+    this.getPagamentosInForm().splice(index, 1);
+    this.atualizaValorDesconto();
+  }
+
   //Carregar lista de Regiões do Procedimento
   procedimentoChange() {
     this.getRegioesFromProcedimento();
@@ -304,6 +309,4 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   formatarNomePagamento(formaPagamento: any) {
     return this.formasPagamento.find(forma => forma.value == formaPagamento).label;
   }
-
-  onRowRemovePagamento(index: any) {}
 }

@@ -8,11 +8,10 @@ export class Aquisicao extends BaseActiveEntity {
   dataAtualizacao: Date;
   situacao: boolean;
   id: number;
-
-  cliente: Cliente;
-  procedimentos: Procedimento[];
   dataAquisicao: Date;
   valorAquisicao: number;
   valorDesconto: number | null;
+  cliente: Cliente;
   pagamentos: Pagamento[];
+  procedimentosDaAquisicao: Procedimento[];
 }

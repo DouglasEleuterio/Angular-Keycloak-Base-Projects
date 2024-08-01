@@ -21,7 +21,6 @@
               emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
               [options]="clientes"
               optionLabel="nome"
-              optionValue="id"
               placeholder="{{'select' | appTranslate:'shared'}}"
               formControlName="cliente"
             ></p-dropdown>
@@ -93,7 +92,7 @@
               <td>{{ regiao.procedimento }}</td>
               <td>{{ regiao.nome }}</td>
               <td>{{ regiao.valor | thousandFormat }}</td>
-              <td [pEditableColumn]="regiao.quantidadeSessoes" pEditableColumnField="code">
+              <td [pEditableColumn]="regiao.quantidadeSessoes" (change)="atualizaValorDesconto()" pEditableColumnField="code">
                 <p-cellEditor>
                   <ng-template pTemplate="input">
                     <input pInputText type="number" [(ngModel)]="regiao.quantidadeSessoes" [ngModelOptions]="{standalone: true}" />
