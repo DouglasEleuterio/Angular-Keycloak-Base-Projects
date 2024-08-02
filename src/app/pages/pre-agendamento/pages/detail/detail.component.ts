@@ -10,6 +10,7 @@ import { PreAgendamentoService } from '../../../../domain/pre-agendamento/pre-ag
 import { CalendarComponent } from '../../../fullcalendar/calendar/calendar.component';
 import { INITIAL_EVENTS } from '../../../fullcalendar/event-utils';
 import { EventChangeArg, EventClickArg } from '@fullcalendar/core';
+import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-detail',
@@ -22,14 +23,14 @@ export class DetailComponent implements OnInit {
   @ViewChild('calendar')
   calendar: CalendarComponent;
 
-  titulo: string;
-
   public entity: PreAgendamento;
   private id: number;
 
   menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
 
   constructor(
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService,
     private route: ActivatedRoute,
     private router: Router,
     private validationService: ValidationService,
@@ -62,6 +63,10 @@ export class DetailComponent implements OnInit {
     }
   }
 
+  /*
+   * Ao carregar a página, buscar todos agendamentos confirmados.
+   * Navegar para data do evento clicado.
+   */
   handlePageLoaded() {
     const calendarApi = this.calendar.getFullCalendar().getApi();
     const calendarOptions = this.calendar.getFullCalendar().options;
@@ -76,16 +81,30 @@ export class DetailComponent implements OnInit {
   }
 
   handleEventChange($event: EventChangeArg) {
-    console.log('Evento foi modificado.');
-    console.log(JSON.stringify($event.oldEvent));
-    this.titulo = $event.oldEvent.title;
-    this.showDialog();
-    // $event.revert();
-    //Chamar modal de confirmação quando evento modificado.
-    //Caso usuário cancele, chamar $event.revert()
-  }
-
-  showDialog() {
-    this.visible = true;
+    this.confirmationService.confirm({
+      header: 'Alterar Agendamento?',
+      message: `<p></p><b>Anterior: </b>Inicio: <i>${new Date($event.oldEvent.startStr).toLocaleString()}</i> Fim: <i>${new Date(
+        $event.oldEvent.endStr
+      ).toLocaleString()}</i></i></p><p></p><b>Novo: </b>Inicio: <i>${new Date(
+        $event.event.startStr
+      ).toLocaleString()}</i> Fim: <i></i>${new Date($event.event.endStr).toLocaleString()}</i></p>`,
+      accept: () => {
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento alterado' });
+        this.confirmationService.close();
+      },
+      reject: type => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Alteração não realizada' });
+            $event.revert();
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Alteração não realizada' });
+            break;
+        }
+        $event.revert();
+        this.confirmationService.close();
+      }
+    });
   }
 }
