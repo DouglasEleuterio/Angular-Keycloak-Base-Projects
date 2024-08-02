@@ -1,19 +1,26 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { CalendarOptions, DateSelectArg, EventApi, EventClickArg } from '@fullcalendar/core';
+import { AfterViewInit, ChangeDetectorRef, Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { CalendarOptions, DateSelectArg, EventChangeArg, EventClickArg, EventInput } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { createEventId, INITIAL_EVENTS } from '../event-utils';
-import { date } from '@rxweb/reactive-form-validators';
+import { createEventId } from '../event-utils';
+import { FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
   selector: 'app-calendar-root',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.css']
 })
-export class CalendarComponent {
-  @Input()
-  diaInicial: Date | null = null;
+export class CalendarComponent implements AfterViewInit {
+  @ViewChild('calendar')
+  calendar: FullCalendarComponent;
+
+  @Output() pageLoaded: EventEmitter<void> = new EventEmitter<void>();
+  @Output() eventClick: EventEmitter<EventClickArg> = new EventEmitter<EventClickArg>();
+  @Output() eventChange: EventEmitter<EventChangeArg> = new EventEmitter<EventChangeArg>();
+
+  public eventosInicial: EventInput[] = [];
+  changeDetector: ChangeDetectorRef;
 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
@@ -36,7 +43,7 @@ export class CalendarComponent {
       nextYear: 'próximo ano',
       prevYear: 'ano anterior'
     },
-    initialDate: this.diaInicial,
+    // initialDate: ,
     views: {
       timeGridWeek: {
         type: 'timeGridWeek',
@@ -73,7 +80,6 @@ export class CalendarComponent {
     dayHeaders: true,
     dayHeaderFormat: { weekday: 'long' },
     initialView: 'timeGridWeek',
-    initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
     weekends: true,
     editable: true,
     selectable: true,
@@ -81,30 +87,26 @@ export class CalendarComponent {
     dayMaxEvents: true,
     select: this.handleDateSelect.bind(this),
     eventClick: this.handleEventClick.bind(this),
-    eventsSet: this.handleEvents.bind(this)
+    eventChange: this.handleEventChange.bind(this)
+    // eventsSet: this.handleEvents.bind(this)
     /* you can update a remote database when these fire:
     eventAdd:
     eventChange:
     eventRemove:
     */
   };
-  currentEvents: EventApi[] = [];
-  eventos: any[] = [];
 
-  constructor(private changeDetector: ChangeDetectorRef) {}
-
-  handleCalendarToggle() {
-    this.calendarVisible = !this.calendarVisible;
+  constructor(changeDetector: ChangeDetectorRef) {
+    this.changeDetector = changeDetector;
   }
 
-  handleWeekendsToggle() {
-    const { calendarOptions } = this;
-    calendarOptions.weekends = !calendarOptions.weekends;
+  ngAfterViewInit(): void {
+    this.pageLoaded.emit();
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
     const title = prompt('Please enter a new title for your event');
-    const calendarApi = selectInfo.view.calendar;
+    const calendarApi = this.getFullCalendar().getApi();
 
     calendarApi.unselect(); // clear date selection
 
@@ -119,15 +121,15 @@ export class CalendarComponent {
     }
   }
 
-  handleEventClick(clickInfo: EventClickArg) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove();
-    }
+  handleEventChange(changeInfo: EventChangeArg) {
+    this.eventChange.emit(changeInfo);
   }
 
-  handleEvents(events: EventApi[]) {
-    this.currentEvents = events;
-    this.eventos = events;
-    this.changeDetector.detectChanges();
+  handleEventClick(clickInfo: EventClickArg) {
+    this.eventClick.emit(clickInfo);
+  }
+
+  public getFullCalendar(): FullCalendarComponent {
+    return this.calendar;
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AppMenuItem, AppMenuModel } from '../../../../domain/menu/app-menu.model';
@@ -7,6 +7,9 @@ import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { PreAgendamento } from '../../../../domain/pre-agendamento/pre-agendamento';
 import { PreAgendamentoService } from '../../../../domain/pre-agendamento/pre-agendamento.service';
+import { CalendarComponent } from '../../../fullcalendar/calendar/calendar.component';
+import { INITIAL_EVENTS } from '../../../fullcalendar/event-utils';
+import { EventChangeArg, EventClickArg } from '@fullcalendar/core';
 
 @Component({
   selector: 'app-detail',
@@ -14,12 +17,17 @@ import { PreAgendamentoService } from '../../../../domain/pre-agendamento/pre-ag
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
+  visible: boolean;
+
+  @ViewChild('calendar')
+  calendar: CalendarComponent;
+
+  titulo: string;
 
   public entity: PreAgendamento;
   private id: number;
 
   menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
-  dataInicial: Date = new Date('1990-09-24');
 
   constructor(
     private route: ActivatedRoute,
@@ -28,8 +36,7 @@ export class DetailComponent implements OnInit {
     private alertService: AlertService,
     private translateService: TranslateService,
     private service: PreAgendamentoService
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.route.params
@@ -43,8 +50,6 @@ export class DetailComponent implements OnInit {
           this.router.navigate(this.menuBack.routerLink).then(() => this.validationService.handle(null, error));
         }
       });
-
-    this.dataInicial = new Date('1990-09-24');
   }
 
   onLoad(entity: PreAgendamento): void {
@@ -55,5 +60,32 @@ export class DetailComponent implements OnInit {
     } else {
       this.entity = entity;
     }
+  }
+
+  handlePageLoaded() {
+    const calendarApi = this.calendar.getFullCalendar().getApi();
+    const calendarOptions = this.calendar.getFullCalendar().options;
+    calendarOptions.events = INITIAL_EVENTS;
+    // calendarApi.gotoDate('1996-09-24');
+    calendarApi.render();
+  }
+
+  handleEventClick($event: EventClickArg) {
+    console.log(JSON.stringify($event.event));
+    //Chamar a Modal de opções quando clicado no evento.
+  }
+
+  handleEventChange($event: EventChangeArg) {
+    console.log('Evento foi modificado.');
+    console.log(JSON.stringify($event.oldEvent));
+    this.titulo = $event.oldEvent.title;
+    this.showDialog();
+    // $event.revert();
+    //Chamar modal de confirmação quando evento modificado.
+    //Caso usuário cancele, chamar $event.revert()
+  }
+
+  showDialog() {
+    this.visible = true;
   }
 }

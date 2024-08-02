@@ -12,9 +12,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { TooltipModule } from 'primeng/tooltip';
 import { DetailComponent } from './pages/detail/detail.component';
 import { CalendarModule } from '../fullcalendar/calendar.module';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [ListComponent, DetailComponent],
-  imports: [CommonModule, PreAgendamentoRoutingModule, ButtonModule, InputTextModule, ReactiveFormsModule, SharedModule, TableModule, UIModule, RippleModule, SharedModule, TooltipModule, CalendarModule]
+  imports: [CommonModule, PreAgendamentoRoutingModule, ButtonModule, InputTextModule, ReactiveFormsModule, SharedModule, TableModule, UIModule, RippleModule, SharedModule, TooltipModule, CalendarModule, DialogModule]
 })
 export class PreAgendamentoModule {}
