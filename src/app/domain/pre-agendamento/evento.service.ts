@@ -2,19 +2,17 @@ import { Injectable } from '@angular/core';
 import { BaseActiveService } from '../../core/domain/base.active.service';
 import { HttpClient } from '@angular/common/http';
 import { EnvService } from '../../env/env.service';
-import { PreAgendamento } from './pre-agendamento';
-import { Observable } from 'rxjs';
-import { ListDatas } from '../../pages/pre-agendamento/pages/list/list-datas';
+import { Evento } from './evento';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PreAgendamentoService extends BaseActiveService<PreAgendamento, number> {
+export class EventoService extends BaseActiveService<Evento, number> {
   constructor(http: HttpClient, envService: EnvService) {
-    super(http, envService, 'pre-agendamento');
+    super(http, envService, 'evento');
   }
-
-  get(id: number): Observable<PreAgendamento> {
+/*
+  get(id: number): Observable<Evento> {
     return ListDatas.getAgendamento(id);
-  }
+  }*/
 }

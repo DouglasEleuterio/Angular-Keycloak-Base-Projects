@@ -24,6 +24,8 @@
             <tr>
               <th scope="col" colspan="1">{{ 'field.cliente.nome' | appTranslate:'pre_agendamento' }}</th>
               <th scope="col" colspan="1">{{ 'field.nome_procedimento' | appTranslate:'pre_agendamento' }}</th>
+              <th scope="col" colspan="1">{{ 'field.regiao' | appTranslate:'pre_agendamento' }}</th>
+              <th scope="col" colspan="1">{{ 'field.data' | appTranslate:'pre_agendamento' }}</th>
               <th scope="col" colspan="1" class="actions">{{ 'actions' | appTranslate:'shared' }}</th>
             </tr>
           </ng-template>
@@ -31,13 +33,22 @@
             <tr>
               <td colspan="1">
                 <span class="p-column-title bold"> {{ 'field.cliente.nome' | appTranslate:'pre_agendamento' }}</span>
-                <span pTooltip="{{entity.cliente.nome}}"> {{ entity.cliente.nome }} </span>
+                <span pTooltip="{{entity.aquisicaoProcedimento.aquisicao.cliente.nome}}">
+                  {{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }}
+                </span>
               </td>
               <td colspan="1">
                 <span class="p-column-title bold"> {{ 'field.nome_procedimento' | appTranslate:'pre_agendamento' }}</span>
-                <span pTooltip="{{entity.nomeProcedimento}}"> {{ entity.nomeProcedimento }} </span>
+                <span pTooltip="{{entity.aquisicaoProcedimento.procedimento}}"> {{ entity.aquisicaoProcedimento.procedimento }} </span>
               </td>
-
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.nome_procedimento' | appTranslate:'pre_agendamento' }}</span>
+                <span pTooltip="{{entity.aquisicaoProcedimento.nome}}"> {{ entity.aquisicaoProcedimento.nome }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.nome_procedimento' | appTranslate:'pre_agendamento' }}</span>
+                <span pTooltip="{{entity.start}}"> {{ entity.start | date: 'dd/MM/yyyy H:mm' }} </span>
+              </td>
               <td colspan="2" class="actions">
                 <span class="p-column-title bold"> {{ 'actions' | appTranslate:'shared' }}</span>
                 <app-table-buttons

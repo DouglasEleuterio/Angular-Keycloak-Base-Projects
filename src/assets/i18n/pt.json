@@ -1508,9 +1508,11 @@
     },
     "FIELD": {
       "NOME_PROCEDIMENTO": "Procedimento",
+      "REGIAO": "Região",
       "CLIENTE": {
         "NOME": "Nome Paciente"
-      }
+      },
+      "DATA": "Data"
     },
     "MESSAGE": {
       "NOT_FOUND": "Pré agendamento não encontrado"

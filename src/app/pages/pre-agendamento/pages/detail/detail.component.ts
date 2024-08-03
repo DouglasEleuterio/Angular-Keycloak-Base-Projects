@@ -5,8 +5,8 @@ import { AppMenuItem, AppMenuModel } from '../../../../domain/menu/app-menu.mode
 import { ValidationService } from '../../../../core/ui/notifications/validation.service';
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { TranslateService } from '@ngx-translate/core';
-import { PreAgendamento } from '../../../../domain/pre-agendamento/pre-agendamento';
-import { PreAgendamentoService } from '../../../../domain/pre-agendamento/pre-agendamento.service';
+import { Evento } from '../../../../domain/pre-agendamento/evento';
+import { EventoService } from '../../../../domain/pre-agendamento/evento.service';
 import { CalendarComponent } from '../../../fullcalendar/calendar/calendar.component';
 import { INITIAL_EVENTS } from '../../../fullcalendar/event-utils';
 import { EventChangeArg, EventClickArg } from '@fullcalendar/core';
@@ -23,7 +23,7 @@ export class DetailComponent implements OnInit {
   @ViewChild('calendar')
   calendar: CalendarComponent;
 
-  public entity: PreAgendamento;
+  public entity: Evento;
   private id: number;
 
   menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
@@ -36,7 +36,7 @@ export class DetailComponent implements OnInit {
     private validationService: ValidationService,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private service: PreAgendamentoService
+    private service: EventoService
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +53,7 @@ export class DetailComponent implements OnInit {
       });
   }
 
-  onLoad(entity: PreAgendamento): void {
+  onLoad(entity: Evento): void {
     if (entity == null) {
       this.router
         .navigate(this.menuBack.routerLink)
