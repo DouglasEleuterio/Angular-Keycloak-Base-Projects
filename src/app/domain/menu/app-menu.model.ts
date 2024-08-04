@@ -67,7 +67,7 @@ export class AppMenuModel {
     icon: 'pi pi-fw pi-calendar',
     routerLink: ['/agendamento'],
     dontNeedPermission: false,
-    permissions: [PermissionEnum.PRE_AGENDAMENTO_LISTAR]
+    permissions: [PermissionEnum.AGENDAMENTO_LISTAR]
   };
 
   public static readonly itemMenuXML: AppMenuItem = {

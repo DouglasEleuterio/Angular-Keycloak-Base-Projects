@@ -10,5 +10,6 @@ export enum PermissionEnum {
   CLIENTE_ADICIONAR = 'Cliente.Adicionar',
   PROCEDIMENTO_LISTAR = 'Procedimento.Listar',
   AQUISICAO_LISTAR = 'Procedimento.Adicionar',
-  PRE_AGENDAMENTO_LISTAR = 'PreAgendamento.Listar'
+  PRE_AGENDAMENTO_LISTAR = 'PreAgendamento.Listar',
+  AGENDAMENTO_LISTAR = 'Agendamento.Listar'
 }
