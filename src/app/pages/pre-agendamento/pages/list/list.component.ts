@@ -50,7 +50,7 @@ export class ListComponent extends PaginatorComponent {
   fetch(): void {
     this.loadingService.startLoading();
     if (this.pagination.filter == null) {
-      this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
+      this.pagination.filter = new Filter({ search: `situacao==true;confirmado==false` }, null);
       this.pagination.sort = [{ field: 'start', order: 'asc' }];
     }
     this.baseController.fetchSelect(this.listSelect, this.pagination, this.service, result => {
