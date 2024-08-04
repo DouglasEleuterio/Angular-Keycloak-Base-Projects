@@ -76,7 +76,7 @@ export class CalendarComponent implements AfterViewInit {
         }
       }
     },
-    hiddenDays: [0],
+    // hiddenDays: [0],
     dayHeaders: true,
     dayHeaderFormat: { weekday: 'long' },
     initialView: 'timeGridWeek',
