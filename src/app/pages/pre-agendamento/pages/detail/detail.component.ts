@@ -36,6 +36,8 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     u.title,
     u.start,
     u.end,
+    u.situacao,
+    u.confirmado,
     u.backgroundColor,
     u.aquisicaoProcedimento.id,
     u.aquisicaoProcedimento.nome,
@@ -102,11 +104,11 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
    * @param $event
    */
   handleEventClick($event: EventClickArg) {
-    console.log(JSON.stringify($event.event));
     const eventoUpdate = new Evento();
     eventoUpdate.id = Number.parseInt($event.event.id);
     eventoUpdate.start = $event.event.start;
     eventoUpdate.end = $event.event.end;
+    eventoUpdate.allDay = $event.event.allDay;
     //Chamar a Modal de opções quando clicado no evento.
     this.confirmationService.confirm({
       header: 'Confirmar Agendamento?',
@@ -116,8 +118,6 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
           value => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento confirmado' });
             this.confirmationService.close();
-            this.calendarApi.removeAllEvents();
-            this.fetch();
           },
           error => {
             this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Alteração não realizada' });
@@ -139,11 +139,11 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   }
 
   handleEventChange($event: EventChangeArg) {
-    console.log(JSON.stringify($event.event));
     const eventoUpdate = new Evento();
     eventoUpdate.id = Number.parseInt($event.event.id);
     eventoUpdate.start = $event.event.start;
     eventoUpdate.end = $event.event.end;
+    eventoUpdate.allDay = $event.event.allDay;
     //Chamar a Modal de opções quando clicado no evento.
     this.confirmationService.confirm({
       header: 'Confirmar Agendamento?',
@@ -153,8 +153,6 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
           value => {
             this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento confirmado' });
             this.confirmationService.close();
-            this.calendarApi.removeAllEvents();
-            this.fetch();
           },
           error => {
             this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Alteração não realizada' });
@@ -171,6 +169,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
             break;
         }
         this.confirmationService.close();
+        $event.revert();
       }
     });
   }
@@ -180,6 +179,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.pagination.pageSize = 100000;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
       result.content.map(value => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         this.calendarApi.addEvent({ ...value });
       });
