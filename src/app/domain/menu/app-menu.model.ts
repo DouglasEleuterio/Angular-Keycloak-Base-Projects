@@ -32,7 +32,7 @@ export class AppMenuModel {
 
   public static readonly itemMenuCliente: AppMenuItem = {
     label: 'menu.cliente',
-    icon: 'pi pi-fw pi-map-marker',
+    icon: 'pi pi-fw pi-user-plus',
     routerLink: ['/cliente'],
     dontNeedPermission: false,
     permissions: [PermissionEnum.CLIENTE_ADICIONAR]
@@ -40,7 +40,7 @@ export class AppMenuModel {
 
   public static readonly itemMenuProcedimento: AppMenuItem = {
     label: 'menu.procedimento',
-    icon: 'pi pi-fw pi-map-marker',
+    icon: 'pi pi-fw pi-th-large',
     routerLink: ['/procedimento'],
     dontNeedPermission: false,
     permissions: [PermissionEnum.PROCEDIMENTO_LISTAR]
@@ -48,7 +48,7 @@ export class AppMenuModel {
 
   public static readonly itemMenuAquisicao: AppMenuItem = {
     label: 'menu.aquisicao',
-    icon: 'pi pi-fw pi-shopping-cart',
+    icon: 'pi pi-fw pi-plus',
     routerLink: ['/aquisicao'],
     dontNeedPermission: false,
     permissions: [PermissionEnum.AQUISICAO_LISTAR]
@@ -64,7 +64,7 @@ export class AppMenuModel {
 
   public static readonly itemAgendamento: AppMenuItem = {
     label: 'menu.agendamento',
-    icon: 'pi pi-fw pi-calendar',
+    icon: 'pi pi-fw pi-check-circle',
     routerLink: ['/agendamento'],
     dontNeedPermission: false,
     permissions: [PermissionEnum.AGENDAMENTO_LISTAR]
@@ -222,34 +222,13 @@ export class AppMenuModel {
     label: 'menu.cadastros',
     icon: 'pi pi-fw pi-table',
     dontNeedPermission: true,
-    items: [
-      AppMenuModel.itemMenuCliente,
-      AppMenuModel.itemMenuProcedimento
-      // AppMenuModel.itemMenuTipoLocalidade,
-      // AppMenuModel.itemMenuClassificacaoLocalidade,
-      // AppMenuModel.itemMenuTipoEvento,
-      // AppMenuModel.itemMenuAuxilioAlimentacao,
-      // AppMenuModel.itemMenuJustificativa,
-      // AppMenuModel.itemMenuValorDiaria,
-      // AppMenuModel.itemMenuLocalDificilAcesso,
-      // AppMenuModel.itemMenuPrecoCombustivel,
-      // AppMenuModel.itemMenuCompanhiaAerea,
-      // AppMenuModel.itemMenuPoliticaIndenizacaoTransporte,
-      // AppMenuModel.itemMenuDistanciaLocalidade
-    ]
+    items: [AppMenuModel.itemMenuCliente, AppMenuModel.itemMenuProcedimento]
   };
 
   public static readonly menu: AppMenuItem[] = [
     AppMenuModel.itemMenuAquisicao,
-    AppMenuModel.menuCadastros,
     AppMenuModel.itemPreAgendamento,
-    AppMenuModel.itemAgendamento
-    // AppMenuModel.itemMenuUploadXML,
-    // AppMenuModel.itemTabelaAliquotaDiferenciada,
-    // AppMenuModel.itemMenuXML,
-    // AppMenuModel.itemMenuProdutosIncidenciaMonofasica
-    // AppMenuModel.itemMenuHome,
-    // AppMenuModel.itemMenuEvento,
-    // AppMenuModel.itemMenuSolicitacao
+    AppMenuModel.itemAgendamento,
+    AppMenuModel.menuCadastros
   ];
 }

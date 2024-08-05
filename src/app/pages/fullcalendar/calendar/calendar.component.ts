@@ -47,11 +47,11 @@ export class CalendarComponent implements AfterViewInit {
     views: {
       timeGridWeek: {
         type: 'timeGridWeek',
-        scrollTime: '08:00:00',
-        slotDuration: '00:05:00',
+        slotMinTime: '07:00:00',
+        slotMaxTime: '21:00:00',
+        slotDuration: '00:10:00',
         dayHeaders: true,
         dayHeaderFormat: { weekday: 'long', day: 'numeric' },
-        slotMaxTime: '21:00:00',
         nowIndicator: true,
         slotLabelInterval: { minute: 10 },
         slotLabelFormat: {
