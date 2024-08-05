@@ -1518,5 +1518,28 @@
     "MESSAGE": {
       "NOT_FOUND": "Pré agendamento não encontrado"
     }
+  },
+  "AGENDAMENTO": {
+    "ACTION": {
+      "DETAIL": "Visualizar",
+      "EDIT": "Editar",
+      "DEL": "Apagar"
+    },
+    "TITLE": {
+      "PAGE": "Agendamento",
+      "DETAIL": "Agendamento"
+    },
+    "FIELD": {
+      "NOME_PROCEDIMENTO": "Procedimento",
+      "REGIAO": "Região",
+      "CLIENTE": {
+        "NOME": "Nome Paciente"
+      },
+      "DATA_INICIO": "Data inicio",
+      "DATA_FIM": "Data fim"
+    },
+    "MESSAGE": {
+      "NOT_FOUND": "Agendamento não encontrado"
+    }
   }
 }

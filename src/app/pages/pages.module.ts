@@ -12,6 +12,9 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { SharedModule } from 'primeng/api';
 import { HomeComponent } from './home/home.component';
 import { LayoutsModule } from '../layouts/layouts.module';
+import { AgendamentoModule } from './agendamento/agendamento.module';
+import { CalendarModule } from './fullcalendar/calendar.module';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -27,7 +30,10 @@ import { LayoutsModule } from '../layouts/layouts.module';
     CardModule,
     CheckboxModule,
     SharedModule,
-    LayoutsModule
+    LayoutsModule,
+    AgendamentoModule,
+    CalendarModule,
+    ToastModule
   ]
 })
 export class PagesModule {}

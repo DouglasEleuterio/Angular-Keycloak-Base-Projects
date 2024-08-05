@@ -1,5 +1,4 @@
 export class DataUtils {
-
   public static formatarDataParaFullcalendar(data): string {
     const dataObj = new Date(data);
     // Obtém os componentes da data
@@ -9,5 +8,17 @@ export class DataUtils {
 
     // Formata a data no formato desejado
     return `${ano}-${mes}-${dia}`;
+  }
+
+  public static obterHoras(data): number {
+    const dataObj = new Date(data);
+    // Obtém os componentes da data
+    return dataObj.getHours();
+  }
+
+  public static obterMinuto(data): number {
+    const dataObj = new Date(data);
+    // Obtém os componentes da data
+    return dataObj.getMinutes();
   }
 }

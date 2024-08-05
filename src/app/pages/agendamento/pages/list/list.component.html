@@ -1,0 +1,72 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.page' | appTranslate:'agendamento' }}</h5>
+      </div>
+      <div class="list-body">
+        <p-table
+          [value]="tableData"
+          [lazy]="true"
+          (onLazyLoad)="paginate($event)"
+          [paginator]="true"
+          [first]="pagination.first"
+          [multiSortMeta]="multiSortMeta"
+          [sortField]="sortField"
+          [sortOrder]="sortOrder"
+          [rows]="pagination.pageSize"
+          [rowsPerPageOptions]="pagination.pageSizeOptions"
+          [totalRecords]="pagination.totalRecords"
+          sortMode="single"
+          dataKey="id"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th scope="col" colspan="1">{{ 'field.cliente.nome' | appTranslate:'agendamento' }}</th>
+              <th scope="col" colspan="1">{{ 'field.nome_procedimento' | appTranslate:'agendamento' }}</th>
+              <th scope="col" colspan="1">{{ 'field.regiao' | appTranslate:'agendamento' }}</th>
+              <th scope="col" colspan="1">{{ 'field.data_inicio' | appTranslate:'agendamento' }}</th>
+              <th scope="col" colspan="1">{{ 'field.data_fim' | appTranslate:'agendamento' }}</th>
+              <th scope="col" colspan="1" class="actions">{{ 'actions' | appTranslate:'shared' }}</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-entity let-expanded="expanded">
+            <tr>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.cliente.nome' | appTranslate:'agendamento' }}</span>
+                <span pTooltip="{{entity.aquisicaoProcedimento.aquisicao.cliente.nome}}">
+                  {{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }}
+                </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.nome_procedimento' | appTranslate:'agendamento' }}</span>
+                <span pTooltip="{{entity.aquisicaoProcedimento.procedimento}}"> {{ entity.aquisicaoProcedimento.procedimento }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.nome_procedimento' | appTranslate:'agendamento' }}</span>
+                <span pTooltip="{{entity.aquisicaoProcedimento.nome}}"> {{ entity.aquisicaoProcedimento.nome }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.nome_procedimento' | appTranslate:'agendamento' }}</span>
+                <span pTooltip="{{entity.start}}"> {{ entity.start | date: 'dd/MM/yyyy H:mm' }} </span>
+              </td>
+              <td colspan="1">
+                <span class="p-column-title bold"> {{ 'field.nome_procedimento' | appTranslate:'agendamento' }}</span>
+                <span pTooltip="{{entity.end}}"> {{ entity.end | date: 'dd/MM/yyyy H:mm' }} </span>
+              </td>
+              <td colspan="2" class="actions">
+                <span class="p-column-title bold"> {{ 'actions' | appTranslate:'shared' }}</span>
+                <app-table-buttons page="agendamento" [entityId]="entity.id" [showRemove]="false" [showEdit]="false"></app-table-buttons>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td style="text-align: center" colspan="99">{{ 'no_records' | appTranslate:'shared' }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

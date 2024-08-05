@@ -1,0 +1,17 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.detail' | appTranslate:'agendamento' }}</h5>
+      </div>
+      <app-calendar-root
+        #calendar
+        (pageLoaded)="handlePageLoaded()"
+        (eventClick)="handleEventClick($event)"
+        (eventChange)="handleEventChange($event)"
+        (eventDateSelect)="handleDateSelect($event)"
+      ></app-calendar-root>
+    </div>
+  </div>
+</div>
+<p-toast></p-toast>

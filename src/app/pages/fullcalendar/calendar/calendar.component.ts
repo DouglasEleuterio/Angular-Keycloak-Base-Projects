@@ -3,7 +3,6 @@ import { CalendarOptions, DateSelectArg, EventChangeArg, EventClickArg, EventInp
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { createEventId } from '../event-utils';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 
 @Component({
@@ -18,6 +17,7 @@ export class CalendarComponent implements AfterViewInit {
   @Output() pageLoaded: EventEmitter<void> = new EventEmitter<void>();
   @Output() eventClick: EventEmitter<EventClickArg> = new EventEmitter<EventClickArg>();
   @Output() eventChange: EventEmitter<EventChangeArg> = new EventEmitter<EventChangeArg>();
+  @Output() eventDateSelect: EventEmitter<DateSelectArg> = new EventEmitter<DateSelectArg>();
 
   public eventosInicial: EventInput[] = [];
   changeDetector: ChangeDetectorRef;
@@ -63,8 +63,8 @@ export class CalendarComponent implements AfterViewInit {
       },
       dia: {
         type: 'timeGrid',
-        slotMinTime: '08:00:00',
-        slotDuration: '00:02:00',
+        slotMinTime: '07:00:00',
+        slotDuration: '00:15:00',
         slotMaxTime: '21:00:00',
         slotLabelInterval: { minute: 5 },
         nowIndicator: true,
@@ -76,7 +76,7 @@ export class CalendarComponent implements AfterViewInit {
         }
       }
     },
-    // hiddenDays: [0],
+    hiddenDays: [0],
     dayHeaders: true,
     dayHeaderFormat: { weekday: 'long' },
     initialView: 'timeGridWeek',
@@ -105,20 +105,11 @@ export class CalendarComponent implements AfterViewInit {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
     const calendarApi = this.getFullCalendar().getApi();
-
     calendarApi.unselect(); // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      });
-    }
+    this.eventDateSelect.emit(selectInfo);
+    calendarApi.gotoDate(selectInfo.start);
+    calendarApi.changeView('dia');
   }
 
   handleEventChange(changeInfo: EventChangeArg) {
