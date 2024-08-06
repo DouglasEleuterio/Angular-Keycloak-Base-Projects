@@ -1514,9 +1514,10 @@
         "NOME": "Nome Paciente"
       },
       "DATA": "Data",
-      "PROFISSIONAL": "Profissional do Atendimento",
-      "DATAINICIO": "Data do Atendimento",
-      "DATAFIM": "Data do Atendimento"
+      "DATAINICIO": "Data inicio",
+      "DATAFIM": "Data fim",
+      "PROFISSIONAL": "Profissional",
+      "SELECIONE_PROFISSIONAL": "Selecione o Profissional"
     },
     "MESSAGE": {
       "NOT_FOUND": "Pré agendamento não encontrado"
@@ -1539,7 +1540,8 @@
         "NOME": "Nome Paciente"
       },
       "DATA_INICIO": "Data inicio",
-      "DATA_FIM": "Data fim"
+      "DATA_FIM": "Data fim",
+      "PROFISSIONAL": "Profissional"
     },
     "MESSAGE": {
       "NOT_FOUND": "Agendamento não encontrado"

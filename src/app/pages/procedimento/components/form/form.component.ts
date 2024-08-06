@@ -4,12 +4,15 @@ import { BaseFormComponent } from '../../../../core/ui/components/form/base-form
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { LogService } from '../../../../core/log/log.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { plainToClass } from 'class-transformer';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
 import { ProcedimentoCreateRequest } from '../../../../domain/procedimento/create/procedimento-create-request-model';
 import { RegiaoCreateRequest } from '../../../../domain/procedimento/create/regiao-create-request-model';
 import { Profissional } from '../../../../domain/profissional/profissional.model';
+import { ProfissionalService } from '../../../../domain/profissional/profissional.service';
 
 @Component({
   selector: 'app-procedimento-form',
@@ -27,6 +30,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   constructor(
     protected alertService: AlertService,
+    protected profissionalService: ProfissionalService,
     protected logService: LogService,
     protected translateService: TranslateService,
     protected validationFormFieldService: ValidationFormFieldService,
@@ -38,7 +42,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildFormGroup();
-    this.profissionais.push({ id: '1', nome: 'Dra. Lara Stival' });
+    this.profissionalService.carregarProfissionais(this.profissionais);
   }
 
   buildFormGroup(): void {

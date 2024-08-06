@@ -22,6 +22,8 @@ import {
   ValidationFormFieldService
 } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { EventImpl } from '@fullcalendar/core/internal';
+import { ProfissionalService } from '../../../../domain/profissional/profissional.service';
+import { Profissional } from '../../../../domain/profissional/profissional.model';
 
 @Component({
   selector: 'app-detail',
@@ -36,8 +38,9 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   calendar: CalendarComponent;
   public entity: Evento;
   id: number;
-  profissionais: { id: string; nome: string }[] = [];
+  profissionais: Profissional[] = [];
   formGroup: FormGroup;
+  agendaProfissional: number;
 
   menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
 
@@ -63,6 +66,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private route: ActivatedRoute,
+    private profissionalService: ProfissionalService,
     private loadingService: LoadingService,
     private baseController: BaseController,
     private formBuilder: FormBuilder,
@@ -74,9 +78,6 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     private service: EventoService
   ) {
     super('PaginationEvento');
-    this.profissionais.push({ id: '1', nome: 'Dra. Lara Stival' });
-    this.profissionais.push({ id: '2', nome: 'Isabela' });
-    this.profissionais.push({ id: '2', nome: 'Thamires' });
   }
 
   buildFormGroup(): void {
@@ -89,6 +90,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildFormGroup();
+    this.profissionalService.carregarProfissionais(this.profissionais);
     this.route.params
       .pipe(
         tap((params: Params) => (this.id = params.id)),
@@ -139,17 +141,17 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.pagination.pageSize = 100000;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
       result.content.map(value => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        this.calendarApi.addEvent({ ...value });
+        this.addEvento(value);
       });
       this.loadingService.stopLoading();
     });
     this.calendarApi.render();
   }
 
-  showDialog() {
-    this.visible = true;
+  addEvento(value: Evento) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.calendarApi.addEvent({ ...value });
   }
 
   cancel() {
@@ -196,7 +198,23 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
     this.formGroup.controls['dataInicio'].setValue(evento.start);
     this.formGroup.controls['dataFim'].setValue(evento.end);
-    this.formGroup.controls['profissional'].setValue(evento.extendedProps.profissional.id.toString());
+    this.formGroup.controls['profissional'].setValue(evento.extendedProps.profissional.id);
     this.visible = true;
+  }
+
+  filtrarPorProfissional() {
+    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${this.agendaProfissional}` }, null);
+    this.calendarApi.removeAllEvents();
+    this.addEvento(this.entity);
+    this.pagination.pageSize = 100000;
+    this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
+      result.content.map(value => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        this.calendarApi.addEvent({ ...value });
+      });
+      this.loadingService.stopLoading();
+    });
+    this.calendarApi.render();
   }
 }

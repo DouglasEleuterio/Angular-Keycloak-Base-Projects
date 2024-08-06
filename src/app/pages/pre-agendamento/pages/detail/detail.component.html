@@ -1,4 +1,36 @@
-<p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button>
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.detail' | appTranslate:'pre_agendamento' }}</h5>
+      </div>
+      <div class="p-card-body">
+        <div class="p-fluid formgrid grid">
+          <app-field class="col-12" page="pre_agendamento" labelName="selecione_profissional">
+            <p-dropdown
+              appendTo="body"
+              (onChange)="filtrarPorProfissional()"
+              [(ngModel)]="agendaProfissional"
+              class="col-12"
+              [filter]="true"
+              optionLabel="nome"
+              optionValue="id"
+              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+              [options]="profissionais"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+            ></p-dropdown>
+          </app-field>
+        </div>
+        <app-calendar-root
+          #calendar
+          (pageLoaded)="handlePageLoaded()"
+          (eventClick)="handleEventClick($event)"
+          (eventChange)="handleEventChange($event)"
+        ></app-calendar-root>
+      </div>
+    </div>
+  </div>
+</div>
 <p-dialog
   header="Header"
   resizable="false"
@@ -63,20 +95,4 @@
     </div>
   </form>
 </p-dialog>
-
-<div class="grid">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-header">
-        <h5>{{ 'title.detail' | appTranslate:'pre_agendamento' }}</h5>
-      </div>
-      <app-calendar-root
-        #calendar
-        (pageLoaded)="handlePageLoaded()"
-        (eventClick)="handleEventClick($event)"
-        (eventChange)="handleEventChange($event)"
-      ></app-calendar-root>
-    </div>
-  </div>
-</div>
 <p-toast></p-toast>
