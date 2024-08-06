@@ -38,9 +38,11 @@
             <ng-template pTemplate="header">
               <tr>
                 <th style="width: 20%">Nome</th>
-                <th style="width: 20%">Preço</th>
-                <th style="width: 20%">Quantidade Sessões</th>
-                <th style="width: 20%">Intervalo entre Sessões</th>
+                <th style="width: 5%">Preço</th>
+                <th style="width: 15%">Quantidade Sessões</th>
+                <th style="width: 15%">Intervalo entre Sessões</th>
+                <th style="width: 10%">Duração da Sessão</th>
+                <th style="width: 20%">Profissional do Atendimento</th>
                 <th style="width: 20%">Ações</th>
               </tr>
             </ng-template>
@@ -88,6 +90,33 @@
                       />
                     </ng-template>
                     <ng-template pTemplate="output"> {{ regiao.intervaloEntreSessoes }}</ng-template>
+                  </p-cellEditor>
+                </td>
+                <td [pEditableColumn]="regiao.duracao" pEditableColumnField="duracao">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <input pInputText type="number" required [(ngModel)]="regiao.duracao" [ngModelOptions]="{standalone: true}" />
+                    </ng-template>
+                    <ng-template pTemplate="output"> {{ regiao.duracao }}</ng-template>
+                  </p-cellEditor>
+                </td>
+                <td [pEditableColumn]="regiao.profissional" pEditableColumnField="profissional">
+                  <p-cellEditor>
+                    <ng-template pTemplate="input">
+                      <p-dropdown
+                        [(ngModel)]="regiao.profissional"
+                        [ngModelOptions]="{standalone: true}"
+                        appFieldRef
+                        [filter]="true"
+                        emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+                        [options]="profissionais"
+                        optionLabel="nome"
+                        placeholder="{{'select' | appTranslate:'shared'}}"
+                      ></p-dropdown>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                      <div>{{regiao.profissional ? regiao.profissional.nome : ' Selecione o profissional '}}</div></ng-template
+                    >
                   </p-cellEditor>
                 </td>
                 <td>

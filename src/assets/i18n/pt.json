@@ -1513,7 +1513,10 @@
       "CLIENTE": {
         "NOME": "Nome Paciente"
       },
-      "DATA": "Data"
+      "DATA": "Data",
+      "PROFISSIONAL": "Profissional do Atendimento",
+      "DATAINICIO": "Data do Atendimento",
+      "DATAFIM": "Data do Atendimento"
     },
     "MESSAGE": {
       "NOT_FOUND": "Pré agendamento não encontrado"

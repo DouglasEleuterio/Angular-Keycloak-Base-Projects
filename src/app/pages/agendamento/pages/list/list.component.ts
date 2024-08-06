@@ -41,6 +41,8 @@ export class ListComponent extends PaginatorComponent {
     u.backgroundColor,
     u.aquisicaoProcedimento.id,
     u.aquisicaoProcedimento.nome,
+    u.aquisicaoProcedimento.profissional.id,
+    u.aquisicaoProcedimento.profissional.nome,
     u.aquisicaoProcedimento.procedimento,
     u.aquisicaoProcedimento.aquisicao.id,
     u.aquisicaoProcedimento.aquisicao.cliente.id,

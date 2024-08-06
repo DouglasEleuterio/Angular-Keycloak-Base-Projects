@@ -1,3 +1,69 @@
+<p-button (click)="showDialog()" icon="pi pi-external-link" label="Show"></p-button>
+<p-dialog
+  header="Header"
+  resizable="false"
+  [maximizable]="true"
+  position="top"
+  [visible]="visible"
+  [style]="{width: '50vw'}"
+  [modal]="true"
+>
+  <ng-template pTemplate="header">
+    <div class="center">
+      <span class="text-m font-bold"
+        >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }} - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
+      >
+    </div>
+  </ng-template>
+  <form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="p-fluid formgrid grid">
+      <app-field class="col-12" page="pre_agendamento">
+        <p-dropdown
+          appendTo="body"
+          appFieldRef
+          class="col-12"
+          [filter]="true"
+          optionLabel="nome"
+          optionValue="id"
+          emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+          [options]="profissionais"
+          placeholder="{{'select' | appTranslate:'shared'}}"
+          formControlName="profissional"
+        ></p-dropdown>
+      </app-field>
+      <app-field class="col-12" page="pre_agendamento">
+        <p-calendar
+          formControlName="dataInicio"
+          dateFormat="dd/mm/yy"
+          monthNavigator="true"
+          yearNavigator="true"
+          showIcon="true"
+          appDateMask
+          [showTime]="true"
+          [showSeconds]="true"
+          appendTo="body"
+        ></p-calendar>
+      </app-field>
+      <app-field class="col-12" page="pre_agendamento">
+        <p-calendar
+          formControlName="dataFim"
+          dateFormat="dd/mm/yy"
+          monthNavigator="true"
+          yearNavigator="true"
+          showIcon="true"
+          appDateMask
+          [showTime]="true"
+          [showSeconds]="true"
+          appendTo="body"
+        ></p-calendar>
+      </app-field>
+    </div>
+    <div style="margin-top: 20px">
+      <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+    </div>
+  </form>
+</p-dialog>
+
 <div class="grid">
   <div class="col-12">
     <div class="card">

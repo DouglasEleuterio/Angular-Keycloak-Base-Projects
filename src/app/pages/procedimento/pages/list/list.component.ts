@@ -21,7 +21,17 @@ import { RegiaoCreateRequest } from '../../../../domain/procedimento/create/regi
 export class ListComponent extends PaginatorComponent {
   tableData: ProcedimentoCreateRequest[] = [];
 
-  listSelect = (u: any) => [u.id, u.nome, u.regioes.id, u.regioes.nome, u.situacao, u.dataCriacao, u.dataAtualizacao];
+  listSelect = (u: any) => [
+    u.id,
+    u.nome,
+    u.regioes.id,
+    u.regioes.nome,
+    u.regioes.profissional.id,
+    u.regioes.profissional.nome,
+    u.situacao,
+    u.dataCriacao,
+    u.dataAtualizacao
+  ];
 
   constructor(
     private breadcrumbService: AppBreadcrumbService,

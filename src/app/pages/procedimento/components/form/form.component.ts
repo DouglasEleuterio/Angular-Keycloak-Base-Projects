@@ -9,6 +9,7 @@ import { plainToClass } from 'class-transformer';
 import { Regiao } from '../../../../domain/procedimento/regiao.model';
 import { ProcedimentoCreateRequest } from '../../../../domain/procedimento/create/procedimento-create-request-model';
 import { RegiaoCreateRequest } from '../../../../domain/procedimento/create/regiao-create-request-model';
+import { Profissional } from '../../../../domain/profissional/profissional.model';
 
 @Component({
   selector: 'app-procedimento-form',
@@ -21,6 +22,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
   formGroup: FormGroup;
   onSubmit: (entity: ProcedimentoCreateRequest, formGroup) => void;
   onCancel: () => void;
+
+  profissionais: Profissional[] = [];
 
   constructor(
     protected alertService: AlertService,
@@ -35,6 +38,7 @@ export class FormComponent extends BaseFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildFormGroup();
+    this.profissionais.push({ id: '1', nome: 'Dra. Lara Stival' });
   }
 
   buildFormGroup(): void {
@@ -83,7 +87,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
       nome: this.getNomeRegiaoInForm(),
       quantidadeSessoes: 1,
       intervaloEntreSessoes: 30,
-      valor: 0
+      valor: 0,
+      duracao: 15
     };
     regioesBkp.push(regiaoCreate);
     this.formGroup.get('regioes').setValue(regioesBkp);

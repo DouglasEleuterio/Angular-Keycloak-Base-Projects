@@ -1,6 +1,6 @@
 export class ProcedimentoAquisicaoRequest {
   id?: number;
-  procedimentoOrigemId: number;
+  regiaoOrigemId: number;
   procedimento?: string;
   nome: string;
   quantidadeSessoes: number;

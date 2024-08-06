@@ -9,12 +9,19 @@ import { Evento } from '../../../../domain/pre-agendamento/evento';
 import { EventoService } from '../../../../domain/pre-agendamento/evento.service';
 import { CalendarComponent } from '../../../fullcalendar/calendar/calendar.component';
 import { Calendar, EventChangeArg, EventClickArg } from '@fullcalendar/core';
-import { ConfirmationService, ConfirmEventType, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { DataUtils } from '../../../../shared/util/data.utils';
 import { BaseController } from '../../../../core/domain/base.controller';
 import { PaginatorComponent } from '../../../../core/ui/components/pagination/paginator.component';
 import { LoadingService } from '../../../../domain/loading/loading.service';
 import { Filter } from '../../../../core/api/filter/filter.model';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { plainToClass } from 'class-transformer';
+import { ConfirmarAgendamento } from '../../../../domain/agendamento/confirmaragendamento.model';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { EventImpl } from '@fullcalendar/core/internal';
 
 @Component({
   selector: 'app-detail',
@@ -22,11 +29,15 @@ import { Filter } from '../../../../core/api/filter/filter.model';
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent extends PaginatorComponent implements OnInit {
+  visible: boolean;
+
   calendarApi: Calendar;
   @ViewChild('calendar')
   calendar: CalendarComponent;
   public entity: Evento;
   id: number;
+  profissionais: { id: string; nome: string }[] = [];
+  formGroup: FormGroup;
 
   menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
 
@@ -41,6 +52,8 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     u.backgroundColor,
     u.aquisicaoProcedimento.id,
     u.aquisicaoProcedimento.nome,
+    u.aquisicaoProcedimento.profissional.id,
+    u.aquisicaoProcedimento.profissional.nome,
     u.aquisicaoProcedimento.procedimento,
     u.aquisicaoProcedimento.aquisicao.id,
     u.aquisicaoProcedimento.aquisicao.cliente.id,
@@ -48,21 +61,34 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   ];
 
   constructor(
-    private confirmationService: ConfirmationService,
     private messageService: MessageService,
     private route: ActivatedRoute,
     private loadingService: LoadingService,
     private baseController: BaseController,
+    private formBuilder: FormBuilder,
     private router: Router,
     private validationService: ValidationService,
+    protected validationFormFieldService: ValidationFormFieldService,
     private alertService: AlertService,
     private translateService: TranslateService,
     private service: EventoService
   ) {
     super('PaginationEvento');
+    this.profissionais.push({ id: '1', nome: 'Dra. Lara Stival' });
+    this.profissionais.push({ id: '2', nome: 'Isabela' });
+    this.profissionais.push({ id: '2', nome: 'Thamires' });
+  }
+
+  buildFormGroup(): void {
+    this.formGroup = this.formBuilder.group({
+      profissional: [null, Validators.required],
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required]
+    });
   }
 
   ngOnInit(): void {
+    this.buildFormGroup();
     this.route.params
       .pipe(
         tap((params: Params) => (this.id = params.id)),
@@ -83,6 +109,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
         .then(() => this.alertService.defaultError(this.translateService.instant('pre_agendamento.message.not_found'.toUpperCase())));
     } else {
       this.entity = entity;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       this.calendarApi.addEvent({ ...this.entity });
       this.calendarApi.gotoDate(DataUtils.formatarDataParaFullcalendar(this.entity.start));
@@ -99,79 +126,12 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.fetch();
   }
 
-  /**
-   * Chamar a modal de confirmação de agendamento
-   * @param $event
-   */
   handleEventClick($event: EventClickArg) {
-    const eventoUpdate = new Evento();
-    eventoUpdate.id = Number.parseInt($event.event.id);
-    eventoUpdate.start = $event.event.start;
-    eventoUpdate.end = $event.event.end;
-    eventoUpdate.allDay = $event.event.allDay;
-    //Chamar a Modal de opções quando clicado no evento.
-    this.confirmationService.confirm({
-      header: 'Confirmar Agendamento?',
-      message: `Confirmar Agendamento para ${eventoUpdate.start.toLocaleString()}`,
-      accept: () => {
-        this.service.update(eventoUpdate).subscribe(
-          value => {
-            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento confirmado' });
-            this.confirmationService.close();
-          },
-          error => {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Alteração não realizada' });
-          }
-        );
-      },
-      reject: type => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Alteração não realizada' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Alteração não realizada' });
-            break;
-        }
-        this.confirmationService.close();
-      }
-    });
+    this.definirAgendamento($event.event);
   }
 
   handleEventChange($event: EventChangeArg) {
-    const eventoUpdate = new Evento();
-    eventoUpdate.id = Number.parseInt($event.event.id);
-    eventoUpdate.start = $event.event.start;
-    eventoUpdate.end = $event.event.end;
-    eventoUpdate.allDay = $event.event.allDay;
-    //Chamar a Modal de opções quando clicado no evento.
-    this.confirmationService.confirm({
-      header: 'Confirmar Agendamento?',
-      message: `Confirmar Agendamento para ${eventoUpdate.start.toLocaleString()}`,
-      accept: () => {
-        this.service.update(eventoUpdate).subscribe(
-          value => {
-            this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento confirmado' });
-            this.confirmationService.close();
-          },
-          error => {
-            this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Alteração não realizada' });
-          }
-        );
-      },
-      reject: type => {
-        switch (type) {
-          case ConfirmEventType.REJECT:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Alteração não realizada' });
-            break;
-          case ConfirmEventType.CANCEL:
-            this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: 'Alteração não realizada' });
-            break;
-        }
-        this.confirmationService.close();
-        $event.revert();
-      }
-    });
+    this.definirAgendamento($event.event);
   }
 
   fetch(): void {
@@ -186,5 +146,57 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       this.loadingService.stopLoading();
     });
     this.calendarApi.render();
+  }
+
+  showDialog() {
+    this.visible = true;
+  }
+
+  cancel() {
+    this.formGroup.controls['dataInicio'].setValue(null);
+    this.formGroup.controls['dataFim'].setValue(null);
+    this.formGroup.controls['profissional'].setValue(null);
+    this.visible = false;
+  }
+
+  submit(): void {
+    if (this.formGroup.valid) {
+      const entity: ConfirmarAgendamento = plainToClass(ConfirmarAgendamento, this.formGroup.value);
+      this.service.confirmarAgendamento(this.id, entity).subscribe(
+        () => {
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento realizado' });
+          this.cancel();
+        },
+        error => {
+          this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: `Alteração não realizada: ${error.message}` });
+        }
+      );
+    } else {
+      this.validationError();
+    }
+  }
+
+  validationError(): void {
+    this.alertService.error(
+      this.translateService.instant('shared.titles.error'.toUpperCase()),
+      this.translateService.instant('shared.msg.invalid_form'.toUpperCase()),
+      () => {
+        this.validationFormFieldService.goFirst();
+      }
+    );
+  }
+
+  private definirAgendamento(evento: EventImpl) {
+    const eventoUpdate = new Evento();
+    eventoUpdate.id = Number.parseInt(evento.id);
+    eventoUpdate.start = evento.start;
+    eventoUpdate.end = evento.end;
+    eventoUpdate.allDay = evento.allDay;
+    //Chamar a Modal de opções quando clicado no evento.
+
+    this.formGroup.controls['dataInicio'].setValue(evento.start);
+    this.formGroup.controls['dataFim'].setValue(evento.end);
+    this.formGroup.controls['profissional'].setValue(evento.extendedProps.profissional.id.toString());
+    this.visible = true;
   }
 }
