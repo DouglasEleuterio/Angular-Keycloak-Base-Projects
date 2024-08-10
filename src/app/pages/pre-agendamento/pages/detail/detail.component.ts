@@ -18,9 +18,7 @@ import { Filter } from '../../../../core/api/filter/filter.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { plainToClass } from 'class-transformer';
 import { ConfirmarAgendamento } from '../../../../domain/agendamento/confirmaragendamento.model';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { EventImpl } from '@fullcalendar/core/internal';
 import { ProfissionalService } from '../../../../domain/profissional/profissional.service';
 import { Profissional } from '../../../../domain/profissional/profissional.model';
@@ -40,7 +38,6 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   id: number;
   profissionais: Profissional[] = [];
   formGroup: FormGroup;
-  agendaProfissional: number;
 
   menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
 
@@ -80,14 +77,6 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     super('PaginationPreAgendamentoDetail');
   }
 
-  buildFormGroup(): void {
-    this.formGroup = this.formBuilder.group({
-      profissional: [null, Validators.required],
-      dataInicio: [null, Validators.required],
-      dataFim: [null, Validators.required]
-    });
-  }
-
   ngOnInit(): void {
     this.buildFormGroup();
     this.profissionalService.carregarProfissionais(this.profissionais);
@@ -104,6 +93,14 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       });
   }
 
+  buildFormGroup(): void {
+    this.formGroup = this.formBuilder.group({
+      profissional: [null, Validators.required],
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required]
+    });
+  }
+
   onLoad(entity: Evento): void {
     if (entity == null) {
       this.router
@@ -113,52 +110,24 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       this.entity = entity;
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      this.calendarApi.addEvent({ ...this.entity });
+      this.calendarApi.addEvent(this.entity);
       this.calendarApi.gotoDate(DataUtils.formatarDataParaFullcalendar(this.entity.start));
       this.calendarApi.render();
     }
   }
 
-  /*
-   * Ao carregar a página, buscar todos agendamentos confirmados.
-   * Navegar para data do evento clicado.
-   */
-  handlePageLoaded() {
-    this.calendarApi = this.calendar.getFullCalendar().getApi();
-    this.fetch();
-  }
-
-  handleEventClick($event: EventClickArg) {
-    this.definirAgendamento($event.event);
-  }
-
-  handleEventChange($event: EventChangeArg) {
-    this.definirAgendamento($event.event);
-  }
-
   fetch(): void {
     this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
-    this.pagination.pageSize = null;
+    this.pagination.pageSize = 10000;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
       result.content.map(value => {
-        this.addEvento(value);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        this.calendarApi.addEvent(value);
       });
       this.loadingService.stopLoading();
     });
     this.calendarApi.render();
-  }
-
-  addEvento(value: Evento) {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this.calendarApi.addEvent({ ...value });
-  }
-
-  cancel() {
-    this.formGroup.controls['dataInicio'].setValue(null);
-    this.formGroup.controls['dataFim'].setValue(null);
-    this.formGroup.controls['profissional'].setValue(null);
-    this.visible = false;
   }
 
   submit(): void {
@@ -167,25 +136,38 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       this.service.confirmarAgendamento(this.id, entity).subscribe(
         () => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento realizado' });
-          this.cancel();
+          this.visible = false;
         },
         error => {
           this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: `Alteração não realizada: ${error.message}` });
         }
       );
     } else {
-      this.validationError();
+      this.alertService.error(
+        this.translateService.instant('shared.titles.error'.toUpperCase()),
+        this.translateService.instant('shared.msg.invalid_form'.toUpperCase()),
+        () => {
+          this.validationFormFieldService.goFirst();
+        }
+      );
     }
   }
 
-  validationError(): void {
-    this.alertService.error(
-      this.translateService.instant('shared.titles.error'.toUpperCase()),
-      this.translateService.instant('shared.msg.invalid_form'.toUpperCase()),
-      () => {
-        this.validationFormFieldService.goFirst();
-      }
-    );
+  //Handlers
+  handleEventClick($event: EventClickArg) {
+    this.definirAgendamento($event.event);
+  }
+
+  handleEventChange($event: EventChangeArg) {
+    this.definirAgendamento($event.event);
+  }
+
+  /*
+   * Ao carregar a página, buscar todos agendamentos confirmados.
+   */
+  handlePageLoaded() {
+    this.calendarApi = this.calendar.getFullCalendar().getApi();
+    this.fetch();
   }
 
   private definirAgendamento(evento: EventImpl) {
@@ -202,17 +184,31 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.visible = true;
   }
 
-  //todo Realiar busca apenas do mês do calendario.
+  //todo Realizar busca apenas do mês do calendario.
   filtrarPorProfissional($event: number) {
     this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${$event}` }, null);
-    this.pagination.pageSize = 100000;
+    this.pagination.pageSize = 10000;
     this.calendarApi.render();
     this.service.filtrarEventoProProfissional(
       this.eventosFetch,
       this.pagination,
       this.calendarApi,
       this.baseController,
-      this.loadingService
+      this.loadingService,
+      this.entity
     );
+  }
+
+  //Eventos
+
+  onFimChange($event: Date) {
+    this.calendarApi.getEventById(this.entity.id.toString()).setEnd($event);
+    this.calendarApi.render();
+  }
+
+  onInicioChange($event: Date) {
+    this.calendarApi.gotoDate($event);
+    this.calendarApi.getEventById(this.entity.id.toString()).setStart($event);
+    this.calendarApi.render();
   }
 }

@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { EnvService } from '../../env/env.service';
 import { Evento } from './evento';
 import { ConfirmarAgendamento } from '../agendamento/confirmaragendamento.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Pagination } from '../../core/api/model/pagination';
 import { Calendar } from '@fullcalendar/core';
 import { BaseController } from '../../core/domain/base.controller';
@@ -27,7 +27,8 @@ export class EventoService extends BaseActiveService<Evento, number> {
     pagination: Pagination,
     calendarApi: Calendar,
     baseController: BaseController,
-    loadingService: LoadingService
+    loadingService: LoadingService,
+    eventoAgendar?: Evento
   ): void {
     baseController.fetchSelect(columns, pagination, this, result => {
       calendarApi.removeAllEvents();
@@ -36,9 +37,12 @@ export class EventoService extends BaseActiveService<Evento, number> {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           calendarApi.addEvent({ ...value });
-          calendarApi.render();
         });
       }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      calendarApi.addEvent(eventoAgendar);
+      calendarApi.render();
       loadingService.stopLoading();
     });
   }

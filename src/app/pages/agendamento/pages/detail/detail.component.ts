@@ -189,7 +189,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   fetch(): void {
     this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
-    this.pagination.pageSize = null;
+    this.pagination.pageSize = 10000;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
       result.content.map(value => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -204,7 +204,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   //todo Realiar busca apenas do mês do calendario.
   filtrarPorProfissional($event: number) {
     this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${$event}` }, null);
-    this.pagination.pageSize = 100000;
+    this.pagination.pageSize = 10000;
     this.calendarApi.render();
     this.service.filtrarEventoProProfissional(
       this.eventosFetch,

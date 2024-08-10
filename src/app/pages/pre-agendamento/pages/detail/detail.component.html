@@ -56,6 +56,7 @@
       <app-field class="col-12" page="pre_agendamento">
         <p-calendar
           formControlName="dataInicio"
+          (onSelect)="onInicioChange($event)"
           dateFormat="dd/mm/yy"
           monthNavigator="true"
           yearNavigator="true"
@@ -70,6 +71,7 @@
         <p-calendar
           formControlName="dataFim"
           dateFormat="dd/mm/yy"
+          (onSelect)="onFimChange($event)"
           monthNavigator="true"
           yearNavigator="true"
           showIcon="true"
@@ -81,7 +83,7 @@
       </app-field>
     </div>
     <div style="margin-top: 20px">
-      <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+      <app-form-buttons (onCancel)="visible=false"></app-form-buttons>
     </div>
   </form>
 </p-dialog>
