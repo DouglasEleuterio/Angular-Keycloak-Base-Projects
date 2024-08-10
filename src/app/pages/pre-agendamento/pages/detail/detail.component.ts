@@ -77,7 +77,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     private translateService: TranslateService,
     private service: EventoService
   ) {
-    super('PaginationEvento');
+    super('PaginationPreAgendamentoDetail');
   }
 
   buildFormGroup(): void {
@@ -138,7 +138,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   fetch(): void {
     this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
-    this.pagination.pageSize = 100000;
+    this.pagination.pageSize = null;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
       result.content.map(value => {
         this.addEvento(value);

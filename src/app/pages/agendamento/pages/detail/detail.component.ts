@@ -60,7 +60,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     private translateService: TranslateService,
     private service: EventoService
   ) {
-    super('PaginationEvento');
+    super('PaginationAgendamentoDetail');
   }
 
   ngOnInit(): void {
@@ -87,6 +87,9 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       //Configurar Agenda para visualização de Dia.
       //Fazer scroll até horário do agendamento
       this.calendarApi.changeView('dia');
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      this.calendarApi.addEvent({ ...entity });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       this.calendarApi.gotoDate(DataUtils.formatarDataParaFullcalendar(this.entity.start));
@@ -186,7 +189,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   fetch(): void {
     this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
-    this.pagination.pageSize = 100000;
+    this.pagination.pageSize = null;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
       result.content.map(value => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

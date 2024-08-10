@@ -40,6 +40,8 @@ export class FormComponent extends BaseFormComponent implements OnInit {
     this.buildFormGroup();
   }
 
+  //Qualquer coisa
+
   ngOnInit(): void {
     this.buildFormGroup();
     this.profissionalService.carregarProfissionais(this.profissionais);

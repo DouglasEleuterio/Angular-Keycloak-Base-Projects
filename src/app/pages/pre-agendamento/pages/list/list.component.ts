@@ -22,7 +22,7 @@ export class ListComponent extends PaginatorComponent {
     private service: EventoService,
     private baseController: BaseController
   ) {
-    super('PaginationEvento');
+    super('PaginationPreAgendamento');
     this.breadcrumbService.setItems([
       AppMenuModel.itemMenuHome,
       {
