@@ -202,19 +202,17 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.visible = true;
   }
 
-  filtrarPorProfissional() {
-    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${this.agendaProfissional}` }, null);
-    this.calendarApi.removeAllEvents();
-    this.addEvento(this.entity);
+  //todo Realiar busca apenas do mês do calendario.
+  filtrarPorProfissional($event: number) {
+    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${$event}` }, null);
     this.pagination.pageSize = 100000;
-    this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
-      result.content.map(value => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        this.calendarApi.addEvent({ ...value });
-      });
-      this.loadingService.stopLoading();
-    });
     this.calendarApi.render();
+    this.service.filtrarEventoProProfissional(
+      this.eventosFetch,
+      this.pagination,
+      this.calendarApi,
+      this.baseController,
+      this.loadingService
+    );
   }
 }

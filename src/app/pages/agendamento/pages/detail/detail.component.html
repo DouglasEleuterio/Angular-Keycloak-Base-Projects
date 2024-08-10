@@ -1,17 +1,24 @@
+<p-toast></p-toast>
 <div class="grid">
   <div class="col-12">
     <div class="card">
       <div class="card-header">
         <h5>{{ 'title.detail' | appTranslate:'agendamento' }}</h5>
       </div>
-      <app-calendar-root
-        #calendar
-        (pageLoaded)="handlePageLoaded()"
-        (eventClick)="handleEventClick($event)"
-        (eventChange)="handleEventChange($event)"
-        (eventDateSelect)="handleDateSelect($event)"
-      ></app-calendar-root>
+      <div class="p-card-body">
+        <div class="p-fluid formgrid grid">
+          <app-field class="col-12" page="shared" labelName="selecione_profissional">
+            <app-select-profissional (profissionalChanged)="filtrarPorProfissional($event)"></app-select-profissional>
+          </app-field>
+        </div>
+        <app-calendar-root
+          #calendar
+          (pageLoaded)="handlePageLoaded()"
+          (eventClick)="handleEventClick($event)"
+          (eventChange)="handleEventChange($event)"
+          (eventDateSelect)="handleDateSelect($event)"
+        ></app-calendar-root>
+      </div>
     </div>
   </div>
 </div>
-<p-toast></p-toast>

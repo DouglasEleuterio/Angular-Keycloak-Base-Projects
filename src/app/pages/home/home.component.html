@@ -1,3 +1,18 @@
 <p-toast></p-toast>
-
-<app-calendar-root #calendar (pageLoaded)="handlePageLoaded()" (eventChange)="handleEventChange($event)"></app-calendar-root>
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title' | appTranslate:'home' }}</h5>
+      </div>
+      <div class="p-card-body">
+        <div class="p-fluid formgrid grid">
+          <app-field class="col-12" page="shared" labelName="selecione_profissional">
+            <app-select-profissional (profissionalChanged)="filtrarPorProfissional($event)"></app-select-profissional>
+          </app-field>
+        </div>
+        <app-calendar-root #calendar (pageLoaded)="handlePageLoaded()" (eventChange)="handleEventChange($event)"></app-calendar-root>
+      </div>
+    </div>
+  </div>
+</div>

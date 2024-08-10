@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { AppBreadcrumbService } from '../../layouts/atlantis/app.breadcrumb.service';
+import { Component, ViewChild } from '@angular/core';
 import { CalendarComponent } from '../fullcalendar/calendar/calendar.component';
 import { Calendar, DateSelectArg, EventChangeArg } from '@fullcalendar/core';
 import { Filter } from '../../core/api/filter/filter.model';
@@ -76,9 +75,21 @@ export class HomeComponent extends PaginatorComponent {
   }
 
   handleDateSelect($event: DateSelectArg) {
-    console.log(`Data selecionada`);
-    console.log($event);
     this.calendarApi.gotoDate($event.start);
     this.calendarApi.changeView('dia');
+  }
+
+  //todo Realiar busca apenas do mês do calendario.
+  filtrarPorProfissional($event: number) {
+    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${$event}` }, null);
+    this.pagination.pageSize = 100000;
+    this.calendarApi.render();
+    this.service.filtrarEventoProProfissional(
+      this.eventosFetch,
+      this.pagination,
+      this.calendarApi,
+      this.baseController,
+      this.loadingService
+    );
   }
 }

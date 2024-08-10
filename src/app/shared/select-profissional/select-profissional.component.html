@@ -1,0 +1,12 @@
+<p-dropdown
+  appendTo="body"
+  (onChange)="onProfissionalChange()"
+  [(ngModel)]="profissionalId"
+  class="col-12"
+  [filter]="true"
+  optionLabel="nome"
+  optionValue="id"
+  emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+  [options]="profissionais"
+  placeholder="{{'select' | appTranslate:'shared'}}"
+></p-dropdown>

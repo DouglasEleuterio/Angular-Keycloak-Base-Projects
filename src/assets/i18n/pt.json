@@ -87,7 +87,8 @@
     },
     "FIELD": {
       "DATA_CRIACAO": "Data de criação",
-      "DATA_ATUALIZACAO": "Data da últmia atualização"
+      "DATA_ATUALIZACAO": "Data da últmia atualização",
+      "SELECIONE_PROFISSIONAL": "Selecione o Profissional"
     }
   },
   "LOGIN": {
@@ -1249,6 +1250,9 @@
         "REQUIRED": "O campo Recomendação é obrigatório."
       }
     }
+  },
+  "HOME": {
+    "TITLE": "Agenda"
   },
   "MENU": {
     "HOME": "Home",

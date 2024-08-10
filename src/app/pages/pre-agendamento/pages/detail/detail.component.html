@@ -6,19 +6,8 @@
       </div>
       <div class="p-card-body">
         <div class="p-fluid formgrid grid">
-          <app-field class="col-12" page="pre_agendamento" labelName="selecione_profissional">
-            <p-dropdown
-              appendTo="body"
-              (onChange)="filtrarPorProfissional()"
-              [(ngModel)]="agendaProfissional"
-              class="col-12"
-              [filter]="true"
-              optionLabel="nome"
-              optionValue="id"
-              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
-              [options]="profissionais"
-              placeholder="{{'select' | appTranslate:'shared'}}"
-            ></p-dropdown>
+          <app-field class="col-12" page="shared" labelName="selecione_profissional">
+            <app-select-profissional (profissionalChanged)="filtrarPorProfissional($event)"></app-select-profissional>
           </app-field>
         </div>
         <app-calendar-root
@@ -43,7 +32,8 @@
   <ng-template pTemplate="header">
     <div class="center">
       <span class="text-m font-bold"
-        >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }} - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
+      >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }}
+        - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
       >
     </div>
   </ng-template>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AppMenuItem, AppMenuModel } from '../../../../domain/menu/app-menu.model';
@@ -199,5 +199,19 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       this.loadingService.stopLoading();
     });
     this.calendarApi.render();
+  }
+
+  //todo Realiar busca apenas do mês do calendario.
+  filtrarPorProfissional($event: number) {
+    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${$event}` }, null);
+    this.pagination.pageSize = 100000;
+    this.calendarApi.render();
+    this.service.filtrarEventoProProfissional(
+      this.eventosFetch,
+      this.pagination,
+      this.calendarApi,
+      this.baseController,
+      this.loadingService
+    );
   }
 }

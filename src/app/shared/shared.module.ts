@@ -28,6 +28,7 @@ import { SituacaoButtonComponent } from './situacao-button/situacao-button.compo
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { FileUploadButtonComponent } from './file-upload-button/file-upload-button.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { SelectProfissionalComponent } from './select-profissional/select-profissional.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     FilterRefDirective,
     FilterComponent,
     DateMaskDirective,
-    TableExporterComponent
+    TableExporterComponent,
+    SelectProfissionalComponent
   ],
   imports: [
     CommonModule,
@@ -76,7 +78,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     FilterComponent,
     FilterRefDirective,
     DateMaskDirective,
-    TableExporterComponent
+    TableExporterComponent,
+    SelectProfissionalComponent
   ],
   providers: []
 })
