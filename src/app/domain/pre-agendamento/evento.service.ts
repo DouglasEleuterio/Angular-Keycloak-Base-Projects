@@ -18,8 +18,8 @@ export class EventoService extends BaseActiveService<Evento, number> {
     super(http, envService, 'evento');
   }
 
-  confirmarAgendamento(eventoId: number, entity: ConfirmarAgendamento): Observable<any> {
-    return this.http.post(`${this.envService.environment.baseUrl}/confirmaragendamento/${eventoId}`, entity);
+  confirmarAgendamento(entity: ConfirmarAgendamento): Observable<any> {
+    return this.http.post(`${this.envService.environment.baseUrl}/confirmaragendamento/${entity.id}`, entity);
   }
 
   public filtrarEventoProProfissional(

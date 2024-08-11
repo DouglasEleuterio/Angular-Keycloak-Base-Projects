@@ -1,9 +1,8 @@
-<p-toast></p-toast>
 <div class="grid">
   <div class="col-12">
     <div class="card">
       <div class="card-header">
-        <h5>{{ 'title.detail' | appTranslate:'agendamento' }}</h5>
+        <h5>{{ 'title.detail' | appTranslate:'pre_agendamento' }}</h5>
       </div>
       <div class="p-card-body">
         <div class="p-fluid formgrid grid">
@@ -16,9 +15,76 @@
           (pageLoaded)="handlePageLoaded()"
           (eventClick)="handleEventClick($event)"
           (eventChange)="handleEventChange($event)"
-          (eventDateSelect)="handleDateSelect($event)"
         ></app-calendar-root>
       </div>
     </div>
   </div>
 </div>
+<p-dialog
+  header="Header"
+  resizable="false"
+  [maximizable]="true"
+  position="top"
+  [visible]="visible"
+  [style]="{width: '50vw'}"
+  [modal]="true"
+>
+  <ng-template pTemplate="header">
+    <div class="center">
+      <span class="text-m font-bold"
+      >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }}
+        - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
+      >
+    </div>
+  </ng-template>
+  <form [formGroup]="formGroup" (ngSubmit)="submit()">
+    <div class="p-fluid formgrid grid">
+      <app-field class="col-12" page="pre_agendamento">
+        <p-dropdown
+          appendTo="body"
+          appFieldRef
+          class="col-12"
+          [filter]="true"
+          optionLabel="nome"
+          optionValue="id"
+          emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+          [options]="profissionais"
+          placeholder="{{'select' | appTranslate:'shared'}}"
+          formControlName="profissional"
+        ></p-dropdown>
+      </app-field>
+      <app-field class="col-12" page="pre_agendamento">
+        <p-calendar
+          formControlName="dataInicio"
+          (onSelect)="onInicioChange($event)"
+          dateFormat="dd/mm/yy"
+          monthNavigator="true"
+          yearNavigator="true"
+          showIcon="true"
+          appDateMask
+          [showTime]="true"
+          [showSeconds]="true"
+          appendTo="body"
+        ></p-calendar>
+      </app-field>
+      <app-field class="col-12" page="pre_agendamento">
+        <p-calendar
+          formControlName="dataFim"
+          dateFormat="dd/mm/yy"
+          (onSelect)="onFimChange($event)"
+          monthNavigator="true"
+          yearNavigator="true"
+          showIcon="true"
+          appDateMask
+          [showTime]="true"
+          [showSeconds]="true"
+          appendTo="body"
+        ></p-calendar>
+      </app-field>
+    </div>
+    <div style="margin-top: 20px">
+      <app-form-buttons (onCancel)="visible=false"></app-form-buttons>
+    </div>
+  </form>
+</p-dialog>
+<p-toast></p-toast>

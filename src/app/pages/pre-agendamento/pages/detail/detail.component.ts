@@ -52,8 +52,8 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     u.backgroundColor,
     u.aquisicaoProcedimento.id,
     u.aquisicaoProcedimento.nome,
-    u.aquisicaoProcedimento.profissional.id,
-    u.aquisicaoProcedimento.profissional.nome,
+    u.profissional.id,
+    u.profissional.nome,
     u.aquisicaoProcedimento.procedimento,
     u.aquisicaoProcedimento.aquisicao.id,
     u.aquisicaoProcedimento.aquisicao.cliente.id,
@@ -95,6 +95,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   buildFormGroup(): void {
     this.formGroup = this.formBuilder.group({
+      id: [null],
       profissional: [null, Validators.required],
       dataInicio: [null, Validators.required],
       dataFim: [null, Validators.required]
@@ -133,7 +134,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   submit(): void {
     if (this.formGroup.valid) {
       const entity: ConfirmarAgendamento = plainToClass(ConfirmarAgendamento, this.formGroup.value);
-      this.service.confirmarAgendamento(this.id, entity).subscribe(
+      this.service.confirmarAgendamento(entity).subscribe(
         () => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento realizado' });
           this.visible = false;
@@ -178,6 +179,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     eventoUpdate.allDay = evento.allDay;
     //Chamar a Modal de opções quando clicado no evento.
 
+    this.formGroup.controls['id'].setValue(evento.id);
     this.formGroup.controls['dataInicio'].setValue(evento.start);
     this.formGroup.controls['dataFim'].setValue(evento.end);
     this.formGroup.controls['profissional'].setValue(evento.extendedProps.profissional.id);
@@ -202,13 +204,13 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   //Eventos
 
   onFimChange($event: Date) {
-    this.calendarApi.getEventById(this.entity.id.toString()).setEnd($event);
+    this.calendarApi.getEventById(this.formGroup.controls['id'].value.toString()).setEnd($event);
     this.calendarApi.render();
   }
 
   onInicioChange($event: Date) {
     this.calendarApi.gotoDate($event);
-    this.calendarApi.getEventById(this.entity.id.toString()).setStart($event);
+    this.calendarApi.getEventById(this.formGroup.controls['id'].value.toString()).setStart($event);
     this.calendarApi.render();
   }
 }

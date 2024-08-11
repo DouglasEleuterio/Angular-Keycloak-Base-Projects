@@ -42,8 +42,8 @@ export class ListComponent extends PaginatorComponent {
     u.aquisicaoProcedimento.id,
     u.aquisicaoProcedimento.nome,
     u.aquisicaoProcedimento.procedimento,
-    u.aquisicaoProcedimento.profissional.id,
-    u.aquisicaoProcedimento.profissional.nome,
+    u.profissional.id,
+    u.profissional.nome,
     u.aquisicaoProcedimento.aquisicao.id,
     u.aquisicaoProcedimento.aquisicao.cliente.id,
     u.aquisicaoProcedimento.aquisicao.cliente.nome
