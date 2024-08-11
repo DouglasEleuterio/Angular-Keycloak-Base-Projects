@@ -22,6 +22,7 @@ import { SplitterModule } from 'primeng/splitter';
 import { AccordionModule } from 'primeng/accordion';
 import { SharedModule } from '../../shared/shared.module';
 import { EditComponent } from './pages/edit/edit.component';
+import { LayoutsModule } from '../../layouts/layouts.module';
 
 @NgModule({
   declarations: [ListComponent, FormComponent, NewComponent, EditComponent],
@@ -44,7 +45,8 @@ import { EditComponent } from './pages/edit/edit.component';
     NgxJsonViewerModule,
     SplitterModule,
     AccordionModule,
-    SharedModule
+    SharedModule,
+    LayoutsModule
   ]
 })
 export class AquisicaoModule {}

@@ -17,7 +17,9 @@ import { LoadingService } from '../../../../domain/loading/loading.service';
 import { Filter } from '../../../../core/api/filter/filter.model';
 import { ProfissionalService } from '../../../../domain/profissional/profissional.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { Profissional } from '../../../../domain/profissional/profissional.model';
 import { EventImpl } from '@fullcalendar/core/internal';
 import { ConfirmarAgendamento } from '../../../../domain/agendamento/confirmaragendamento.model';
@@ -111,13 +113,17 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       this.entity = entity;
 
       this.calendarApi.changeView('dia');
-      this.calendarApi.scrollToTime({ hours: DataUtils.obterHoras(this.entity.start), minute: DataUtils.obterMinuto(this.entity.start) });
+      this.calendarApi.scrollToTime({
+        hours: DataUtils.obterHoras(this.entity.start),
+        minute: DataUtils.obterMinuto(this.entity.start)
+      });
       this.calendarApi.gotoDate(DataUtils.formatarDataParaFullcalendar(this.entity.start));
       this.calendarApi.render();
     }
   }
 
   fetch(): void {
+    this.loadingService.startLoading();
     this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
     this.pagination.pageSize = 10000;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
@@ -140,7 +146,11 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
           this.visible = false;
         },
         error => {
-          this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: `Alteração não realizada: ${error.message}` });
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Cancelado',
+            detail: `Alteração não realizada: ${error.message}`
+          });
         }
       );
     } else {
@@ -201,7 +211,6 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   }
 
   //Eventos
-
   onFimChange($event: Date) {
     this.calendarApi.getEventById(this.entity.id.toString()).setEnd($event);
     this.calendarApi.render();
@@ -210,6 +219,43 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   onInicioChange($event: Date) {
     this.calendarApi.gotoDate($event);
     this.calendarApi.getEventById(this.entity.id.toString()).setStart($event);
+    this.calendarApi.render();
+  }
+
+  cancel() {
+    this.visible = false;
+  }
+
+  onEventoCancelar() {
+    this.removerEventoCalendario();
+    this.service.cancelarAgendamento(this.formGroup.controls['id'].value).subscribe(
+      () => {
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento cancelado' });
+        this.visible = false;
+      },
+      error => {
+        this.messageService.add({
+          severity: 'warn',
+          summary: 'Cancelado',
+          detail: `Alteração não realizada: ${error.message}`
+        });
+      }
+    );
+  }
+
+  removerEventoCalendario() {
+    const allEvents: EventImpl[] = this.calendarApi.getEvents();
+    const idEvents: string[] = this.calendarApi.getEvents().map(value => value.id);
+    const eventoSelecionado = this.calendarApi.getEventById(this.formGroup.controls['id'].value);
+    const index = idEvents.indexOf(eventoSelecionado.id);
+    if (index > -1) {
+      allEvents.splice(index, 1);
+    }
+    this.calendarApi.removeAllEvents();
+    this.calendarApi.render();
+    allEvents.forEach(value => {
+      this.calendarApi.addEvent(value);
+    });
     this.calendarApi.render();
   }
 }

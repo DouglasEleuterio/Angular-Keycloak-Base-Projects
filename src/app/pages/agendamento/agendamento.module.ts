@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { CalendarModule } from '../fullcalendar/calendar.module';
 import { CalendarModule as CalendarPrime } from 'primeng/calendar';
+import { RippleModule } from 'primeng/ripple';
+import { LayoutsModule } from '../../layouts/layouts.module';
 
 @NgModule({
   declarations: [ListComponent, DetailComponent],
@@ -33,7 +35,9 @@ import { CalendarModule as CalendarPrime } from 'primeng/calendar';
     PaginatorModule,
     ReactiveFormsModule,
     RxReactiveFormsModule,
-    CalendarPrime
+    CalendarPrime,
+    RippleModule,
+    LayoutsModule
   ]
 })
 export class AgendamentoModule {}

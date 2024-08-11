@@ -46,4 +46,8 @@ export class EventoService extends BaseActiveService<Evento, number> {
       loadingService.stopLoading();
     });
   }
+
+  cancelarAgendamento(value: any) {
+    return this.http.put(`${this.envService.environment.baseUrl}/${this.api}/cancelaragendamento/${value}`, null);
+  }
 }

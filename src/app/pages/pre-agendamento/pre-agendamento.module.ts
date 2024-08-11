@@ -18,6 +18,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { DropdownModule } from 'primeng/dropdown';
 import { CalendarModule } from 'primeng/calendar';
+import { LayoutsModule } from '../../layouts/layouts.module';
 
 @NgModule({
   declarations: [ListComponent, DetailComponent],
@@ -41,7 +42,8 @@ import { CalendarModule } from 'primeng/calendar';
     RxReactiveFormsModule,
     DropdownModule,
     FormsModule,
-    CalendarModule
+    CalendarModule,
+    LayoutsModule
   ]
 })
 export class PreAgendamentoModule {}

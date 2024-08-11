@@ -1,3 +1,4 @@
+<app-loading></app-loading>
 <div class="grid">
   <div class="col-12">
     <div class="card">
@@ -32,8 +33,7 @@
   <ng-template pTemplate="header">
     <div class="center">
       <span class="text-m font-bold"
-      >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }}
-        - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
+        >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }} - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
       >
     </div>
   </ng-template>
@@ -83,7 +83,25 @@
       </app-field>
     </div>
     <div style="margin-top: 20px">
-      <app-form-buttons (onCancel)="visible=false"></app-form-buttons>
+      <div class="form-buttons">
+        <button
+          pButton
+          pRipple
+          (click)="onEventoCancelar()"
+          type="button"
+          label="{{'button.cancelar' | appTranslate:'agendamento'}}"
+          class="p-button-outlined p-button-danger"
+        ></button>
+        <button
+          pButton
+          pRipple
+          (click)="cancel()"
+          type="button"
+          label="{{'back' | appTranslate:'shared'}}"
+          class="p-button-outlined"
+        ></button>
+        <button pButton pRipple type="submit" label="{{'save' | appTranslate:'shared'}}"></button>
+      </div>
     </div>
   </form>
 </p-dialog>

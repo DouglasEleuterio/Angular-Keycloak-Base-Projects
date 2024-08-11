@@ -1549,6 +1549,9 @@
     },
     "MESSAGE": {
       "NOT_FOUND": "Agendamento não encontrado"
+    },
+    "BUTTON": {
+      "CANCELAR": "Cancelar Agendamento"
     }
   }
 }

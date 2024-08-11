@@ -113,11 +113,16 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       // @ts-ignore
       this.calendarApi.addEvent(this.entity);
       this.calendarApi.gotoDate(DataUtils.formatarDataParaFullcalendar(this.entity.start));
+      this.calendarApi.scrollToTime({
+        hours: DataUtils.obterHoras(this.entity.start),
+        minute: DataUtils.obterMinuto(this.entity.start)
+      });
       this.calendarApi.render();
     }
   }
 
   fetch(): void {
+    this.loadingService.startLoading();
     this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
     this.pagination.pageSize = 10000;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
@@ -138,6 +143,8 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
         () => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento realizado' });
           this.visible = false;
+          this.calendarApi.removeAllEvents();
+          this.fetch();
         },
         error => {
           this.messageService.add({ severity: 'warn', summary: 'Cancelado', detail: `Alteração não realizada: ${error.message}` });
