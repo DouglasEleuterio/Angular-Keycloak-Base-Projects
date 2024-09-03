@@ -6,7 +6,7 @@ import { AppBreadcrumbService } from '../../../../layouts/atlantis/app.breadcrum
 import { Filter } from '../../../../core/api/filter/filter.model';
 import { LoadingService } from '../../../../domain/loading/loading.service';
 import { BaseController } from '../../../../core/domain/base.controller';
-import { EventoService } from '../../../../domain/pre-agendamento/evento.service';
+import { AgendamentoService } from '../../../../domain/pre-agendamento/agendamento.service';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +19,7 @@ export class ListComponent extends PaginatorComponent {
   constructor(
     private breadcrumbService: AppBreadcrumbService,
     private loadingService: LoadingService,
-    private service: EventoService,
+    private service: AgendamentoService,
     private baseController: BaseController
   ) {
     super('PaginationAgendamento');
@@ -52,7 +52,7 @@ export class ListComponent extends PaginatorComponent {
   fetch(): void {
     this.loadingService.startLoading();
     if (this.pagination.filter == null) {
-      this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
+      this.pagination.filter = new Filter({ search: `situacao==true;executado==false` }, null);
       this.pagination.sort = [{ field: 'start', order: 'asc' }];
     }
     this.baseController.fetchSelect(this.listSelect, this.pagination, this.service, result => {

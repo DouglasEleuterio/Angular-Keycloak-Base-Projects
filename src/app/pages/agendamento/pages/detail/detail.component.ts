@@ -6,7 +6,6 @@ import { ValidationService } from '../../../../core/ui/notifications/validation.
 import { AlertService } from '../../../../core/ui/notifications/alert.service';
 import { TranslateService } from '@ngx-translate/core';
 import { Evento } from '../../../../domain/pre-agendamento/evento';
-import { EventoService } from '../../../../domain/pre-agendamento/evento.service';
 import { CalendarComponent } from '../../../fullcalendar/calendar/calendar.component';
 import { Calendar, EventChangeArg, EventClickArg } from '@fullcalendar/core';
 import { MessageService } from 'primeng/api';
@@ -24,6 +23,7 @@ import { Profissional } from '../../../../domain/profissional/profissional.model
 import { EventImpl } from '@fullcalendar/core/internal';
 import { ConfirmarAgendamento } from '../../../../domain/agendamento/confirmaragendamento.model';
 import { plainToClass } from 'class-transformer';
+import { AgendamentoService } from '../../../../domain/pre-agendamento/agendamento.service';
 
 @Component({
   selector: 'app-agendamento-detail',
@@ -41,7 +41,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   profissionais: Profissional[] = [];
   formGroup: FormGroup;
 
-  menuBack: AppMenuItem = AppMenuModel.itemPreAgendamento;
+  menuBack: AppMenuItem = AppMenuModel.itemAgendamento;
 
   eventosFetch = (u: any) => [
     u.id,
@@ -50,7 +50,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     u.start,
     u.end,
     u.situacao,
-    u.confirmado,
+    u.executado,
     u.backgroundColor,
     u.aquisicaoProcedimento.id,
     u.aquisicaoProcedimento.nome,
@@ -74,7 +74,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     protected validationFormFieldService: ValidationFormFieldService,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private service: EventoService
+    private service: AgendamentoService
   ) {
     super('PaginationAgendamentoDetail');
   }
@@ -108,7 +108,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     if (entity == null) {
       this.router
         .navigate(this.menuBack.routerLink)
-        .then(() => this.alertService.defaultError(this.translateService.instant('pre_agendamento.message.not_found'.toUpperCase())));
+        .then(() => this.alertService.defaultError(this.translateService.instant('agendamento.message.not_found'.toUpperCase())));
     } else {
       this.entity = entity;
 
@@ -124,7 +124,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   fetch(): void {
     this.loadingService.startLoading();
-    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
+    this.pagination.filter = new Filter({ search: `situacao==true;executado==false` }, null);
     this.pagination.pageSize = 10000;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
       result.content.map(value => {
@@ -140,7 +140,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   submit(): void {
     if (this.formGroup.valid) {
       const entity: ConfirmarAgendamento = plainToClass(ConfirmarAgendamento, this.formGroup.value);
-      this.service.confirmarAgendamento(entity).subscribe(
+      this.service.alterarAgendamento(entity).subscribe(
         () => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento atualizado' });
           this.visible = false;
@@ -198,7 +198,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   //todo Realizar busca apenas do mês do calendario.
   filtrarPorProfissional($event: number) {
-    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${$event}` }, null);
+    this.pagination.filter = new Filter({ search: `situacao==true;executado==false;profissional.id==${$event}` }, null);
     this.pagination.pageSize = 10000;
     this.calendarApi.render();
     this.service.filtrarEventoProProfissional(
