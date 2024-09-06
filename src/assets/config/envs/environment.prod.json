@@ -1,7 +1,7 @@
 {
-  "baseUrl": "https://clinica-api.3ptecnologia.com.br",
-  "authLoginUrl": "https://clinica-api.3ptecnologia.com.br/auth/token",
-  "authLogoutUrl": "https://clinica-api.3ptecnologia.com.br/auth/logout",
+  "baseUrl": "https://144.126.152.69:8080",
+  "authLoginUrl": "https://144.126.152.69:8080/auth/token",
+  "authLogoutUrl": "https://144.126.152.69:8080/auth/logout",
   "authCodeUrl": "https://auth.3ptecnologia.com.br/realms/3p-apps/protocol/openid-connect/auth",
   "authClientId": "clinica",
   "authCallbackUrl": "https://clinica-app.3ptecnologia.com.br/oauth/authorize/callback",
