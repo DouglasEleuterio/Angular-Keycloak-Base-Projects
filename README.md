@@ -54,13 +54,13 @@ As documentações destes respectivos pacotes se encontram:
 docker login -u douglaseleuterioferreira -p Fox789789@!
 ````
 ````shell
-docker build -t clinica-app:v2.0.1 --build-arg VERSION=2.0.0 .
+docker build -t clinica-app-v1.0.13 --build-arg VERSION=1.0.13 .
 ````
 ````shell
-docker tag clinica-app:v2.0.0 douglaseleuterioferreira/apps:clinica-app-v2.0.1
+docker tag clinica-app-v1.0.13 douglaseleuterioferreira/apps:clinica-app-v1.0.13
 ````
 ````shell
-docker push douglaseleuterioferreira/apps:clinica-app-v2.0.1
+docker push douglaseleuterioferreira/apps:clinica-app-v1.0.13
 ````
 
 # Trilha para o desenvolvimento eficiente
