@@ -24,6 +24,7 @@ export class CalendarComponent implements AfterViewInit {
 
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
+    timeZone: 'local',
     locale: 'brLocale',
     firstDay: 1,
     plugins: [interactionPlugin, dayGridPlugin, timeGridPlugin],
