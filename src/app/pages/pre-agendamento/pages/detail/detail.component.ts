@@ -22,6 +22,7 @@ import { ValidationFormFieldService } from '../../../../core/ui/components/valid
 import { EventImpl } from '@fullcalendar/core/internal';
 import { ProfissionalService } from '../../../../domain/profissional/profissional.service';
 import { Profissional } from '../../../../domain/profissional/profissional.model';
+import { AgendamentoService } from '../../../../domain/pre-agendamento/agendamento.service';
 
 @Component({
   selector: 'app-detail',
@@ -72,7 +73,9 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     protected validationFormFieldService: ValidationFormFieldService,
     private alertService: AlertService,
     private translateService: TranslateService,
-    private service: EventoService
+    private service: EventoService,
+    private agendamentoService: AgendamentoService
+
   ) {
     super('PaginationPreAgendamentoDetail');
   }
@@ -123,9 +126,9 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   fetch(): void {
     this.loadingService.startLoading();
-    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
+    this.pagination.filter = new Filter({ search: `situacao==true;executado==false` }, null);
     this.pagination.pageSize = 10000;
-    this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
+    this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.agendamentoService, result => {
       result.content.map(value => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -195,10 +198,10 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   //todo Realizar busca apenas do mês do calendario.
   filtrarPorProfissional($event: number) {
-    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${$event}` }, null);
+    this.pagination.filter = new Filter({ search: `situacao==true;executado==false;profissional.id==${$event}` }, null);
     this.pagination.pageSize = 10000;
     this.calendarApi.render();
-    this.service.filtrarEventoProProfissional(
+    this.agendamentoService.filtrarEventoProProfissional(
       this.eventosFetch,
       this.pagination,
       this.calendarApi,
