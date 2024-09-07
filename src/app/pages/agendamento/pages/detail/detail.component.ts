@@ -16,9 +16,7 @@ import { LoadingService } from '../../../../domain/loading/loading.service';
 import { Filter } from '../../../../core/api/filter/filter.model';
 import { ProfissionalService } from '../../../../domain/profissional/profissional.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  ValidationFormFieldService
-} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { Profissional } from '../../../../domain/profissional/profissional.model';
 import { EventImpl } from '@fullcalendar/core/internal';
 import { ConfirmarAgendamento } from '../../../../domain/agendamento/confirmaragendamento.model';

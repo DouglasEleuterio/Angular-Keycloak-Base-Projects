@@ -7,6 +7,7 @@ import { BaseController } from '../../core/domain/base.controller';
 import { EventoService } from '../../domain/pre-agendamento/evento.service';
 import { LoadingService } from '../../domain/loading/loading.service';
 import { MessageService } from 'primeng/api';
+import { AgendamentoService } from '../../domain/pre-agendamento/agendamento.service';
 
 @Component({
   templateUrl: './home.component.html'
@@ -37,7 +38,7 @@ export class HomeComponent extends PaginatorComponent {
     private loadingService: LoadingService,
     private messageService: MessageService,
     private baseController: BaseController,
-    private service: EventoService
+    private service: AgendamentoService
   ) {
     super('PaginationAgenda');
   }
@@ -52,7 +53,7 @@ export class HomeComponent extends PaginatorComponent {
   }
 
   fetch(): void {
-    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true` }, null);
+    this.pagination.filter = new Filter({ search: `situacao==true;executado==false` }, null);
     this.pagination.pageSize = 100000;
     this.baseController.fetchSelect(this.eventosFetch, this.pagination, this.service, result => {
       result.content.map(value => {
@@ -81,7 +82,7 @@ export class HomeComponent extends PaginatorComponent {
 
   //todo Realiar busca apenas do mês do calendario.
   filtrarPorProfissional($event: number) {
-    this.pagination.filter = new Filter({ search: `situacao==true;confirmado==true;profissional.id==${$event}` }, null);
+    this.pagination.filter = new Filter({ search: `situacao==true;executado==false;profissional.id==${$event}` }, null);
     this.pagination.pageSize = 100000;
     this.calendarApi.render();
     this.service.filtrarEventoProProfissional(
