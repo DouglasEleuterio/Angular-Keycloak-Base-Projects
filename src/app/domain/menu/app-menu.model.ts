@@ -70,36 +70,12 @@ export class AppMenuModel {
     permissions: [PermissionEnum.AGENDAMENTO_LISTAR]
   };
 
-  public static readonly itemMenuXML: AppMenuItem = {
-    label: 'menu.xml',
-    icon: 'pi pi-fw pi-file-import',
-    routerLink: ['/xml'],
+  public static readonly itemTermos: AppMenuItem = {
+    label: 'menu.termos',
+    icon: 'pi pi-fw pi-check-circle',
+    routerLink: ['/termo'],
     dontNeedPermission: false,
-    permissions: [PermissionEnum.XML_LISTAR]
-  };
-
-  public static readonly itemTabelaAliquotaDiferenciada: AppMenuItem = {
-    label: 'menu.tabela_aliquota_diferenciada',
-    icon: 'pi pi-fw pi-table',
-    routerLink: ['/tabela-aliquota-diferenciada'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.TABELA_ALIQUOTA_DIFERENCIADA_LISTAR]
-  };
-
-  public static readonly itemMenuUploadXML: AppMenuItem = {
-    label: 'menu.upload',
-    icon: 'pi pi-fw pi-file-import',
-    routerLink: ['/upload'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.UPLOAD_ADICIONAR]
-  };
-
-  public static readonly itemMenuProdutosIncidenciaMonofasica: AppMenuItem = {
-    label: 'menu.protutos_incidencia_monofasica',
-    icon: 'pi pi-fw pi-chart-line',
-    routerLink: ['/produtos-incidencia-monofasica'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.INCIDENCIA_MONOFASICA_LISTAR]
+    permissions: [PermissionEnum.TERMOS_LISTAR]
   };
 
   public static readonly itemMenuExemplo: AppMenuItem = {
@@ -222,7 +198,7 @@ export class AppMenuModel {
     label: 'menu.cadastros',
     icon: 'pi pi-fw pi-table',
     dontNeedPermission: true,
-    items: [AppMenuModel.itemMenuCliente, AppMenuModel.itemMenuProcedimento]
+    items: [AppMenuModel.itemMenuCliente, AppMenuModel.itemMenuProcedimento, AppMenuModel.itemTermos]
   };
 
   public static readonly menu: AppMenuItem[] = [
