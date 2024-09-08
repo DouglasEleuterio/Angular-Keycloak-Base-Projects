@@ -16,6 +16,8 @@ import { AgendamentoModule } from './agendamento/agendamento.module';
 import { CalendarModule } from './fullcalendar/calendar.module';
 import { ToastModule } from 'primeng/toast';
 import { SharedModule as Shared } from '../shared/shared.module';
+import { EditorComponent } from '../shared/editor-component/editor/editor.component';
+import { TermoModule } from './termo/termo.module';
 
 @NgModule({
   declarations: [HomeComponent],
@@ -35,7 +37,9 @@ import { SharedModule as Shared } from '../shared/shared.module';
     AgendamentoModule,
     CalendarModule,
     ToastModule,
-    Shared
+    Shared,
+    EditorComponent,
+    TermoModule
   ]
 })
 export class PagesModule {}

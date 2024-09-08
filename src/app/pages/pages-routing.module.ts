@@ -48,6 +48,11 @@ const routes: Routes = [
     path: 'exemplo',
     loadChildren: () => import('./exemplo/exemplo.module').then(m => m.ExemploModule),
     canActivate: [TableStateClearGuard]
+  },
+  {
+    path: 'termo',
+    loadChildren: () => import('./termo/termo.module').then(m => m.TermoModule),
+    canActivate: [TableStateClearGuard]
   }
 ];
 
