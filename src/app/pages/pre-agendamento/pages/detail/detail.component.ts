@@ -75,7 +75,6 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     private translateService: TranslateService,
     private service: EventoService,
     private agendamentoService: AgendamentoService
-
   ) {
     super('PaginationPreAgendamentoDetail');
   }
@@ -114,7 +113,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       this.entity = entity;
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      this.calendarApi.addEvent(this.entity);
+      // this.calendarApi.addEvent(this.entity);
       this.calendarApi.gotoDate(DataUtils.formatarDataParaFullcalendar(this.entity.start));
       this.calendarApi.scrollToTime({
         hours: DataUtils.obterHoras(this.entity.start),
