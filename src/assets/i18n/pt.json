@@ -1553,5 +1553,16 @@
     "BUTTON": {
       "CANCELAR": "Cancelar Agendamento"
     }
+  },
+  "TERMO": {
+    "TITLE": {
+      "PAGE": "Termo"
+    },
+    "FIELD": {
+      "VERSAO": "Versão"
+    },
+    "ACTION": {
+      "ADD": "Criar Termo"
+    }
   }
 }
