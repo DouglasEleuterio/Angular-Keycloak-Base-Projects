@@ -22,6 +22,7 @@ import { ActiveLabelPipe } from './pipes/active-label.pipe';
 import { EllipsesPipe } from './pipes/app-ellipse.pipe';
 import { SimNaoPipe } from './pipes/sim-nao.pipe';
 import { PercentualFormatPipe } from './pipes/percentual-format.pipe';
+import { VersaoPipe } from './pipes/versao.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PercentualFormatPipe } from './pipes/percentual-format.pipe';
     HasPermissionDirective,
     AppTranslatePipe,
     CnpjCpfPipe,
+    VersaoPipe,
     PhoneFormatPipe,
     EmptyDataPipe,
     RelativeTimePipe,
@@ -51,6 +53,7 @@ import { PercentualFormatPipe } from './pipes/percentual-format.pipe';
     HasPermissionDirective,
     AppTranslatePipe,
     CnpjCpfPipe,
+    VersaoPipe,
     PhoneFormatPipe,
     EmptyDataPipe,
     RelativeTimePipe,
