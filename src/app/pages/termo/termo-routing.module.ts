@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListComponent } from './pages/list/list.component';
 import { DetailComponent } from './pages/detail/detail.component';
+import { NewComponent } from './pages/new/new.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'detail/:id',
     component: DetailComponent
+  },
+  {
+    path: 'new',
+    component: NewComponent
   }
 ];
 
