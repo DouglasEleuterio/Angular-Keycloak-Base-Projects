@@ -1,0 +1,33 @@
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ (isNew ? 'title.new_page' : 'title.edit_page') | appTranslate:'procedimento' }}</h5>
+      </div>
+      <p class="card-subtitle">{{ 'required_field' | appTranslate:'shared' }}</p>
+      <form (ngSubmit)="submit()" [formGroup]="formGroup">
+        <div class="p-fluid formgrid grid">
+          <app-field class="p-field col-12 md:col-6 lg:col-6" [submitted]="submitted" [labelName]="'procedimento.nome'" page="aquisicao">
+            <p-dropdown
+              appFieldRef
+              [filter]="true"
+              emptyFilterMessage="{{'no_records' | appTranslate:'shared'}}"
+              [options]="procedimentosForSelect"
+              optionLabel="name"
+              optionValue="id"
+              formControlName="procedimento"
+              placeholder="{{'select' | appTranslate:'shared'}}"
+            >
+            </p-dropdown>
+          </app-field>
+        </div>
+        <div [formGroup]="formGroup.get('documento')">
+          <app-tinymce-editor formControlName="conteudo"></app-tinymce-editor>
+        </div>
+        <div style="margin-top: 20px">
+          <app-form-buttons (onCancel)="cancel()"></app-form-buttons>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
