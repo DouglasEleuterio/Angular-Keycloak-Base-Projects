@@ -11,7 +11,8 @@
   <ng-template pTemplate="header">
     <div class="center">
       <span class="text-m font-bold"
-        >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }} - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
+      >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }}
+        - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
       >
     </div>
   </ng-template>
@@ -105,7 +106,8 @@
   <ng-template pTemplate="header">
     <div class="center">
       <span class="text-m font-bold"
-        >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }} - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
+      >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }}
+        - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
       >
     </div>
   </ng-template>
@@ -137,7 +139,7 @@
       ></p-calendar>
     </app-field>
     <p-divider></p-divider>
-
+    <p>Profissional(is) responsável(eis) pelo atendimento</p>
     <p-pickList
       [source]="profissionaisDisponiveis"
       [target]="profissionaisSelecionado"
@@ -171,14 +173,11 @@
   <ng-template pTemplate="body">
     <p-accordion>
       <p-accordionTab header="Observação">
+        <h3>Insira as observações do atendimento</h3>
         <div [formGroup]="formGroupConfirmar.get('documento')">
           <app-tinymce-editor formControlName="conteudo"></app-tinymce-editor>
         </div>
       </p-accordionTab>
-    </p-accordion>
-    <p-accordion *ngIf="true">
-      <p-accordionTab header="Formulário"> {{ formGroupConfirmar.value | json }} </p-accordionTab>
-      <p-accordionTab header="Formulário 2"> {{ formGroupConfirmar.controls['profissionais'].value | json }} </p-accordionTab>
     </p-accordion>
   </ng-template>
   <ng-template pTemplate="footer">
