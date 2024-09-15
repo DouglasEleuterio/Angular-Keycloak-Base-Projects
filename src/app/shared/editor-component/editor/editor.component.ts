@@ -47,9 +47,9 @@ export class EditorComponent implements ControlValueAccessor {
             registry. In the next release this part hopefully won't be
             necessary, as we are looking to handle it internally.
           */
-          const id = 'blobid' + (new Date()).getTime();
+          const id = 'blobid' + new Date().getTime();
           // @ts-ignore
-          const blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+          const blobCache = tinymce.activeEditor.editorUpload.blobCache;
           // @ts-ignore
           const base64 = reader.result.split(',')[1];
           const blobInfo = blobCache.create(id, file, base64);
