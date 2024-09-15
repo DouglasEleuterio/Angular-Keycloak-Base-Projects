@@ -18,7 +18,9 @@ import { Filter } from '../../../../core/api/filter/filter.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { plainToClass } from 'class-transformer';
 import { ConfirmarAgendamento } from '../../../../domain/agendamento/confirmaragendamento.model';
-import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { EventImpl } from '@fullcalendar/core/internal';
 import { ProfissionalService } from '../../../../domain/profissional/profissional.service';
 import { Profissional } from '../../../../domain/profissional/profissional.model';
@@ -113,7 +115,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       this.entity = entity;
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      // this.calendarApi.addEvent(this.entity);
+      this.calendarApi.addEvent(this.entity);
       this.calendarApi.gotoDate(DataUtils.formatarDataParaFullcalendar(this.entity.start));
       this.calendarApi.scrollToTime({
         hours: DataUtils.obterHoras(this.entity.start),
@@ -199,7 +201,6 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   filtrarPorProfissional($event: number) {
     this.pagination.filter = new Filter({ search: `situacao==true;executado==false;profissional.id==${$event}` }, null);
     this.pagination.pageSize = 10000;
-    this.calendarApi.render();
     this.agendamentoService.filtrarEventoProProfissional(
       this.eventosFetch,
       this.pagination,

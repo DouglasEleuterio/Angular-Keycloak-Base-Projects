@@ -9,6 +9,7 @@ import { Pagination } from '../../core/api/model/pagination';
 import { Calendar } from '@fullcalendar/core';
 import { BaseController } from '../../core/domain/base.controller';
 import { LoadingService } from '../loading/loading.service';
+import { ConfirmarAtendimento } from '../atendimento/confirmar-atendimento.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class AgendamentoService extends BaseActiveService<Evento, number> {
 
   alterarAgendamento(entity: ConfirmarAgendamento): Observable<any> {
     return this.http.post(`${this.envService.environment.baseUrl}/${this.api}/alteraragendamento/${entity.id}`, entity);
+  }
+
+  confirmarAtendimento(entity: ConfirmarAtendimento): Observable<any> {
+    return this.http.post(`${this.envService.environment.baseUrl}/atendimento`, entity);
   }
 
   public filtrarEventoProProfissional(

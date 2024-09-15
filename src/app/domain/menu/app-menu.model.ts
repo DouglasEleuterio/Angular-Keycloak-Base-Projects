@@ -78,59 +78,20 @@ export class AppMenuModel {
     permissions: [PermissionEnum.TERMOS_LISTAR]
   };
 
+  public static readonly itemAtendimentos: AppMenuItem = {
+    label: 'menu.atendimento',
+    icon: 'pi pi-fw pi-check-circle',
+    routerLink: ['/atendimento'],
+    dontNeedPermission: false,
+    permissions: [PermissionEnum.ATENDIMENTO_LISTAR]
+  };
+
   public static readonly itemMenuExemplo: AppMenuItem = {
     label: 'menu.exemplo',
     icon: 'pi pi-fw pi-file-edit',
     routerLink: ['/exemplo'],
     dontNeedPermission: false,
     permissions: [PermissionEnum.EXEMPLO]
-  };
-
-  public static readonly itemMenuTipoLocalidade: AppMenuItem = {
-    label: 'menu.tipo_localidade',
-    icon: 'pi pi-fw pi-map-marker',
-    routerLink: ['/tipo-localidade'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.ADMINISTRADOR]
-  };
-
-  public static readonly itemMenuJustificativa: AppMenuItem = {
-    label: 'menu.justificativa',
-    icon: 'pi pi-fw pi-file-edit',
-    routerLink: ['/justificativa'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.ADMINISTRADOR]
-  };
-
-  public static readonly itemMenuValorDiaria: AppMenuItem = {
-    label: 'menu.valor_diaria',
-    icon: 'pi pi-fw pi-dollar',
-    routerLink: ['/valor-diaria'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.ADMINISTRADOR]
-  };
-  public static readonly itemMenuClassificacaoLocalidade: AppMenuItem = {
-    label: 'menu.classificacao_localidade',
-    icon: 'pi pi-fw pi-map-marker',
-    routerLink: ['/classificacao-localidade'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.ADMINISTRADOR]
-  };
-
-  public static readonly itemMenuAuxilioAlimentacao: AppMenuItem = {
-    label: 'menu.auxilio_alimentacao',
-    icon: 'pi pi-fw pi-shopping-bag',
-    routerLink: ['/auxilio-alimentacao'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.ADMINISTRADOR]
-  };
-
-  public static readonly itemMenuLocalDificilAcesso: AppMenuItem = {
-    label: 'menu.local_dificil_acesso',
-    icon: 'pi pi-fw pi-map-marker',
-    routerLink: ['/local-dificil-acesso'],
-    dontNeedPermission: false,
-    permissions: [PermissionEnum.ADMINISTRADOR]
   };
 
   public static readonly menuSubmenu: AppMenuItem = {
@@ -205,6 +166,7 @@ export class AppMenuModel {
     AppMenuModel.itemMenuAquisicao,
     AppMenuModel.itemPreAgendamento,
     AppMenuModel.itemAgendamento,
+    AppMenuModel.itemAtendimentos,
     AppMenuModel.menuCadastros
   ];
 }

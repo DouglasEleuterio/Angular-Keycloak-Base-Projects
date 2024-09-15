@@ -1,32 +1,10 @@
 <app-loading></app-loading>
-<div class="grid">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-header">
-        <h5>{{ 'title.detail' | appTranslate:'agendamento' }}</h5>
-      </div>
-      <div class="p-card-body">
-        <div class="p-fluid formgrid grid">
-          <app-field class="col-12" page="shared" labelName="selecione_profissional">
-            <app-select-profissional (profissionalChanged)="filtrarPorProfissional($event)"></app-select-profissional>
-          </app-field>
-        </div>
-        <app-calendar-root
-          #calendar
-          (pageLoaded)="handlePageLoaded()"
-          (eventClick)="handleEventClick($event)"
-          (eventChange)="handleEventChange($event)"
-        ></app-calendar-root>
-      </div>
-    </div>
-  </div>
-</div>
 <p-dialog
   header="Header"
   resizable="false"
   [maximizable]="true"
   position="top"
-  [visible]="visible"
+  [visible]="modalViewVisible"
   [style]="{width: '50vw'}"
   [modal]="true"
 >
@@ -87,22 +65,166 @@
         <button
           pButton
           pRipple
-          (click)="onEventoCancelar()"
+          (click)="onEventoConfirmar()"
           type="button"
-          label="{{'button.cancelar' | appTranslate:'agendamento'}}"
-          class="p-button-outlined p-button-danger"
+          label="{{'button.confirmar' | appTranslate:'agendamento'}}"
+          class="p-button p-button-success"
         ></button>
         <button
           pButton
           pRipple
-          (click)="cancel()"
+          (click)="onEventoCancelar()"
+          type="button"
+          label="{{'button.cancelar' | appTranslate:'agendamento'}}"
+          class="p-button p-button-danger"
+        ></button>
+        <button
+          pButton
+          pRipple
+          (click)="cancelView()"
           type="button"
           label="{{'back' | appTranslate:'shared'}}"
-          class="p-button-outlined"
+          class="p-button p-button-info"
         ></button>
         <button pButton pRipple type="submit" label="{{'save' | appTranslate:'shared'}}"></button>
       </div>
     </div>
   </form>
 </p-dialog>
+
+<!--Modal confirmar Atendimento-->
+<p-dialog
+  header="Header"
+  resizable="true"
+  [maximizable]="true"
+  position="top"
+  [visible]="modalConfirmarVisible"
+  [style]="{width: '70vw'}"
+  [modal]="false"
+>
+  <ng-template pTemplate="header">
+    <div class="center">
+      <span class="text-m font-bold"
+        >{{ entity.aquisicaoProcedimento.aquisicao.cliente.nome }} - {{ entity.aquisicaoProcedimento.aquisicao.cliente.telefone }}</span
+      >
+    </div>
+  </ng-template>
+  <form [formGroup]="formGroupConfirmar">
+    <app-field class="col-12" page="pre_agendamento">
+      <p-calendar
+        formControlName="dataInicio"
+        dateFormat="dd/mm/yy"
+        monthNavigator="true"
+        yearNavigator="true"
+        showIcon="true"
+        appDateMask
+        [showTime]="true"
+        [showSeconds]="true"
+        appendTo="body"
+      ></p-calendar>
+    </app-field>
+    <app-field class="col-12" page="pre_agendamento">
+      <p-calendar
+        formControlName="dataFim"
+        dateFormat="dd/mm/yy"
+        monthNavigator="true"
+        yearNavigator="true"
+        showIcon="true"
+        appDateMask
+        [showTime]="true"
+        [showSeconds]="true"
+        appendTo="body"
+      ></p-calendar>
+    </app-field>
+    <p-divider></p-divider>
+
+    <p-pickList
+      [source]="profissionaisDisponiveis"
+      [target]="profissionaisSelecionado"
+      sourceHeader="Disponível"
+      targetHeader="Selecionado"
+      [dragdrop]="true"
+      [responsive]="true"
+      [sourceStyle]="{ height: '20rem' }"
+      [targetStyle]="{ height: '20rem' }"
+      filterBy="nome"
+      keepSelection="true"
+      stripedRows="true"
+      sourceFilterPlaceholder="Buscar por nome"
+      targetFilterPlaceholder="Buscar por nome"
+      breakpoint="1400px"
+      (onMoveToTarget)="onMoveTarget($event)"
+      (onMoveAllToTarget)="onMoveTarget($event)"
+      (onMoveToSource)="onMoveSource($event)"
+      (onMoveAllToSource)="onMoveSource($event)"
+    >
+      <ng-template let-profissional pTemplate="item">
+        <div class="flex flex-wrap p-2 align-items-center gap-3">
+          <div class="flex-1 flex flex-column gap-2">
+            <span class="font-bold">{{ profissional.nome }}</span>
+          </div>
+        </div>
+      </ng-template>
+    </p-pickList>
+  </form>
+  <p-divider></p-divider>
+  <ng-template pTemplate="body">
+    <p-accordion>
+      <p-accordionTab header="Observação">
+        <div [formGroup]="formGroupConfirmar.get('documento')">
+          <app-tinymce-editor formControlName="conteudo"></app-tinymce-editor>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+    <p-accordion *ngIf="true">
+      <p-accordionTab header="Formulário"> {{ formGroupConfirmar.value | json }} </p-accordionTab>
+      <p-accordionTab header="Formulário 2"> {{ formGroupConfirmar.controls['profissionais'].value | json }} </p-accordionTab>
+    </p-accordion>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div style="margin-top: 20px">
+      <div class="form-buttons">
+        <button
+          pButton
+          pRipple
+          (click)="cancelConfirmar()"
+          type="button"
+          label="{{'back' | appTranslate:'shared'}}"
+          class="p-button p-button-info"
+        ></button>
+        <button
+          pButton
+          pRipple
+          (click)="submitConfirmar()"
+          [disabled]="this.formGroupConfirmar.invalid || profissionaisSelecionado.length < 1"
+          label="{{'save' | appTranslate:'shared'}}"
+        ></button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>
+
+<!--Modal visualizar Agendamento-->
+<div class="grid">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ 'title.detail' | appTranslate:'agendamento' }}</h5>
+      </div>
+      <div class="p-card-body">
+        <div class="p-fluid formgrid grid">
+          <app-field class="col-12" page="shared" labelName="selecione_profissional">
+            <app-select-profissional (profissionalChanged)="filtrarPorProfissional($event)"></app-select-profissional>
+          </app-field>
+        </div>
+        <app-calendar-root
+          #calendar
+          (pageLoaded)="handlePageLoaded()"
+          (eventClick)="handleEventClick($event)"
+          (eventChange)="handleEventChange($event)"
+        ></app-calendar-root>
+      </div>
+    </div>
+  </div>
+</div>
 <p-toast></p-toast>

@@ -1551,7 +1551,8 @@
       "NOT_FOUND": "Agendamento não encontrado"
     },
     "BUTTON": {
-      "CANCELAR": "Cancelar Agendamento"
+      "CANCELAR": "Cancelar Agendamento",
+      "CONFIRMAR": "Confirmar Atendimento"
     }
   },
   "TERMO": {

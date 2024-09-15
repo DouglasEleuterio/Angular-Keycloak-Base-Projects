@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AppMenuItem, AppMenuModel } from '../../../../domain/menu/app-menu.model';
@@ -15,21 +15,25 @@ import { PaginatorComponent } from '../../../../core/ui/components/pagination/pa
 import { LoadingService } from '../../../../domain/loading/loading.service';
 import { Filter } from '../../../../core/api/filter/filter.model';
 import { ProfissionalService } from '../../../../domain/profissional/profissional.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ValidationFormFieldService } from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  ValidationFormFieldService
+} from '../../../../core/ui/components/validation/field-focus/validation-form-field.service';
 import { Profissional } from '../../../../domain/profissional/profissional.model';
 import { EventImpl } from '@fullcalendar/core/internal';
 import { ConfirmarAgendamento } from '../../../../domain/agendamento/confirmaragendamento.model';
 import { plainToClass } from 'class-transformer';
 import { AgendamentoService } from '../../../../domain/pre-agendamento/agendamento.service';
+import { ConfirmarAtendimento } from '../../../../domain/atendimento/confirmar-atendimento.model';
 
 @Component({
   selector: 'app-agendamento-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
-export class DetailComponent extends PaginatorComponent implements OnInit {
-  visible: boolean;
+export class DetailComponent extends PaginatorComponent implements OnInit, AfterViewInit {
+  modalViewVisible: boolean;
+  modalConfirmarVisible: boolean;
 
   calendarApi: Calendar;
   @ViewChild('calendar')
@@ -37,7 +41,11 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
   public entity: Evento;
   id: number;
   profissionais: Profissional[] = [];
+  //PickList
+  profissionaisDisponiveis: Profissional[] = [];
+  profissionaisSelecionado: Profissional[] = [];
   formGroup: FormGroup;
+  formGroupConfirmar: FormGroup;
 
   menuBack: AppMenuItem = AppMenuModel.itemAgendamento;
 
@@ -79,6 +87,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildFormGroup();
+    this.buildFormGroupConfirmar();
     this.profissionalService.carregarProfissionais(this.profissionais);
     this.route.params
       .pipe(
@@ -93,6 +102,16 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       });
   }
 
+  ngAfterViewInit(): void {
+    this.profissionalService.fetchProfissionais().subscribe(value => {
+      this.profissionaisDisponiveis = value;
+      this.profissionaisDisponiveis = this.profissionaisDisponiveis.splice(
+        this.profissionaisDisponiveis.indexOf(this.entity.profissional),
+        1
+      );
+    });
+  }
+
   buildFormGroup(): void {
     this.formGroup = this.formBuilder.group({
       id: null,
@@ -102,6 +121,23 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     });
   }
 
+  buildFormGroupConfirmar(): void {
+    this.formGroupConfirmar = this.formBuilder.group({
+      dataInicio: [null, Validators.required],
+      dataFim: [null, Validators.required],
+      documento: this.formBuilder.group({
+        id: [null],
+        conteudo: [null]
+      }),
+      agendamento: [null],
+      profissionais: this.formBuilder.array([])
+    });
+  }
+
+  get profissionaisForm(): FormArray {
+    return this.formGroupConfirmar.get('profissionais') as FormArray;
+  }
+
   onLoad(entity: Evento): void {
     if (entity == null) {
       this.router
@@ -109,7 +145,11 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
         .then(() => this.alertService.defaultError(this.translateService.instant('agendamento.message.not_found'.toUpperCase())));
     } else {
       this.entity = entity;
-
+      //FormGroup
+      this.formGroupConfirmar.controls['agendamento'].setValue(this.entity.id);
+      this.profissionaisForm.value.push(entity.profissional);
+      this.profissionaisSelecionado.push(entity.profissional);
+      //Calendar
       this.calendarApi.changeView('dia');
       this.calendarApi.scrollToTime({
         hours: DataUtils.obterHoras(this.entity.start),
@@ -135,13 +175,44 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.calendarApi.render();
   }
 
+  submitConfirmar() {
+    if (this.formGroupConfirmar.valid) {
+      const entity: ConfirmarAtendimento = plainToClass(ConfirmarAtendimento, this.formGroupConfirmar.value);
+      this.service.confirmarAtendimento(entity).subscribe(
+        () => {
+          this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Atendimento salvo' });
+          this.modalViewVisible = false;
+          this.modalConfirmarVisible = false;
+          //Recarregar agendamentos
+          this.calendarApi.removeAllEvents();
+          this.fetch();
+        },
+        error => {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Cancelado',
+            detail: `Alteração não realizada: ${error.message}`
+          });
+        }
+      );
+    } else {
+      this.alertService.error(
+        this.translateService.instant('shared.titles.error'.toUpperCase()),
+        this.translateService.instant('shared.msg.invalid_form'.toUpperCase()),
+        () => {
+          this.validationFormFieldService.goFirst();
+        }
+      );
+    }
+  }
+
   submit(): void {
     if (this.formGroup.valid) {
       const entity: ConfirmarAgendamento = plainToClass(ConfirmarAgendamento, this.formGroup.value);
       this.service.alterarAgendamento(entity).subscribe(
         () => {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento atualizado' });
-          this.visible = false;
+          this.modalViewVisible = false;
         },
         error => {
           this.messageService.add({
@@ -191,7 +262,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.formGroup.controls['dataInicio'].setValue(evento.start);
     this.formGroup.controls['dataFim'].setValue(evento.end);
     this.formGroup.controls['profissional'].setValue(evento.extendedProps.profissional.id);
-    this.visible = true;
+    this.modalViewVisible = true;
   }
 
   //todo Realizar busca apenas do mês do calendario.
@@ -220,8 +291,12 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.calendarApi.render();
   }
 
-  cancel() {
-    this.visible = false;
+  cancelView() {
+    this.modalViewVisible = false;
+  }
+
+  cancelConfirmar() {
+    this.modalConfirmarVisible = false;
   }
 
   onEventoCancelar() {
@@ -229,7 +304,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
     this.service.cancelarAgendamento(this.formGroup.controls['id'].value).subscribe(
       () => {
         this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Agendamento cancelado' });
-        this.visible = false;
+        this.modalViewVisible = false;
       },
       error => {
         this.messageService.add({
@@ -239,6 +314,12 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
         });
       }
     );
+  }
+
+  onEventoConfirmar() {
+    this.modalConfirmarVisible = true;
+    this.formGroupConfirmar.controls['dataInicio'].setValue(this.formGroup.controls['dataInicio'].value);
+    this.formGroupConfirmar.controls['dataFim'].setValue(this.formGroup.controls['dataFim'].value);
   }
 
   removerEventoCalendario() {
@@ -255,5 +336,26 @@ export class DetailComponent extends PaginatorComponent implements OnInit {
       this.calendarApi.addEvent(value);
     });
     this.calendarApi.render();
+  }
+
+  //Adicionar Itens no form group
+  onMoveTarget($event: any) {
+    const profissionaisEnviados = $event.items;
+    const profissionaisInseridos: Profissional[] = this.formGroupConfirmar.controls['profissionais'].value;
+    profissionaisEnviados.forEach((value: Profissional) => {
+      profissionaisInseridos.push(value);
+    });
+  }
+
+  //Remover Itens no form group
+  onMoveSource($event: any) {
+    const profissionais: Profissional[] = this.formGroupConfirmar.controls['profissionais'].value;
+    const remanescentes: Profissional[] = [];
+    const removidos = $event.items;
+    for (let i = 0; i < removidos.length; i++) {
+      const index = profissionais.indexOf(removidos[i]);
+      profissionais.splice(index, 1);
+    }
+    this.formGroupConfirmar.controls['profissionais'].setValue(profissionais);
   }
 }

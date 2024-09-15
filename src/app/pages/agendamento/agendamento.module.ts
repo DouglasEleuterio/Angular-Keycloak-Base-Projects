@@ -17,6 +17,10 @@ import { CalendarModule } from '../fullcalendar/calendar.module';
 import { CalendarModule as CalendarPrime } from 'primeng/calendar';
 import { RippleModule } from 'primeng/ripple';
 import { LayoutsModule } from '../../layouts/layouts.module';
+import { EditorComponent } from '../../shared/editor-component/editor/editor.component';
+import { DividerModule } from 'primeng/divider';
+import { PickListModule } from 'primeng/picklist';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [ListComponent, DetailComponent],
@@ -37,7 +41,11 @@ import { LayoutsModule } from '../../layouts/layouts.module';
     RxReactiveFormsModule,
     CalendarPrime,
     RippleModule,
-    LayoutsModule
+    LayoutsModule,
+    EditorComponent,
+    DividerModule,
+    PickListModule,
+    AccordionModule
   ]
 })
 export class AgendamentoModule {}
