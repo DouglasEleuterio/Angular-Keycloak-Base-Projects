@@ -186,6 +186,7 @@ export class DetailComponent extends PaginatorComponent implements OnInit, After
           //Recarregar agendamentos
           this.calendarApi.removeAllEvents();
           this.fetch();
+          this.router.navigate(this.menuBack.routerLink);
         },
         error => {
           this.messageService.add({

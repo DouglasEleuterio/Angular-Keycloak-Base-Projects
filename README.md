@@ -51,16 +51,16 @@ As documentações destes respectivos pacotes se encontram:
 ### Build do Docker
 * Gerar imagem
 ````shell
-docker login -u douglaseleuterioferreira -p Fox789789@!
+docker login -u douglaseleuterioferreira -p Fox789789@! 
 ````
 ````shell
-docker build -t clinica-app-v1.0.15 --build-arg VERSION=1.0.15 .
+docker build -t clinica-app-v1.0.16 --build-arg VERSION=1.0.16 .
 ````
 ````shell
-docker tag clinica-app-v1.0.15 douglaseleuterioferreira/apps:clinica-app-v1.0.15
+docker tag clinica-app-v1.0.16 douglaseleuterioferreira/apps:clinica-app-v1.0.16
 ````
 ````shell
-docker push douglaseleuterioferreira/apps:clinica-app-v1.0.15
+docker push douglaseleuterioferreira/apps:clinica-app-v1.0.16
 ````
 
 # Trilha para o desenvolvimento eficiente
