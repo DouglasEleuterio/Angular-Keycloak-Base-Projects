@@ -25,6 +25,7 @@ import { ConfirmarAgendamento } from '../../../../domain/agendamento/confirmarag
 import { plainToClass } from 'class-transformer';
 import { AgendamentoService } from '../../../../domain/pre-agendamento/agendamento.service';
 import { ConfirmarAtendimento } from '../../../../domain/atendimento/confirmar-atendimento.model';
+import { Layout } from '../../../../shared/editor-component/editor/layout';
 
 @Component({
   selector: 'app-agendamento-detail',
@@ -146,6 +147,9 @@ export class DetailComponent extends PaginatorComponent implements OnInit, After
     } else {
       this.entity = entity;
       //FormGroup
+      this.formGroupConfirmar.controls['documento'].get('conteudo').setValue(Layout.tabelaProdutos);
+      //Layout padrão de inserção de gasto de material no antendimento;
+      this.formGroupConfirmar.controls['agendamento'].setValue(this.entity.id);
       this.formGroupConfirmar.controls['agendamento'].setValue(this.entity.id);
       this.profissionaisForm.value.push(entity.profissional);
       this.profissionaisSelecionado.push(entity.profissional);
@@ -186,7 +190,10 @@ export class DetailComponent extends PaginatorComponent implements OnInit, After
           //Recarregar agendamentos
           this.calendarApi.removeAllEvents();
           this.fetch();
-          this.router.navigate(this.menuBack.routerLink);
+          //
+          setTimeout(function () {
+            this.router.navigate(this.menuBack.routerLink);
+          }, 2000);
         },
         error => {
           this.messageService.add({

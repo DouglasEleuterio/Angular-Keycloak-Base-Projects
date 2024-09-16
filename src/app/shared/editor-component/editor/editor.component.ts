@@ -19,8 +19,86 @@ import { EditorComponent as Editor } from '@tinymce/tinymce-angular';
 export class EditorComponent implements ControlValueAccessor {
   init = {
     selector: 'textarea',
-    plugins: 'lists link file image media table code help wordcount',
+    plugins: [
+      // Core editing features
+      'anchor',
+      'autolink',
+      'charmap',
+      'codesample',
+      'emoticons',
+      'image',
+      'link',
+      'lists',
+      'media',
+      'searchreplace',
+      'table',
+      'visualblocks',
+      'wordcount',
+      // Your account includes a free trial of TinyMCE premium features
+      // Try the most popular premium features until Sep 21, 2024:
+      'checklist',
+      'mediaembed',
+      'casechange',
+      'export',
+      'formatpainter',
+      'pageembed',
+      'a11ychecker',
+      'tinymcespellchecker',
+      'permanentpen',
+      'powerpaste',
+      'advtable',
+      'advcode',
+      'editimage',
+      'advtemplate',
+      'ai',
+      'mentions',
+      'tinycomments',
+      'tableofcontents',
+      'footnotes',
+      'mergetags',
+      'autocorrect',
+      'typography',
+      'inlinecss',
+      'markdown',
+      'file',
+      'help',
+      'wordcount'
+    ],
+    toolbar: [
+      'undo redo | styles | alignleft aligncenter alignright alignjustify | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat | print preview  fullscreen forecolor backcolor emoticons | help'
+    ],
     file_picker_types: 'image media',
+    tinycomments_mode: 'embedded',
+    tinycomments_author: 'Author name',
+    mergetags_list: [
+      { value: 'First.Name', title: 'First Name' },
+      { value: 'Email', title: 'Email' }
+    ],
+    menu: {
+      file: {
+        title: 'File',
+        items: 'newdocument restoredraft | preview | importword exportpdf exportword | print | deleteallconversations'
+      },
+      edit: { title: 'Edit', items: 'undo redo | cut copy paste pastetext | selectall | searchreplace' },
+      view: {
+        title: 'View',
+        items: 'code revisionhistory | visualaid visualchars visualblocks | spellchecker | preview fullscreen | showcomments'
+      },
+      insert: {
+        title: 'Insert',
+        items:
+          'image link media addcomment pageembed codesample inserttable | math | charmap emoticons hr | pagebreak nonbreaking anchor tableofcontents | insertdatetime'
+      },
+      format: {
+        title: 'Format',
+        items:
+          'bold italic underline strikethrough superscript subscript codeformat | styles blocks fontfamily fontsize align lineheight | forecolor backcolor | language | removeformat'
+      },
+      tools: { title: 'Tools', items: 'spellchecker spellcheckerlanguage | a11ycheck code wordcount' },
+      table: { title: 'Table', items: 'inserttable | cell row column | advtablesort | tableprops deletetable' },
+      help: { title: 'Help', items: 'help' }
+    },
+    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
     /* enable title field in the Image dialog*/
     image_title: true,
     /* enable automatic uploads of images represented by blob or data URIs*/
@@ -36,7 +114,7 @@ export class EditorComponent implements ControlValueAccessor {
       input.setAttribute('type', 'file');
       input.setAttribute('accept', 'image/*');
 
-      input.addEventListener('change', (e) => {
+      input.addEventListener('change', e => {
         // @ts-ignore
         const file = e.target.files[0];
 
@@ -66,9 +144,7 @@ export class EditorComponent implements ControlValueAccessor {
     content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
 
     branding: false,
-    language: 'pt_BR',
-    toolbar:
-      'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image | print preview media fullscreen | forecolor backcolor emoticons | help'
+    language: 'pt_BR'
   };
 
   // Funções de ControlValueAccessor
