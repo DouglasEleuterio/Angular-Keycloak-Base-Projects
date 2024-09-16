@@ -1,4 +1,5 @@
 {
+  "version": "1.0.17",
   "baseUrl": "https://144.126.152.69:8080",
   "authLoginUrl": "https://144.126.152.69:8080/auth/token",
   "authLogoutUrl": "https://144.126.152.69:8080/auth/logout",
